@@ -33,14 +33,9 @@ jobs:
       - name: Install west
         run: pip install west
 
-      - name: Copy shield to ZMK
+      - name: Copy config to ZMK app
         run: |
-          echo "Listing config-repo content..."
-          ls -la config-repo/config/boards/shields/
-          echo "Copying shield..."
-          mkdir -p zmk/app/boards/shields/17pad
-          cp -r config-repo/config/boards/shields/17pad/* zmk/app/boards/shields/17pad/
-          echo "Verifying copy..."
+          cp -r config-repo/config/* zmk/app/
           ls -la zmk/app/boards/shields/17pad/
 
       - name: Initialize Zephyr workspace
@@ -52,7 +47,7 @@ jobs:
       - name: Build firmware
         run: |
           cd zmk/app
-          west build -b nice_nano -- -DSHIELD=17pad -DZMK_CONFIG="${GITHUB_WORKSPACE}/config-repo/config"
+          west build -b nice_nano -- -DSHIELD=17pad
 
       - name: Upload firmware
         uses: actions/upload-artifact@v4
