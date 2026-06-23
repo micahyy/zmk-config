@@ -6,4 +6,29 @@ on:
 
 jobs:
   build:
-    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+    runs-on: ubuntu-latest
+    container: ghcr.io/zmkfirmware/zmk-build-ts:latest
+    steps:
+      - name: Checkout ZMK
+        uses: actions/checkout@v4
+        with:
+          repository: zmkfirmware/zmk
+          ref: main
+          path: zmk
+
+      - name: Checkout user config
+        uses: actions/checkout@v4
+        with:
+          path: zmk/app/user-config
+
+      - name: Build firmware
+        run: |
+          cd zmk/app
+          west build -b nice_nano -- -DSHIELD=17pad -DZMK_CONFIG="${GITHUB_WORKSPACE}/zmk/app/user-config/config"
+        shell: bash
+
+      - name: Upload firmware
+        uses: actions/upload-artifact@v4
+        with:
+          name: firmware
+          path: zmk/app/build/zephyr/zmk.uf2
