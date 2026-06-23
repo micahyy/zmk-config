@@ -1,0 +1,34 @@
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/outputs.h>
+
+/ {
+    keymap {
+        compatible = "zmk,keymap";
+
+        // 默认层：标准数字小键盘
+        default_layer {
+            display-name = "Base";
+            bindings = <
+                &lt K_NUM_LK &kp K_SLASH &kp K_ASTERISK &kp K_MINUS
+                &kp N7       &kp N8     &kp N9        &kp K_PLUS
+                &kp N4       &kp N5     &kp N6        &kp K_ENTER
+                &kp N1       &kp N2     &kp N3        &trans
+                &kp N0       &trans     &kp K_DOT     &trans
+            >;
+        };
+
+        // 第1层：功能键（通过 &mo 1 切换）
+        layer_1 {
+            display-name = "Fn";
+            bindings = <
+                &kp C_AC    &kp K_PIPE &kp K_BACKSLASH &kp K_EQUAL
+                &kp F7      &kp F8     &kp F9          &kp F10
+                &kp F4      &kp F5     &kp F6          &kp F11
+                &kp F1      &kp F2     &kp F3          &trans
+                &kp F12     &trans     &kp K_INSERT    &trans
+            >;
+        };
+    };
+};
