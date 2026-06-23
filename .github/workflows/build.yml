@@ -7,6 +7,3 @@ on:
 jobs:
   build:
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
-    with:
-      # 指定你的键盘配置目录（不需要指定 board/shield）
-      config-path: config
