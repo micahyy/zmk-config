@@ -1,0 +1,4 @@
+﻿id: 17pad
+name: 17Pad
+type: shield
+depends_on: [nice_nano]
