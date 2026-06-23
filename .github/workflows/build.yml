@@ -35,7 +35,13 @@ jobs:
 
       - name: Copy shield to ZMK
         run: |
-          cp -r config-repo/config/boards/shields/17pad zmk/app/boards/shields/
+          echo "Listing config-repo content..."
+          ls -la config-repo/config/boards/shields/
+          echo "Copying shield..."
+          mkdir -p zmk/app/boards/shields/17pad
+          cp -r config-repo/config/boards/shields/17pad/* zmk/app/boards/shields/17pad/
+          echo "Verifying copy..."
+          ls -la zmk/app/boards/shields/17pad/
 
       - name: Initialize Zephyr workspace
         run: |
