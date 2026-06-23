@@ -42,7 +42,7 @@ jobs:
       - name: Build firmware
         run: |
           cd zmk/app
-          west build -b nice_nano -- -DSHIELD=17pad -DZMK_CONFIG="${GITHUB_WORKSPACE}/config-repo/config"
+          west build -b nice_nano -- -DSHIELD=17pad -DZMK_EXTRA_MODULES="${GITHUB_WORKSPACE}/config-repo" -DZMK_CONFIG="${GITHUB_WORKSPACE}/config-repo/config"
 
       - name: Upload firmware
         uses: actions/upload-artifact@v4
