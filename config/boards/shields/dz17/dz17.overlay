@@ -40,20 +40,28 @@
         compatible = "zmk,battery-nrf-vddh";
         charge-status-gpios = <&gpio0 31 GPIO_ACTIVE_LOW>;
     };
+
+    // pinctrl for SPIM3 (MOSI=P0.26, SCK=P0.27)
+    pinctrl {
+        spi3_default: spi3_default {
+            group1 {
+                psels = <NRF_PSEL(SPIM_SCK, 0, 27)>,
+                        <NRF_PSEL(SPIM_MOSI, 0, 26)>;
+            };
+        };
+    };
 };
 
-// WS2812 RGB LEDs: 17 LEDs (one per key), data on P0.26, using SPIM3 MOSI
+// WS2812 RGB LEDs: 17 LEDs (one per key), data on P0.26, using SPIM3
 &spi3 {
-    compatible = "nordic,nrf-spim";
     status = "okay";
-    mosi-pin = <26>;
-    sck-pin = <27>;
-    cs-gpios = <&gpio0 0 0>;
+    cs-gpios = <&gpio0 0 GPIO_ACTIVE_LOW>;
+    pinctrl-0 = <&spi3_default>;
+    pinctrl-names = "default";
 
     led_strip: ws2812@0 {
         compatible = "worldsemi,ws2812-spi";
         status = "okay";
-        label = "WS2812";
         reg = <0>;
         spi-max-frequency = <4000000>;
         chain-length = <17>;
