@@ -1,11 +1,9 @@
 #include <dt-bindings/zmk/matrix_transform.h>
 #include <dt-bindings/gpio/gpio.h>
-#include <dt-bindings/led/led.h>
 
 / {
     chosen {
         zmk,kscan = &kscan0;
-        zmk,led_strip = &led_strip;
         zmk,battery = &vbatt;
     };
 
@@ -36,52 +34,9 @@
             ;
     };
 
-    // Battery voltage monitoring (optional)
+    // Battery voltage monitoring with TP4056 STBY charge status on P0.31
     vbatt: vbatt {
         compatible = "zmk,battery-nrf-vddh";
         charge-status-gpios = <&gpio0 31 GPIO_ACTIVE_LOW>;
     };
-
-    // WS2812 RGB on P0.26
-    led_strip: ws2812@0 {
-        compatible = "worldsemi,ws2812-spi";
-        label = "WS2812";
-        status = "okay";
-
-        /* SPI */
-        spi-max-frequency = <5250000>;
-        spi-cpol;
-        spi-cpha;
-        reg = <0>;
-
-        /* WS2812 */
-        chain-length = <1>; /* set number of LEDs here */
-        spi-one-frame = <0x70>;
-        spi-zero-frame = <0x40>;
-        color-mapping = <LED_COLOR_ID_GREEN LED_COLOR_ID_RED LED_COLOR_ID_BLUE>;
-    };
-};
-
-&pinctrl {
-    spi0_default: spi0_default {
-        group1 {
-            psels = <NRF_PSEL(SPIM_SCK, 0, 26)>;
-        };
-    };
-
-    spi0_sleep: spi0_sleep {
-        group1 {
-            psels = <NRF_PSEL(SPIM_SCK, 0, 26)>;
-            low-power-enable;
-        };
-    };
-};
-
-&spi0 {
-    status = "okay";
-    compatible = "nordic,nrf-spim";
-    pinctrl-0 = <&spi0_default>;
-    pinctrl-1 = <&spi0_sleep>;
-    pinctrl-names = "default", "sleep";
-    cs-gpios = <&gpio0 0x00 0>;
 };
