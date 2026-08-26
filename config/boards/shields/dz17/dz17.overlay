@@ -6,6 +6,7 @@
     chosen {
         zmk,kscan = &kscan0;
         zmk,led_strip = &led_strip;
+        zmk,battery = &vbatt;
     };
 
     // 17 keys direct GPIO, pin 1 common to GND
@@ -33,6 +34,12 @@
             , <&gpio0  3 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   // 16: 0
             , <&gpio1 10 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   // 17: .
             ;
+    };
+
+    // Battery voltage monitoring (optional)
+    vbatt: vbatt {
+        compatible = "zmk,battery-nrf-vddh";
+        charge-status-gpios = <&gpio0 31 GPIO_ACTIVE_LOW>;
     };
 
     // WS2812 RGB on P0.26

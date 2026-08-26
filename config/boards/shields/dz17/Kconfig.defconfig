@@ -3,6 +3,10 @@ if SHIELD_DZ17
 config ZMK_KEYBOARD_NAME
     default "DZ17"
 
+# Battery monitoring via TP4056 STBY pin on P0.31
+config ZMK_BATTERY_NRF_VDDH
+    default y
+
 # WS2812 RGB LED on P0.26 via SPI
 config SPI
     default y
