@@ -7,8 +7,14 @@ config ZMK_KEYBOARD_NAME
 config ZMK_BATTERY_NRF_VDDH
     default y
 
-# WS2812 RGB underglow: 17 per-key LEDs
+# WS2812 RGB underglow: 17 per-key LEDs on P0.26
 config ZMK_RGB_UNDERGLOW
+    default y
+
+config LED_STRIP
+    default y
+
+config WS2812_STRIP
     default y
 
 endif
