@@ -3,9 +3,9 @@ if SHIELD_DZ17
 config ZMK_KEYBOARD_NAME
     default "DZ17"
 
-# Battery monitoring via TP4056 STBY pin on P0.31
-config ZMK_BATTERY_NRF_VDDH
-    default y
+# Kconfig defaults only for items that must be guaranteed at Kconfig layer.
+# Runtime feature flags (RGB/LED strip/battery) live in dz17.conf instead,
+# matching the convention used by in-tree ZMK shields like Corne/Kyria.
 
 # WS2812 RGB underglow: 17 per-key LEDs on P0.26
 config ZMK_RGB_UNDERGLOW
