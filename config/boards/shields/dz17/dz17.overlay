@@ -5,6 +5,7 @@
     chosen {
         zmk,kscan = &kscan0;
         zmk,battery = &vbatt;
+        zmk,underglow = &led_strip;
     };
 
     // 17 keys direct GPIO, pin 1 common to GND
@@ -38,5 +39,26 @@
     vbatt: vbatt {
         compatible = "zmk,battery-nrf-vddh";
         charge-status-gpios = <&gpio0 31 GPIO_ACTIVE_LOW>;
+    };
+};
+
+// WS2812 RGB LEDs: 17 LEDs (one per key), data on P0.26, using SPIM3 MOSI
+&spi3 {
+    compatible = "nordic,nrf-spim";
+    status = "okay";
+    mosi-pin = <26>;
+    sck-pin = <27>;
+    cs-gpios = <&gpio0 0 0>;
+
+    led_strip: ws2812@0 {
+        compatible = "worldsemi,ws2812-spi";
+        status = "okay";
+        label = "WS2812";
+        reg = <0>;
+        spi-max-frequency = <4000000>;
+        chain-length = <17>;
+        spi-one-frame = <0x70>;
+        spi-zero-frame = <0x40>;
+        reset-delay = <600>;
     };
 };
