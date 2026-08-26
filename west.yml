@@ -1,0 +1,11 @@
+manifest:
+  remotes:
+    - name: micahyy
+      url-base: https://github.com/micahyy
+  projects:
+    - name: zmk
+      remote: micahyy
+      revision: edf5c0814fd3ea202e43aad2d68fd32e882a518c
+      import: app/west.yml
+  self:
+    path: config

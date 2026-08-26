@@ -1,0 +1,80 @@
+#include <dt-bindings/zmk/matrix_transform.h>
+#include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/led/led.h>
+
+/ {
+    chosen {
+        zmk,kscan = &kscan0;
+        zmk,led_strip = &led_strip;
+    };
+
+    // 17 keys direct GPIO, pin 1 common to GND
+    kscan0: kscan {
+        compatible = "zmk,kscan-gpio-direct";
+        wakeup-source;
+        debounce-press-ms = <10>;
+        debounce-release-ms = <10>;
+        input-gpios
+            = <&gpio0 10 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   // 1: NUM
+            , <&gpio1  9 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   // 2: /
+            , <&gpio0 17 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   // 3: *
+            , <&gpio0 13 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   // 4: -
+            , <&gpio0 24 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   // 5: 7
+            , <&gpio0  5 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   // 6: 8
+            , <&gpio0 15 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   // 7: 9
+            , <&gpio0  9 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   // 8: +
+            , <&gpio0  7 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   // 9: 4
+            , <&gpio0  2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   // 10: 5
+            , <&gpio0 30 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   // 11: 6
+            , <&gpio1 11 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   // 12: Enter
+            , <&gpio0 28 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   // 13: 1
+            , <&gpio1 13 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   // 14: 2
+            , <&gpio0 29 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   // 15: 3
+            , <&gpio0  3 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   // 16: 0
+            , <&gpio1 10 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   // 17: .
+            ;
+    };
+
+    // WS2812 RGB on P0.26
+    led_strip: ws2812@0 {
+        compatible = "worldsemi,ws2812-spi";
+        label = "WS2812";
+        status = "okay";
+
+        /* SPI */
+        spi-max-frequency = <5250000>;
+        spi-cpol;
+        spi-cpha;
+        reg = <0>;
+
+        /* WS2812 */
+        chain-length = <1>; /* set number of LEDs here */
+        spi-one-frame = <0x70>;
+        spi-zero-frame = <0x40>;
+        color-mapping = <LED_COLOR_ID_GREEN LED_COLOR_ID_RED LED_COLOR_ID_BLUE>;
+    };
+};
+
+&pinctrl {
+    spi0_default: spi0_default {
+        group1 {
+            psels = <NRF_PSEL(SPIM_SCK, 0, 26)>;
+        };
+    };
+
+    spi0_sleep: spi0_sleep {
+        group1 {
+            psels = <NRF_PSEL(SPIM_SCK, 0, 26)>;
+            low-power-enable;
+        };
+    };
+};
+
+&spi0 {
+    status = "okay";
+    compatible = "nordic,nrf-spim";
+    pinctrl-0 = <&spi0_default>;
+    pinctrl-1 = <&spi0_sleep>;
+    pinctrl-names = "default", "sleep";
+    cs-gpios = <&gpio0 0x00 0>;
+};

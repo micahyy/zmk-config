@@ -1,0 +1,8 @@
+file_format: "1"
+id: dz17
+name: DZ17
+type: shield
+url: https://github.com/micahyy/zmk-config
+requires: [pro_micro]
+features:
+  - keys

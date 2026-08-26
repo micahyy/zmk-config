@@ -1,0 +1,4 @@
+id: dz17
+name: DZ17
+type: shield
+depends_on: [nice_nano]
