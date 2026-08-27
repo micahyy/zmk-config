@@ -1,0 +1,5 @@
+config CZMAO_BLE_INDICATOR
+    bool "CZMAO BLE indicator & NumLock LED"
+    default y
+    help
+      Enable BLE channel indicator and NumLock LED on DZ17.
