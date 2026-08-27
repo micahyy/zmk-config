@@ -28,17 +28,18 @@
 
         // Layer 1 (hold NUM): RGB controls + Bluetooth, matching DS17R6 QMK layout
         //
-        //   trans  trans  *Studio    - BRI+
-        //   TOG    SATU   trans      + BRI-
+        //   trans  trans  *Studio    - Bootloader
+        //   TOG    SATU   BRI+       + BRI-
         //   HUD    trans  HUI        Enter trans
         //   BT0    BT1    BT2
         //   EFF                   BT_CLR
         //
         // * key = ZMK Studio unlock (hold NUM, press * to enable live editing)
+        // - key = enter UF2 bootloader (USB connection required)
         fn_layer {
             bindings = <
                 &trans             &trans             &studio_unlock      &bootloader
-                &rgb_ug RGB_TOG    &rgb_ug RGB_SAI    &trans              &rgb_ug RGB_BRD
+                &rgb_ug RGB_TOG    &rgb_ug RGB_SAI    &rgb_ug RGB_BRI    &rgb_ug RGB_BRD
                 &rgb_ug RGB_HUD    &trans             &rgb_ug RGB_HUI     &trans
                 &bt BT_SEL 0       &bt BT_SEL 1       &bt BT_SEL 2
                 &rgb_ug RGB_EFF                       &bt BT_CLR
