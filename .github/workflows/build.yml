@@ -24,7 +24,12 @@ jobs:
         run: west zephyr-export
 
       - name: Build DZ17
-        run: west build -s zmk/app -b nice_nano_v2 -- -DSHIELD=dz17 -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
+        run: >
+          west build -s zmk/app -b nice_nano_v2
+          -- -DSHIELD=dz17
+          -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
+          -DSNIPPET="studio-rpc-usb-uart"
+          -DCONFIG_ZMK_STUDIO=y
 
       - name: Rename firmware
         run: cp build/zephyr/zmk.uf2 dz17_nice_nano_v2.uf2
