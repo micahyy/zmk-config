@@ -1,12 +1,13 @@
-#include <dt-bindings/zmk/matrix_transform.h>
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/led/led.h>
+#include "dz17-layouts.dtsi"
 
 / {
     chosen {
         zmk,kscan = &kscan0;
         zmk,battery = &vbatt;
         zmk,underglow = &led_strip;
+        zmk,physical-layout = <&dz17_layout>;
     };
 
     // 17 keys direct GPIO
