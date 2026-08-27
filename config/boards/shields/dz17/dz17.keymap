@@ -2,7 +2,6 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/rgb.h>
-#include <dt-bindings/zmk/studio.h>
 
 / {
     keymap {
@@ -28,19 +27,19 @@
 
         // Layer 1 (hold NUM): RGB controls + Bluetooth, matching DS17R6 QMK layout
         //
-        //   trans  /      *         - (BRI+)
-        //   TOG    SATU   trans
-        //   HUD    trans  HUI       + (BRI-)
-        //   BT_0   trans  BT_2
-        //   EFF (next)            BT_CLR
+        //   trans  trans  *Studio    - BRI+
+        //   TOG    SATU   trans      + BRI-
+        //   HUD    trans  HUI        Enter trans
+        //   BT0    BT1    BT2
+        //   EFF                   BT_CLR
         //
-        // * key = ZMK Studio unlock (press to enable live editing)
+        // * key = ZMK Studio unlock (hold NUM, press * to enable live editing)
         fn_layer {
             bindings = <
                 &trans             &trans             &studio_unlock      &rgb_ug RGB_BRI
-                &rgb_ug RGB_TOG    &rgb_ug RGB_SAI    &trans
-                &rgb_ug RGB_HUD    &trans             &rgb_ug RGB_HUI     &rgb_ug RGB_BRD
-                &bt BT_SEL 0       &trans             &bt BT_SEL 2
+                &rgb_ug RGB_TOG    &rgb_ug RGB_SAI    &trans              &rgb_ug RGB_BRD
+                &rgb_ug RGB_HUD    &trans             &rgb_ug RGB_HUI     &trans
+                &bt BT_SEL 0       &bt BT_SEL 1       &bt BT_SEL 2
                 &rgb_ug RGB_EFF                       &bt BT_CLR
             >;
         };
