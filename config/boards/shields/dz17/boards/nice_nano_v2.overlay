@@ -3,12 +3,16 @@
 // WS2812: 17 per-key LEDs, data on P0.26 via SPIM3
 // Board-specific overlay (pinctrl/SPI must live here per ZMK docs)
 //
-// IMPORTANT: No "sleep" pinctrl state for SPIM3. On nRF52840, putting MOSI
-// into low-power during deep sleep causes WS2812 to freeze after wake — the
-// SPI peripheral never resumes driving the data line correctly.
+// Sleep pinctrl state required by nRF SPI driver BUILD_ASSERT. Defined WITHOUT
+// low-power-enable so MOSI stays driven during deep sleep (prevents WS2812 freeze).
 
 &pinctrl {
     spi3_default: spi3_default {
+        group1 {
+            psels = <NRF_PSEL(SPIM_MOSI, 0, 26)>;
+        };
+    };
+    spi3_sleep: spi3_sleep {
         group1 {
             psels = <NRF_PSEL(SPIM_MOSI, 0, 26)>;
         };
@@ -19,7 +23,8 @@
     compatible = "nordic,nrf-spim";
     status = "okay";
     pinctrl-0 = <&spi3_default>;
-    pinctrl-names = "default";
+    pinctrl-1 = <&spi3_sleep>;
+    pinctrl-names = "default", "sleep";
 
     led_strip: ws2812@0 {
         compatible = "worldsemi,ws2812-spi";
