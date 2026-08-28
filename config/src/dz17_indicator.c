@@ -167,9 +167,9 @@ static struct proxy_config cfg0 = {
     .length = DT_INST_PROP(0, chain_length),
 };
 
-/* Init priority 40 — must be AFTER real WS2812 strip (prio 35, LED_STRIP_INIT_PRIORITY) */
+/* APPLICATION level runs after all POST_KERNEL devices (including WS2812 strip at 35) */
 DEVICE_DT_INST_DEFINE(0, proxy_init, NULL, NULL, &cfg0,
-                      POST_KERNEL, 40, &proxy_api);
+                      APPLICATION, CONFIG_KERNEL_INIT_PRIORITY_DEFAULT, &proxy_api);
 
 /* ---- events ---- */
 static int ble_profile_listener(const zmk_event_t *eh) {
