@@ -1,1 +1,1 @@
-target_sources_ifdef(CONFIG_CZMAO_BLE_INDICATOR app PRIVATE src/ble_indicator.c)
+target_sources_ifdef(CONFIG_CZMAO_DZ17_INDICATORS app PRIVATE src/dz17_indicator.c)
