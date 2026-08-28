@@ -72,6 +72,11 @@ static int solid_off_slot = -1;
 static int64_t last_frame_tick = 0;
 static bool self_driving = false;
 
+static struct proxy_config cfg0 = {
+    .target = DEVICE_DT_GET(DT_INST_PHANDLE(0, target)),
+    .length = DT_INST_PROP(0, chain_length),
+};
+
 /* ---- helpers ---- */
 static inline struct led_rgb rgb_from_u32(uint32_t v) {
     return (struct led_rgb){
@@ -106,9 +111,7 @@ static bool any_indicator_active(void) {
 /* Directly push current indicator state to the WS2812 strip.
  * Used when ZMK underglow is not sending frames (RGB off). */
 static void self_drive_refresh(void) {
-    const struct device *dev = DEVICE_DT_GET(DT_DRV_INST(0));
-    const struct proxy_config *cfg = dev->config;
-    if (!cfg || !cfg->target || !device_is_ready(cfg->target)) return;
+    if (!device_is_ready(cfg0.target)) return;
 
     struct led_rgb pixels[17] = {0};
     for (int i = 0; i < NUM_INDICATORS; i++) {
@@ -119,7 +122,7 @@ static void self_drive_refresh(void) {
             pixels[is->index] = rgb_from_u32(is->color);
         }
     }
-    led_strip_update_rgb(cfg->target, pixels, 17);
+    led_strip_update_rgb(cfg0.target, pixels, 17);
 }
 
 /* ---- work handlers ---- */
@@ -204,11 +207,16 @@ static int proxy_init(const struct device *dev) {
         return -ENODEV;
     }
 
-    /* Indices 0..3 come from DTS: [BLE0, BLE1, BLE2, USB] */
-    for (int i = 0; i < 4; i++) {
-        ind_states[i].index = DT_INST_PROP_BY_IDX(0, indicator_indices, i);
-        ind_states[i].color = DT_INST_PROP_BY_IDX(0, indicator_colors, i);
-    }
+    /* Indices 0..3 come from DTS: [BLE0, BLE1, BLE2, USB].
+     * DT_INST_PROP_BY_IDX requires a literal index, so unroll manually. */
+    ind_states[0].index = DT_INST_PROP_BY_IDX(0, indicator_indices, 0);
+    ind_states[1].index = DT_INST_PROP_BY_IDX(0, indicator_indices, 1);
+    ind_states[2].index = DT_INST_PROP_BY_IDX(0, indicator_indices, 2);
+    ind_states[3].index = DT_INST_PROP_BY_IDX(0, indicator_indices, 3);
+    ind_states[0].color = DT_INST_PROP_BY_IDX(0, indicator_colors, 0);
+    ind_states[1].color = DT_INST_PROP_BY_IDX(0, indicator_colors, 1);
+    ind_states[2].color = DT_INST_PROP_BY_IDX(0, indicator_colors, 2);
+    ind_states[3].color = DT_INST_PROP_BY_IDX(0, indicator_colors, 3);
 
     /* Slot 4: NumLock on the NUM key (first key, WS2812 index 0) */
     ind_states[NUM_SLOT].index = 0;
@@ -238,11 +246,6 @@ static int proxy_init(const struct device *dev) {
 
 static const struct led_strip_driver_api proxy_api = {
     .update_rgb = proxy_update_rgb,
-};
-
-static struct proxy_config cfg0 = {
-    .target = DEVICE_DT_GET(DT_INST_PHANDLE(0, target)),
-    .length = DT_INST_PROP(0, chain_length),
 };
 
 /* APPLICATION level runs after all POST_KERNEL devices (incl. WS2812) */
