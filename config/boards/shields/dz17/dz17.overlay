@@ -6,7 +6,7 @@
     chosen {
         zmk,kscan = &kscan0;
         zmk,battery = &vbatt;
-        zmk,underglow = &led_strip;
+        zmk,underglow = &indicator_proxy;
         zmk,physical-layout = <&dz17_layout>;
     };
 
@@ -42,12 +42,24 @@
         compatible = "zmk,battery-nrf-vddh";
         charge-status-gpios = <&gpio0 31 GPIO_ACTIVE_LOW>;
     };
+
+    // LED indicator proxy: sits between ZMK underglow and real WS2812 strip.
+    // Overlays BLE/USB status colors on specific key LEDs while letting
+    // RGB animations run normally on all other pixels.
+    //
+    // Indicator order: [BLE0, BLE1, BLE2, USB]
+    // LED indices:     [12,    13,    14,    8  ]
+    // Colors:          [blue,  blue,  blue,  green]
+    indicator_proxy: indicator_proxy {
+        compatible = "czmao,dz17-indicators";
+        target = <&led_strip>;
+        chain-length = <17>;
+        indicator-indices = <12 13 14 8>;
+        indicator-colors = <0x0000CC 0x0000CC 0x0000CC 0x00CC00>;
+    };
 };
 
-// WS2812: 17 per-key LEDs, data on P0.26 via SPIM3 (per ZMK official docs)
-// Sleep pinctrl state is required by nRF SPI driver BUILD_ASSERT when PM_DEVICE
-// is enabled. We define it WITHOUT low-power-enable so MOSI stays driven during
-// deep sleep — otherwise WS2812 freezes after wake.
+// WS2812: 17 per-key LEDs, data on P0.26 via SPIM3
 &pinctrl {
     spi3_default: spi3_default {
         group1 {
