@@ -24,9 +24,7 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #define SOLID_HOLD_MS   2000
 #define RENAME_DELAY_MS 100
 #define USB_SLOT        3
-
-/* Number of indicators is fixed by devicetree (compile-time). */
-#define NUM_INDICATORS  DT_INST_PROP_LEN(0, indicator_indices)
+#define NUM_INDICATORS  4
 
 enum phase {
     PHASE_OFF = 0,
@@ -125,27 +123,38 @@ static int proxy_update_rgb(const struct device *dev, struct led_rgb *pixels, si
 
 static int proxy_init(const struct device *dev) {
     const struct proxy_config *cfg = dev->config;
+
+    /* Wait for target LED strip to be ready */
     if (!device_is_ready(cfg->target)) {
-        LOG_ERR("target LED strip not ready");
+        LOG_ERR("target LED strip not ready, retrying...");
         return -ENODEV;
     }
 
-    /* Load indicator positions/colors from devicetree.
-     * DT_INST_PROP for array types expands to a brace-enclosed initializer. */
-    static const uint8_t dt_indices[] = DT_INST_PROP(0, indicator_indices);
-    static const uint32_t dt_colors[] = DT_INST_PROP(0, indicator_colors);
+    /* Read indicator positions/colors from DTS using explicit indices */
+    ind_states[0].index = DT_INST_PROP_BY_IDX(0, indicator_indices, 0);
+    ind_states[1].index = DT_INST_PROP_BY_IDX(0, indicator_indices, 1);
+    ind_states[2].index = DT_INST_PROP_BY_IDX(0, indicator_indices, 2);
+    ind_states[3].index = DT_INST_PROP_BY_IDX(0, indicator_indices, 3);
+
+    ind_states[0].color = DT_INST_PROP_BY_IDX(0, indicator_colors, 0);
+    ind_states[1].color = DT_INST_PROP_BY_IDX(0, indicator_colors, 1);
+    ind_states[2].color = DT_INST_PROP_BY_IDX(0, indicator_colors, 2);
+    ind_states[3].color = DT_INST_PROP_BY_IDX(0, indicator_colors, 3);
 
     for (int i = 0; i < NUM_INDICATORS; i++) {
-        ind_states[i].index = dt_indices[i];
-        ind_states[i].color = dt_colors[i];
         ind_states[i].phase = PHASE_OFF;
+        ind_states[i].blink_on = false;
     }
 
     k_work_init_delayable(&blink_work, blink_handler);
     k_work_init_delayable(&solid_off_work, solid_off_handler);
     k_work_init_delayable(&rename_work, rename_handler);
 
-    LOG_INF("DZ17 indicators: %d slots ready", NUM_INDICATORS);
+    LOG_INF("DZ17 indicators: idx=[%d,%d,%d,%d] colors=[0x%06X,0x%06X,0x%06X,0x%06X]",
+            ind_states[0].index, ind_states[1].index,
+            ind_states[2].index, ind_states[3].index,
+            ind_states[0].color, ind_states[1].color,
+            ind_states[2].color, ind_states[3].color);
     return 0;
 }
 
@@ -158,8 +167,9 @@ static struct proxy_config cfg0 = {
     .length = DT_INST_PROP(0, chain_length),
 };
 
+/* Init at priority 60 — after the real WS2812 strip (LED_STRIP_INIT_PRIORITY=50) */
 DEVICE_DT_INST_DEFINE(0, proxy_init, NULL, NULL, &cfg0,
-                      POST_KERNEL, CONFIG_LED_STRIP_INIT_PRIORITY, &proxy_api);
+                      POST_KERNEL, 60, &proxy_api);
 
 /* ---- events ---- */
 static int ble_profile_listener(const zmk_event_t *eh) {
