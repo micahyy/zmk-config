@@ -1,10 +1,9 @@
 #include <dt-bindings/led/led.h>
 
 // WS2812: 17 per-key LEDs, data on P0.26 via SPIM3
-// Board-specific overlay (pinctrl/SPI must live here per ZMK docs)
-//
-// Sleep pinctrl state required by nRF SPI driver BUILD_ASSERT. Defined WITHOUT
-// low-power-enable so MOSI stays driven during deep sleep (prevents WS2812 freeze).
+// Board-specific overlay: pinctrl/SPI hardware definition.
+// Underglow chosen node is set by the shield overlay (dz17.overlay)
+// to route through indicator_proxy. Do NOT set it here.
 
 &pinctrl {
     spi3_default: spi3_default {
@@ -28,17 +27,12 @@
 
     led_strip: ws2812@0 {
         compatible = "worldsemi,ws2812-spi";
+        status = "okay";
         reg = <0>;
         spi-max-frequency = <4000000>;
         chain-length = <17>;
         spi-one-frame = <0x70>;
         spi-zero-frame = <0x40>;
         color-mapping = <LED_COLOR_ID_GREEN LED_COLOR_ID_RED LED_COLOR_ID_BLUE>;
-    };
-};
-
-/ {
-    chosen {
-        zmk,underglow = &led_strip;
     };
 };
