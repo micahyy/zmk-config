@@ -134,10 +134,14 @@ static int proxy_init(const struct device *dev) {
         return -ENODEV;
     }
 
-    /* Load indicator positions/colors from devicetree (one element at a time). */
+    /* Load indicator positions/colors from devicetree.
+     * DT_INST_PROP for array types expands to a brace-enclosed initializer. */
+    static const uint8_t dt_indices[] = DT_INST_PROP(0, indicator_indices);
+    static const uint32_t dt_colors[] = DT_INST_PROP(0, indicator_colors);
+
     for (int i = 0; i < NUM_INDICATORS; i++) {
-        ind_states[i].index = DT_INST_PROP_BY_IDX(0, indicator_indices, i);
-        ind_states[i].color = DT_INST_PROP_BY_IDX(0, indicator_colors, i);
+        ind_states[i].index = dt_indices[i];
+        ind_states[i].color = dt_colors[i];
         ind_states[i].phase = PHASE_OFF;
     }
 
