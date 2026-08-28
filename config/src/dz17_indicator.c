@@ -123,10 +123,6 @@ static int proxy_update_rgb(const struct device *dev, struct led_rgb *pixels, si
     return led_strip_update_rgb(cfg->target, pixels, num);
 }
 
-static size_t proxy_length(const struct device *dev) {
-    return ((const struct proxy_config *)dev->config)->length;
-}
-
 static int proxy_init(const struct device *dev) {
     const struct proxy_config *cfg = dev->config;
     if (!device_is_ready(cfg->target)) {
@@ -155,7 +151,6 @@ static int proxy_init(const struct device *dev) {
 
 static const struct led_strip_driver_api proxy_api = {
     .update_rgb = proxy_update_rgb,
-    .length = proxy_length,
 };
 
 static struct proxy_config cfg0 = {
