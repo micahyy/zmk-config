@@ -48,14 +48,15 @@
     // RGB animations run normally on all other pixels.
     //
     // Indicator order: [BLE0, BLE1, BLE2, USB]
-    // LED indices:     [12,    13,    14,    8  ]
+    // LED indices:     [11,    12,    13,    7  ]  (physical LED number - 1)
     // Colors:          [blue,  blue,  blue,  green]
+    // NumLock slot is hard-coded in driver: index 0, white 0xFFFFFF
     indicator_proxy: indicator_proxy {
         compatible = "czmao,dz17-indicators";
         target = <&led_strip>;
         chain-length = <17>;
-        indicator-indices = <12 13 14 8>;
-        indicator-colors = <0x0000CC 0x0000CC 0x0000CC 0x00CC00>;
+        indicator-indices = <11 12 13 7>;
+        indicator-colors = <0x0000FF 0x0000FF 0x0000FF 0x00CC00>;
     };
 };
 

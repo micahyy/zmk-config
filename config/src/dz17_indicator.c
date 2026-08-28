@@ -1,11 +1,19 @@
 /*
- * DZ17 LED strip proxy — multi-position BLE/USB indicators
+ * DZ17 LED strip proxy — multi-position BLE/USB/NumLock indicators
  *
  * Sits between ZMK underglow and the real WS2812 strip.
  * ZMK writes animation frames to us; we overlay indicator colors
  * on specific pixels, then forward everything to the real strip.
  *
- * RGB animations keep running normally while indicators show independently.
+ * When RGB underglow is OFF, we still drive the strip directly
+ * so that channel indicators blink/solid work independently.
+ *
+ * Indicator slots:
+ *   0 = BLE profile 0 (key 1)
+ *   1 = BLE profile 1 (key 2)
+ *   2 = BLE profile 2 (key 3)
+ *   3 = USB selected   (key 4)
+ *   4 = NumLock        (NUM key)
  */
 #define DT_DRV_COMPAT czmao_dz17_indicators
 
@@ -15,16 +23,25 @@
 #include <zephyr/logging/log.h>
 #include <zmk/events/ble_active_profile_changed.h>
 #include <zmk/events/endpoint_changed.h>
+#include <zmk/events/hid_indicators_changed.h>
 #include <zmk/ble.h>
 #include <zmk/endpoints.h>
+#include <zmk/hid.h>
 
 LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
-#define BLINK_PERIOD_MS 500
-#define SOLID_HOLD_MS   2000
-#define RENAME_DELAY_MS 100
-#define USB_SLOT        3
-#define NUM_INDICATORS  4
+#define BLINK_PERIOD_MS  500
+#define SOLID_HOLD_MS    2000
+#define RENAME_DELAY_MS  100
+#define REFRESH_MS       50       /* independent refresh when RGB off   */
+#define RGB_IDLE_MS      250      /* if no underglow frame in this time */
+                                 /* we assume RGB is off and self-drive */
+#define USB_SLOT         3
+#define NUM_SLOT         4
+#define NUM_INDICATORS   5
+
+/* HID LED report bitmasks (USB HID Usage Tables, LED report) */
+#define HID_LED_NUM_LOCK  0x01
 
 enum phase {
     PHASE_OFF = 0,
@@ -33,10 +50,10 @@ enum phase {
 };
 
 struct indicator_state {
-    uint8_t index;
+    uint8_t  index;
     uint32_t color;
     enum phase phase;
-    bool blink_on;
+    bool     blink_on;
 };
 
 struct proxy_config {
@@ -49,15 +66,18 @@ static struct indicator_state ind_states[NUM_INDICATORS];
 static struct k_work_delayable blink_work;
 static struct k_work_delayable solid_off_work;
 static struct k_work_delayable rename_work;
+static struct k_work_delayable refresh_work;
 static uint8_t pending_rename_profile = 0xFF;
 static int solid_off_slot = -1;
+static int64_t last_frame_tick = 0;
+static bool self_driving = false;
 
 /* ---- helpers ---- */
 static inline struct led_rgb rgb_from_u32(uint32_t v) {
     return (struct led_rgb){
         .r = (v >> 16) & 0xFF,
-        .g = (v >> 8) & 0xFF,
-        .b = v & 0xFF,
+        .g = (v >>  8) & 0xFF,
+        .b =  v        & 0xFF,
     };
 }
 
@@ -76,16 +96,47 @@ static void set_indicator(uint8_t slot, enum phase phase) {
     }
 }
 
+static bool any_indicator_active(void) {
+    for (int i = 0; i < NUM_INDICATORS; i++) {
+        if (ind_states[i].phase != PHASE_OFF) return true;
+    }
+    return false;
+}
+
+/* Directly push current indicator state to the WS2812 strip.
+ * Used when ZMK underglow is not sending frames (RGB off). */
+static void self_drive_refresh(void) {
+    const struct device *dev = DEVICE_DT_GET(DT_DRV_INST(0));
+    const struct proxy_config *cfg = dev->config;
+    if (!cfg || !cfg->target || !device_is_ready(cfg->target)) return;
+
+    struct led_rgb pixels[17] = {0};
+    for (int i = 0; i < NUM_INDICATORS; i++) {
+        struct indicator_state *is = &ind_states[i];
+        if (is->index >= 17 || is->phase == PHASE_OFF) continue;
+
+        if (is->phase == PHASE_SOLID || is->blink_on) {
+            pixels[is->index] = rgb_from_u32(is->color);
+        }
+    }
+    led_strip_update_rgb(cfg->target, pixels, 17);
+}
+
 /* ---- work handlers ---- */
 static void blink_handler(struct k_work *w) {
-    bool any = false;
+    bool any_blinking = false;
     for (int i = 0; i < NUM_INDICATORS; i++) {
         if (ind_states[i].phase == PHASE_BLINK) {
             ind_states[i].blink_on = !ind_states[i].blink_on;
-            any = true;
+            any_blinking = true;
         }
     }
-    if (any) k_work_reschedule(&blink_work, K_MSEC(BLINK_PERIOD_MS));
+    if (self_driving && any_indicator_active()) {
+        self_drive_refresh();
+    }
+    if (any_blinking) {
+        k_work_reschedule(&blink_work, K_MSEC(BLINK_PERIOD_MS));
+    }
 }
 
 static void solid_off_handler(struct k_work *w) {
@@ -93,6 +144,7 @@ static void solid_off_handler(struct k_work *w) {
         ind_states[solid_off_slot].phase = PHASE_OFF;
     }
     solid_off_slot = -1;
+    if (self_driving) self_drive_refresh();
 }
 
 static void rename_handler(struct k_work *w) {
@@ -104,9 +156,32 @@ static void rename_handler(struct k_work *w) {
     pending_rename_profile = 0xFF;
 }
 
+/* Runs at REFRESH_MS while any indicator is active. Detects whether
+ * ZMK underglow is still producing frames. If not, we drive the strip
+ * ourselves so indicators show even when RGB is toggled off. */
+static void refresh_handler(struct k_work *w) {
+    int64_t now = k_uptime_get();
+    bool should_self_drive = (now - last_frame_tick) > RGB_IDLE_MS;
+
+    if (should_self_drive && any_indicator_active()) {
+        self_driving = true;
+        self_drive_refresh();
+        k_work_reschedule(&refresh_work, K_MSEC(REFRESH_MS));
+    } else {
+        self_driving = false;
+        if (any_indicator_active()) {
+            k_work_reschedule(&refresh_work, K_MSEC(REFRESH_MS));
+        }
+    }
+}
+
 /* ---- led_strip API ---- */
-static int proxy_update_rgb(const struct device *dev, struct led_rgb *pixels, size_t num) {
+static int proxy_update_rgb(const struct device *dev, struct led_rgb *pixels,
+                            size_t num) {
     const struct proxy_config *cfg = dev->config;
+
+    last_frame_tick = k_uptime_get();
+    self_driving = false;
 
     for (int i = 0; i < NUM_INDICATORS; i++) {
         struct indicator_state *is = &ind_states[i];
@@ -124,37 +199,40 @@ static int proxy_update_rgb(const struct device *dev, struct led_rgb *pixels, si
 static int proxy_init(const struct device *dev) {
     const struct proxy_config *cfg = dev->config;
 
-    /* Wait for target LED strip to be ready */
     if (!device_is_ready(cfg->target)) {
         LOG_ERR("target LED strip not ready, retrying...");
         return -ENODEV;
     }
 
-    /* Read indicator positions/colors from DTS using explicit indices */
-    ind_states[0].index = DT_INST_PROP_BY_IDX(0, indicator_indices, 0);
-    ind_states[1].index = DT_INST_PROP_BY_IDX(0, indicator_indices, 1);
-    ind_states[2].index = DT_INST_PROP_BY_IDX(0, indicator_indices, 2);
-    ind_states[3].index = DT_INST_PROP_BY_IDX(0, indicator_indices, 3);
+    /* Indices 0..3 come from DTS: [BLE0, BLE1, BLE2, USB] */
+    for (int i = 0; i < 4; i++) {
+        ind_states[i].index = DT_INST_PROP_BY_IDX(0, indicator_indices, i);
+        ind_states[i].color = DT_INST_PROP_BY_IDX(0, indicator_colors, i);
+    }
 
-    ind_states[0].color = DT_INST_PROP_BY_IDX(0, indicator_colors, 0);
-    ind_states[1].color = DT_INST_PROP_BY_IDX(0, indicator_colors, 1);
-    ind_states[2].color = DT_INST_PROP_BY_IDX(0, indicator_colors, 2);
-    ind_states[3].color = DT_INST_PROP_BY_IDX(0, indicator_colors, 3);
+    /* Slot 4: NumLock on the NUM key (first key, WS2812 index 0) */
+    ind_states[NUM_SLOT].index = 0;
+    ind_states[NUM_SLOT].color = 0xFFFFFF;   /* white */
 
     for (int i = 0; i < NUM_INDICATORS; i++) {
-        ind_states[i].phase = PHASE_OFF;
+        ind_states[i].phase    = PHASE_OFF;
         ind_states[i].blink_on = false;
     }
 
-    k_work_init_delayable(&blink_work, blink_handler);
-    k_work_init_delayable(&solid_off_work, solid_off_handler);
-    k_work_init_delayable(&rename_work, rename_handler);
+    k_work_init_delayable(&blink_work,      blink_handler);
+    k_work_init_delayable(&solid_off_work,  solid_off_handler);
+    k_work_init_delayable(&rename_work,     rename_handler);
+    k_work_init_delayable(&refresh_work,    refresh_handler);
 
-    LOG_INF("DZ17 indicators: idx=[%d,%d,%d,%d] colors=[0x%06X,0x%06X,0x%06X,0x%06X]",
+    last_frame_tick = k_uptime_get();
+
+    LOG_INF("DZ17 indicators: idx=[%d,%d,%d,%d,%d] colors=[0x%06X,0x%06X,0x%06X,0x%06X,0x%06X]",
             ind_states[0].index, ind_states[1].index,
             ind_states[2].index, ind_states[3].index,
+            ind_states[4].index,
             ind_states[0].color, ind_states[1].color,
-            ind_states[2].color, ind_states[3].color);
+            ind_states[2].color, ind_states[3].color,
+            ind_states[4].color);
     return 0;
 }
 
@@ -167,9 +245,10 @@ static struct proxy_config cfg0 = {
     .length = DT_INST_PROP(0, chain_length),
 };
 
-/* APPLICATION level runs after all POST_KERNEL devices (including WS2812 strip at 35) */
+/* APPLICATION level runs after all POST_KERNEL devices (incl. WS2812) */
 DEVICE_DT_INST_DEFINE(0, proxy_init, NULL, NULL, &cfg0,
-                      APPLICATION, CONFIG_KERNEL_INIT_PRIORITY_DEFAULT, &proxy_api);
+                      APPLICATION, CONFIG_KERNEL_INIT_PRIORITY_DEFAULT,
+                      &proxy_api);
 
 /* ---- events ---- */
 static int ble_profile_listener(const zmk_event_t *eh) {
@@ -183,7 +262,7 @@ static int ble_profile_listener(const zmk_event_t *eh) {
     pending_rename_profile = ev->index;
     k_work_reschedule(&rename_work, K_MSEC(RENAME_DELAY_MS));
 
-    /* Clear all BLE indicators (slots 0..2); USB is slot 3. */
+    /* Clear all BLE indicators (slots 0..2); USB is slot 3, NumLock slot 4. */
     for (int i = 0; i < 3; i++) set_indicator(i, PHASE_OFF);
 
     if (zmk_ble_profile_is_connected(ev->index)) {
@@ -192,6 +271,8 @@ static int ble_profile_listener(const zmk_event_t *eh) {
         set_indicator(ev->index, PHASE_BLINK);
         k_work_reschedule(&blink_work, K_MSEC(BLINK_PERIOD_MS));
     }
+
+    k_work_reschedule(&refresh_work, K_MSEC(REFRESH_MS));
     return 0;
 }
 ZMK_LISTENER(dz17_ble_ind, ble_profile_listener);
@@ -208,7 +289,25 @@ static int endpoint_listener(const zmk_event_t *eh) {
     } else {
         set_indicator(USB_SLOT, PHASE_OFF);
     }
+
+    k_work_reschedule(&refresh_work, K_MSEC(REFRESH_MS));
     return 0;
 }
 ZMK_LISTENER(dz17_ep_ind, endpoint_listener);
 ZMK_SUBSCRIPTION(dz17_ep_ind, zmk_endpoint_changed);
+
+static int hid_indicators_listener(const zmk_event_t *eh) {
+    const struct zmk_hid_indicators_changed *ev =
+        as_zmk_hid_indicators_changed(eh);
+    if (!ev) return 0;
+
+    bool num_on = (ev->indicators & HID_LED_NUM_LOCK) != 0;
+    LOG_INF("HID indicators=0x%02X numlock=%d", ev->indicators, num_on);
+
+    set_indicator(NUM_SLOT, num_on ? PHASE_SOLID : PHASE_OFF);
+
+    k_work_reschedule(&refresh_work, K_MSEC(REFRESH_MS));
+    return 0;
+}
+ZMK_LISTENER(dz17_hid_ind, hid_indicators_listener);
+ZMK_SUBSCRIPTION(dz17_hid_ind, zmk_hid_indicators_changed);
