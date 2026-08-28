@@ -167,38 +167,38 @@ Layer 2 (长按 /):
 
 ## 问题跟踪
 
-### 2026-08-28 第二轮实测反馈（commit f950e25）
+### 2026-08-28 第二轮实测反馈（commit 80e50c7，Build #95通过）
 
 **问题1：RGB状态断电不持久**
 - 现象：通电会自动切换到默认灯效，没有记录断电之前的灯效
-- 修复：`CONFIG_ZMK_RGB_UNDERGLOW_ON_START` 从 `y` 改为 `n`，并启用 `CONFIG_ZMK_SETTINGS=y`。ZMK settings系统会自动保存当前灯效/色相/亮度/开关状态到flash，上电恢复。`*_START` 系列值仅在首次烧录（无settings数据）时作为默认值使用。
-- 状态：✅ 已修复，待测试
+- 修复：`CONFIG_ZMK_RGB_UNDERGLOW_ON_START` 从 `y` 改为 `n`。ZMK settings子系统默认启用，会自动保存当前灯效/色相/亮度/开关状态到flash，上电恢复。`*_START` 系列值仅在首次烧录（无settings数据）时作为默认值使用。注意：当前ZMK v0.3.0版本中`CONFIG_ZMK_SETTINGS`符号不存在，不能显式设置。
+- 状态：✅ 已修复，待刷入测试
 
 **问题2：BLE指示灯位置偏移**
 - 现象：通道1还是在2的位置闪，RGB从RGB1~RGB17，没有RGB0
 - 修复：物理LED编号是1-based，代码数组索引需要 `物理编号 − 1`。原索引12/13/14/8分别调整为11/12/13/7。
-- 状态：✅ 已修复，待测试（如果位置仍然不对，需要确认PCB上WS2812的实际串接顺序）
+- 状态：✅ 已修复，待刷入测试（如果位置仍然不对，需要确认PCB上WS2812的实际串接顺序）
 
 **问题3：RGB关闭时通道指示灯不闪**
 - 现象：关闭灯的情况下通道指示灯不闪，只常亮关闭前的指示灯
 - 根因：proxy驱动依赖ZMK underglow每帧调`update_rgb`来叠加指示灯颜色；RGB关闭后underglow不再发送帧，proxy没有机会刷新strip
 - 修复：新增独立refresh工作队列（50ms周期），检测到250ms内无underglow帧时判定为RGB关闭状态，proxy直接构造全黑+指示灯像素写入WS2812。指示灯闪烁/常亮在RGB关闭时也能正常工作。
-- 状态：✅ 已修复，待测试
+- 状态：✅ 已修复，待刷入测试
 
 **问题4：NumLock指示灯缺失**
 - 现象：numberlock指示灯没有
 - 修复：新增第5个指示灯槽位（slot 4），硬编码在NUM键位置（数组索引0 = RGB1），白色0xFFFFFF。订阅`zmk_hid_indicators_changed`事件，读取bit0（HID_LED_NUM_LOCK），宿主上报NumLock开启时白色常亮，关闭时熄灭。与其他通道指示灯互不干扰。
-- 状态：✅ 已修复，待测试
+- 状态：✅ 已修复，待刷入测试
 
 **问题5：BLE指示灯蓝色太浅**
 - 现象：蓝牙指示灯的颜色有点浅蓝
 - 修复：BLE蓝色从 `0x0000CC` 改为 `0x0000FF`（纯蓝，最大亮度）
-- 状态：✅ 已修复，待测试
+- 状态：✅ 已修复，待刷入测试
 
 ### 修改的文件
 
 | 文件 | 修改内容 |
 |:----:|:----:|
-| `config/boards/shields/dz17/dz17.conf` | ON_START y→n，增加CONFIG_ZMK_SETTINGS=y |
+| `config/boards/shields/dz17/dz17.conf` | ON_START y→n（settings默认启用，不显式设置CONFIG_ZMK_SETTINGS） |
 | `config/boards/shields/dz17/dz17.overlay` | 索引12/13/14/8→11/12/13/7，蓝色0x0000CC→0x0000FF |
 | `config/src/dz17_indicator.c` | 新增NumLock槽位/HID事件监听/自主刷新机制，BLE槽位扩展为5个 |
