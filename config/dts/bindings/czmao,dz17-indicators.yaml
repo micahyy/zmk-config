@@ -1,0 +1,33 @@
+description: |
+  DZ17 multi-position LED strip indicator proxy.
+  Sits between ZMK underglow and the real WS2812 strip, overlaying
+  BLE/USB connection status colors on specific key LEDs while
+  leaving the rest of the strip running normal animations.
+
+compatible: "czmao,dz17-indicators"
+
+include: base.yaml
+
+properties:
+  target:
+    type: phandle
+    required: true
+    description: The real LED strip device to forward frames to.
+
+  chain-length:
+    type: int
+    required: true
+    description: Total number of pixels on the strip.
+
+  indicator-indices:
+    type: array
+    required: true
+    description: |
+      LED indices for indicators, in order:
+      [ble0_index, ble1_index, ble2_index, usb_index]
+
+  indicator-colors:
+    type: array
+    required: true
+    description: |
+      Colors (0xRRGGBB) for indicators, in same order as indices.
