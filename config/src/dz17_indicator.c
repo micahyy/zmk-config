@@ -23,8 +23,10 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #define BLINK_PERIOD_MS 500
 #define SOLID_HOLD_MS   2000
 #define RENAME_DELAY_MS 100
-#define NUM_INDICATORS  4  /* 3 BLE + 1 USB */
 #define USB_SLOT        3
+
+/* Number of indicators is fixed by devicetree (compile-time). */
+#define NUM_INDICATORS  DT_INST_PROP_LEN(0, indicator_indices)
 
 enum phase {
     PHASE_OFF = 0,
@@ -42,7 +44,6 @@ struct indicator_state {
 struct proxy_config {
     const struct device *target;
     uint16_t length;
-    uint8_t num_indicators;
 };
 
 /* ---- runtime ---- */
@@ -109,7 +110,7 @@ static void rename_handler(struct k_work *w) {
 static int proxy_update_rgb(const struct device *dev, struct led_rgb *pixels, size_t num) {
     const struct proxy_config *cfg = dev->config;
 
-    for (int i = 0; i < cfg->num_indicators; i++) {
+    for (int i = 0; i < NUM_INDICATORS; i++) {
         struct indicator_state *is = &ind_states[i];
         if (is->index >= num || is->phase == PHASE_OFF) continue;
 
@@ -133,23 +134,18 @@ static int proxy_init(const struct device *dev) {
         return -ENODEV;
     }
 
-    /* Load indicator positions/colors from devicetree */
-    const uint8_t *indices = DT_INST_PROP(0, indicator_indices);
-    const uint32_t *colors = DT_INST_PROP(0, indicator_colors);
-    int n = MIN(DT_INST_PROP_LEN(0, indicator_indices), NUM_INDICATORS);
-
-    for (int i = 0; i < n; i++) {
-        ind_states[i].index = indices[i];
-        ind_states[i].color = colors[i];
+    /* Load indicator positions/colors from devicetree (one element at a time). */
+    for (int i = 0; i < NUM_INDICATORS; i++) {
+        ind_states[i].index = DT_INST_PROP_BY_IDX(0, indicator_indices, i);
+        ind_states[i].color = DT_INST_PROP_BY_IDX(0, indicator_colors, i);
         ind_states[i].phase = PHASE_OFF;
     }
-    cfg->num_indicators = n;
 
     k_work_init_delayable(&blink_work, blink_handler);
     k_work_init_delayable(&solid_off_work, solid_off_handler);
     k_work_init_delayable(&rename_work, rename_handler);
 
-    LOG_INF("DZ17 indicators: %d slots ready", n);
+    LOG_INF("DZ17 indicators: %d slots ready", NUM_INDICATORS);
     return 0;
 }
 
@@ -178,7 +174,7 @@ static int ble_profile_listener(const zmk_event_t *eh) {
     pending_rename_profile = ev->index;
     k_work_reschedule(&rename_work, K_MSEC(RENAME_DELAY_MS));
 
-    /* Clear all BLE indicators */
+    /* Clear all BLE indicators (slots 0..2); USB is slot 3. */
     for (int i = 0; i < 3; i++) set_indicator(i, PHASE_OFF);
 
     if (zmk_ble_profile_is_connected(ev->index)) {
