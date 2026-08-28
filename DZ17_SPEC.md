@@ -157,3 +157,7 @@ Layer 2 (长按 /):
 | 目标板 | nice_nano_v2 (nRF52840) |
 | 仓库 | [github.com/micahyy/zmk-config](https://github.com/micahyy/zmk-config) |
 | 分支 | main |
+
+
+Build ZMK Firmware #92: Commit f950e25 pushed by micahyy
+通电会自动切换到默认灯效，没有记录断电之前的灯效；要求保留断电之前的灯效
