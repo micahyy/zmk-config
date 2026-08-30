@@ -19,13 +19,15 @@
  * kill switch that forces every indicator LED off; toggling again re-syncs
  * the LEDs to the current BLE/USB/NumLock state.
  */
+#define DT_DRV_COMPAT czmao_behavior_led_toggle
+
 #include <zephyr/device.h>
 #include <zephyr/drivers/led.h>
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
 #include <zephyr/sys/util.h>
 
-#define DT_DRV_COMPAT czmao_behavior_led_toggle
+#include <drivers/behavior.h>
 #include <zmk/behavior.h>
 
 #include <zmk/events/ble_active_profile_changed.h>
@@ -225,17 +227,12 @@ static int czm_ledtog_released(struct zmk_behavior_binding *binding,
     return ZMK_BEHAVIOR_OPAQUE;
 }
 
-static const struct zmk_behavior_driver_api czm_ledtog_api = {
+static const struct behavior_driver_api czm_ledtog_api = {
     .binding_pressed = czm_ledtog_pressed,
     .binding_released = czm_ledtog_released,
 };
 
-static int czm_ledtog_init(const struct device *dev) {
-    ARG_UNUSED(dev);
-    return 0;
-}
-
-BEHAVIOR_DT_INST_DEFINE(0, czm_ledtog_init, NULL, NULL, NULL, APPLICATION,
+BEHAVIOR_DT_INST_DEFINE(0, NULL, NULL, NULL, NULL, POST_KERNEL,
                         CONFIG_KERNEL_INIT_PRIORITY_DEFAULT, &czm_ledtog_api);
 
 /* ---- init: sync current state so LEDs are correct right after boot ---- */
