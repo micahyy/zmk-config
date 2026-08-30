@@ -1,23 +1,32 @@
 /*
  * DZ17 monochrome GPIO LED indicators.
  *
- * Wiring (per LED): anode -> VCC 3.3V rail, cathode -> 1k resistor -> GPIO.
+ * Wiring (per LED): 3.3V rail -> 1k resistor -> LED anode (+),
+ *                   LED cathode (-) -> GPIO.
  * Active-low: driving the GPIO LOW turns the LED on (handled by gpio-leds).
  *
  *   led0 (P0.22) = NumLock  -> solid while host reports NumLock on
- *   led1 (P0.12) = BLE prof 1
- *   led2 (P0.04) = BLE prof 2
- *   led3 (P0.26) = BLE prof 3
+ *   led1 (P0.12) = BLE profile 1
+ *   led2 (P0.04) = BLE profile 2
+ *   led3 (P0.26) = BLE profile 3
  *   led4 (P0.08) = USB output selected
  *
  * BLE profile indicator: solid when the selected profile is connected,
  * blinking while advertising/disconnected. USB indicator: solid while the
  * USB endpoint is selected. Only one channel family is active at a time.
+ *
+ * The &czm_ledtog custom behavior (hold "/" then tap "*") toggles a master
+ * kill switch that forces every indicator LED off; toggling again re-syncs
+ * the LEDs to the current BLE/USB/NumLock state.
  */
 #include <zephyr/device.h>
 #include <zephyr/drivers/led.h>
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
+#include <zephyr/sys/util.h>
+
+#define DT_DRV_COMPAT zmk_behavior
+#include <zmk/behavior.h>
 
 #include <zmk/events/ble_active_profile_changed.h>
 #include <zmk/events/endpoint_changed.h>
@@ -35,6 +44,7 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #define LED_BLE1  2   /* P0.04 */
 #define LED_BLE2  3   /* P0.26 */
 #define LED_USB   4   /* P0.08 */
+#define LED_COUNT 5
 #define BLE_COUNT 3
 
 /* HID LED report bitmasks (USB HID Usage Tables, LED report) */
@@ -46,7 +56,15 @@ static int blinking_led = -1;
 static bool blink_on = false;
 static struct k_work_delayable blink_work;
 
+/* Master kill switch: when true, every indicator LED is forced off. */
+static bool all_leds_off = false;
+/* Last known NumLock state, used when re-syncing after lights-off. */
+static bool numlock_on = false;
+
 static void led_set(int idx, bool on) {
+    if (on && all_leds_off) {
+        return;
+    }
     if (on) {
         led_on(led_dev, idx);
     } else {
@@ -74,7 +92,7 @@ static void apply_ble_profile(uint8_t profile) {
     }
     if (zmk_ble_profile_is_connected(profile)) {
         led_set(LED_BLE0 + profile, true);
-    } else {
+    } else if (!all_leds_off) {
         blinking_led = LED_BLE0 + profile;
         blink_on = true;
         led_set(blinking_led, true);
@@ -89,6 +107,45 @@ static void blink_handler(struct k_work *w) {
     blink_on = !blink_on;
     led_set(blinking_led, blink_on);
     k_work_reschedule(&blink_work, K_MSEC(BLINK_PERIOD_MS));
+}
+
+/* Re-sync every LED to the current transport/profile/NumLock state. */
+static void leds_resync(void) {
+    if (all_leds_off) {
+        blink_stop();
+        for (int i = 0; i < LED_COUNT; i++) {
+            led_set(i, false);
+        }
+        return;
+    }
+
+    struct zmk_endpoint_instance ep = zmk_endpoints_selected();
+    if (ep.transport == ZMK_TRANSPORT_USB) {
+        blink_stop();
+        for (int i = 0; i < BLE_COUNT; i++) {
+            led_set(LED_BLE0 + i, false);
+        }
+        led_set(LED_USB, true);
+    } else {
+        led_set(LED_USB, false);
+        int cur = zmk_ble_active_profile_index();
+        if (cur >= 0 && cur < BLE_COUNT) {
+            apply_ble_profile((uint8_t)cur);
+        } else {
+            blink_stop();
+            for (int i = 0; i < BLE_COUNT; i++) {
+                led_set(LED_BLE0 + i, false);
+            }
+        }
+    }
+    led_set(LED_NUM, numlock_on);
+}
+
+/* Called by the &czm_ledtog custom behavior. */
+void dz17_leds_toggle_master(void) {
+    all_leds_off = !all_leds_off;
+    LOG_INF("Indicator LEDs master switch -> %s", all_leds_off ? "OFF" : "ON");
+    leds_resync();
 }
 
 /* ---- events ---- */
@@ -120,11 +177,11 @@ static int endpoint_listener(const zmk_event_t *eh) {
 
     if (ev->endpoint.transport == ZMK_TRANSPORT_USB) {
         LOG_INF("Output endpoint: USB");
-        led_set(LED_USB, true);
         blink_stop();
         for (int i = 0; i < BLE_COUNT; i++) {
             led_set(LED_BLE0 + i, false);
         }
+        led_set(LED_USB, true);
     } else {
         LOG_INF("Output endpoint: BLE");
         led_set(LED_USB, false);
@@ -144,13 +201,42 @@ static int hid_indicators_listener(const zmk_event_t *eh) {
     if (!ev) {
         return 0;
     }
-    bool num_on = (ev->indicators & HID_LED_NUM_LOCK) != 0;
-    LOG_INF("HID indicators=0x%02X numlock=%d", ev->indicators, num_on);
-    led_set(LED_NUM, num_on);
+    numlock_on = (ev->indicators & HID_LED_NUM_LOCK) != 0;
+    LOG_INF("HID indicators=0x%02X numlock=%d", ev->indicators, numlock_on);
+    led_set(LED_NUM, numlock_on);
     return 0;
 }
 ZMK_LISTENER(dz17_hid_ind, hid_indicators_listener);
 ZMK_SUBSCRIPTION(dz17_hid_ind, zmk_hid_indicators_changed);
+
+/* ---- custom behavior: &czm_ledtog (hold "/", tap "*") ---- */
+static int czm_ledtog_pressed(struct zmk_behavior_binding *binding,
+                              struct zmk_behavior_binding_event event) {
+    ARG_UNUSED(binding);
+    ARG_UNUSED(event);
+    dz17_leds_toggle_master();
+    return ZMK_BEHAVIOR_OPAQUE;
+}
+
+static int czm_ledtog_released(struct zmk_behavior_binding *binding,
+                               struct zmk_behavior_binding_event event) {
+    ARG_UNUSED(binding);
+    ARG_UNUSED(event);
+    return ZMK_BEHAVIOR_OPAQUE;
+}
+
+static const struct zmk_behavior_driver_api czm_ledtog_api = {
+    .binding_pressed = czm_ledtog_pressed,
+    .binding_released = czm_ledtog_released,
+};
+
+static int czm_ledtog_init(const struct device *dev) {
+    ARG_UNUSED(dev);
+    return 0;
+}
+
+BEHAVIOR_DT_INST_DEFINE(0, czm_ledtog_init, NULL, NULL, NULL, APPLICATION,
+                        CONFIG_KERNEL_INIT_PRIORITY_DEFAULT, &czm_ledtog_api);
 
 /* ---- init: sync current state so LEDs are correct right after boot ---- */
 static int dz17_led_init(void) {
@@ -159,23 +245,15 @@ static int dz17_led_init(void) {
         return -ENODEV;
     }
 
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < LED_COUNT; i++) {
         led_off(led_dev, i);
     }
     k_work_init_delayable(&blink_work, blink_handler);
 
-    struct zmk_endpoint_instance ep = zmk_endpoints_selected();
-    if (ep.transport == ZMK_TRANSPORT_USB) {
-        led_set(LED_USB, true);
-    } else {
-        int cur = zmk_ble_active_profile_index();
-        if (cur >= 0 && cur < BLE_COUNT) {
-            apply_ble_profile((uint8_t)cur);
-        }
-    }
-
     zmk_hid_indicators_t ind = zmk_hid_indicators_get_current_profile();
-    led_set(LED_NUM, (ind & HID_LED_NUM_LOCK) != 0);
+    numlock_on = (ind & HID_LED_NUM_LOCK) != 0;
+
+    leds_resync();
 
     LOG_INF("DZ17 mono LEDs ready: Num=P0.22 BLE1=P0.12 BLE2=P0.04 BLE3=P0.26 USB=P0.08");
     return 0;
