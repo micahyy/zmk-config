@@ -40,7 +40,7 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 /* HID LED report bitmasks (USB HID Usage Tables, LED report) */
 #define HID_LED_NUM_LOCK 0x01
 
-static const struct device *const led_dev = DEVICE_DT_GET(DT_NODELABEL(leds));
+static const struct device *const led_dev = DEVICE_DT_GET(DT_INST(0, gpio_leds));
 
 static int blinking_led = -1;
 static bool blink_on = false;

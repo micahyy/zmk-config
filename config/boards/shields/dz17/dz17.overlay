@@ -46,6 +46,7 @@
     // Active-low: GPIO driven LOW turns the LED on.
     leds {
         compatible = "gpio-leds";
+        label = "DZ17 indicator LEDs";
         led0: led_0 { gpios = <&gpio0 22 GPIO_ACTIVE_LOW>; };  // NumLock  (white)
         led1: led_1 { gpios = <&gpio0 12 GPIO_ACTIVE_LOW>; };  // BLE prof 1
         led2: led_2 { gpios = <&gpio0  4 GPIO_ACTIVE_LOW>; };  // BLE prof 2
