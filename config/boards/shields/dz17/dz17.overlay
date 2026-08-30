@@ -12,7 +12,7 @@
     // Bound in keymap layer 2 (hold "/", tap "*").
     behaviors {
         czm_ledtog: czm_ledtog {
-            compatible = "zmk,behavior";
+            compatible = "czmao,behavior-led-toggle";
             label = "CZMAO_LED_TOGGLE";
             #binding-cells = <0>;
         };
