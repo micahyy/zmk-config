@@ -25,7 +25,7 @@
 #include <zephyr/logging/log.h>
 #include <zephyr/sys/util.h>
 
-#define DT_DRV_COMPAT zmk_behavior
+#define DT_DRV_COMPAT czmao_behavior_led_toggle
 #include <zmk/behavior.h>
 
 #include <zmk/events/ble_active_profile_changed.h>
