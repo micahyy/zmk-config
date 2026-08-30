@@ -8,6 +8,16 @@
         zmk,physical-layout = <&dz17_layout>;
     };
 
+    // Custom behavior: &czm_ledtog toggles all indicator LEDs on/off.
+    // Bound in keymap layer 2 (hold "/", tap "*").
+    behaviors {
+        czm_ledtog: czm_ledtog {
+            compatible = "zmk,behavior";
+            label = "CZMAO_LED_TOGGLE";
+            #binding-cells = <0>;
+        };
+    };
+
     // 17 keys direct GPIO (unchanged)
     kscan0: kscan {
         compatible = "zmk,kscan-gpio-direct";
@@ -42,7 +52,8 @@
     };
 
     // Monochrome indicator LEDs.
-    // Wiring: LED anode -> VCC (3.3V rail), cathode -> 1k resistor -> GPIO.
+    // Wiring per LED: 3.3V -> 1k resistor -> LED anode (+),
+    //                 LED cathode (-) -> GPIO.
     // Active-low: GPIO driven LOW turns the LED on.
     leds {
         compatible = "gpio-leds";
