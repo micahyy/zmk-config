@@ -1,7 +1,6 @@
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
-#include <dt-bindings/zmk/rgb.h>
 #include <dt-bindings/zmk/reset.h>
 #include <dt-bindings/zmk/outputs.h>
 
@@ -10,14 +9,8 @@
         compatible = "zmk,keymap";
 
         // Layer 0: Default numpad
-        // NUM key = LT(1): tap NumLock, hold to access FN layer
-        // "/" key = LT(2): tap Divide, hold to access RGB layer
-        //
-        //   LT(1)  LT(2)  *      -
-        //   7      8      9      +
-        //   4      5      6      Enter
-        //   1      2      3
-        //   0             .
+        //   NUM = LT(1): tap NumLock, hold for FN layer
+        //   /   = LT(2): tap Divide, hold for layer 2
         default_layer {
             bindings = <
                 &lt 1 KP_NUMLOCK  &lt 2 KP_DIVIDE  &kp KP_MULTIPLY  &kp KP_MINUS
@@ -29,17 +22,8 @@
         };
 
         // Layer 1 (hold NUM): Bluetooth + USB toggle + System
-        //
-        //   trans  trans  *Studio  - Bootloader
-        //   trans  trans  trans    + trans
-        //   OUT    trans  trans    Enter trans
-        //   BT0    BT1    BT2
-        //   trans            . BT_CLR
-        //
-        // * = ZMK Studio unlock
-        // - = enter UF2 bootloader (USB connection required)
-        // 4 = toggle output between USB and BLE
-        // . = clear all BT pairings
+        //   FN+1/2/3 = BLE profile, FN+4 = toggle USB/BLE,
+        //   FN+* = Studio unlock, FN+- = bootloader, FN+. = clear pairings
         fn_layer {
             bindings = <
                 &trans       &trans       &studio_unlock   &bootloader
@@ -50,20 +34,16 @@
             >;
         };
 
-        // Layer 2 (hold "/"): RGB controls
-        //
-        //   trans  trans  trans  trans
-        //   7=TOG  8=BRI+ trans  trans
-        //   trans  trans  trans  trans
-        //   trans  2=BRI- trans
-        //   0=EFF        trans
-        rgb_layer {
+        // Layer 2 (hold "/"): hold "/" and tap "*" = toggle all indicator
+        // LEDs on/off (master kill switch). WS2812 strip removed; the rest
+        // of this layer stays transparent.
+        layer2 {
             bindings = <
-                &trans             &trans             &trans           &trans
-                &rgb_ug RGB_TOG    &rgb_ug RGB_BRI    &trans           &trans
-                &trans             &trans             &trans           &trans
-                &trans             &rgb_ug RGB_BRD    &trans
-                &rgb_ug RGB_EFF                      &trans
+                &trans &trans &czm_ledtog &trans
+                &trans &trans &trans      &trans
+                &trans &trans &trans      &trans
+                &trans &trans &trans
+                &trans       &trans
             >;
         };
     };
