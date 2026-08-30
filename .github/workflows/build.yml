@@ -34,22 +34,10 @@ jobs:
           -DSNIPPET="studio-rpc-usb-uart"
           -DCONFIG_ZMK_STUDIO=y
 
-      - name: Debug kscan ord
-        if: always()
-        run: |
-          echo "=== DT_CHOSEN_zmk_kscan lines ==="
-          grep -rn "DT_CHOSEN_zmk_kscan" build/zephyr/include/generated/ || echo "NOT FOUND"
-          echo "=== DT_N_S_kscan_ORD exact ==="
-          grep -rn "define DT_N_S_kscan_ORD " build/zephyr/include/generated/ || echo "NOT FOUND"
-          echo "=== kscan node comment block in devicetree_generated.h ==="
-          grep -n "Node identifier: DT_N_S_kscan$" build/zephyr/include/generated/devicetree_generated.h || grep -n "DT_N_S_kscan" build/zephyr/include/generated/devicetree_generated.h | head -20
-
       - name: Rename firmware
-        if: success()
         run: cp build/zephyr/zmk.uf2 dz17_nice_nano_v2.uf2
 
       - name: Upload firmware
-        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: dz17_firmware
