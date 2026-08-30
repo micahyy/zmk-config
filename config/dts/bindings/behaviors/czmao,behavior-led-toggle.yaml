@@ -1,0 +1,9 @@
+# Custom ZMK behavior: master toggle for all DZ17 indicator LEDs.
+# Copyright (c) 2026 czmao
+# SPDX-License-Identifier: MIT
+
+description: Toggle all indicator LEDs on/off
+
+compatible: "czmao,behavior-led-toggle"
+
+include: zero_param.yaml
