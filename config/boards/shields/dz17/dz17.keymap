@@ -10,7 +10,7 @@
 
         // Layer 0: Default numpad
         //   NUM = LT(1): tap NumLock, hold for FN layer
-        //   /   = LT(2): tap Divide, hold for (now empty) layer 2
+        //   /   = LT(2): tap Divide, hold for layer 2
         default_layer {
             bindings = <
                 &lt 1 KP_NUMLOCK  &lt 2 KP_DIVIDE  &kp KP_MULTIPLY  &kp KP_MINUS
@@ -34,13 +34,14 @@
             >;
         };
 
-        // Layer 2 (hold "/"): previously RGB controls.
-        // WS2812 strip removed -> all transparent (empty placeholder layer).
+        // Layer 2 (hold "/"): hold "/" and tap "*" = toggle all indicator
+        // LEDs on/off (master kill switch). WS2812 strip removed; the rest
+        // of this layer stays transparent.
         layer2 {
             bindings = <
-                &trans &trans &trans &trans
-                &trans &trans &trans &trans
-                &trans &trans &trans &trans
+                &trans &trans &czm_ledtog &trans
+                &trans &trans &trans      &trans
+                &trans &trans &trans      &trans
                 &trans &trans &trans
                 &trans       &trans
             >;
