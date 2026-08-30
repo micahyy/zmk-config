@@ -34,10 +34,30 @@ jobs:
           -DSNIPPET="studio-rpc-usb-uart"
           -DCONFIG_ZMK_STUDIO=y
 
+      - name: Debug DTS/Kconfig (runs even on build failure)
+        if: always()
+        run: |
+          echo "===== .config: KSCAN / LED / GPIO ====="
+          grep -E "CONFIG_(ZMK_)?KSCAN|CONFIG_LED|CONFIG_GPIO" build/zephyr/.config || echo "(no matching lines)"
+          echo ""
+          echo "===== zephyr.dts: chosen block ====="
+          awk '/chosen {/,/};/' build/zephyr/zephyr.dts | head -30
+          echo ""
+          echo "===== zephyr.dts: kscan node ====="
+          grep -n -A12 "kscan@" build/zephyr/zephyr.dts | head -40
+          echo ""
+          echo "===== zephyr.dts: leds node ====="
+          grep -n -A12 "leds {" build/zephyr/zephyr.dts | head -30
+          echo ""
+          echo "===== devicetree_generated: zmk,kscan ord ====="
+          grep -n "zmk_kscan_ORD\|DT_N_S_kscan" build/zephyr/include/generated/devicetree_generated.h | head -20
+
       - name: Rename firmware
+        if: success()
         run: cp build/zephyr/zmk.uf2 dz17_nice_nano_v2.uf2
 
       - name: Upload firmware
+        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: dz17_firmware
