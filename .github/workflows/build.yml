@@ -34,27 +34,15 @@ jobs:
           -DSNIPPET="studio-rpc-usb-uart"
           -DCONFIG_ZMK_STUDIO=y
 
-      - name: Debug kscan device
+      - name: Debug kscan ord
         if: always()
         run: |
-          D=build/zephyr
-          G=$D/include/generated/devicetree_generated.h
-          echo "===== zephyr.dts: kscan node body ====="
-          grep -n -A25 "kscan0: kscan {" $D/zephyr.dts || echo "(label form not found, try bare)"
-          grep -n -A25 "^	kscan {" $D/zephyr.dts || true
-          echo ""
-          echo "===== kscan DEP_ORD ====="
-          KORD=$(grep -oP '#define DT_N_S_kscan_DEP_ORD \K[0-9]+' $G | head -1)
-          echo "KORD=$KORD"
-          echo "===== chosen zmk_kscan ORD macro ====="
-          grep -n "DT_CHOSEN_zmk_kscan" $G | head -5
-          echo "===== device extern lines for kscan ORD ====="
-          grep -n "dts_ord_${KORD}" $G | head -20
-          echo "===== how many __device_dts_ord externs total ====="
-          grep -c "__device_dts_ord" $G
-          echo "===== kscan-gpio-direct source compiled? ====="
-          find build -name "*.o" -path "*kscan*" 2>/dev/null | head
-          grep -rn "kscan_gpio_direct" build/zephyr/CMakeFiles 2>/dev/null | head -3 || echo "(not in CMakeFiles)"
+          echo "=== DT_CHOSEN_zmk_kscan lines ==="
+          grep -rn "DT_CHOSEN_zmk_kscan" build/zephyr/include/generated/ || echo "NOT FOUND"
+          echo "=== DT_N_S_kscan_ORD exact ==="
+          grep -rn "define DT_N_S_kscan_ORD " build/zephyr/include/generated/ || echo "NOT FOUND"
+          echo "=== kscan node comment block in devicetree_generated.h ==="
+          grep -n "Node identifier: DT_N_S_kscan$" build/zephyr/include/generated/devicetree_generated.h || grep -n "DT_N_S_kscan" build/zephyr/include/generated/devicetree_generated.h | head -20
 
       - name: Rename firmware
         if: success()
