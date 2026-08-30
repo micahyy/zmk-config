@@ -3,8 +3,8 @@
 
 / {
     chosen {
-        zmk,kscan = <&kscan0>;
-        zmk,battery = <&vbatt>;
+        zmk,kscan = &kscan0;
+        zmk,battery = &vbatt;
         zmk,physical-layout = <&dz17_layout>;
     };
 
