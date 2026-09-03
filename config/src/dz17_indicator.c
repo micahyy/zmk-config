@@ -15,8 +15,10 @@
  *   - BLE, profile not connected/advertising: its blue LED blinks (~1 Hz).
  *   - BLE, profile connected: its blue LED is solid for 2s as confirmation,
  *     then turns off; resumes blinking if the link drops.
- *   - USB selected: green LED solid for 2s, then off; all blue LEDs off.
- *   - Switching channel/profil re-triggers the confirmation/blink.
+ *   - USB selected: green LED solid for 2s, then off; blue LEDs stay off
+ *     EXCEPT a 2s fast-blink cue on the newly selected BLE channel when
+ *     switching profiles (works in USB mode too, so the key gives feedback).
+ *   - Switching profile always re-triggers the cue/confirmation/blink.
  *   - NumLock (white) independent: solid while host reports NumLock on.
  *
  * Implementation: a single 250ms tick RECOMPUTES the desired on/off state
@@ -45,7 +47,8 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
 #define TICK_MS        250   /* full resync interval                 */
 #define BLINK_HALF_MS  500   /* blink toggle interval (~1 Hz)        */
-#define CONFIRM_MS     2000  /* solid confirmation window            */
+#define CUE_HALF_MS    125   /* fast-blink toggle (~4 Hz) for cues   */
+#define CONFIRM_MS     2000  /* solid / cue confirmation window       */
 
 #define LED_NUM   0   /* P0.22 */
 #define LED_BLE0  1   /* P0.12 */
@@ -72,6 +75,11 @@ static int last_connected = -1;  /* -1 unknown, 0/1 */
 static int confirm_led = -1;
 static int64_t confirm_deadline = 0;
 
+/* Profile-switch cue: fast-blink the target blue LED for CUE_MS regardless
+ * of transport, so the BLE1/2/3 keys always give visible feedback. */
+static int cue_led = -1;
+static int64_t cue_deadline = 0;
+
 static void led_set(int idx, bool on) {
     if (on) {
         led_on(led_dev, idx);
@@ -91,7 +99,7 @@ static void refresh_all(void) {
     int connected = (!usb && cur >= 0 && cur < BLE_COUNT &&
                      zmk_ble_profile_is_connected((uint8_t)cur)) ? 1 : 0;
 
-    /* ---- edges: (re)arm the 2s solid-confirmation window ---- */
+    /* ---- edges: (re)arm the 2s confirmation / cue windows ---- */
     if (usb != last_usb) {
         if (usb) {
             confirm_led = LED_USB;
@@ -106,22 +114,29 @@ static void refresh_all(void) {
         last_usb = usb;
     }
 
-    if (!usb) {
-        if (cur != last_profile) {
-            last_profile = cur;
+    /* Profile edge fires in BOTH transports: switching to BLE profile N
+     * always fast-blinks LED N for 2s (the cue), so the key gives feedback
+     * even while plugged into USB. */
+    if (cur != last_profile) {
+        if (cur >= 0 && cur < BLE_COUNT) {
+            cue_led = LED_BLE0 + cur;
+            cue_deadline = now + CONFIRM_MS;
+        }
+        if (!usb) {
             last_connected = connected;
             confirm_led = (connected && cur >= 0) ? (LED_BLE0 + cur) : -1;
             if (confirm_led >= 0) {
                 confirm_deadline = now + CONFIRM_MS;
             }
-        } else if (connected != last_connected) {
-            last_connected = connected;
-            if (connected && cur >= 0) {
-                confirm_led = LED_BLE0 + cur;
-                confirm_deadline = now + CONFIRM_MS;
-            } else {
-                confirm_led = -1;   /* dropped -> blink, no solid window */
-            }
+        }
+        last_profile = cur;
+    } else if (!usb && connected != last_connected) {
+        last_connected = connected;
+        if (connected && cur >= 0) {
+            confirm_led = LED_BLE0 + cur;
+            confirm_deadline = now + CONFIRM_MS;
+        } else {
+            confirm_led = -1;   /* dropped -> blink, no solid window */
         }
     }
 
@@ -133,19 +148,26 @@ static void refresh_all(void) {
     on[LED_NUM] = (ind & HID_LED_NUM_LOCK) != 0;
 
     if (usb) {
-        /* USB: green only during the confirmation window; blue never on. */
+        /* USB: green only during the confirmation window; blue only for
+         * the 2s fast-blink cue on profile switch. */
         if (confirm_led == LED_USB && now < confirm_deadline) {
             on[LED_USB] = true;
         }
     } else if (cur >= 0 && cur < BLE_COUNT) {
         int led = LED_BLE0 + cur;
         if (!connected) {
-            /* Advertising / disconnected: blink. */
+            /* Advertising / disconnected: slow blink. */
             on[led] = ((now / BLINK_HALF_MS) % 2) == 0;
         } else if (confirm_led == led && now < confirm_deadline) {
             /* Connected: solid 2s confirmation, then off. */
             on[led] = true;
         }
+    }
+
+    /* Profile-switch cue: fast-blink overrides the steady off state
+     * (applies in USB too; in BLE it's harmless while already blinking). */
+    if (cue_led >= LED_BLE0 && cue_led <= LED_BLE2 && now < cue_deadline) {
+        on[cue_led] = ((now / CUE_HALF_MS) % 2) == 0;
     }
 
     /* ---- force-write all pins (idempotent; fixes any drift) ---- */
@@ -155,6 +177,9 @@ static void refresh_all(void) {
 
     if (confirm_led >= 0 && now >= confirm_deadline) {
         confirm_led = -1;
+    }
+    if (cue_led >= 0 && now >= cue_deadline) {
+        cue_led = -1;
     }
 }
 
