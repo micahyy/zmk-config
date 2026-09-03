@@ -91,6 +91,7 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 static const struct device *const led_dev = DEVICE_DT_GET(DT_INST(0, gpio_leds));
 
 static struct k_work_delayable tick_work;
+static struct k_work_delayable out_tog_work;
 
 /* Edge-detection state (initialised to impossible values so the first
  * tick always sees the current state as a fresh edge). */
@@ -359,12 +360,30 @@ static int hid_indicators_listener(const zmk_event_t *eh) {
 ZMK_LISTENER(dz17_hid_ind, hid_indicators_listener);
 ZMK_SUBSCRIPTION(dz17_hid_ind, zmk_hid_indicators_changed);
 
+/* Runs 50ms after FN+N4 (OUT_TOG): the behavior has by then updated the
+ * selected endpoint, so read the final transport and arm the matching
+ * feedback directly - no dependency on endpoint-changed event ordering. */
+static void out_tog_handler(struct k_work *w) {
+    ARG_UNUSED(w);
+    if (zmk_endpoints_selected().transport == ZMK_TRANSPORT_USB &&
+        zmk_usb_is_powered()) {
+        confirm_led = LED_USB;
+        confirm_deadline = k_uptime_get() + CONFIRM_MS;
+    }
+    /* BLE side: reset edge trackers so refresh_all re-arms the blue
+     * blink/solid confirmation for the active profile. */
+    last_usb = -1;
+    last_profile = -1;
+    last_connected = -1;
+    refresh_all();
+}
+
 /* Key-position listener: ZMK's &bt BT_SEL <already-active-profile> fires
  * NO profile-changed event (it bails out as "no change"), so pressing
  * FN+N1 while BLE1 is already selected gave zero feedback. Give the
  * cue directly on the physical key press (FN layer held), regardless of
  * whether the profile actually changed. Re-arming the same cue is
- * harmless. OUT_TOG is left to the endpoint-changed event. */
+ * harmless. FN+N4 (OUT_TOG) arms the delayed transport check above. */
 static int position_listener(const zmk_event_t *eh) {
     const struct zmk_position_state_changed *ev =
         as_zmk_position_state_changed(eh);
@@ -375,16 +394,27 @@ static int position_listener(const zmk_event_t *eh) {
         return 0;
     }
 
-    int led = -1;
     switch (ev->position) {
-    case POS_BT_SEL0: led = LED_BLE0; break;
-    case POS_BT_SEL1: led = LED_BLE1; break;
-    case POS_BT_SEL2: led = LED_BLE2; break;
-    default: return 0;
+    case POS_BT_SEL0:
+        cue_led = LED_BLE0;
+        cue_deadline = k_uptime_get() + CONFIRM_MS;
+        break;
+    case POS_BT_SEL1:
+        cue_led = LED_BLE1;
+        cue_deadline = k_uptime_get() + CONFIRM_MS;
+        break;
+    case POS_BT_SEL2:
+        cue_led = LED_BLE2;
+        cue_deadline = k_uptime_get() + CONFIRM_MS;
+        break;
+    case POS_OUT_TOG:
+        /* Event fires before the output behavior runs; check after it. */
+        k_work_reschedule(&out_tog_work, K_MSEC(50));
+        return 0;
+    default:
+        return 0;
     }
 
-    cue_led = led;
-    cue_deadline = k_uptime_get() + CONFIRM_MS;
     refresh_all();
     return 0;
 }
@@ -403,6 +433,7 @@ static int dz17_led_init(void) {
     }
     boot_grace_end = k_uptime_get() + BOOT_GRACE_MS;
     k_work_init_delayable(&tick_work, tick_handler);
+    k_work_init_delayable(&out_tog_work, out_tog_handler);
 
     /* First tick runs immediately and arms the correct window/edges. */
     refresh_all();
