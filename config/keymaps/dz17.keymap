@@ -48,7 +48,7 @@
         ch1: ch_key1 {
             compatible = "zmk,behavior-hold-tap";
             label = "CH1 (tap select / hold pair)";
-            #binding-cells = <0>;
+            #binding-cells = <2>;
             flavor = "tap-preferred";
             tapping-term-ms = <1000>;
             bindings = <&pair1 &sel1>;
@@ -56,7 +56,7 @@
         ch2: ch_key2 {
             compatible = "zmk,behavior-hold-tap";
             label = "CH2 (tap select / hold pair)";
-            #binding-cells = <0>;
+            #binding-cells = <2>;
             flavor = "tap-preferred";
             tapping-term-ms = <1000>;
             bindings = <&pair2 &sel2>;
@@ -64,7 +64,7 @@
         ch3: ch_key3 {
             compatible = "zmk,behavior-hold-tap";
             label = "CH3 (tap select / hold pair)";
-            #binding-cells = <0>;
+            #binding-cells = <2>;
             flavor = "tap-preferred";
             tapping-term-ms = <1000>;
             bindings = <&pair3 &sel3>;
@@ -96,7 +96,7 @@
                 &trans       &trans       &studio_unlock   &bootloader
                 &trans       &trans       &trans           &trans
                 &out OUT_TOG &trans       &trans           &trans
-                &ch1         &ch2         &ch3
+                &ch1 0 0     &ch2 0 0     &ch3 0 0
                 &trans                      &bt BT_CLR
             >;
         };
