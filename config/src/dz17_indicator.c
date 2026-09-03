@@ -104,8 +104,12 @@ static void led_set(int idx, bool on) {
 static void refresh_all(void) {
     int64_t now = k_uptime_get();
 
-    struct zmk_endpoint_instance ep = zmk_endpoints_selected();
-    int usb = (ep.transport == ZMK_TRANSPORT_USB) ? 1 : 0;
+    /* Use VBUS power, not the selected endpoint: USB enumeration takes a
+     * few hundred ms after plug-in, during which the endpoint is still BLE
+     * and the blue LED would keep blinking for a beat before the green USB
+     * LED comes on. VBUS is true the instant power is applied, so the LEDs
+     * switch immediately on plug/unplug. */
+    int usb = zmk_usb_is_powered() ? 1 : 0;
 
     int cur = zmk_ble_active_profile_index();
     int connected = (!usb && cur >= 0 && cur < BLE_COUNT &&
@@ -162,13 +166,9 @@ static void refresh_all(void) {
     on[LED_NUM] = (ind & HID_LED_NUM_LOCK) != 0;
 
     if (usb) {
-        /* USB: green only during the confirmation window AND only when
-         * USB power is actually present - on battery boot the endpoint
-         * briefly reports USB before switching to BLE, which must not
-         * flash the green LED. Blue is only the 2s cue on profile
-         * switch. */
-        if (confirm_led == LED_USB && now < confirm_deadline &&
-            zmk_usb_is_powered()) {
+        /* USB powered: green for the 2s confirmation window. Blue LEDs
+         * stay off except the 2s cue on a real profile switch. */
+        if (confirm_led == LED_USB && now < confirm_deadline) {
             on[LED_USB] = true;
         }
     } else if (cur >= 0 && cur < BLE_COUNT) {
@@ -245,12 +245,9 @@ static int ble_profile_listener(const zmk_event_t *eh) {
      * connected raises a profile-changed event with the same index, which
      * previously flashed BLE1 at USB insert. In BLE mode the blink/solid
      * logic in refresh_all already covers switches, so cue is USB-only. */
-    if (real_switch) {
-        struct zmk_endpoint_instance ep = zmk_endpoints_selected();
-        if (ep.transport == ZMK_TRANSPORT_USB) {
-            cue_led = LED_BLE0 + ev->index;
-            cue_deadline = k_uptime_get() + CONFIRM_MS;
-        }
+    if (real_switch && zmk_usb_is_powered()) {
+        cue_led = LED_BLE0 + ev->index;
+        cue_deadline = k_uptime_get() + CONFIRM_MS;
     }
 
     LOG_INF("BLE profile %d (connected=%d)", ev->index,
