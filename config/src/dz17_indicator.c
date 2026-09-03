@@ -40,9 +40,12 @@
 #include <zmk/events/ble_active_profile_changed.h>
 #include <zmk/events/endpoint_changed.h>
 #include <zmk/events/hid_indicators_changed.h>
+#include <zephyr/settings/settings.h>
+
 #include <zmk/ble.h>
 #include <zmk/endpoints.h>
 #include <zmk/hid_indicators.h>
+#include <zmk/usb.h>
 
 LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
@@ -153,9 +156,13 @@ static void refresh_all(void) {
     on[LED_NUM] = (ind & HID_LED_NUM_LOCK) != 0;
 
     if (usb) {
-        /* USB: green only during the confirmation window; blue only for
-         * the 2s fast-blink cue on profile switch. */
-        if (confirm_led == LED_USB && now < confirm_deadline) {
+        /* USB: green only during the confirmation window AND only when
+         * USB power is actually present - on battery boot the endpoint
+         * briefly reports USB before switching to BLE, which must not
+         * flash the green LED. Blue is only the 2s cue on profile
+         * switch. */
+        if (confirm_led == LED_USB && now < confirm_deadline &&
+            zmk_usb_is_powered()) {
             on[LED_USB] = true;
         }
     } else if (cur >= 0 && cur < BLE_COUNT) {
@@ -206,6 +213,15 @@ static int ble_profile_listener(const zmk_event_t *eh) {
     static char name[16];
     snprintf(name, sizeof(name), "czm_ble_%d", ev->index + 1);
     zmk_ble_set_device_name(name);
+
+#if defined(CONFIG_SETTINGS)
+    /* Persist the active profile immediately: ZMK's own save is debounced
+     * ~60s (CONFIG_ZMK_SETTINGS_SAVE_DEBOUNCE), so switching channels and
+     * powering off within a minute would otherwise revert to the old
+     * channel at next boot. Key/length must match ZMK ble.c (uint8). */
+    uint8_t prof_idx = (uint8_t)ev->index;
+    settings_save_one("ble/active_profile", &prof_idx, sizeof(prof_idx));
+#endif
 
     /* USB cue: a profile switch while plugged in (real key press only;
      * zmk_ble_prof_select bails out when the profile is unchanged, and
