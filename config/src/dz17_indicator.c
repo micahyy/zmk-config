@@ -61,10 +61,10 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
                              * hundred ms after power-up, so without
                              * this a USB-powered boot would blink the
                              * active BLE LED before the green LED.   */
-#define BLINK_HALF_MS  500   /* blink toggle interval (~1 Hz)        */
-#define CUE_HALF_MS    250   /* cue blink toggle (2 Hz). MUST equal TICK_MS:
-                             * the 250ms sampling then toggles every tick and
-                             * can never alias to a steady on/off. */
+#define BLINK_HALF_MS  500   /* blink toggle interval (~1 Hz): used for
+                             * both the 30s advertising blink and the
+                             * profile-switch cue, so key feedback and
+                             * pairing blink share the same slow rhythm. */
 #define CONFIRM_MS     3000  /* solid confirmation / cue window (3s)  */
 #define BLINK_TIMEOUT_MS 30000 /* unconnected/advertising: blink ~30s,
                                 * then LED off until a state change
@@ -331,7 +331,7 @@ static void refresh_all(void) {
      * (now < cue_start) and never overlaps it. */
     if (cue_led >= LED_BLE0 && cue_led <= LED_BLE2 &&
         now >= cue_start && now < cue_deadline && !usb_green) {
-        on[cue_led] = ((now / CUE_HALF_MS) % 2) == 0;
+        on[cue_led] = ((now / BLINK_HALF_MS) % 2) == 0;
     }
 
     /* ---- force-write all pins (idempotent; fixes any drift) ---- */
