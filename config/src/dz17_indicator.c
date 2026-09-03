@@ -106,9 +106,13 @@ static int last_usb      = -1;   /* 1 = USB transport, 0 = BLE */
 static int last_profile  = -1;
 static int last_connected = -1;  /* -1 unknown, 0/1 */
 
-/* Momentary solid-confirmation window: confirm_led stays on until deadline. */
-static int confirm_led = -1;
-static int64_t confirm_deadline = 0;
+/* Green USB confirmation window: green LED stays on until deadline. */
+static int64_t usb_confirm_deadline = 0;
+
+/* Blue BLE confirmation window: the connected channel's blue LED is solid
+ * until deadline (transport independent). */
+static int blue_confirm_led = -1;
+static int64_t blue_confirm_deadline = 0;
 
 /* Profile-switch cue: fast-blink the target blue LED for CUE_MS regardless
  * of transport, so the BLE1/2/3 keys always give visible feedback. If the
@@ -150,28 +154,27 @@ static void led_set(int idx, bool on) {
     }
 }
 
-/* Arm the green USB confirmation (2s). Any in-flight/queued blue cue is
+/* Arm the green USB confirmation (3s). Any in-flight/queued blue cue is
  * pushed to start after the green window so the two LEDs can never light
  * at the same time. */
 static void arm_usb_confirm(void) {
     int64_t now = k_uptime_get();
-    confirm_led = LED_USB;
-    confirm_deadline = now + CONFIRM_MS;
+    usb_confirm_deadline = now + CONFIRM_MS;
     if (cue_led >= 0) {
-        cue_start = confirm_deadline;
+        cue_start = usb_confirm_deadline;
         cue_deadline = cue_start + CONFIRM_MS;
     }
 }
 
-/* Arm a blue profile-switch cue (2s fast blink). If the green USB
+/* Arm a blue profile-switch cue (3s fast blink). If the green USB
  * confirmation is still showing, queue the cue to begin when it ends
  * rather than overlapping it; the feedback is never dropped. */
 static void arm_blue_cue(int led) {
     int64_t now = k_uptime_get();
     cue_led = led;
     cue_start = now;
-    if (confirm_led == LED_USB && now < confirm_deadline) {
-        cue_start = confirm_deadline;
+    if (now < usb_confirm_deadline) {
+        cue_start = usb_confirm_deadline;
     }
     cue_deadline = cue_start + CONFIRM_MS;
 }
@@ -231,58 +234,60 @@ static void refresh_all(void) {
     }
 
     int cur = zmk_ble_active_profile_index();
-    int connected = (!usb && cur >= 0 && cur < BLE_COUNT &&
+    /* BLE connection state is tracked regardless of transport: ZMK keeps
+     * the BLE link/advertising alive in USB mode too, so pairing can be
+     * done with the cable plugged in - the blue LED must then show the
+     * same 30s blink / 3s solid feedback as wireless. */
+    int connected = (cur >= 0 && cur < BLE_COUNT &&
                      zmk_ble_profile_is_connected((uint8_t)cur)) ? 1 : 0;
 
-    /* ---- edges: (re)arm the 2s confirmation / cue windows ---- */
+    /* ---- edges: (re)arm the confirmation / blink windows ---- */
     if (usb != last_usb) {
         if (usb) {
-            /* Green confirmation; queues any blue cue after it. */
+            /* Entering USB: green confirmation; queues any blue cue after
+             * it. The blue blink window is NOT reset - pairing over BLE
+             * with the cable in keeps blinking the active channel. */
             arm_usb_confirm();
         } else {
             /* Just entered BLE: force profile/connected edges below to
              * re-arm the confirmation / 30s blink for the active profile. */
-            confirm_led = -1;
             cue_led = -1;
             last_profile = -1;
             last_connected = -1;
-            blink_deadline = now + BLINK_TIMEOUT_MS;
+            if (!connected) {
+                blink_deadline = now + BLINK_TIMEOUT_MS;
+            }
         }
         last_usb = usb;
     }
 
-    /* Profile / connection edges drive only the BLE-mode solid
-     * confirmation. The USB cue is armed by the profile-changed listener
-     * (real key presses), never here, so the initial boot state sync
-     * (e.g. profile 0 at power-on) does not flash a blue LED. */
-    if (!usb) {
-        if (cur != last_profile) {
-            /* Switched profile: a fresh 30s blink window for the new
-             * channel (solid 3s first if it is already connected). */
-            last_profile = cur;
-            last_connected = connected;
-            blink_deadline = now + BLINK_TIMEOUT_MS;
-            confirm_led = (connected && cur >= 0) ? (LED_BLE0 + cur) : -1;
-            if (confirm_led >= 0) {
-                confirm_deadline = now + CONFIRM_MS;
-            }
-        } else if (connected != last_connected) {
-            last_connected = connected;
-            if (connected && cur >= 0) {
-                confirm_led = LED_BLE0 + cur;
-                confirm_deadline = now + CONFIRM_MS;
-            } else {
-                confirm_led = -1;   /* dropped -> blink, no solid window */
-                blink_deadline = now + BLINK_TIMEOUT_MS;
-            }
-        }
-    } else {
-        /* Keep edge trackers current while in USB so the next BLE session
-         * starts without a stale edge; the blink window starts fresh on
-         * return to BLE (armed by the usb edge above). */
+    /* Profile / connection edges drive the blue channel feedback:
+     * switching channels or losing the link (re)starts the 30s advertising
+     * blink; an established connection lights the channel solid for 3s.
+     * The USB cue for key presses is armed by the profile-changed/position
+     * listeners, so the boot state sync never flashes a blue LED. */
+    if (cur != last_profile) {
+        /* Switched profile (or first valid profile): a fresh 30s blink
+         * window for the new channel (solid 3s first if already paired &
+         * connected). */
         last_profile = cur;
         last_connected = connected;
-        blink_deadline = 0;
+        if (!connected) {
+            blink_deadline = now + BLINK_TIMEOUT_MS;
+            blue_confirm_led = -1;
+        } else if (cur >= 0) {
+            blue_confirm_led = LED_BLE0 + cur;
+            blue_confirm_deadline = now + CONFIRM_MS;
+        }
+    } else if (connected != last_connected) {
+        last_connected = connected;
+        if (connected && cur >= 0) {
+            blue_confirm_led = LED_BLE0 + cur;
+            blue_confirm_deadline = now + CONFIRM_MS;
+        } else {
+            blue_confirm_led = -1;   /* dropped -> blink, no solid window */
+            blink_deadline = now + BLINK_TIMEOUT_MS;
+        }
     }
 
     /* ---- desired state of every LED ---- */
@@ -292,14 +297,20 @@ static void refresh_all(void) {
     zmk_hid_indicators_t ind = zmk_hid_indicators_get_current_profile();
     on[LED_NUM] = (ind & HID_LED_NUM_LOCK) != 0;
 
-    if (usb) {
-        /* USB mode (actual endpoint or VBUS grace after plug-in): green
-         * for the 2s confirmation window. Blue LEDs stay off except the
-         * 2s cue on a profile switch. */
-        if (confirm_led == LED_USB && now < confirm_deadline) {
-            on[LED_USB] = true;
-        }
-    } else if (cur >= 0 && cur < BLE_COUNT) {
+    /* Green USB LED: solid for the 3s confirmation window. While it is
+     * on, the blue LEDs are suppressed (below) so the two never overlap;
+     * the blue window/timer keeps running and resumes when green clears. */
+    bool usb_green = usb && (now < usb_confirm_deadline);
+    if (usb_green) {
+        on[LED_USB] = true;
+    }
+
+    /* Blue channel LED (works in BOTH transports - BLE keeps advertising
+     * over USB too): 30s slow blink while disconnected/advertising; solid
+     * 3s confirmation once connected (BLE mode only - over USB the host is
+     * the USB link, so the blue confirmation stays off). Suppressed while
+     * the green USB confirmation is on. */
+    if (cur >= 0 && cur < BLE_COUNT && !usb_green) {
         int led = LED_BLE0 + cur;
         if (!connected) {
             /* Advertising / disconnected: slow blink for ~30s, then the
@@ -307,8 +318,9 @@ static void refresh_all(void) {
             if (now < blink_deadline) {
                 on[led] = ((now / BLINK_HALF_MS) % 2) == 0;
             }
-        } else if (confirm_led == led && now < confirm_deadline) {
-            /* Connected: solid 3s confirmation, then off. */
+        } else if (!usb && blue_confirm_led == led &&
+                   now < blue_confirm_deadline) {
+            /* Connected over BLE: solid 3s confirmation, then off. */
             on[led] = true;
         }
     }
@@ -318,7 +330,7 @@ static void refresh_all(void) {
      * A cue armed while the green confirmation is showing stays queued
      * (now < cue_start) and never overlaps it. */
     if (cue_led >= LED_BLE0 && cue_led <= LED_BLE2 &&
-        now >= cue_start && now < cue_deadline) {
+        now >= cue_start && now < cue_deadline && !usb_green) {
         on[cue_led] = ((now / CUE_HALF_MS) % 2) == 0;
     }
 
@@ -327,8 +339,8 @@ static void refresh_all(void) {
         led_set(i, on[i]);
     }
 
-    if (confirm_led >= 0 && now >= confirm_deadline) {
-        confirm_led = -1;
+    if (blue_confirm_led >= 0 && now >= blue_confirm_deadline) {
+        blue_confirm_led = -1;
     }
     if (cue_led >= 0 && now >= cue_deadline) {
         cue_led = -1;
