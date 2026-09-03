@@ -5,6 +5,56 @@
 #include <dt-bindings/zmk/outputs.h>
 
 / {
+    // Logitech-style channel keys:
+    //   TAP  FN+1/2/3  = switch channel (pairing kept, reconnect attempts)
+    //   HOLD FN+1/2/3 (1s) = pairing mode: selects that channel and clears
+    //                       its bond, so it fast-blinks and accepts a new
+    //                       host. The &pair_X macro = BT_SEL X then BT_CLR.
+    behaviors {
+        pair1: pair_profile1 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            tap-ms = <50>;
+            bindings = <&bt BT_SEL 0 &bt BT_CLR>;
+        };
+        pair2: pair_profile2 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            tap-ms = <50>;
+            bindings = <&bt BT_SEL 1 &bt BT_CLR>;
+        };
+        pair3: pair_profile3 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            tap-ms = <50>;
+            bindings = <&bt BT_SEL 2 &bt BT_CLR>;
+        };
+        ch1: ch_key1 {
+            compatible = "zmk,behavior-hold-tap";
+            label = "CH1 (tap select / hold pair)";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <1000>;
+            bindings = <&pair1>, <&bt BT_SEL 0>;
+        };
+        ch2: ch_key2 {
+            compatible = "zmk,behavior-hold-tap";
+            label = "CH2 (tap select / hold pair)";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <1000>;
+            bindings = <&pair2>, <&bt BT_SEL 1>;
+        };
+        ch3: ch_key3 {
+            compatible = "zmk,behavior-hold-tap";
+            label = "CH3 (tap select / hold pair)";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <1000>;
+            bindings = <&pair3>, <&bt BT_SEL 2>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -22,14 +72,15 @@
         };
 
         // Layer 1 (hold NUM): Bluetooth + USB toggle + System
-        //   FN+1/2/3 = BLE profile, FN+4 = toggle USB/BLE,
+        //   FN+1/2/3 = TAP switch channel / HOLD 1s pairing mode,
+        //   FN+4 = toggle USB/BLE,
         //   FN+* = Studio unlock, FN+- = bootloader, FN+. = clear pairings
         fn_layer {
             bindings = <
                 &trans       &trans       &studio_unlock   &bootloader
                 &trans       &trans       &trans           &trans
                 &out OUT_TOG &trans       &trans           &trans
-                &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2
+                &ch1         &ch2         &ch3
                 &trans                      &bt BT_CLR
             >;
         };
