@@ -202,3 +202,63 @@ Layer 2 (长按 /):
 | `config/boards/shields/dz17/dz17.conf` | ON_START y→n（settings默认启用，不显式设置CONFIG_ZMK_SETTINGS） |
 | `config/boards/shields/dz17/dz17.overlay` | 索引12/13/14/8→11/12/13/7，蓝色0x0000CC→0x0000FF |
 | `config/src/dz17_indicator.c` | 新增NumLock槽位/HID事件监听/自主刷新机制，BLE槽位扩展为5个 |
+
+---
+
+## 【2026-08-30 定稿】单色 GPIO 灯方案（替代 WS2812）
+
+WS2812 灯阵硬件拆除，改为 5 颗独立单色 LED，Zephyr gpio-leds 驱动 + 自定义模块 `config/src/dz17_indicator.c`。已合并 main（merge 7418abe1）。
+
+### 硬件接线
+
+每颗灯独立串 1K 限流电阻，电阻在阳极侧（用户习惯）：
+
+```
+3.3V → 1K电阻 → 灯长脚(+) → 灯短脚(-) → GPIO
+```
+
+| 灯 | 颜色 | GPIO | 含义 |
+|---|---|---|---|
+| led0 | 白 | P0.22 | NumLock，跟随宿主 HID 报告常亮/灭 |
+| led1 | 蓝 | P0.12 | BLE profile 1 |
+| led2 | 蓝 | P0.04 | BLE profile 2 |
+| led3 | 蓝 | P0.26 | BLE profile 3 |
+| led4 | 绿 | P0.08 | USB 输出通道 |
+
+- active-low：GPIO 拉低点亮（gpio-leds GPIO_ACTIVE_LOW）
+- **不共电阻**：不同颜色 Vf 差异会致亮度参差、同亮电流翻倍
+- 阳极接 nice!nano 板载 3.3V（VDD/REG0，外部负载 ≤25mA），禁接 RAW/VBUS；nRF52840 GPIO 非 5V 容忍
+
+### 充电指示灯（TP4056，纯硬件）
+
+STBY/CHRG 为开漏输出，灯须从 3.3V 取电：
+
+```
+3.3V → 1K电阻 → 灯长脚(+) → 灯短脚(-) → TP4056 引脚
+```
+
+- 红灯接 CHRG：充电中亮，充满灭
+- 绿灯接 STBY：充满常亮，充电中灭
+- P0.31 照常接 STBY 供固件读充电状态（zmk,battery-nrf-vddh 的 charge-status-gpios，GPIO_ACTIVE_LOW），与灯并联互不影响
+
+### 灯逻辑
+
+- BLE 通道：当前 profile 已连接 = 对应蓝灯常亮；未连接/广播中 = 500ms 闪烁
+- USB 通道：绿灯常亮，三个蓝灯全灭（切通道时互斥）
+- 白灯：跟随电脑 NumLock HID 报告
+- 蓝牙广播名按 profile 改为 czm_ble_1/2/3
+
+### 一键关灯（新功能）
+
+自定义 behavior `&czm_ledtog`（compatible `czmao,behavior-led-toggle`，binding YAML 在 `config/dts/bindings/behaviors/`）：
+
+- **操作：按住 "/" 键（LT(2)）不放，再按一下 "*" 键** → 5 灯全灭；再操作一次恢复，恢复后自动同步当前 BLE/USB/NumLock 状态
+- 关灯期间键盘功能不受影响；关灯状态下 BLE 闪烁/切通道等灯效请求被门控忽略
+- layer2 第 3 格（position 2）绑定，layer2 其余位置保持 &trans
+
+### ZMK v0.3.0 自定义 behavior 要点（踩坑记录）
+
+1. v0.3.0 没有通用 `zmk,behavior` binding YAML，自定义 behavior 必须自带 binding YAML（放 config 仓库 `config/dts/bindings/behaviors/xxx.yaml`，`include: zero_param.yaml`），compatible 用厂商标识前缀（如 `czmao,behavior-led-toggle`），否则 edtlib 报 "lacks binding"
+2. C 侧 API：`#include <drivers/behavior.h>`，结构体名是 `struct behavior_driver_api`（无 zmk_ 前缀），`BEHAVIOR_DT_INST_DEFINE(0, NULL, NULL, NULL, NULL, POST_KERNEL, CONFIG_KERNEL_INIT_PRIORITY_DEFAULT, &api)`
+3. `#define DT_DRV_COMPAT czmao_behavior_led_toggle` 必须放在所有 include 之前
+4. pressed/released 回调返回 `ZMK_BEHAVIOR_OPAQUE`

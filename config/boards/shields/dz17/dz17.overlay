@@ -8,17 +8,7 @@
         zmk,physical-layout = <&dz17_layout>;
     };
 
-    // Custom behavior: &czm_ledtog toggles all indicator LEDs on/off.
-    // Bound in keymap layer 2 (hold "/", tap "*").
-    behaviors {
-        czm_ledtog: czm_ledtog {
-            compatible = "czmao,behavior-led-toggle";
-            label = "CZMAO_LED_TOGGLE";
-            #binding-cells = <0>;
-        };
-    };
-
-    // 17 keys direct GPIO (unchanged)
+    // 17 keys direct GPIO
     kscan0: kscan {
         compatible = "zmk,kscan-gpio-direct";
         wakeup-source;
@@ -45,13 +35,15 @@
             ;
     };
 
-    // Battery voltage + TP4056 STBY charge status on P0.31 (unchanged)
+    // Battery voltage monitoring with TP4056 STBY charge status on P0.31.
+    // STBY is open-drain: driven LOW when fully charged, floating while
+    // charging -> GPIO_ACTIVE_HIGH (charging when idle-high, charged when low).
     vbatt: vbatt {
         compatible = "zmk,battery-nrf-vddh";
-        charge-status-gpios = <&gpio0 31 GPIO_ACTIVE_LOW>;
+        charge-status-gpios = <&gpio0 31 GPIO_ACTIVE_HIGH>;
     };
 
-    // Monochrome indicator LEDs.
+    // Monochrome indicator LEDs (WS2812 strip removed).
     // Wiring per LED: 3.3V -> 1k resistor -> LED anode (+),
     //                 LED cathode (-) -> GPIO.
     // Active-low: GPIO driven LOW turns the LED on.
@@ -59,9 +51,9 @@
         compatible = "gpio-leds";
         label = "DZ17 indicator LEDs";
         led0: led_0 { gpios = <&gpio0 22 GPIO_ACTIVE_LOW>; };  // NumLock  (white)
-        led1: led_1 { gpios = <&gpio0 12 GPIO_ACTIVE_LOW>; };  // BLE prof 1
-        led2: led_2 { gpios = <&gpio0  4 GPIO_ACTIVE_LOW>; };  // BLE prof 2
-        led3: led_3 { gpios = <&gpio0 26 GPIO_ACTIVE_LOW>; };  // BLE prof 3
-        led4: led_4 { gpios = <&gpio0  8 GPIO_ACTIVE_LOW>; };  // USB output
+        led1: led_1 { gpios = <&gpio0 12 GPIO_ACTIVE_LOW>; };  // BLE prof 1 (blue)
+        led2: led_2 { gpios = <&gpio0  4 GPIO_ACTIVE_LOW>; };  // BLE prof 2 (blue)
+        led3: led_3 { gpios = <&gpio0 26 GPIO_ACTIVE_LOW>; };  // BLE prof 3 (blue)
+        led4: led_4 { gpios = <&gpio0  8 GPIO_ACTIVE_LOW>; };  // USB output  (green)
     };
 };

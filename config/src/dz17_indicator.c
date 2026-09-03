@@ -15,20 +15,14 @@
  * blinking while advertising/disconnected. USB indicator: solid while the
  * USB endpoint is selected. Only one channel family is active at a time.
  *
- * The &czm_ledtog custom behavior (hold "/" then tap "*") toggles a master
- * kill switch that forces every indicator LED off; toggling again re-syncs
- * the LEDs to the current BLE/USB/NumLock state.
+ * Pure event-listener module: no custom behavior, no WS2812, no proxy.
  */
-#define DT_DRV_COMPAT czmao_behavior_led_toggle
 
 #include <zephyr/device.h>
 #include <zephyr/drivers/led.h>
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
 #include <zephyr/sys/util.h>
-
-#include <drivers/behavior.h>
-#include <zmk/behavior.h>
 
 #include <zmk/events/ble_active_profile_changed.h>
 #include <zmk/events/endpoint_changed.h>
@@ -58,15 +52,10 @@ static int blinking_led = -1;
 static bool blink_on = false;
 static struct k_work_delayable blink_work;
 
-/* Master kill switch: when true, every indicator LED is forced off. */
-static bool all_leds_off = false;
-/* Last known NumLock state, used when re-syncing after lights-off. */
+/* Last known NumLock state, used when re-syncing after init/wake. */
 static bool numlock_on = false;
 
 static void led_set(int idx, bool on) {
-    if (on && all_leds_off) {
-        return;
-    }
     if (on) {
         led_on(led_dev, idx);
     } else {
@@ -94,7 +83,7 @@ static void apply_ble_profile(uint8_t profile) {
     }
     if (zmk_ble_profile_is_connected(profile)) {
         led_set(LED_BLE0 + profile, true);
-    } else if (!all_leds_off) {
+    } else {
         blinking_led = LED_BLE0 + profile;
         blink_on = true;
         led_set(blinking_led, true);
@@ -103,6 +92,7 @@ static void apply_ble_profile(uint8_t profile) {
 }
 
 static void blink_handler(struct k_work *w) {
+    ARG_UNUSED(w);
     if (blinking_led < 0) {
         return;
     }
@@ -113,14 +103,6 @@ static void blink_handler(struct k_work *w) {
 
 /* Re-sync every LED to the current transport/profile/NumLock state. */
 static void leds_resync(void) {
-    if (all_leds_off) {
-        blink_stop();
-        for (int i = 0; i < LED_COUNT; i++) {
-            led_set(i, false);
-        }
-        return;
-    }
-
     struct zmk_endpoint_instance ep = zmk_endpoints_selected();
     if (ep.transport == ZMK_TRANSPORT_USB) {
         blink_stop();
@@ -141,13 +123,6 @@ static void leds_resync(void) {
         }
     }
     led_set(LED_NUM, numlock_on);
-}
-
-/* Called by the &czm_ledtog custom behavior. */
-void dz17_leds_toggle_master(void) {
-    all_leds_off = !all_leds_off;
-    LOG_INF("Indicator LEDs master switch -> %s", all_leds_off ? "OFF" : "ON");
-    leds_resync();
 }
 
 /* ---- events ---- */
@@ -210,30 +185,6 @@ static int hid_indicators_listener(const zmk_event_t *eh) {
 }
 ZMK_LISTENER(dz17_hid_ind, hid_indicators_listener);
 ZMK_SUBSCRIPTION(dz17_hid_ind, zmk_hid_indicators_changed);
-
-/* ---- custom behavior: &czm_ledtog (hold "/", tap "*") ---- */
-static int czm_ledtog_pressed(struct zmk_behavior_binding *binding,
-                              struct zmk_behavior_binding_event event) {
-    ARG_UNUSED(binding);
-    ARG_UNUSED(event);
-    dz17_leds_toggle_master();
-    return ZMK_BEHAVIOR_OPAQUE;
-}
-
-static int czm_ledtog_released(struct zmk_behavior_binding *binding,
-                               struct zmk_behavior_binding_event event) {
-    ARG_UNUSED(binding);
-    ARG_UNUSED(event);
-    return ZMK_BEHAVIOR_OPAQUE;
-}
-
-static const struct behavior_driver_api czm_ledtog_api = {
-    .binding_pressed = czm_ledtog_pressed,
-    .binding_released = czm_ledtog_released,
-};
-
-BEHAVIOR_DT_INST_DEFINE(0, NULL, NULL, NULL, NULL, POST_KERNEL,
-                        CONFIG_KERNEL_INIT_PRIORITY_DEFAULT, &czm_ledtog_api);
 
 /* ---- init: sync current state so LEDs are correct right after boot ---- */
 static int dz17_led_init(void) {

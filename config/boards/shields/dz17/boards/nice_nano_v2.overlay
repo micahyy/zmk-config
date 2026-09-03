@@ -1,3 +1,5 @@
-/* Board-specific overlay for nice_nano_v2.
- * WS2812 SPIM3 strip removed — DZ17 now uses monochrome GPIO LEDs
- * defined in the shield overlay (dz17.overlay). Nothing required here. */
+// Board-specific overlay for DZ17 on nice_nano_v2.
+//
+// Monochrome GPIO indicator build: no WS2812/SPIM3 hardware is configured.
+// (Previously this file enabled SPI3 + ws2812-spi on P0.26; that LED strip
+// was removed and P0.26 is now the BLE profile 3 indicator LED.)
