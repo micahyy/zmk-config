@@ -50,6 +50,11 @@
 LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
 #define TICK_MS        250   /* full resync interval                 */
+#define BOOT_GRACE_MS  900   /* all channel LEDs off after boot: the
+                             * USB driver reports VBUS only a few
+                             * hundred ms after power-up, so without
+                             * this a USB-powered boot would blink the
+                             * active BLE LED before the green LED.   */
 #define BLINK_HALF_MS  500   /* blink toggle interval (~1 Hz)        */
 #define CUE_HALF_MS    250   /* cue blink toggle (2 Hz). MUST equal TICK_MS:
                              * the 250ms sampling then toggles every tick and
@@ -86,6 +91,9 @@ static int64_t confirm_deadline = 0;
 static int cue_led = -1;
 static int64_t cue_deadline = 0;
 
+/* End of the boot grace window (set in init). */
+static int64_t boot_grace_end = 0;
+
 /* Index carried by the last profile-changed event. ZMK raises that event
  * not only on a real key-driven profile switch but also on BLE connect,
  * disconnect and pairing completion (all with the SAME active index); a
@@ -103,6 +111,19 @@ static void led_set(int idx, bool on) {
 /* Full recompute + force-write of every LED. Safe to call from any context. */
 static void refresh_all(void) {
     int64_t now = k_uptime_get();
+
+    /* Boot grace: the USB driver reports VBUS only a few hundred ms after
+     * power-up, so early ticks would mistake USB power for battery BLE and
+     * blink a blue LED. Keep every LED dark and arm no state until the
+     * window ends; the edge trackers (still -1) then treat the real state
+     * as a fresh edge and light the correct LED (green on USB, blue on
+     * battery). Events during grace also end up here. */
+    if (now < boot_grace_end) {
+        for (int i = 0; i < LED_COUNT; i++) {
+            led_set(i, false);
+        }
+        return;
+    }
 
     /* Use VBUS power, not the selected endpoint: USB enumeration takes a
      * few hundred ms after plug-in, during which the endpoint is still BLE
@@ -294,6 +315,7 @@ static int dz17_led_init(void) {
     for (int i = 0; i < LED_COUNT; i++) {
         led_off(led_dev, i);
     }
+    boot_grace_end = k_uptime_get() + BOOT_GRACE_MS;
     k_work_init_delayable(&tick_work, tick_handler);
 
     /* First tick runs immediately and arms the correct window/edges. */
