@@ -466,6 +466,15 @@ static int position_listener(const zmk_event_t *eh) {
         return 0;
     }
 
+    if (ev->position == POS_BT_SEL0 || ev->position == POS_BT_SEL1 ||
+        ev->position == POS_BT_SEL2) {
+        /* Re-pressing a profile key must restart the ~30s advertising
+         * blink even when that profile is already active: ZMK's BT_SEL
+         * fires NO profile-changed event for the current profile, so
+         * without this the LED would only show the 3s cue and stop. */
+        blink_deadline = k_uptime_get() + BLINK_TIMEOUT_MS;
+    }
+
     switch (ev->position) {
     case POS_BT_SEL0:
         arm_blue_cue(LED_BLE0);
