@@ -140,6 +140,11 @@ static void refresh_all(void) {
      * as a fresh edge and light the correct LED (green on USB, blue on
      * battery). Events during grace also end up here. */
     if (now < boot_grace_end) {
+        /* Keep the VBUS baseline current during grace too, otherwise the
+         * first post-grace tick would see a false VBUS rising edge and
+         * arm the 1.5s plug-in grace, forcing USB mode and swallowing
+         * early BLE/USB toggle edges. */
+        vbus_was_powered = zmk_usb_is_powered() ? 1 : 0;
         for (int i = 0; i < LED_COUNT; i++) {
             led_set(i, false);
         }
@@ -323,6 +328,18 @@ static int endpoint_listener(const zmk_event_t *eh) {
     }
     LOG_INF("Output endpoint: %s",
             ev->endpoint.transport == ZMK_TRANSPORT_USB ? "USB" : "BLE");
+
+    /* Arm the green confirmation directly on the event (which carries the
+     * transport) rather than relying solely on the tick edge detection -
+     * e.g. OUT_TOG back to USB then reliably lights green for 2s even if
+     * tick timing or the VBUS plug-in grace interferes. Boot grace swallows
+     * events before the window ends. */
+    if (k_uptime_get() >= boot_grace_end &&
+        ev->endpoint.transport == ZMK_TRANSPORT_USB && zmk_usb_is_powered()) {
+        confirm_led = LED_USB;
+        confirm_deadline = k_uptime_get() + CONFIRM_MS;
+    }
+
     refresh_all();
     return 0;
 }
