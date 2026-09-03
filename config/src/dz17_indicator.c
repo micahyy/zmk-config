@@ -40,11 +40,13 @@
 #include <zmk/events/ble_active_profile_changed.h>
 #include <zmk/events/endpoint_changed.h>
 #include <zmk/events/hid_indicators_changed.h>
+#include <zmk/events/position_state_changed.h>
 #include <zephyr/settings/settings.h>
 
 #include <zmk/ble.h>
 #include <zmk/endpoints.h>
 #include <zmk/hid_indicators.h>
+#include <zmk/keymap.h>
 #include <zmk/usb.h>
 
 LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
@@ -68,6 +70,20 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #define LED_USB   4   /* P0.08 */
 #define LED_COUNT 5
 #define BLE_COUNT 3
+
+/* FN layer + physical key positions of the BLE profile / output keys.
+ * FN+N1/N2/N3 = BT_SEL 0/1/2 -> positions 12/13/14; FN+N4 = OUT_TOG -> 8. */
+#define FN_LAYER    1
+#define POS_OUT_TOG 8
+#define POS_BT_SEL0 12
+#define POS_BT_SEL1 13
+#define POS_BT_SEL2 14
+
+/* VBUS plug-in grace: after power (or VBUS) is detected while the
+ * endpoint is still enumerating over BLE, assume USB for this long so
+ * the LEDs follow the cable immediately instead of blinking blue for
+ * the ~500ms enumeration window. */
+#define VBUS_GRACE_MS 1500
 
 /* HID LED report bitmasks (USB HID Usage Tables, LED report) */
 #define HID_LED_NUM_LOCK 0x01
@@ -93,6 +109,11 @@ static int64_t cue_deadline = 0;
 
 /* End of the boot grace window (set in init). */
 static int64_t boot_grace_end = 0;
+
+/* VBUS plug-in grace: while now < vbus_grace_end a VBUS-present board is
+ * treated as USB mode even before enumeration finishes. */
+static int64_t vbus_grace_end = 0;
+static int vbus_was_powered = 0;
 
 /* Index carried by the last profile-changed event. ZMK raises that event
  * not only on a real key-driven profile switch but also on BLE connect,
@@ -125,12 +146,22 @@ static void refresh_all(void) {
         return;
     }
 
-    /* Use VBUS power, not the selected endpoint: USB enumeration takes a
-     * few hundred ms after plug-in, during which the endpoint is still BLE
-     * and the blue LED would keep blinking for a beat before the green USB
-     * LED comes on. VBUS is true the instant power is applied, so the LEDs
-     * switch immediately on plug/unplug. */
-    int usb = zmk_usb_is_powered() ? 1 : 0;
+    /* Mode follows the ACTUAL endpoint (so FN+N4 OUT_TOG switches the LEDs
+     * instantly) - EXCEPT for a short window after VBUS appears: USB
+     * enumeration takes a few hundred ms during which the endpoint is
+     * still BLE and the blue LED would blink for a beat. While VBUS is
+     * present and within that grace window, assume USB. */
+    int vbus_powered = zmk_usb_is_powered() ? 1 : 0;
+    if (vbus_powered && !vbus_was_powered) {
+        vbus_grace_end = now + VBUS_GRACE_MS;
+    }
+    vbus_was_powered = vbus_powered;
+
+    struct zmk_endpoint_instance ep = zmk_endpoints_selected();
+    int usb = (ep.transport == ZMK_TRANSPORT_USB) ? 1 : 0;
+    if (!usb && vbus_powered && now < vbus_grace_end) {
+        usb = 1;
+    }
 
     int cur = zmk_ble_active_profile_index();
     int connected = (!usb && cur >= 0 && cur < BLE_COUNT &&
@@ -187,8 +218,9 @@ static void refresh_all(void) {
     on[LED_NUM] = (ind & HID_LED_NUM_LOCK) != 0;
 
     if (usb) {
-        /* USB powered: green for the 2s confirmation window. Blue LEDs
-         * stay off except the 2s cue on a real profile switch. */
+        /* USB mode (actual endpoint or VBUS grace after plug-in): green
+         * for the 2s confirmation window. Blue LEDs stay off except the
+         * 2s cue on a profile switch. */
         if (confirm_led == LED_USB && now < confirm_deadline) {
             on[LED_USB] = true;
         }
@@ -266,9 +298,14 @@ static int ble_profile_listener(const zmk_event_t *eh) {
      * connected raises a profile-changed event with the same index, which
      * previously flashed BLE1 at USB insert. In BLE mode the blink/solid
      * logic in refresh_all already covers switches, so cue is USB-only. */
-    if (real_switch && zmk_usb_is_powered()) {
-        cue_led = LED_BLE0 + ev->index;
-        cue_deadline = k_uptime_get() + CONFIRM_MS;
+    if (real_switch) {
+        struct zmk_endpoint_instance cur_ep = zmk_endpoints_selected();
+        /* Cue in USB mode only (real USB transport with VBUS present;
+         * endpoint==USB without VBUS only happens during enumeration). */
+        if (cur_ep.transport == ZMK_TRANSPORT_USB && zmk_usb_is_powered()) {
+            cue_led = LED_BLE0 + ev->index;
+            cue_deadline = k_uptime_get() + CONFIRM_MS;
+        }
     }
 
     LOG_INF("BLE profile %d (connected=%d)", ev->index,
@@ -304,6 +341,38 @@ static int hid_indicators_listener(const zmk_event_t *eh) {
 }
 ZMK_LISTENER(dz17_hid_ind, hid_indicators_listener);
 ZMK_SUBSCRIPTION(dz17_hid_ind, zmk_hid_indicators_changed);
+
+/* Key-position listener: ZMK's &bt BT_SEL <already-active-profile> fires
+ * NO profile-changed event (it bails out as "no change"), so pressing
+ * FN+N1 while BLE1 is already selected gave zero feedback. Give the
+ * cue directly on the physical key press (FN layer held), regardless of
+ * whether the profile actually changed. Re-arming the same cue is
+ * harmless. OUT_TOG is left to the endpoint-changed event. */
+static int position_listener(const zmk_event_t *eh) {
+    const struct zmk_position_state_changed *ev =
+        as_zmk_position_state_changed(eh);
+    if (!ev || !ev->state) {
+        return 0;
+    }
+    if (!zmk_keymap_layer_active(FN_LAYER)) {
+        return 0;
+    }
+
+    int led = -1;
+    switch (ev->position) {
+    case POS_BT_SEL0: led = LED_BLE0; break;
+    case POS_BT_SEL1: led = LED_BLE1; break;
+    case POS_BT_SEL2: led = LED_BLE2; break;
+    default: return 0;
+    }
+
+    cue_led = led;
+    cue_deadline = k_uptime_get() + CONFIRM_MS;
+    refresh_all();
+    return 0;
+}
+ZMK_LISTENER(dz17_pos_ind, position_listener);
+ZMK_SUBSCRIPTION(dz17_pos_ind, zmk_position_state_changed);
 
 /* ---- init ---- */
 static int dz17_led_init(void) {
