@@ -9,7 +9,8 @@
     //   TAP  FN+1/2/3  = switch channel (pairing kept, reconnect attempts)
     //   HOLD FN+1/2/3 (1s) = pairing mode: selects that channel and clears
     //                       its bond, so it fast-blinks and accepts a new
-    //                       host. The &pair_X macro = BT_SEL X then BT_CLR.
+    //                       host. The &pair_X macro = BT_SEL X then BT_CLR;
+    //                       &sel_X = BT_SEL X only (bond kept for reconnect).
     behaviors {
         pair1: pair_profile1 {
             compatible = "zmk,behavior-macro";
@@ -29,29 +30,44 @@
             tap-ms = <50>;
             bindings = <&bt BT_SEL 2 &bt BT_CLR>;
         };
+        sel1: select_profile1 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&bt BT_SEL 0>;
+        };
+        sel2: select_profile2 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&bt BT_SEL 1>;
+        };
+        sel3: select_profile3 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&bt BT_SEL 2>;
+        };
         ch1: ch_key1 {
             compatible = "zmk,behavior-hold-tap";
             label = "CH1 (tap select / hold pair)";
-            #binding-cells = <2>;
+            #binding-cells = <0>;
             flavor = "tap-preferred";
             tapping-term-ms = <1000>;
-            bindings = <&pair1>, <&bt BT_SEL 0>;
+            bindings = <&pair1 &sel1>;
         };
         ch2: ch_key2 {
             compatible = "zmk,behavior-hold-tap";
             label = "CH2 (tap select / hold pair)";
-            #binding-cells = <2>;
+            #binding-cells = <0>;
             flavor = "tap-preferred";
             tapping-term-ms = <1000>;
-            bindings = <&pair2>, <&bt BT_SEL 1>;
+            bindings = <&pair2 &sel2>;
         };
         ch3: ch_key3 {
             compatible = "zmk,behavior-hold-tap";
             label = "CH3 (tap select / hold pair)";
-            #binding-cells = <2>;
+            #binding-cells = <0>;
             flavor = "tap-preferred";
             tapping-term-ms = <1000>;
-            bindings = <&pair3>, <&bt BT_SEL 2>;
+            bindings = <&pair3 &sel3>;
         };
     };
 
