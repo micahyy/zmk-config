@@ -16,8 +16,9 @@
  *   - BLE, profile connected: its blue LED is solid for 2s as confirmation,
  *     then turns off; resumes blinking if the link drops.
  *   - USB selected: green LED solid for 2s, then off; blue LEDs stay off
- *     EXCEPT a 2s fast-blink cue on the newly selected BLE channel when
- *     switching profiles (works in USB mode too, so the key gives feedback).
+ *     EXCEPT a 2s blink cue on the newly selected BLE channel when
+ *     switching profiles (real key press only, so the FN+1/2/3 keys give
+ *     visible feedback while plugged in; power-on sync never flashes).
  *   - Switching profile always re-triggers the cue/confirmation/blink.
  *   - NumLock (white) independent: solid while host reports NumLock on.
  *
@@ -47,7 +48,9 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
 #define TICK_MS        250   /* full resync interval                 */
 #define BLINK_HALF_MS  500   /* blink toggle interval (~1 Hz)        */
-#define CUE_HALF_MS    125   /* fast-blink toggle (~4 Hz) for cues   */
+#define CUE_HALF_MS    250   /* cue blink toggle (2 Hz). MUST equal TICK_MS:
+                             * the 250ms sampling then toggles every tick and
+                             * can never alias to a steady on/off. */
 #define CONFIRM_MS     2000  /* solid / cue confirmation window       */
 
 #define LED_NUM   0   /* P0.22 */
@@ -114,30 +117,32 @@ static void refresh_all(void) {
         last_usb = usb;
     }
 
-    /* Profile edge fires in BOTH transports: switching to BLE profile N
-     * always fast-blinks LED N for 2s (the cue), so the key gives feedback
-     * even while plugged into USB. */
-    if (cur != last_profile) {
-        if (cur >= 0 && cur < BLE_COUNT) {
-            cue_led = LED_BLE0 + cur;
-            cue_deadline = now + CONFIRM_MS;
-        }
-        if (!usb) {
+    /* Profile / connection edges drive only the BLE-mode solid
+     * confirmation. The USB cue is armed by the profile-changed listener
+     * (real key presses), never here, so the initial boot state sync
+     * (e.g. profile 0 at power-on) does not flash a blue LED. */
+    if (!usb) {
+        if (cur != last_profile) {
+            last_profile = cur;
             last_connected = connected;
             confirm_led = (connected && cur >= 0) ? (LED_BLE0 + cur) : -1;
             if (confirm_led >= 0) {
                 confirm_deadline = now + CONFIRM_MS;
             }
+        } else if (connected != last_connected) {
+            last_connected = connected;
+            if (connected && cur >= 0) {
+                confirm_led = LED_BLE0 + cur;
+                confirm_deadline = now + CONFIRM_MS;
+            } else {
+                confirm_led = -1;   /* dropped -> blink, no solid window */
+            }
         }
+    } else {
+        /* Keep edge trackers current while in USB so the next BLE session
+         * starts without a stale edge. */
         last_profile = cur;
-    } else if (!usb && connected != last_connected) {
         last_connected = connected;
-        if (connected && cur >= 0) {
-            confirm_led = LED_BLE0 + cur;
-            confirm_deadline = now + CONFIRM_MS;
-        } else {
-            confirm_led = -1;   /* dropped -> blink, no solid window */
-        }
     }
 
     /* ---- desired state of every LED ---- */
@@ -201,6 +206,17 @@ static int ble_profile_listener(const zmk_event_t *eh) {
     static char name[16];
     snprintf(name, sizeof(name), "czm_ble_%d", ev->index + 1);
     zmk_ble_set_device_name(name);
+
+    /* USB cue: a profile switch while plugged in (real key press only;
+     * zmk_ble_prof_select bails out when the profile is unchanged, and
+     * power-on state sync never raises this event) blinks the target blue
+     * LED for 2s. In BLE the blink/solid logic in refresh_all already
+     * covers it, so cue is USB-only. */
+    struct zmk_endpoint_instance ep = zmk_endpoints_selected();
+    if (ep.transport == ZMK_TRANSPORT_USB) {
+        cue_led = LED_BLE0 + ev->index;
+        cue_deadline = k_uptime_get() + CONFIRM_MS;
+    }
 
     LOG_INF("BLE profile %d (connected=%d)", ev->index,
             zmk_ble_profile_is_connected(ev->index));
