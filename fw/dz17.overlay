@@ -1,0 +1,67 @@
+#include <dt-bindings/gpio/gpio.h>
+#include "dz17-layouts.dtsi"
+
+/ {
+    chosen {
+        zmk,kscan = &kscan0;
+        zmk,battery = &vbatt;
+        zmk,physical-layout = <&dz17_layout>;
+    };
+
+    // Custom behavior: &czm_ledtog toggles all indicator LEDs on/off.
+    // Bound in keymap layer 2 (hold "/", tap "*").
+    behaviors {
+        czm_ledtog: czm_ledtog {
+            compatible = "czmao,behavior-led-toggle";
+            label = "CZMAO_LED_TOGGLE";
+            #binding-cells = <0>;
+        };
+    };
+
+    // 17 keys direct GPIO (unchanged)
+    kscan0: kscan {
+        compatible = "zmk,kscan-gpio-direct";
+        wakeup-source;
+        debounce-press-ms = <10>;
+        debounce-release-ms = <10>;
+        input-gpios
+            = <&gpio0 10 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   // 1: NUM
+            , <&gpio1  9 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   // 2: /
+            , <&gpio0 17 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   // 3: *
+            , <&gpio0 13 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   // 4: -
+            , <&gpio0 24 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   // 5: 7
+            , <&gpio0  5 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   // 6: 8
+            , <&gpio0 15 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   // 7: 9
+            , <&gpio0  9 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   // 8: +
+            , <&gpio0  7 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   // 9: 4
+            , <&gpio0  2 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   // 10: 5
+            , <&gpio0 30 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   // 11: 6
+            , <&gpio1 11 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   // 12: Enter
+            , <&gpio0 28 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   // 13: 1
+            , <&gpio1 13 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   // 14: 2
+            , <&gpio0 29 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   // 15: 3
+            , <&gpio0  3 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   // 16: 0
+            , <&gpio1 10 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   // 17: .
+            ;
+    };
+
+    // Battery voltage + TP4056 STBY charge status on P0.31 (unchanged)
+    vbatt: vbatt {
+        compatible = "zmk,battery-nrf-vddh";
+        charge-status-gpios = <&gpio0 31 GPIO_ACTIVE_LOW>;
+    };
+
+    // Monochrome indicator LEDs.
+    // Wiring per LED: 3.3V -> 1k resistor -> LED anode (+),
+    //                 LED cathode (-) -> GPIO.
+    // Active-low: GPIO driven LOW turns the LED on.
+    leds {
+        compatible = "gpio-leds";
+        label = "DZ17 indicator LEDs";
+        led0: led_0 { gpios = <&gpio0 22 GPIO_ACTIVE_LOW>; };  // NumLock  (white)
+        led1: led_1 { gpios = <&gpio0 12 GPIO_ACTIVE_LOW>; };  // BLE prof 1
+        led2: led_2 { gpios = <&gpio0  4 GPIO_ACTIVE_LOW>; };  // BLE prof 2
+        led3: led_3 { gpios = <&gpio0 26 GPIO_ACTIVE_LOW>; };  // BLE prof 3
+        led4: led_4 { gpios = <&gpio0  8 GPIO_ACTIVE_LOW>; };  // USB output
+    };
+};

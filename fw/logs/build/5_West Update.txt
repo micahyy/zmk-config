@@ -1,0 +1,1780 @@
+﻿2026-08-30T05:35:21.8788543Z ##[group]Run west update
+2026-08-30T05:35:21.8788880Z [36;1mwest update[0m
+2026-08-30T05:35:21.8789218Z shell: sh -e {0}
+2026-08-30T05:35:21.8789423Z ##[endgroup]
+2026-08-30T05:35:22.0801873Z === updating zmk (zmk):
+2026-08-30T05:35:22.0802964Z --- zmk: initializing
+2026-08-30T05:35:22.0848902Z Initialized empty Git repository in /__w/zmk-config/zmk-config/zmk/.git/
+2026-08-30T05:35:22.0886667Z --- zmk: fetching, need revision edf5c0814fd3ea202e43aad2d68fd32e882a518c
+2026-08-30T05:35:23.5769875Z From https://github.com/micahyy/zmk
+2026-08-30T05:35:23.5770636Z  * [new branch]        main       -> refs/west/main
+2026-08-30T05:35:23.7427876Z HEAD is now at edf5c081 chore(main): release 0.3.0 (#2858)
+2026-08-30T05:35:23.8713044Z HEAD is now at edf5c081 chore(main): release 0.3.0 (#2858)
+2026-08-30T05:35:23.8870607Z === updating zephyr (zephyr):
+2026-08-30T05:35:23.8871183Z --- zephyr: initializing
+2026-08-30T05:35:23.8904803Z Initialized empty Git repository in /__w/zmk-config/zmk-config/zephyr/.git/
+2026-08-30T05:35:23.8940199Z --- zephyr: fetching, need revision v3.5.0+zmk-fixes
+2026-08-30T05:35:41.0441620Z From https://github.com/zmkfirmware/zephyr
+2026-08-30T05:35:41.0442657Z  * branch                v3.5.0+zmk-fixes -> FETCH_HEAD
+2026-08-30T05:35:41.0457216Z  * [new tag]             v1.0.0         -> v1.0.0
+2026-08-30T05:35:41.0458859Z  * [new tag]             v1.1.0         -> v1.1.0
+2026-08-30T05:35:41.0461386Z  * [new tag]             v1.1.0-rc1     -> v1.1.0-rc1
+2026-08-30T05:35:41.0462027Z  * [new tag]             v1.10.0        -> v1.10.0
+2026-08-30T05:35:41.0464279Z  * [new tag]             v1.10.0-rc1    -> v1.10.0-rc1
+2026-08-30T05:35:41.0466310Z  * [new tag]             v1.10.0-rc2    -> v1.10.0-rc2
+2026-08-30T05:35:41.0468067Z  * [new tag]             v1.10.0-rc3    -> v1.10.0-rc3
+2026-08-30T05:35:41.0469685Z  * [new tag]             v1.11.0        -> v1.11.0
+2026-08-30T05:35:41.0472021Z  * [new tag]             v1.11.0-rc1    -> v1.11.0-rc1
+2026-08-30T05:35:41.0473677Z  * [new tag]             v1.11.0-rc2    -> v1.11.0-rc2
+2026-08-30T05:35:41.0474342Z  * [new tag]             v1.11.0-rc3    -> v1.11.0-rc3
+2026-08-30T05:35:41.0475579Z  * [new tag]             v1.12.0        -> v1.12.0
+2026-08-30T05:35:41.0477061Z  * [new tag]             v1.12.0-rc1    -> v1.12.0-rc1
+2026-08-30T05:35:41.0478800Z  * [new tag]             v1.12.0-rc2    -> v1.12.0-rc2
+2026-08-30T05:35:41.0480699Z  * [new tag]             v1.12.0-rc3    -> v1.12.0-rc3
+2026-08-30T05:35:41.0482193Z  * [new tag]             v1.13.0        -> v1.13.0
+2026-08-30T05:35:41.0484260Z  * [new tag]             v1.13.0-rc1    -> v1.13.0-rc1
+2026-08-30T05:35:41.0485941Z  * [new tag]             v1.13.0-rc2    -> v1.13.0-rc2
+2026-08-30T05:35:41.0486541Z  * [new tag]             v1.13.0-rc3    -> v1.13.0-rc3
+2026-08-30T05:35:41.0489657Z  * [new tag]             v1.14.0        -> v1.14.0
+2026-08-30T05:35:41.0491076Z  * [new tag]             v1.14.0-rc1    -> v1.14.0-rc1
+2026-08-30T05:35:41.0492845Z  * [new tag]             v1.14.0-rc2    -> v1.14.0-rc2
+2026-08-30T05:35:41.0493471Z  * [new tag]             v1.14.0-rc3    -> v1.14.0-rc3
+2026-08-30T05:35:41.0494920Z  * [new tag]             v1.14.1        -> v1.14.1
+2026-08-30T05:35:41.0496809Z  * [new tag]             v1.14.1-rc1    -> v1.14.1-rc1
+2026-08-30T05:35:41.0499668Z  * [new tag]             v1.14.1-rc2    -> v1.14.1-rc2
+2026-08-30T05:35:41.0500432Z  * [new tag]             v1.14.1-rc3    -> v1.14.1-rc3
+2026-08-30T05:35:41.0502825Z  * [new tag]             v1.14.2        -> v1.14.2
+2026-08-30T05:35:41.0504382Z  * [new tag]             v1.2.0         -> v1.2.0
+2026-08-30T05:35:41.0505434Z  * [new tag]             v1.2.0-rc1     -> v1.2.0-rc1
+2026-08-30T05:35:41.0506553Z  * [new tag]             v1.2.0-rc2     -> v1.2.0-rc2
+2026-08-30T05:35:41.0509651Z  * [new tag]             v1.3.0         -> v1.3.0
+2026-08-30T05:35:41.0510252Z  * [new tag]             v1.3.0-rc1     -> v1.3.0-rc1
+2026-08-30T05:35:41.0511513Z  * [new tag]             v1.3.0-rc2     -> v1.3.0-rc2
+2026-08-30T05:35:41.0514897Z  * [new tag]             v1.4.0         -> v1.4.0
+2026-08-30T05:35:41.0515782Z  * [new tag]             v1.4.0-rc1     -> v1.4.0-rc1
+2026-08-30T05:35:41.0516984Z  * [new tag]             v1.4.0-rc2     -> v1.4.0-rc2
+2026-08-30T05:35:41.0517883Z  * [new tag]             v1.4.0-rc3     -> v1.4.0-rc3
+2026-08-30T05:35:41.0520016Z  * [new tag]             v1.5.0         -> v1.5.0
+2026-08-30T05:35:41.0521281Z  * [new tag]             v1.5.0-rc0     -> v1.5.0-rc0
+2026-08-30T05:35:41.0523910Z  * [new tag]             v1.5.0-rc1     -> v1.5.0-rc1
+2026-08-30T05:35:41.0524508Z  * [new tag]             v1.5.0-rc2     -> v1.5.0-rc2
+2026-08-30T05:35:41.0525782Z  * [new tag]             v1.5.0-rc3     -> v1.5.0-rc3
+2026-08-30T05:35:41.0527588Z  * [new tag]             v1.5.0-rc4     -> v1.5.0-rc4
+2026-08-30T05:35:41.0529519Z  * [new tag]             v1.6.0         -> v1.6.0
+2026-08-30T05:35:41.0531294Z  * [new tag]             v1.6.0-rc1     -> v1.6.0-rc1
+2026-08-30T05:35:41.0533396Z  * [new tag]             v1.6.0-rc2     -> v1.6.0-rc2
+2026-08-30T05:35:41.0534179Z  * [new tag]             v1.6.0-rc3     -> v1.6.0-rc3
+2026-08-30T05:35:41.0536736Z  * [new tag]             v1.6.0-rc4     -> v1.6.0-rc4
+2026-08-30T05:35:41.0537547Z  * [new tag]             v1.6.1         -> v1.6.1
+2026-08-30T05:35:41.0539001Z  * [new tag]             v1.6.1-rc      -> v1.6.1-rc
+2026-08-30T05:35:41.0540483Z  * [new tag]             v1.6.99        -> v1.6.99
+2026-08-30T05:35:41.0542062Z  * [new tag]             v1.7.0         -> v1.7.0
+2026-08-30T05:35:41.0543348Z  * [new tag]             v1.7.0-rc1     -> v1.7.0-rc1
+2026-08-30T05:35:41.0545421Z  * [new tag]             v1.7.0-rc2     -> v1.7.0-rc2
+2026-08-30T05:35:41.0546827Z  * [new tag]             v1.7.0-rc3     -> v1.7.0-rc3
+2026-08-30T05:35:41.0548190Z  * [new tag]             v1.7.0-rc4     -> v1.7.0-rc4
+2026-08-30T05:35:41.0551528Z  * [new tag]             v1.7.1         -> v1.7.1
+2026-08-30T05:35:41.0552104Z  * [new tag]             v1.7.1-rc      -> v1.7.1-rc
+2026-08-30T05:35:41.0553753Z  * [new tag]             v1.7.99        -> v1.7.99
+2026-08-30T05:35:41.0554668Z  * [new tag]             v1.8.0         -> v1.8.0
+2026-08-30T05:35:41.0556851Z  * [new tag]             v1.8.0-rc1     -> v1.8.0-rc1
+2026-08-30T05:35:41.0558629Z  * [new tag]             v1.8.0-rc2     -> v1.8.0-rc2
+2026-08-30T05:35:41.0559614Z  * [new tag]             v1.8.0-rc3     -> v1.8.0-rc3
+2026-08-30T05:35:41.0560832Z  * [new tag]             v1.8.0-rc4     -> v1.8.0-rc4
+2026-08-30T05:35:41.0562707Z  * [new tag]             v1.8.99        -> v1.8.99
+2026-08-30T05:35:41.0564203Z  * [new tag]             v1.9.0         -> v1.9.0
+2026-08-30T05:35:41.0565577Z  * [new tag]             v1.9.0-rc1     -> v1.9.0-rc1
+2026-08-30T05:35:41.0567696Z  * [new tag]             v1.9.0-rc2     -> v1.9.0-rc2
+2026-08-30T05:35:41.0570761Z  * [new tag]             v1.9.0-rc3     -> v1.9.0-rc3
+2026-08-30T05:35:41.0571900Z  * [new tag]             v1.9.0-rc4     -> v1.9.0-rc4
+2026-08-30T05:35:41.0573006Z  * [new tag]             v1.9.1         -> v1.9.1
+2026-08-30T05:35:41.0574916Z  * [new tag]             v1.9.2         -> v1.9.2
+2026-08-30T05:35:41.0576544Z  * [new tag]             v2.0.0         -> v2.0.0
+2026-08-30T05:35:41.0577672Z  * [new tag]             v2.0.0-rc1     -> v2.0.0-rc1
+2026-08-30T05:35:41.0580374Z  * [new tag]             v2.0.0-rc2     -> v2.0.0-rc2
+2026-08-30T05:35:41.0581366Z  * [new tag]             v2.0.0-rc3     -> v2.0.0-rc3
+2026-08-30T05:35:41.0582999Z  * [new tag]             v2.1.0         -> v2.1.0
+2026-08-30T05:35:41.0585325Z  * [new tag]             v2.1.0-rc1     -> v2.1.0-rc1
+2026-08-30T05:35:41.0586516Z  * [new tag]             v2.1.0-rc2     -> v2.1.0-rc2
+2026-08-30T05:35:41.0587158Z  * [new tag]             v2.1.0-rc3     -> v2.1.0-rc3
+2026-08-30T05:35:41.0590275Z  * [new tag]             v2.2.0         -> v2.2.0
+2026-08-30T05:35:41.0590876Z  * [new tag]             v2.2.0-rc1     -> v2.2.0-rc1
+2026-08-30T05:35:41.0593107Z  * [new tag]             v2.2.0-rc2     -> v2.2.0-rc2
+2026-08-30T05:35:41.0593853Z  * [new tag]             v2.2.0-rc3     -> v2.2.0-rc3
+2026-08-30T05:35:41.0596011Z  * [new tag]             v2.2.1         -> v2.2.1
+2026-08-30T05:35:41.0597718Z  * [new tag]             v2.3.0         -> v2.3.0
+2026-08-30T05:35:41.0600763Z  * [new tag]             v2.3.0-rc1     -> v2.3.0-rc1
+2026-08-30T05:35:41.0601424Z  * [new tag]             v2.3.0-rc2     -> v2.3.0-rc2
+2026-08-30T05:35:41.0603389Z  * [new tag]             v2.4.0         -> v2.4.0
+2026-08-30T05:35:41.0604872Z  * [new tag]             v2.4.0-rc1     -> v2.4.0-rc1
+2026-08-30T05:35:41.0606696Z  * [new tag]             v2.4.0-rc2     -> v2.4.0-rc2
+2026-08-30T05:35:41.0608007Z  * [new tag]             v2.4.0-rc3     -> v2.4.0-rc3
+2026-08-30T05:35:41.0610552Z  * [new tag]             zephyr-v1.0.0  -> zephyr-v1.0.0
+2026-08-30T05:35:41.0611895Z  * [new tag]             zephyr-v1.1.0  -> zephyr-v1.1.0
+2026-08-30T05:35:41.0613777Z  * [new tag]             zephyr-v1.10.0 -> zephyr-v1.10.0
+2026-08-30T05:35:41.0615737Z  * [new tag]             zephyr-v1.11.0 -> zephyr-v1.11.0
+2026-08-30T05:35:41.0616574Z  * [new tag]             zephyr-v1.12.0 -> zephyr-v1.12.0
+2026-08-30T05:35:41.0618679Z  * [new tag]             zephyr-v1.13.0 -> zephyr-v1.13.0
+2026-08-30T05:35:41.0620189Z  * [new tag]             zephyr-v1.14.0 -> zephyr-v1.14.0
+2026-08-30T05:35:41.0622379Z  * [new tag]             zephyr-v1.14.1 -> zephyr-v1.14.1
+2026-08-30T05:35:41.0623698Z  * [new tag]             zephyr-v1.2.0  -> zephyr-v1.2.0
+2026-08-30T05:35:41.0625835Z  * [new tag]             zephyr-v1.3.0  -> zephyr-v1.3.0
+2026-08-30T05:35:41.0627568Z  * [new tag]             zephyr-v1.4.0  -> zephyr-v1.4.0
+2026-08-30T05:35:41.0629565Z  * [new tag]             zephyr-v1.5.0  -> zephyr-v1.5.0
+2026-08-30T05:35:41.0631098Z  * [new tag]             zephyr-v1.6.0  -> zephyr-v1.6.0
+2026-08-30T05:35:41.0632363Z  * [new tag]             zephyr-v1.6.1  -> zephyr-v1.6.1
+2026-08-30T05:35:41.0634089Z  * [new tag]             zephyr-v1.7.0  -> zephyr-v1.7.0
+2026-08-30T05:35:41.0636028Z  * [new tag]             zephyr-v1.7.1  -> zephyr-v1.7.1
+2026-08-30T05:35:41.0637109Z  * [new tag]             zephyr-v1.8.0  -> zephyr-v1.8.0
+2026-08-30T05:35:41.0639076Z  * [new tag]             zephyr-v1.9.0  -> zephyr-v1.9.0
+2026-08-30T05:35:41.0640688Z  * [new tag]             zephyr-v1.9.1  -> zephyr-v1.9.1
+2026-08-30T05:35:41.0642144Z  * [new tag]             zephyr-v1.9.2  -> zephyr-v1.9.2
+2026-08-30T05:35:41.0643717Z  * [new tag]             zephyr-v2.0.0  -> zephyr-v2.0.0
+2026-08-30T05:35:41.0645295Z  * [new tag]             zephyr-v2.1.0  -> zephyr-v2.1.0
+2026-08-30T05:35:41.0646922Z  * [new tag]             zephyr-v2.2.0  -> zephyr-v2.2.0
+2026-08-30T05:35:41.0648208Z  * [new tag]             zephyr-v2.2.1  -> zephyr-v2.2.1
+2026-08-30T05:35:41.0649971Z  * [new tag]             zephyr-v2.3.0  -> zephyr-v2.3.0
+2026-08-30T05:35:41.0651809Z  * [new tag]             zephyr-v2.4.0  -> zephyr-v2.4.0
+2026-08-30T05:35:42.9819340Z HEAD is now at dacab4875 scripts: check_init_priorities: drop recursive child parsing
+2026-08-30T05:35:43.5173516Z HEAD is now at dacab4875 scripts: check_init_priorities: drop recursive child parsing
+2026-08-30T05:35:43.5584731Z === updating nanopb (modules/lib/nanopb):
+2026-08-30T05:35:43.5585498Z --- nanopb: initializing
+2026-08-30T05:35:43.5621413Z Initialized empty Git repository in /__w/zmk-config/zmk-config/modules/lib/nanopb/.git/
+2026-08-30T05:35:43.5660002Z --- nanopb: fetching, need revision 8c60555d6277a0360c876bd85d491fc4fb0cd74a
+2026-08-30T05:35:44.2645677Z From https://github.com/zmkfirmware/nanopb
+2026-08-30T05:35:44.2646495Z  * [new branch]      cifuzz_test4           -> refs/west/cifuzz_test4
+2026-08-30T05:35:44.2648061Z  * [new branch]      dependabot/pip/extra/setuptools-70.0.0 -> refs/west/dependabot/pip/extra/setuptools-70.0.0
+2026-08-30T05:35:44.2649356Z  * [new branch]      dev_dynamic_nanopb_pb2 -> refs/west/dev_dynamic_nanopb_pb2
+2026-08-30T05:35:44.2655979Z  * [new branch]      dev_markdown_docs      -> refs/west/dev_markdown_docs
+2026-08-30T05:35:44.2657079Z  * [new branch]      maintenance_0.1        -> refs/west/maintenance_0.1
+2026-08-30T05:35:44.2658793Z  * [new branch]      maintenance_0.2        -> refs/west/maintenance_0.2
+2026-08-30T05:35:44.2660305Z  * [new branch]      maintenance_0.3        -> refs/west/maintenance_0.3
+2026-08-30T05:35:44.2661749Z  * [new branch]      master                 -> refs/west/master
+2026-08-30T05:35:44.2663106Z  * [new branch]      optimize/reduce-stack-usage -> refs/west/optimize/reduce-stack-usage
+2026-08-30T05:35:44.2664018Z  * [new branch]      zephyr                 -> refs/west/zephyr
+2026-08-30T05:35:44.2664671Z  * [new branch]      zmk                    -> refs/west/zmk
+2026-08-30T05:35:44.2671937Z  * [new tag]         0.2.9.5                -> 0.2.9.5
+2026-08-30T05:35:44.2673766Z  * [new tag]         0.3.6                  -> 0.3.6
+2026-08-30T05:35:44.2674689Z  * [new tag]         0.3.7                  -> 0.3.7
+2026-08-30T05:35:44.2676374Z  * [new tag]         0.3.8                  -> 0.3.8
+2026-08-30T05:35:44.2677912Z  * [new tag]         0.3.9                  -> 0.3.9
+2026-08-30T05:35:44.2679243Z  * [new tag]         0.3.9.1                -> 0.3.9.1
+2026-08-30T05:35:44.2681994Z  * [new tag]         0.3.9.2                -> 0.3.9.2
+2026-08-30T05:35:44.2683559Z  * [new tag]         0.3.9.3                -> 0.3.9.3
+2026-08-30T05:35:44.2684438Z  * [new tag]         0.3.9.4                -> 0.3.9.4
+2026-08-30T05:35:44.2685291Z  * [new tag]         0.3.9.5                -> 0.3.9.5
+2026-08-30T05:35:44.2686336Z  * [new tag]         0.3.9.6                -> 0.3.9.6
+2026-08-30T05:35:44.2687680Z  * [new tag]         0.3.9.7                -> 0.3.9.7
+2026-08-30T05:35:44.2689134Z  * [new tag]         0.3.9.8                -> 0.3.9.8
+2026-08-30T05:35:44.2690577Z  * [new tag]         0.4.0                  -> 0.4.0
+2026-08-30T05:35:44.2692587Z  * [new tag]         0.4.1                  -> 0.4.1
+2026-08-30T05:35:44.2693611Z  * [new tag]         0.4.2                  -> 0.4.2
+2026-08-30T05:35:44.2694711Z  * [new tag]         0.4.3                  -> 0.4.3
+2026-08-30T05:35:44.2695937Z  * [new tag]         0.4.4                  -> 0.4.4
+2026-08-30T05:35:44.2697698Z  * [new tag]         0.4.5                  -> 0.4.5
+2026-08-30T05:35:44.2699257Z  * [new tag]         nanopb-0.1.0           -> nanopb-0.1.0
+2026-08-30T05:35:44.2700150Z  * [new tag]         nanopb-0.1.1           -> nanopb-0.1.1
+2026-08-30T05:35:44.2702492Z  * [new tag]         nanopb-0.1.2           -> nanopb-0.1.2
+2026-08-30T05:35:44.2703548Z  * [new tag]         nanopb-0.1.3           -> nanopb-0.1.3
+2026-08-30T05:35:44.2704835Z  * [new tag]         nanopb-0.1.4           -> nanopb-0.1.4
+2026-08-30T05:35:44.2705825Z  * [new tag]         nanopb-0.1.5           -> nanopb-0.1.5
+2026-08-30T05:35:44.2707037Z  * [new tag]         nanopb-0.1.6           -> nanopb-0.1.6
+2026-08-30T05:35:44.2709021Z  * [new tag]         nanopb-0.1.7           -> nanopb-0.1.7
+2026-08-30T05:35:44.2710185Z  * [new tag]         nanopb-0.1.8           -> nanopb-0.1.8
+2026-08-30T05:35:44.2711591Z  * [new tag]         nanopb-0.1.9           -> nanopb-0.1.9
+2026-08-30T05:35:44.2713324Z  * [new tag]         nanopb-0.1.9.1         -> nanopb-0.1.9.1
+2026-08-30T05:35:44.2714484Z  * [new tag]         nanopb-0.2.0           -> nanopb-0.2.0
+2026-08-30T05:35:44.2715345Z  * [new tag]         nanopb-0.2.1           -> nanopb-0.2.1
+2026-08-30T05:35:44.2717131Z  * [new tag]         nanopb-0.2.2           -> nanopb-0.2.2
+2026-08-30T05:35:44.2718290Z  * [new tag]         nanopb-0.2.3           -> nanopb-0.2.3
+2026-08-30T05:35:44.2719839Z  * [new tag]         nanopb-0.2.4           -> nanopb-0.2.4
+2026-08-30T05:35:44.2721129Z  * [new tag]         nanopb-0.2.5           -> nanopb-0.2.5
+2026-08-30T05:35:44.2722736Z  * [new tag]         nanopb-0.2.6           -> nanopb-0.2.6
+2026-08-30T05:35:44.2723856Z  * [new tag]         nanopb-0.2.7           -> nanopb-0.2.7
+2026-08-30T05:35:44.2725298Z  * [new tag]         nanopb-0.2.8           -> nanopb-0.2.8
+2026-08-30T05:35:44.2726688Z  * [new tag]         nanopb-0.2.9           -> nanopb-0.2.9
+2026-08-30T05:35:44.2728376Z  * [new tag]         nanopb-0.2.9.1         -> nanopb-0.2.9.1
+2026-08-30T05:35:44.2730044Z  * [new tag]         nanopb-0.2.9.2         -> nanopb-0.2.9.2
+2026-08-30T05:35:44.2731518Z  * [new tag]         nanopb-0.2.9.3         -> nanopb-0.2.9.3
+2026-08-30T05:35:44.2733433Z  * [new tag]         nanopb-0.2.9.4         -> nanopb-0.2.9.4
+2026-08-30T05:35:44.2734131Z  * [new tag]         nanopb-0.2.9.5         -> nanopb-0.2.9.5
+2026-08-30T05:35:44.2735693Z  * [new tag]         nanopb-0.3.0           -> nanopb-0.3.0
+2026-08-30T05:35:44.2736733Z  * [new tag]         nanopb-0.3.1           -> nanopb-0.3.1
+2026-08-30T05:35:44.2738164Z  * [new tag]         nanopb-0.3.2           -> nanopb-0.3.2
+2026-08-30T05:35:44.2739801Z  * [new tag]         nanopb-0.3.3           -> nanopb-0.3.3
+2026-08-30T05:35:44.2741164Z  * [new tag]         nanopb-0.3.4           -> nanopb-0.3.4
+2026-08-30T05:35:44.2742579Z  * [new tag]         nanopb-0.3.5           -> nanopb-0.3.5
+2026-08-30T05:35:44.2743768Z  * [new tag]         nanopb-0.3.6           -> nanopb-0.3.6
+2026-08-30T05:35:44.2745103Z  * [new tag]         nanopb-0.3.7           -> nanopb-0.3.7
+2026-08-30T05:35:44.2746377Z  * [new tag]         nanopb-0.3.8           -> nanopb-0.3.8
+2026-08-30T05:35:44.2747984Z  * [new tag]         nanopb-0.3.9           -> nanopb-0.3.9
+2026-08-30T05:35:44.2750384Z  * [new tag]         nanopb-0.3.9.1         -> nanopb-0.3.9.1
+2026-08-30T05:35:44.2752566Z  * [new tag]         nanopb-0.3.9.2         -> nanopb-0.3.9.2
+2026-08-30T05:35:44.2753377Z  * [new tag]         nanopb-0.3.9.3         -> nanopb-0.3.9.3
+2026-08-30T05:35:44.2754428Z  * [new tag]         nanopb-0.3.9.4         -> nanopb-0.3.9.4
+2026-08-30T05:35:44.2755859Z  * [new tag]         nanopb-0.3.9.5         -> nanopb-0.3.9.5
+2026-08-30T05:35:44.2757672Z  * [new tag]         nanopb-0.3.9.6         -> nanopb-0.3.9.6
+2026-08-30T05:35:44.2759082Z  * [new tag]         nanopb-0.3.9.7         -> nanopb-0.3.9.7
+2026-08-30T05:35:44.2760482Z  * [new tag]         nanopb-0.3.9.8         -> nanopb-0.3.9.8
+2026-08-30T05:35:44.2761828Z  * [new tag]         nanopb-0.4.0           -> nanopb-0.4.0
+2026-08-30T05:35:44.2763191Z  * [new tag]         nanopb-0.4.0-dev       -> nanopb-0.4.0-dev
+2026-08-30T05:35:44.2764495Z  * [new tag]         nanopb-0.4.1           -> nanopb-0.4.1
+2026-08-30T05:35:44.2766128Z  * [new tag]         nanopb-0.4.2           -> nanopb-0.4.2
+2026-08-30T05:35:44.2767725Z  * [new tag]         nanopb-0.4.3           -> nanopb-0.4.3
+2026-08-30T05:35:44.2769372Z  * [new tag]         nanopb-0.4.4           -> nanopb-0.4.4
+2026-08-30T05:35:44.2770472Z  * [new tag]         nanopb-0.4.5           -> nanopb-0.4.5
+2026-08-30T05:35:44.3467881Z HEAD is now at 8c60555 Merge pull request #4 from petejohanson/build/find-protoc-fixes
+2026-08-30T05:35:44.3682999Z HEAD is now at 8c60555 Merge pull request #4 from petejohanson/build/find-protoc-fixes
+2026-08-30T05:35:44.3687818Z === updating zmk-studio-messages (modules/msgs/zmk-studio-messages):
+2026-08-30T05:35:44.3689199Z --- zmk-studio-messages: initializing
+2026-08-30T05:35:44.3724181Z Initialized empty Git repository in /__w/zmk-config/zmk-config/modules/msgs/zmk-studio-messages/.git/
+2026-08-30T05:35:44.3757470Z --- zmk-studio-messages: fetching, need revision 6cb4c283e76209d59c45fbcb218800cd19e9339d
+2026-08-30T05:35:44.8234947Z From https://github.com/zmkfirmware/zmk-studio-messages
+2026-08-30T05:35:44.8235439Z  * [new branch]      add-combos -> refs/west/add-combos
+2026-08-30T05:35:44.8235775Z  * [new branch]      main       -> refs/west/main
+2026-08-30T05:35:44.8368569Z HEAD is now at 6cb4c28 refactor: Return detailed save changes response.
+2026-08-30T05:35:44.8417481Z HEAD is now at 6cb4c28 refactor: Return detailed save changes response.
+2026-08-30T05:35:44.8421496Z === updating acpica (modules/lib/acpica):
+2026-08-30T05:35:44.8422221Z --- acpica: initializing
+2026-08-30T05:35:44.8450559Z Initialized empty Git repository in /__w/zmk-config/zmk-config/modules/lib/acpica/.git/
+2026-08-30T05:35:44.8484138Z --- acpica: fetching, need revision 0333c2af13179f9b33d495cf7cb9a509f751cbb1
+2026-08-30T05:35:52.8905299Z From https://github.com/zephyrproject-rtos/acpica
+2026-08-30T05:35:52.8906170Z  * [new branch]          master      -> refs/west/master
+2026-08-30T05:35:52.8906998Z  * [new branch]          zephyr      -> refs/west/zephyr
+2026-08-30T05:35:52.8907918Z  * [new branch]          zephyr-v3.5 -> refs/west/zephyr-v3.5
+2026-08-30T05:35:53.1641177Z HEAD is now at 0333c2af1 os_specific: zephyr: add generic platform support
+2026-08-30T05:35:53.2780659Z HEAD is now at 0333c2af1 os_specific: zephyr: add generic platform support
+2026-08-30T05:35:53.2785813Z === updating canopennode (modules/lib/canopennode):
+2026-08-30T05:35:53.2786715Z --- canopennode: initializing
+2026-08-30T05:35:53.2822012Z Initialized empty Git repository in /__w/zmk-config/zmk-config/modules/lib/canopennode/.git/
+2026-08-30T05:35:53.2860246Z --- canopennode: fetching, need revision dec12fa3f0d790cafa8414a4c2930ea71ab72ffd
+2026-08-30T05:35:54.4114149Z From https://github.com/zephyrproject-rtos/canopennode
+2026-08-30T05:35:54.4114989Z  * [new branch]      master            -> refs/west/master
+2026-08-30T05:35:54.4115514Z  * [new branch]      v1.3-master       -> refs/west/v1.3-master
+2026-08-30T05:35:54.4116238Z  * [new branch]      zephyr            -> refs/west/zephyr
+2026-08-30T05:35:54.4116788Z  * [new tag]         zephyr-snapshot-1 -> zephyr-snapshot-1
+2026-08-30T05:35:54.4377939Z HEAD is now at dec12fa stack: map CANopenNode crc16_ccitt() to Zephyr crc16_itu_t()
+2026-08-30T05:35:54.4530161Z HEAD is now at dec12fa stack: map CANopenNode crc16_ccitt() to Zephyr crc16_itu_t()
+2026-08-30T05:35:54.4533942Z === updating cmsis (modules/hal/cmsis):
+2026-08-30T05:35:54.4535297Z --- cmsis: initializing
+2026-08-30T05:35:54.4570259Z Initialized empty Git repository in /__w/zmk-config/zmk-config/modules/hal/cmsis/.git/
+2026-08-30T05:35:54.4608990Z --- cmsis: fetching, need revision 5a00331455dd74e31e80efa383a489faea0590e3
+2026-08-30T05:35:55.0708885Z From https://github.com/zephyrproject-rtos/cmsis
+2026-08-30T05:35:55.0709799Z  * [new branch]      master     -> refs/west/master
+2026-08-30T05:35:55.0918838Z HEAD is now at 5a00331 remove cmsis-dsp and cmsis-nn
+2026-08-30T05:35:55.1052881Z HEAD is now at 5a00331 remove cmsis-dsp and cmsis-nn
+2026-08-30T05:35:55.1056106Z === updating cmsis-dsp (modules/lib/cmsis-dsp):
+2026-08-30T05:35:55.1056752Z --- cmsis-dsp: initializing
+2026-08-30T05:35:55.1089246Z Initialized empty Git repository in /__w/zmk-config/zmk-config/modules/lib/cmsis-dsp/.git/
+2026-08-30T05:35:55.1124883Z --- cmsis-dsp: fetching, need revision ff7b5fd1ea5f094665c090c343ec44e74dc0b193
+2026-08-30T05:35:59.5001204Z From https://github.com/zephyrproject-rtos/cmsis-dsp
+2026-08-30T05:35:59.5002008Z  * [new branch]        main       -> refs/west/main
+2026-08-30T05:35:59.5002658Z  * [new branch]        zephyr     -> refs/west/zephyr
+2026-08-30T05:35:59.5003212Z  * [new branch]        zephyr-3.6 -> refs/west/zephyr-3.6
+2026-08-30T05:35:59.5004446Z  * [new branch]        zephyr-4.0 -> refs/west/zephyr-4.0
+2026-08-30T05:35:59.5006498Z  * [new branch]        zephyr-4.4 -> refs/west/zephyr-4.4
+2026-08-30T05:35:59.5009031Z  * [new branch]        zephyr-4.5 -> refs/west/zephyr-4.5
+2026-08-30T05:35:59.9558560Z HEAD is now at ff7b5fd1 compute Library: fix inline function that is not static
+2026-08-30T05:36:00.2534927Z HEAD is now at ff7b5fd1 compute Library: fix inline function that is not static
+2026-08-30T05:36:00.2540279Z === updating cmsis-nn (modules/lib/cmsis-nn):
+2026-08-30T05:36:00.2541516Z --- cmsis-nn: initializing
+2026-08-30T05:36:00.2576890Z Initialized empty Git repository in /__w/zmk-config/zmk-config/modules/lib/cmsis-nn/.git/
+2026-08-30T05:36:00.2618692Z --- cmsis-nn: fetching, need revision 0c8669d81381ccf3b1a01d699f3b68b50134a99f
+2026-08-30T05:36:01.2490576Z From https://github.com/zephyrproject-rtos/cmsis-nn
+2026-08-30T05:36:01.2491345Z  * [new branch]      main          -> refs/west/main
+2026-08-30T05:36:01.2492144Z  * [new branch]      zephyr        -> refs/west/zephyr
+2026-08-30T05:36:01.2493188Z  * [new branch]      zephyr-v6.0.0 -> refs/west/zephyr-v6.0.0
+2026-08-30T05:36:01.2494323Z  * [new branch]      zephyr-v7.0.0 -> refs/west/zephyr-v7.0.0
+2026-08-30T05:36:01.3362975Z HEAD is now at 0c8669d Merge pull request #1 from XenuIsWatching/zephyr
+2026-08-30T05:36:01.3793765Z HEAD is now at 0c8669d Merge pull request #1 from XenuIsWatching/zephyr
+2026-08-30T05:36:01.3797476Z === updating fatfs (modules/fs/fatfs):
+2026-08-30T05:36:01.3798096Z --- fatfs: initializing
+2026-08-30T05:36:01.3834294Z Initialized empty Git repository in /__w/zmk-config/zmk-config/modules/fs/fatfs/.git/
+2026-08-30T05:36:01.3885774Z --- fatfs: fetching, need revision 427159bf95ea49b7680facffaa29ad506b42709b
+2026-08-30T05:36:02.3126189Z From https://github.com/zephyrproject-rtos/fatfs
+2026-08-30T05:36:02.3126861Z  * [new branch]      master       -> refs/west/master
+2026-08-30T05:36:02.3127749Z  * [new branch]      v1.14-branch -> refs/west/v1.14-branch
+2026-08-30T05:36:02.3362985Z HEAD is now at 427159b zephyr: fix ffconf.h override use of STRINGIZE
+2026-08-30T05:36:02.3481236Z HEAD is now at 427159b zephyr: fix ffconf.h override use of STRINGIZE
+2026-08-30T05:36:02.3485026Z === updating hal_ambiq (modules/hal/ambiq):
+2026-08-30T05:36:02.3486277Z --- hal_ambiq: initializing
+2026-08-30T05:36:02.3519463Z Initialized empty Git repository in /__w/zmk-config/zmk-config/modules/hal/ambiq/.git/
+2026-08-30T05:36:02.3557106Z --- hal_ambiq: fetching, need revision 0a7c99325aa73a1ef777501da91c2c6608661e56
+2026-08-30T05:36:04.1354016Z From https://github.com/zephyrproject-rtos/hal_ambiq
+2026-08-30T05:36:04.1354584Z  * [new branch]      main       -> refs/west/main
+2026-08-30T05:36:04.1940732Z HEAD is now at 0a7c993 modules: hal_ambiq: Add Ambiq Apollo4 Blue Plus SoC
+2026-08-30T05:36:04.2514800Z HEAD is now at 0a7c993 modules: hal_ambiq: Add Ambiq Apollo4 Blue Plus SoC
+2026-08-30T05:36:04.2518267Z === updating hal_atmel (modules/hal/atmel):
+2026-08-30T05:36:04.2518869Z --- hal_atmel: initializing
+2026-08-30T05:36:04.2551568Z Initialized empty Git repository in /__w/zmk-config/zmk-config/modules/hal/atmel/.git/
+2026-08-30T05:36:04.2588090Z --- hal_atmel: fetching, need revision 5ab43007eda3f380c125f957f03638d2e8d1144d
+2026-08-30T05:36:05.2807729Z From https://github.com/zephyrproject-rtos/hal_atmel
+2026-08-30T05:36:05.2808429Z  * [new branch]      master       -> refs/west/master
+2026-08-30T05:36:05.2808840Z  * [new branch]      v1.14-branch -> refs/west/v1.14-branch
+2026-08-30T05:36:05.5135984Z HEAD is now at 5ab4300 Remove LITTLE_ENDIAN and __LITTLE_ENDIAN defines
+2026-08-30T05:36:05.7778495Z HEAD is now at 5ab4300 Remove LITTLE_ENDIAN and __LITTLE_ENDIAN defines
+2026-08-30T05:36:05.7783316Z === updating hal_espressif (modules/hal/espressif):
+2026-08-30T05:36:05.7784757Z --- hal_espressif: initializing
+2026-08-30T05:36:05.7819426Z Initialized empty Git repository in /__w/zmk-config/zmk-config/modules/hal/espressif/.git/
+2026-08-30T05:36:05.7858204Z --- hal_espressif: fetching, need revision 31fc5758f3507f8f0af00b1dea1a0df7af99bfc0
+2026-08-30T05:36:16.4289431Z From https://github.com/zephyrproject-rtos/hal_espressif
+2026-08-30T05:36:16.4290309Z  * [new branch]            hal_idf-4.3-zep-3.6 -> refs/west/hal_idf-4.3-zep-3.6
+2026-08-30T05:36:16.4290834Z  * [new branch]            hal_idf-4.4_zep-3.7 -> refs/west/hal_idf-4.4_zep-3.7
+2026-08-30T05:36:16.4307628Z  * [new branch]            hal_idf-5.1_zep-4.0 -> refs/west/hal_idf-5.1_zep-4.0
+2026-08-30T05:36:16.4308684Z  * [new branch]            hal_idf-5.1_zep-4.2 -> refs/west/hal_idf-5.1_zep-4.2
+2026-08-30T05:36:16.4309163Z  * [new branch]            hal_v4.2            -> refs/west/hal_v4.2
+2026-08-30T05:36:16.4309579Z  * [new branch]            hal_v4.4            -> refs/west/hal_v4.4
+2026-08-30T05:36:16.4310196Z  * [new branch]            main                -> refs/west/main
+2026-08-30T05:36:16.4310615Z  * [new branch]            v4.4-branch         -> refs/west/v4.4-branch
+2026-08-30T05:36:16.4311031Z  * [new branch]            zephyr              -> refs/west/zephyr
+2026-08-30T05:36:16.4311750Z  * [new tag]               pr117638-hotfix     -> pr117638-hotfix
+2026-08-30T05:36:16.4312128Z  * [new tag]               release/v4.3        -> release/v4.3
+2026-08-30T05:36:16.4312499Z  * [new tag]               snapshot/1          -> snapshot/1
+2026-08-30T05:36:17.5505533Z HEAD is now at 31fc5758f3 random: rename header file as in Zephyr.
+2026-08-30T05:36:17.9823005Z HEAD is now at 31fc5758f3 random: rename header file as in Zephyr.
+2026-08-30T05:36:17.9830086Z === updating hal_ethos_u (modules/hal/ethos_u):
+2026-08-30T05:36:17.9831364Z --- hal_ethos_u: initializing
+2026-08-30T05:36:17.9864209Z Initialized empty Git repository in /__w/zmk-config/zmk-config/modules/hal/ethos_u/.git/
+2026-08-30T05:36:17.9901891Z --- hal_ethos_u: fetching, need revision 90ada2ea5681b2a2722a10d2898eac34c2510791
+2026-08-30T05:36:18.6130925Z From https://github.com/zephyrproject-rtos/hal_ethos_u
+2026-08-30T05:36:18.6131458Z  * [new branch]      bump             -> refs/west/bump
+2026-08-30T05:36:18.6131964Z  * [new branch]      main             -> refs/west/main
+2026-08-30T05:36:18.6136964Z  * [new branch]      upmerge_20220209 -> refs/west/upmerge_20220209
+2026-08-30T05:36:18.6137700Z  * [new branch]      v4.3-branch      -> refs/west/v4.3-branch
+2026-08-30T05:36:18.6346807Z HEAD is now at 90ada2e Clarify README regarding CPU choice
+2026-08-30T05:36:18.6447456Z HEAD is now at 90ada2e Clarify README regarding CPU choice
+2026-08-30T05:36:18.6451353Z === updating hal_gigadevice (modules/hal/gigadevice):
+2026-08-30T05:36:18.6452009Z --- hal_gigadevice: initializing
+2026-08-30T05:36:18.6485847Z Initialized empty Git repository in /__w/zmk-config/zmk-config/modules/hal/gigadevice/.git/
+2026-08-30T05:36:18.6523989Z --- hal_gigadevice: fetching, need revision 2994b7dde8b0b0fa9b9c0ccb13474b6a486cddc3
+2026-08-30T05:36:20.2880732Z From https://github.com/zephyrproject-rtos/hal_gigadevice
+2026-08-30T05:36:20.2881424Z  * [new branch]      main       -> refs/west/main
+2026-08-30T05:36:20.3659087Z HEAD is now at 2994b7d README.md: add pllmf and pack exception for gd32a50x
+2026-08-30T05:36:20.4156382Z HEAD is now at 2994b7d README.md: add pllmf and pack exception for gd32a50x
+2026-08-30T05:36:20.4160183Z === updating hal_intel (modules/hal/intel):
+2026-08-30T05:36:20.4160941Z --- hal_intel: initializing
+2026-08-30T05:36:20.4194897Z Initialized empty Git repository in /__w/zmk-config/zmk-config/modules/hal/intel/.git/
+2026-08-30T05:36:20.4250843Z --- hal_intel: fetching, need revision b3b43d4e3da7ba483611bbbea7ef8af92c69df31
+2026-08-30T05:36:20.9541259Z From https://github.com/zephyrproject-rtos/hal_intel
+2026-08-30T05:36:20.9541773Z  * [new branch]      main       -> refs/west/main
+2026-08-30T05:36:20.9735859Z HEAD is now at b3b43d4 pm: fix handling reset prep in incorrect place
+2026-08-30T05:36:20.9824471Z HEAD is now at b3b43d4 pm: fix handling reset prep in incorrect place
+2026-08-30T05:36:20.9828834Z === updating hal_nordic (modules/hal/nordic):
+2026-08-30T05:36:20.9829667Z --- hal_nordic: initializing
+2026-08-30T05:36:20.9862655Z Initialized empty Git repository in /__w/zmk-config/zmk-config/modules/hal/nordic/.git/
+2026-08-30T05:36:20.9899493Z --- hal_nordic: fetching, need revision 884c4d61746bc35fbd379c169fc87ddb56c6461d
+2026-08-30T05:36:27.0434101Z From https://github.com/zephyrproject-rtos/hal_nordic
+2026-08-30T05:36:27.0435509Z  * [new branch]      Temperature_service_sub_disabling -> refs/west/Temperature_service_sub_disabling
+2026-08-30T05:36:27.0436071Z  * [new branch]      master             -> refs/west/master
+2026-08-30T05:36:27.0448178Z  * [new branch]      nrfx-removed       -> refs/west/nrfx-removed
+2026-08-30T05:36:27.0449056Z  * [new branch]      nrfx-removed-4.3.x -> refs/west/nrfx-removed-4.3.x
+2026-08-30T05:36:27.0449550Z  * [new branch]      v1.14-branch       -> refs/west/v1.14-branch
+2026-08-30T05:36:27.0449928Z  * [new tag]         nrfx-2.10.0        -> nrfx-2.10.0
+2026-08-30T05:36:27.0450265Z  * [new tag]         nrfx-2.11.0        -> nrfx-2.11.0
+2026-08-30T05:36:27.0450583Z  * [new tag]         nrfx-3.0.0         -> nrfx-3.0.0
+2026-08-30T05:36:27.0451174Z  * [new tag]         nrfx-3.12.1        -> nrfx-3.12.1
+2026-08-30T05:36:27.0451482Z  * [new tag]         nrfx-3.9.0         -> nrfx-3.9.0
+2026-08-30T05:36:27.0455095Z  * [new tag]         nrfx-4.0.1         -> nrfx-4.0.1
+2026-08-30T05:36:27.0457221Z  * [new tag]         nrfx-4.2.1         -> nrfx-4.2.1
+2026-08-30T05:36:27.0458702Z  * [new tag]         nrfx-4.4.0         -> nrfx-4.4.0
+2026-08-30T05:36:27.0460232Z  * [new tag]         nrfx-4.5.0         -> nrfx-4.5.0
+2026-08-30T05:36:27.5222975Z HEAD is now at 884c4d6 nrfx: Update to version 3.6.0
+2026-08-30T05:36:28.2139116Z HEAD is now at 884c4d6 nrfx: Update to version 3.6.0
+2026-08-30T05:36:28.2144672Z === updating hal_nuvoton (modules/hal/nuvoton):
+2026-08-30T05:36:28.2145334Z --- hal_nuvoton: initializing
+2026-08-30T05:36:28.2183497Z Initialized empty Git repository in /__w/zmk-config/zmk-config/modules/hal/nuvoton/.git/
+2026-08-30T05:36:28.2224504Z --- hal_nuvoton: fetching, need revision 3e0a4c4d3328b2f72b164219add19d5308b53cb5
+2026-08-30T05:36:29.4558194Z From https://github.com/zephyrproject-rtos/hal_nuvoton
+2026-08-30T05:36:29.4558961Z  * [new branch]      master     -> refs/west/master
+2026-08-30T05:36:29.5252174Z HEAD is now at 3e0a4c4 hal: NuMaker M46x: revise API name of M460 FMC erase bank
+2026-08-30T05:36:29.5737245Z HEAD is now at 3e0a4c4 hal: NuMaker M46x: revise API name of M460 FMC erase bank
+2026-08-30T05:36:29.5741135Z === updating hal_quicklogic (modules/hal/quicklogic):
+2026-08-30T05:36:29.5744169Z --- hal_quicklogic: initializing
+2026-08-30T05:36:29.5777938Z Initialized empty Git repository in /__w/zmk-config/zmk-config/modules/hal/quicklogic/.git/
+2026-08-30T05:36:29.5817540Z --- hal_quicklogic: fetching, need revision b3a66fe6d04d87fd1533a5c8de51d0599fcd08d0
+2026-08-30T05:36:30.0603284Z From https://github.com/zephyrproject-rtos/hal_quicklogic
+2026-08-30T05:36:30.0604018Z  * [new branch]      master     -> refs/west/master
+2026-08-30T05:36:30.0771992Z HEAD is now at b3a66fe Remove references to FPGA IP core drivers
+2026-08-30T05:36:30.0842020Z HEAD is now at b3a66fe Remove references to FPGA IP core drivers
+2026-08-30T05:36:30.0844663Z === updating hal_renesas (modules/hal/renesas):
+2026-08-30T05:36:30.0845395Z --- hal_renesas: initializing
+2026-08-30T05:36:30.0879561Z Initialized empty Git repository in /__w/zmk-config/zmk-config/modules/hal/renesas/.git/
+2026-08-30T05:36:30.0918309Z --- hal_renesas: fetching, need revision a6cf2af9140e014fbbc48d2b6deb802231dd369f
+2026-08-30T05:36:31.5694191Z From https://github.com/zephyrproject-rtos/hal_renesas
+2026-08-30T05:36:31.5694744Z  * [new branch]      main       -> refs/west/main
+2026-08-30T05:36:31.5868314Z HEAD is now at a6cf2af Remove dynamic memory allocation from PD code
+2026-08-30T05:36:31.5956128Z HEAD is now at a6cf2af Remove dynamic memory allocation from PD code
+2026-08-30T05:36:31.5961640Z === updating hal_rpi_pico (modules/hal/rpi_pico):
+2026-08-30T05:36:31.5962271Z --- hal_rpi_pico: initializing
+2026-08-30T05:36:31.5993415Z Initialized empty Git repository in /__w/zmk-config/zmk-config/modules/hal/rpi_pico/.git/
+2026-08-30T05:36:31.6030180Z --- hal_rpi_pico: fetching, need revision fba7162cc7bee06d0149622bbcaac4e41062d368
+2026-08-30T05:36:32.8335657Z From https://github.com/zephyrproject-rtos/hal_rpi_pico
+2026-08-30T05:36:32.8336841Z  * [new branch]        zephyr     -> refs/west/zephyr
+2026-08-30T05:36:32.8338249Z  * [new tag]           1.0.0      -> 1.0.0
+2026-08-30T05:36:32.8338947Z  * [new tag]           1.0.1      -> 1.0.1
+2026-08-30T05:36:32.8339444Z  * [new tag]           1.1.0      -> 1.1.0
+2026-08-30T05:36:32.8341255Z  * [new tag]           1.1.1      -> 1.1.1
+2026-08-30T05:36:32.8342002Z  * [new tag]           1.1.2      -> 1.1.2
+2026-08-30T05:36:32.8343941Z  * [new tag]           1.2.0      -> 1.2.0
+2026-08-30T05:36:32.8345283Z  * [new tag]           1.3.0      -> 1.3.0
+2026-08-30T05:36:32.9019253Z HEAD is now at fba7162c Merge pull request #5 from soburi/zephyr_timer_modification
+2026-08-30T05:36:32.9382340Z HEAD is now at fba7162c Merge pull request #5 from soburi/zephyr_timer_modification
+2026-08-30T05:36:32.9387502Z === updating hal_stm32 (modules/hal/stm32):
+2026-08-30T05:36:32.9388306Z --- hal_stm32: initializing
+2026-08-30T05:36:32.9421710Z Initialized empty Git repository in /__w/zmk-config/zmk-config/modules/hal/stm32/.git/
+2026-08-30T05:36:32.9459261Z --- hal_stm32: fetching, need revision 89ef0a3383edebf661073073bcdf6e2836fe90ee
+2026-08-30T05:36:47.4903850Z From https://github.com/zephyrproject-rtos/hal_stm32
+2026-08-30T05:36:47.4904316Z  * [new branch]        main        -> refs/west/main
+2026-08-30T05:36:47.4909821Z  * [new branch]        master      -> refs/west/master
+2026-08-30T05:36:47.4910565Z  * [new branch]        v3.7-branch -> refs/west/v3.7-branch
+2026-08-30T05:36:47.4911265Z  * [new branch]        v4.4-branch -> refs/west/v4.4-branch
+2026-08-30T05:36:48.9027913Z HEAD is now at 89ef0a33 stm32cube: stm32h5:  ethernet: PTP clock doesn’t works
+2026-08-30T05:36:50.0614759Z HEAD is now at 89ef0a33 stm32cube: stm32h5:  ethernet: PTP clock doesn’t works
+2026-08-30T05:36:50.0628606Z === updating hal_telink (modules/hal/telink):
+2026-08-30T05:36:50.0629350Z --- hal_telink: initializing
+2026-08-30T05:36:50.0659615Z Initialized empty Git repository in /__w/zmk-config/zmk-config/modules/hal/telink/.git/
+2026-08-30T05:36:50.0699617Z --- hal_telink: fetching, need revision 38573af589173259801ae6c2b34b7d4c9e626746
+2026-08-30T05:36:50.5025537Z From https://github.com/zephyrproject-rtos/hal_telink
+2026-08-30T05:36:50.5026014Z  * [new branch]      main       -> refs/west/main
+2026-08-30T05:36:50.5277799Z HEAD is now at 38573af B91 ADC driver support
+2026-08-30T05:36:50.5397364Z HEAD is now at 38573af B91 ADC driver support
+2026-08-30T05:36:50.5400860Z === updating hal_wurthelektronik (modules/hal/wurthelektronik):
+2026-08-30T05:36:50.5404149Z --- hal_wurthelektronik: initializing
+2026-08-30T05:36:50.5442028Z Initialized empty Git repository in /__w/zmk-config/zmk-config/modules/hal/wurthelektronik/.git/
+2026-08-30T05:36:50.5483972Z --- hal_wurthelektronik: fetching, need revision 24ca9873c3d608fad1fea0431836bc8f144c132e
+2026-08-30T05:36:50.9161627Z From https://github.com/zephyrproject-rtos/hal_wurthelektronik
+2026-08-30T05:36:50.9162125Z  * [new branch]      zephyr     -> refs/west/zephyr
+2026-08-30T05:36:50.9308753Z HEAD is now at 24ca987 Initialized WE HAL module repository.
+2026-08-30T05:36:50.9377197Z HEAD is now at 24ca987 Initialized WE HAL module repository.
+2026-08-30T05:36:50.9381822Z === updating libmetal (modules/hal/libmetal):
+2026-08-30T05:36:50.9382479Z --- libmetal: initializing
+2026-08-30T05:36:50.9413774Z Initialized empty Git repository in /__w/zmk-config/zmk-config/modules/hal/libmetal/.git/
+2026-08-30T05:36:50.9450922Z --- libmetal: fetching, need revision b91611a6f47dd29fb24c46e5621e797557f80ec6
+2026-08-30T05:36:51.3434902Z From https://github.com/zephyrproject-rtos/libmetal
+2026-08-30T05:36:51.3435737Z  * [new branch]      main         -> refs/west/main
+2026-08-30T05:36:51.3436517Z  * [new branch]      v1.14-branch -> refs/west/v1.14-branch
+2026-08-30T05:36:51.3692687Z HEAD is now at b91611a lib: update libmetal to release v2023.04.0
+2026-08-30T05:36:51.3790662Z HEAD is now at b91611a lib: update libmetal to release v2023.04.0
+2026-08-30T05:36:51.3795426Z === updating liblc3 (modules/lib/liblc3):
+2026-08-30T05:36:51.3796807Z --- liblc3: initializing
+2026-08-30T05:36:51.3828925Z Initialized empty Git repository in /__w/zmk-config/zmk-config/modules/lib/liblc3/.git/
+2026-08-30T05:36:51.3865942Z --- liblc3: fetching, need revision 448f3de31f49a838988a162ef1e23a89ddf2d2ed
+2026-08-30T05:36:51.8217761Z From https://github.com/zephyrproject-rtos/liblc3
+2026-08-30T05:36:51.8218541Z  * [new branch]      main       -> refs/west/main
+2026-08-30T05:36:51.8435105Z HEAD is now at 448f3de Merge pull request #8 from carlescufi/rename
+2026-08-30T05:36:51.8532759Z HEAD is now at 448f3de Merge pull request #8 from carlescufi/rename
+2026-08-30T05:36:51.8536381Z === updating littlefs (modules/fs/littlefs):
+2026-08-30T05:36:51.8536831Z --- littlefs: initializing
+2026-08-30T05:36:51.8570573Z Initialized empty Git repository in /__w/zmk-config/zmk-config/modules/fs/littlefs/.git/
+2026-08-30T05:36:51.8607144Z --- littlefs: fetching, need revision ca583fd297ceb48bced3c2548600dc615d67af24
+2026-08-30T05:36:52.4255118Z From https://github.com/zephyrproject-rtos/littlefs
+2026-08-30T05:36:52.4255933Z  * [new branch]      zephyr          -> refs/west/zephyr
+2026-08-30T05:36:52.4256673Z  * [new tag]         littlefs-v2.1.0 -> littlefs-v2.1.0
+2026-08-30T05:36:52.4257693Z  * [new tag]         littlefs-v2.1.1 -> littlefs-v2.1.1
+2026-08-30T05:36:52.4259446Z  * [new tag]         littlefs-v2.1.2 -> littlefs-v2.1.2
+2026-08-30T05:36:52.4260818Z  * [new tag]         littlefs-v2.1.3 -> littlefs-v2.1.3
+2026-08-30T05:36:52.4262248Z  * [new tag]         littlefs-v2.1.4 -> littlefs-v2.1.4
+2026-08-30T05:36:52.4264000Z  * [new tag]         littlefs-v2.2.0 -> littlefs-v2.2.0
+2026-08-30T05:36:52.4449355Z HEAD is now at ca583fd Merge tag 'v2.5.0' of https://github.com/littlefs-project/littlefs into zephyr
+2026-08-30T05:36:52.4531804Z HEAD is now at ca583fd Merge tag 'v2.5.0' of https://github.com/littlefs-project/littlefs into zephyr
+2026-08-30T05:36:52.4534480Z === updating lvgl (modules/lib/gui/lvgl):
+2026-08-30T05:36:52.4535610Z --- lvgl: initializing
+2026-08-30T05:36:52.4569214Z Initialized empty Git repository in /__w/zmk-config/zmk-config/modules/lib/gui/lvgl/.git/
+2026-08-30T05:36:52.4604379Z --- lvgl: fetching, need revision 8a6a2d1d29d17d1e4bdc94c243c146a39d635fdd
+2026-08-30T05:37:04.8855705Z From https://github.com/zephyrproject-rtos/lvgl
+2026-08-30T05:37:04.8857073Z  * [new branch]          dependabot/github_actions/actions/cache-6 -> refs/west/dependabot/github_actions/actions/cache-6
+2026-08-30T05:37:04.8859154Z  * [new branch]          dependabot/github_actions/actions/checkout-7 -> refs/west/dependabot/github_actions/actions/checkout-7
+2026-08-30T05:37:04.8862350Z  * [new branch]          dependabot/github_actions/actions/setup-python-7 -> refs/west/dependabot/github_actions/actions/setup-python-7
+2026-08-30T05:37:04.8864234Z  * [new branch]          dependabot/github_actions/arduino/arduino-lint-action-3 -> refs/west/dependabot/github_actions/arduino/arduino-lint-action-3
+2026-08-30T05:37:04.8865621Z  * [new branch]          master                    -> refs/west/master
+2026-08-30T05:37:04.8869307Z  * [new branch]          v4.0-branch               -> refs/west/v4.0-branch
+2026-08-30T05:37:04.8870237Z  * [new branch]          zephyr                    -> refs/west/zephyr
+2026-08-30T05:37:04.8871147Z  * [new branch]          zephyr_2025_06_11         -> refs/west/zephyr_2025_06_11
+2026-08-30T05:37:04.8871972Z  * [new tag]             emulated-benchmark-latest -> emulated-benchmark-latest
+2026-08-30T05:37:05.2010405Z HEAD is now at 8a6a2d1d2 zephyr: Move gluecode back to zephyr main repository
+2026-08-30T05:37:05.3917586Z HEAD is now at 8a6a2d1d2 zephyr: Move gluecode back to zephyr main repository
+2026-08-30T05:37:05.3922491Z === updating mbedtls (modules/crypto/mbedtls):
+2026-08-30T05:37:05.3923807Z --- mbedtls: initializing
+2026-08-30T05:37:05.3958802Z Initialized empty Git repository in /__w/zmk-config/zmk-config/modules/crypto/mbedtls/.git/
+2026-08-30T05:37:05.3993856Z --- mbedtls: fetching, need revision c38dc78d9a8dcbe43b898cc1171ab33ba3e6fc26
+2026-08-30T05:37:18.2341211Z From https://github.com/zephyrproject-rtos/mbedtls
+2026-08-30T05:37:18.2342118Z  * [new branch]          zephyr_mbedtls_v3.6.7       -> refs/west/zephyr_mbedtls_v3.6.7
+2026-08-30T05:37:18.2343172Z  * [new branch]          zephyr_mbedtls_v4.1.1       -> refs/west/zephyr_mbedtls_v4.1.1
+2026-08-30T05:37:18.2343709Z  * [new tag]             zephyr_mbedtls_v3.6.4       -> zephyr_mbedtls_v3.6.4
+2026-08-30T05:37:18.2344182Z  * [new tag]             zephyr_mbedtls_v3.6.5       -> zephyr_mbedtls_v3.6.5
+2026-08-30T05:37:18.2344648Z  * [new tag]             zephyr_mbedtls_v3.6.6       -> zephyr_mbedtls_v3.6.6
+2026-08-30T05:37:18.2345182Z  * [new tag]             zephyr_mbedtls_v4.0.99_a83ab39d82 -> zephyr_mbedtls_v4.0.99_a83ab39d82
+2026-08-30T05:37:18.2348573Z  * [new tag]             zephyr_mbedtls_v4.1.0       -> zephyr_mbedtls_v4.1.0
+2026-08-30T05:37:18.2349084Z  * [new tag]             zephyr_v2.7.99_mbedtls_v3.0.0 -> zephyr_v2.7.99_mbedtls_v3.0.0
+2026-08-30T05:37:18.2349605Z  * [new tag]             zephyr_v2.7_mbedtls_v2.28.3 -> zephyr_v2.7_mbedtls_v2.28.3
+2026-08-30T05:37:18.4507308Z HEAD is now at c38dc78d9 Merge pull request #44 from d3zd3z/zephyr-3.4.0
+2026-08-30T05:37:18.5829269Z HEAD is now at c38dc78d9 Merge pull request #44 from d3zd3z/zephyr-3.4.0
+2026-08-30T05:37:18.5833365Z === updating mipi-sys-t (modules/debug/mipi-sys-t):
+2026-08-30T05:37:18.5835231Z --- mipi-sys-t: initializing
+2026-08-30T05:37:18.5869240Z Initialized empty Git repository in /__w/zmk-config/zmk-config/modules/debug/mipi-sys-t/.git/
+2026-08-30T05:37:18.5904818Z --- mipi-sys-t: fetching, need revision a819419603a2dfcb47f7f39092e1bc112e45d1ef
+2026-08-30T05:37:19.1211056Z From https://github.com/zephyrproject-rtos/mipi-sys-t
+2026-08-30T05:37:19.1211565Z  * [new branch]      zephyr     -> refs/west/zephyr
+2026-08-30T05:37:19.1432946Z HEAD is now at a819419 library: allow building without wchar support
+2026-08-30T05:37:19.1541844Z HEAD is now at a819419 library: allow building without wchar support
+2026-08-30T05:37:19.1545686Z === updating nrf_hw_models (modules/bsim_hw_models/nrf_hw_models):
+2026-08-30T05:37:19.1546628Z --- nrf_hw_models: initializing
+2026-08-30T05:37:19.1580480Z Initialized empty Git repository in /__w/zmk-config/zmk-config/modules/bsim_hw_models/nrf_hw_models/.git/
+2026-08-30T05:37:19.1618123Z --- nrf_hw_models: fetching, need revision f4595802d32d103718bf50b3d390b7a450895843
+2026-08-30T05:37:19.6870471Z From https://github.com/zephyrproject-rtos/nrf_hw_models
+2026-08-30T05:37:19.6871474Z  * [new branch]      main              -> refs/west/main
+2026-08-30T05:37:19.6872030Z  * [new branch]      master            -> refs/west/master
+2026-08-30T05:37:19.6872405Z  * [new branch]      nrf4.0.0          -> refs/west/nrf4.0.0
+2026-08-30T05:37:19.6873318Z  * [new branch]      nrfx3.x           -> refs/west/nrfx3.x
+2026-08-30T05:37:19.6875193Z  * [new branch]      zephyr_2025_01_14 -> refs/west/zephyr_2025_01_14
+2026-08-30T05:37:19.6876767Z  * [new branch]      zephyr_2025_01_22 -> refs/west/zephyr_2025_01_22
+2026-08-30T05:37:19.7202218Z HEAD is now at f459580 TEMP & ECB: Fix INTEN sideeffect prototypes
+2026-08-30T05:37:19.7301704Z HEAD is now at f459580 TEMP & ECB: Fix INTEN sideeffect prototypes
+2026-08-30T05:37:19.7306662Z === updating open-amp (modules/lib/open-amp):
+2026-08-30T05:37:19.7307462Z --- open-amp: initializing
+2026-08-30T05:37:19.7338087Z Initialized empty Git repository in /__w/zmk-config/zmk-config/modules/lib/open-amp/.git/
+2026-08-30T05:37:19.7373086Z --- open-amp: fetching, need revision 42b7c577714b8f22ce82a901e19c1814af4609a8
+2026-08-30T05:37:20.1503735Z From https://github.com/zephyrproject-rtos/open-amp
+2026-08-30T05:37:20.1504413Z  * [new branch]      bump_v2024.05.0 -> refs/west/bump_v2024.05.0
+2026-08-30T05:37:20.1504844Z  * [new branch]      main            -> refs/west/main
+2026-08-30T05:37:20.1507006Z  * [new branch]      v1.14-branch    -> refs/west/v1.14-branch
+2026-08-30T05:37:20.1508074Z  * [new tag]         old_master      -> old_master
+2026-08-30T05:37:20.1746511Z HEAD is now at 42b7c57 cmake: Compile with WITH_DCACHE_RSC_TABLE
+2026-08-30T05:37:20.1844590Z HEAD is now at 42b7c57 cmake: Compile with WITH_DCACHE_RSC_TABLE
+2026-08-30T05:37:20.1849412Z === updating percepio (modules/debug/percepio):
+2026-08-30T05:37:20.1850016Z --- percepio: initializing
+2026-08-30T05:37:20.1887933Z Initialized empty Git repository in /__w/zmk-config/zmk-config/modules/debug/percepio/.git/
+2026-08-30T05:37:20.1925778Z --- percepio: fetching, need revision a3728efccc47dd372f40e6313589ca4c5cc7d5e9
+2026-08-30T05:37:20.7256776Z From https://github.com/zephyrproject-rtos/percepio
+2026-08-30T05:37:20.7257649Z  * [new branch]      main                   -> refs/west/main
+2026-08-30T05:37:20.7258192Z  * [new branch]      main_zephyr            -> refs/west/main_zephyr
+2026-08-30T05:37:20.7259226Z  * [new branch]      zephyr                 -> refs/west/zephyr
+2026-08-30T05:37:20.7262512Z  * [new branch]      zephyr_v4_10_2_hotfix1 -> refs/west/zephyr_v4_10_2_hotfix1
+2026-08-30T05:37:20.7637137Z HEAD is now at a3728ef Merge pull request #4 from peter-mitsis/pmitsis-k_mem_block
+2026-08-30T05:37:20.8301082Z === updating picolibc (modules/lib/picolibc):
+2026-08-30T05:37:20.8308470Z HEAD is now at a3728ef Merge pull request #4 from peter-mitsis/pmitsis-k_mem_block
+2026-08-30T05:37:20.8314395Z --- picolibc: initializing
+2026-08-30T05:37:20.8786840Z Initialized empty Git repository in /__w/zmk-config/zmk-config/modules/lib/picolibc/.git/
+2026-08-30T05:37:20.8827332Z --- picolibc: fetching, need revision d07c38ff051386f8e09a143ea0a6c1d6d66dd1d8
+2026-08-30T05:37:36.7767790Z From https://github.com/zephyrproject-rtos/picolibc
+2026-08-30T05:37:36.7806683Z  * [new branch]          Z-emcb-cygwin_daemon        -> refs/west/Z-emcb-cygwin_daemon
+2026-08-30T05:37:36.7808297Z  * [new branch]          aarch64                     -> refs/west/aarch64
+2026-08-30T05:37:36.7809103Z  * [new branch]          add-fakeroots-dir           -> refs/west/add-fakeroots-dir
+2026-08-30T05:37:36.7809904Z  * [new branch]          amd64_to_x86_64             -> refs/west/amd64_to_x86_64
+2026-08-30T05:37:36.7810696Z  * [new branch]          ancient-clang               -> refs/west/ancient-clang
+2026-08-30T05:37:36.7811486Z  * [new branch]          arc-20081103-branch         -> refs/west/arc-20081103-branch
+2026-08-30T05:37:36.7812539Z  * [new branch]          arc-insight_6_8-branch      -> refs/west/arc-insight_6_8-branch
+2026-08-30T05:37:36.7813658Z  * [new branch]          arc-strchr                  -> refs/west/arc-strchr
+2026-08-30T05:37:36.7814464Z  * [new branch]          arm-read-tp-cleanup         -> refs/west/arm-read-tp-cleanup
+2026-08-30T05:37:36.7815413Z  * [new branch]          binutils-2_10-branch        -> refs/west/binutils-2_10-branch
+2026-08-30T05:37:36.7816261Z  * [new branch]          binutils-2_11-branch        -> refs/west/binutils-2_11-branch
+2026-08-30T05:37:36.7817082Z  * [new branch]          binutils-2_12-branch        -> refs/west/binutils-2_12-branch
+2026-08-30T05:37:36.7818057Z  * [new branch]          binutils-2_13-branch        -> refs/west/binutils-2_13-branch
+2026-08-30T05:37:36.7818551Z  * [new branch]          binutils-2_14-branch        -> refs/west/binutils-2_14-branch
+2026-08-30T05:37:36.7819235Z  * [new branch]          binutils-2_15-branch        -> refs/west/binutils-2_15-branch
+2026-08-30T05:37:36.7819711Z  * [new branch]          binutils-2_16-branch        -> refs/west/binutils-2_16-branch
+2026-08-30T05:37:36.7820656Z  * [new branch]          binutils-2_17-branch        -> refs/west/binutils-2_17-branch
+2026-08-30T05:37:36.7821158Z  * [new branch]          binutils-2_18-branch        -> refs/west/binutils-2_18-branch
+2026-08-30T05:37:36.7821895Z  * [new branch]          binutils-2_19-branch        -> refs/west/binutils-2_19-branch
+2026-08-30T05:37:36.7822540Z  * [new branch]          binutils-2_20-branch        -> refs/west/binutils-2_20-branch
+2026-08-30T05:37:36.7823378Z  * [new branch]          binutils-2_21-branch        -> refs/west/binutils-2_21-branch
+2026-08-30T05:37:36.7824056Z  * [new branch]          binutils-2_22-branch        -> refs/west/binutils-2_22-branch
+2026-08-30T05:37:36.7825364Z  * [new branch]          binutils-2_22_branch        -> refs/west/binutils-2_22_branch
+2026-08-30T05:37:36.7826138Z  * [new branch]          binutils-2_23-branch        -> refs/west/binutils-2_23-branch
+2026-08-30T05:37:36.7827033Z  * [new branch]          binutils-2_24-branch        -> refs/west/binutils-2_24-branch
+2026-08-30T05:37:36.7828382Z  * [new branch]          binutils-arc-20080908-branch -> refs/west/binutils-arc-20080908-branch
+2026-08-30T05:37:36.7829433Z  * [new branch]          binutils-arc-20081103-branch -> refs/west/binutils-arc-20081103-branch
+2026-08-30T05:37:36.7830005Z  * [new branch]          binutils-csl-2_17-branch    -> refs/west/binutils-csl-2_17-branch
+2026-08-30T05:37:36.7830863Z  * [new branch]          binutils-csl-arm-2005q1-branch -> refs/west/binutils-csl-arm-2005q1-branch
+2026-08-30T05:37:36.7831498Z  * [new branch]          binutils-csl-gxxpro-3_4-branch -> refs/west/binutils-csl-gxxpro-3_4-branch
+2026-08-30T05:37:36.7832036Z  * [new branch]          branch-1.4.6                -> refs/west/branch-1.4.6
+2026-08-30T05:37:36.7832461Z  * [new branch]          branch-1.8.4                -> refs/west/branch-1.8.4
+2026-08-30T05:37:36.7832870Z  * [new branch]          c++11-fix                   -> refs/west/c++11-fix
+2026-08-30T05:37:36.7833270Z  * [new branch]          c-sky                       -> refs/west/c-sky
+2026-08-30T05:37:36.7838051Z  * [new branch]          cagney-unwind-20030108-branch -> refs/west/cagney-unwind-20030108-branch
+2026-08-30T05:37:36.7839883Z  * [new branch]          cagney_bfdfile-20040213-branch -> refs/west/cagney_bfdfile-20040213-branch
+2026-08-30T05:37:36.7841950Z  * [new branch]          cagney_bigcore-20040122-branch -> refs/west/cagney_bigcore-20040122-branch
+2026-08-30T05:37:36.7843905Z  * [new branch]          cagney_convert-20030606-branch -> refs/west/cagney_convert-20030606-branch
+2026-08-30T05:37:36.7845867Z  * [new branch]          cagney_fileio-20030521-branch -> refs/west/cagney_fileio-20030521-branch
+2026-08-30T05:37:36.7847880Z  * [new branch]          cagney_frameaddr-20030403-branch -> refs/west/cagney_frameaddr-20030403-branch
+2026-08-30T05:37:36.7849728Z  * [new branch]          cagney_framebase-20030326-branch -> refs/west/cagney_framebase-20030326-branch
+2026-08-30T05:37:36.7851604Z  * [new branch]          cagney_lazyid-20030317-branch -> refs/west/cagney_lazyid-20030317-branch
+2026-08-30T05:37:36.7853231Z  * [new branch]          cagney_offbyone-20030303-branch -> refs/west/cagney_offbyone-20030303-branch
+2026-08-30T05:37:36.7855609Z  * [new branch]          cagney_regbuf-20020515-branch -> refs/west/cagney_regbuf-20020515-branch
+2026-08-30T05:37:36.7857419Z  * [new branch]          cagney_sysregs-20020825-branch -> refs/west/cagney_sysregs-20020825-branch
+2026-08-30T05:37:36.7859009Z  * [new branch]          cagney_tramp-20040309-branch -> refs/west/cagney_tramp-20040309-branch
+2026-08-30T05:37:36.7861163Z  * [new branch]          cagney_writestrings-20030508-branch -> refs/west/cagney_writestrings-20030508-branch
+2026-08-30T05:37:36.7863162Z  * [new branch]          cagney_x86i386-20030821-branch -> refs/west/cagney_x86i386-20030821-branch
+2026-08-30T05:37:36.7864694Z  * [new branch]          callout                     -> refs/west/callout
+2026-08-30T05:37:36.7868210Z  * [new branch]          carlton_dictionary-branch   -> refs/west/carlton_dictionary-branch
+2026-08-30T05:37:36.7869328Z  * [new branch]          cgen-1_1-branch             -> refs/west/cgen-1_1-branch
+2026-08-30T05:37:36.7870380Z  * [new branch]          cgf-deleteme                -> refs/west/cgf-deleteme
+2026-08-30T05:37:36.7872755Z  * [new branch]          cgf-dev-branch              -> refs/west/cgf-dev-branch
+2026-08-30T05:37:36.7888675Z  * [new branch]          clang-riscv                 -> refs/west/clang-riscv
+2026-08-30T05:37:36.7889573Z  * [new branch]          cmake                       -> refs/west/cmake
+2026-08-30T05:37:36.7890440Z  * [new branch]          cmake-no-tls                -> refs/west/cmake-no-tls
+2026-08-30T05:37:36.7894216Z  * [new branch]          cmake-small-ultoa           -> refs/west/cmake-small-ultoa
+2026-08-30T05:37:36.7896359Z  * [new branch]          cmake-wcsftime              -> refs/west/cmake-wcsftime
+2026-08-30T05:37:36.7898766Z  * [new branch]          cr-0x3b58                   -> refs/west/cr-0x3b58
+2026-08-30T05:37:36.7900309Z  * [new branch]          cr-0x5e6                    -> refs/west/cr-0x5e6
+2026-08-30T05:37:36.7901999Z  * [new branch]          cr-0x5ef                    -> refs/west/cr-0x5ef
+2026-08-30T05:37:36.7903215Z  * [new branch]          cr-0x5f1                    -> refs/west/cr-0x5f1
+2026-08-30T05:37:36.7904232Z  * [new branch]          cr-0x9b                     -> refs/west/cr-0x9b
+2026-08-30T05:37:36.7905313Z  * [new branch]          cr-0x9c                     -> refs/west/cr-0x9c
+2026-08-30T05:37:36.7912881Z  * [new branch]          cr-0x9d                     -> refs/west/cr-0x9d
+2026-08-30T05:37:36.7914816Z  * [new branch]          cr-0x9e                     -> refs/west/cr-0x9e
+2026-08-30T05:37:36.7916391Z  * [new branch]          csl-arm-20050325-branch     -> refs/west/csl-arm-20050325-branch
+2026-08-30T05:37:36.7918808Z  * [new branch]          cv-branch                   -> refs/west/cv-branch
+2026-08-30T05:37:36.7931473Z  * [new branch]          cv-branch-2                 -> refs/west/cv-branch-2
+2026-08-30T05:37:36.7932889Z  * [new branch]          cv-post-1_7_9               -> refs/west/cv-post-1_7_9
+2026-08-30T05:37:36.7935376Z  * [new branch]          cygnus                      -> refs/west/cygnus
+2026-08-30T05:37:36.7943896Z  * [new branch]          cygwin-1-1-4                -> refs/west/cygwin-1-1-4
+2026-08-30T05:37:36.7952099Z  * [new branch]          cygwin-1-3-1                -> refs/west/cygwin-1-3-1
+2026-08-30T05:37:36.7953854Z  * [new branch]          cygwin-1-3-10-1             -> refs/west/cygwin-1-3-10-1
+2026-08-30T05:37:36.7962529Z  * [new branch]          cygwin-1-3-11-3             -> refs/west/cygwin-1-3-11-3
+2026-08-30T05:37:36.7963843Z  * [new branch]          cygwin-1-3-12-1             -> refs/west/cygwin-1-3-12-1
+2026-08-30T05:37:36.7974920Z  * [new branch]          cygwin-1-3-13-1             -> refs/west/cygwin-1-3-13-1
+2026-08-30T05:37:36.7976338Z  * [new branch]          cygwin-1-3-13-2             -> refs/west/cygwin-1-3-13-2
+2026-08-30T05:37:36.7978072Z  * [new branch]          cygwin-1-3-14-1             -> refs/west/cygwin-1-3-14-1
+2026-08-30T05:37:36.7980040Z  * [new branch]          cygwin-1-3-15-1             -> refs/west/cygwin-1-3-15-1
+2026-08-30T05:37:36.7981406Z  * [new branch]          cygwin-1-3-16-1             -> refs/west/cygwin-1-3-16-1
+2026-08-30T05:37:36.7983135Z  * [new branch]          cygwin-1-3-17-1             -> refs/west/cygwin-1-3-17-1
+2026-08-30T05:37:36.7984549Z  * [new branch]          cygwin-1-3-18-1             -> refs/west/cygwin-1-3-18-1
+2026-08-30T05:37:36.7996815Z  * [new branch]          cygwin-1-3-19-1             -> refs/west/cygwin-1-3-19-1
+2026-08-30T05:37:36.7999011Z  * [new branch]          cygwin-1-3-2                -> refs/west/cygwin-1-3-2
+2026-08-30T05:37:36.8002043Z  * [new branch]          cygwin-1-3-3                -> refs/west/cygwin-1-3-3
+2026-08-30T05:37:36.8002862Z  * [new branch]          cygwin-1-3-4                -> refs/west/cygwin-1-3-4
+2026-08-30T05:37:36.8004716Z  * [new branch]          cygwin-1-3-5                -> refs/west/cygwin-1-3-5
+2026-08-30T05:37:36.8005551Z  * [new branch]          cygwin-1-3-5-2              -> refs/west/cygwin-1-3-5-2
+2026-08-30T05:37:36.8009085Z  * [new branch]          cygwin-1-3-5-3              -> refs/west/cygwin-1-3-5-3
+2026-08-30T05:37:36.8010075Z  * [new branch]          cygwin-1-3-6-1              -> refs/west/cygwin-1-3-6-1
+2026-08-30T05:37:36.8012467Z  * [new branch]          cygwin-1-3-6-2              -> refs/west/cygwin-1-3-6-2
+2026-08-30T05:37:36.8013555Z  * [new branch]          cygwin-1-3-6-3              -> refs/west/cygwin-1-3-6-3
+2026-08-30T05:37:36.8027094Z  * [new branch]          cygwin-1-3-6-4              -> refs/west/cygwin-1-3-6-4
+2026-08-30T05:37:36.8029259Z  * [new branch]          cygwin-1-3-6-5              -> refs/west/cygwin-1-3-6-5
+2026-08-30T05:37:36.8031677Z  * [new branch]          cygwin-1-3-6-6              -> refs/west/cygwin-1-3-6-6
+2026-08-30T05:37:36.8032545Z  * [new branch]          cygwin-1-3-7-1              -> refs/west/cygwin-1-3-7-1
+2026-08-30T05:37:36.8034983Z  * [new branch]          cygwin-1-3-8-1              -> refs/west/cygwin-1-3-8-1
+2026-08-30T05:37:36.8037219Z  * [new branch]          cygwin-1-3-9                -> refs/west/cygwin-1-3-9
+2026-08-30T05:37:36.8038773Z  * [new branch]          cygwin-1_7_29-release-branchpoint -> refs/west/cygwin-1_7_29-release-branchpoint
+2026-08-30T05:37:36.8040914Z  * [new branch]          cygwin-2.0                  -> refs/west/cygwin-2.0
+2026-08-30T05:37:36.8041858Z  * [new branch]          cygwin-3_0-branch           -> refs/west/cygwin-3_0-branch
+2026-08-30T05:37:36.8042741Z  * [new branch]          cygwin-64bit-branch         -> refs/west/cygwin-64bit-branch
+2026-08-30T05:37:36.8047044Z  * [new branch]          cygwin-64bit-premerge-branch -> refs/west/cygwin-64bit-premerge-branch
+2026-08-30T05:37:36.8049392Z  * [new branch]          cygwin-acl                  -> refs/west/cygwin-acl
+2026-08-30T05:37:36.8050454Z  * [new branch]          cygwin_daemon               -> refs/west/cygwin_daemon
+2026-08-30T05:37:36.8052637Z  * [new branch]          debian                      -> refs/west/debian
+2026-08-30T05:37:36.8068043Z  * [new branch]          dje-cgen-play1-branch       -> refs/west/dje-cgen-play1-branch
+2026-08-30T05:37:36.8069576Z  * [new branch]          docker-builder-packages.txt-hash -> refs/west/docker-builder-packages.txt-hash
+2026-08-30T05:37:36.8070668Z  * [new branch]          drow-cplus-branch           -> refs/west/drow-cplus-branch
+2026-08-30T05:37:36.8083064Z  * [new branch]          drow-reverse-20070409-branch -> refs/west/drow-reverse-20070409-branch
+2026-08-30T05:37:36.8084629Z  * [new branch]          drow_intercu-20040221-branch -> refs/west/drow_intercu-20040221-branch
+2026-08-30T05:37:36.8087553Z  * [new branch]          ezannoni_pie-20030916-branch -> refs/west/ezannoni_pie-20030916-branch
+2026-08-30T05:37:36.8090184Z  * [new branch]          ezannoni_pie-20040323-branch -> refs/west/ezannoni_pie-20040323-branch
+2026-08-30T05:37:36.8103743Z  * [new branch]          fifo_doover3                -> refs/west/fifo_doover3
+2026-08-30T05:37:36.8105180Z  * [new branch]          fix-c++-x86-longjmp         -> refs/west/fix-c++-x86-longjmp
+2026-08-30T05:37:36.8107297Z  * [new branch]          fixes-newlib                -> refs/west/fixes-newlib
+2026-08-30T05:37:36.8110112Z  * [new branch]          float-inlines               -> refs/west/float-inlines
+2026-08-30T05:37:36.8112859Z  * [new branch]          fp-zeuch                    -> refs/west/fp-zeuch
+2026-08-30T05:37:36.8114523Z  * [new branch]          gcc-startfile-path          -> refs/west/gcc-startfile-path
+2026-08-30T05:37:36.8117161Z  * [new branch]          gdb-csl-20060226-branch     -> refs/west/gdb-csl-20060226-branch
+2026-08-30T05:37:36.8119723Z  * [new branch]          gdb-csl-arm-20051020-branch -> refs/west/gdb-csl-arm-20051020-branch
+2026-08-30T05:37:36.8121178Z  * [new branch]          gdb-csl-available-20060303-branch -> refs/west/gdb-csl-available-20060303-branch
+2026-08-30T05:37:36.8123376Z  * [new branch]          gdb-csl-gxxpro-6_3-branch   -> refs/west/gdb-csl-gxxpro-6_3-branch
+2026-08-30T05:37:36.8125081Z  * [new branch]          gdb-csl-symbian-20060226-branch -> refs/west/gdb-csl-symbian-20060226-branch
+2026-08-30T05:37:36.8127234Z  * [new branch]          gdb-premipsmulti-2000-06-06-branch -> refs/west/gdb-premipsmulti-2000-06-06-branch
+2026-08-30T05:37:36.8129461Z  * [new branch]          gdb_5_0-2000-04-10-branch   -> refs/west/gdb_5_0-2000-04-10-branch
+2026-08-30T05:37:36.8132169Z  * [new branch]          gdb_5_1-2001-07-29-branch   -> refs/west/gdb_5_1-2001-07-29-branch
+2026-08-30T05:37:36.8135594Z  * [new branch]          gdb_5_1_0_1-2002-01-03-branch -> refs/west/gdb_5_1_0_1-2002-01-03-branch
+2026-08-30T05:37:36.8136542Z  * [new branch]          gdb_5_2-branch              -> refs/west/gdb_5_2-branch
+2026-08-30T05:37:36.8138069Z  * [new branch]          gdb_5_3-branch              -> refs/west/gdb_5_3-branch
+2026-08-30T05:37:36.8140438Z  * [new branch]          gdb_6_0-branch              -> refs/west/gdb_6_0-branch
+2026-08-30T05:37:36.8142260Z  * [new branch]          gdb_6_1-branch              -> refs/west/gdb_6_1-branch
+2026-08-30T05:37:36.8144298Z  * [new branch]          gdb_6_2-branch              -> refs/west/gdb_6_2-branch
+2026-08-30T05:37:36.8146430Z  * [new branch]          gdb_6_3-branch              -> refs/west/gdb_6_3-branch
+2026-08-30T05:37:36.8149184Z  * [new branch]          gdb_6_4-branch              -> refs/west/gdb_6_4-branch
+2026-08-30T05:37:36.8151643Z  * [new branch]          gdb_6_5-branch              -> refs/west/gdb_6_5-branch
+2026-08-30T05:37:36.8164494Z  * [new branch]          gdb_6_6-branch              -> refs/west/gdb_6_6-branch
+2026-08-30T05:37:36.8166446Z  * [new branch]          gdb_6_7-branch              -> refs/west/gdb_6_7-branch
+2026-08-30T05:37:36.8180072Z  * [new branch]          gdb_6_8-branch              -> refs/west/gdb_6_8-branch
+2026-08-30T05:37:36.8193856Z  * [new branch]          gdb_7_0-branch              -> refs/west/gdb_7_0-branch
+2026-08-30T05:37:36.8208237Z  * [new branch]          gdb_7_1-branch              -> refs/west/gdb_7_1-branch
+2026-08-30T05:37:36.8210437Z  * [new branch]          gdb_7_2-branch              -> refs/west/gdb_7_2-branch
+2026-08-30T05:37:36.8212327Z  * [new branch]          gdb_7_3-branch              -> refs/west/gdb_7_3-branch
+2026-08-30T05:37:36.8214981Z  * [new branch]          gdb_7_4-branch              -> refs/west/gdb_7_4-branch
+2026-08-30T05:37:36.8233936Z  * [new branch]          gdb_7_5-branch              -> refs/west/gdb_7_5-branch
+2026-08-30T05:37:36.8235498Z  * [new branch]          gdb_7_6-branch              -> refs/west/gdb_7_6-branch
+2026-08-30T05:37:36.8237922Z  * [new branch]          gdb_s390-2001-09-26-branch  -> refs/west/gdb_s390-2001-09-26-branch
+2026-08-30T05:37:36.8245027Z  * [new branch]          gh                          -> refs/west/gh
+2026-08-30T05:37:36.8248059Z  * [new branch]          insight_6_8-branch          -> refs/west/insight_6_8-branch
+2026-08-30T05:37:36.8249469Z  * [new branch]          interps-20030202-branch     -> refs/west/interps-20030202-branch
+2026-08-30T05:37:36.8252025Z  * [new branch]          isblank-extern-inline       -> refs/west/isblank-extern-inline
+2026-08-30T05:37:36.8254358Z  * [new branch]          jimb-gdb_6_2-e500-branch    -> refs/west/jimb-gdb_6_2-e500-branch
+2026-08-30T05:37:36.8255541Z  * [new branch]          jimb-macro-020506-branch    -> refs/west/jimb-macro-020506-branch
+2026-08-30T05:37:36.8258457Z  * [new branch]          jimb-ppc64-linux-20030509-branch -> refs/west/jimb-ppc64-linux-20030509-branch
+2026-08-30T05:37:36.8259999Z  * [new branch]          jimb-ppc64-linux-20030528-branch -> refs/west/jimb-ppc64-linux-20030528-branch
+2026-08-30T05:37:36.8261580Z  * [new branch]          jimb-ppc64-linux-20030613-branch -> refs/west/jimb-ppc64-linux-20030613-branch
+2026-08-30T05:37:36.8264610Z  * [new branch]          jimb-rda-nptl-branch        -> refs/west/jimb-rda-nptl-branch
+2026-08-30T05:37:36.8266201Z  * [new branch]          kettenis-i386newframe-20030308-branch -> refs/west/kettenis-i386newframe-20030308-branch
+2026-08-30T05:37:36.8269257Z  * [new branch]          kettenis_i386newframe-20030406-branch -> refs/west/kettenis_i386newframe-20030406-branch
+2026-08-30T05:37:36.8271723Z  * [new branch]          kettenis_i386newframe-20030419-branch -> refs/west/kettenis_i386newframe-20030419-branch
+2026-08-30T05:37:36.8273145Z  * [new branch]          kettenis_sparc-20030918-branch -> refs/west/kettenis_sparc-20030918-branch
+2026-08-30T05:37:36.8274300Z  * [new branch]          kseitz_interps-20020528-branch -> refs/west/kseitz_interps-20020528-branch
+2026-08-30T05:37:36.8275866Z  * [new branch]          locking-docs                -> refs/west/locking-docs
+2026-08-30T05:37:36.8276917Z  * [new branch]          main                        -> refs/west/main
+2026-08-30T05:37:36.8279701Z  * [new branch]          mingw-std-ns-branch         -> refs/west/mingw-std-ns-branch
+2026-08-30T05:37:36.8281073Z  * [new branch]          mingwex                     -> refs/west/mingwex
+2026-08-30T05:37:36.8283485Z  * [new branch]          msnyder-checkpoint-072509-branch -> refs/west/msnyder-checkpoint-072509-branch
+2026-08-30T05:37:36.8285117Z  * [new branch]          msnyder-fork-checkpoint-branch -> refs/west/msnyder-fork-checkpoint-branch
+2026-08-30T05:37:36.8289491Z  * [new branch]          msnyder-reverse-20060331-branch -> refs/west/msnyder-reverse-20060331-branch
+2026-08-30T05:37:36.8290958Z  * [new branch]          msnyder-reverse-20060502-branch -> refs/west/msnyder-reverse-20060502-branch
+2026-08-30T05:37:36.8305993Z  * [new branch]          msnyder-reverse-20080609-branch -> refs/west/msnyder-reverse-20080609-branch
+2026-08-30T05:37:36.8319486Z  * [new branch]          msnyder-tracepoint-checkpoint-branch -> refs/west/msnyder-tracepoint-checkpoint-branch
+2026-08-30T05:37:36.8321310Z  * [new branch]          msp430                      -> refs/west/msp430
+2026-08-30T05:37:36.8333639Z  * [new branch]          multiprocess-20081120-branch -> refs/west/multiprocess-20081120-branch
+2026-08-30T05:37:36.8334958Z  * [new branch]          newlib                      -> refs/west/newlib
+2026-08-30T05:37:36.8337460Z  * [new branch]          newlib-1_17_0-arc           -> refs/west/newlib-1_17_0-arc
+2026-08-30T05:37:36.8339710Z  * [new branch]          newlib-autotools-branch     -> refs/west/newlib-autotools-branch
+2026-08-30T05:37:36.8341810Z  * [new branch]          newlib-csl-20060320-branch  -> refs/west/newlib-csl-20060320-branch
+2026-08-30T05:37:36.8343379Z  * [new branch]          nickrob-async-20060513-branch -> refs/west/nickrob-async-20060513-branch
+2026-08-30T05:37:36.8345272Z  * [new branch]          non-linux-ln                -> refs/west/non-linux-ln
+2026-08-30T05:37:36.8347640Z  * [new branch]          noreparent                  -> refs/west/noreparent
+2026-08-30T05:37:36.8350971Z  * [new branch]          offbyone-20030313-branch    -> refs/west/offbyone-20030313-branch
+2026-08-30T05:37:36.8351927Z  * [new branch]          posix-limits                -> refs/west/posix-limits
+2026-08-30T05:37:36.8353949Z  * [new branch]          pre-regex                   -> refs/west/pre-regex
+2026-08-30T05:37:36.8361959Z  * [new branch]          pregp02r1                   -> refs/west/pregp02r1
+2026-08-30T05:37:36.8363448Z  * [new branch]          proposed-for-0.18           -> refs/west/proposed-for-0.18
+2026-08-30T05:37:36.8365837Z  * [new branch]          proposed-zephyr-4.2         -> refs/west/proposed-zephyr-4.2
+2026-08-30T05:37:36.8367940Z  * [new branch]          readline_4_3-import-branch  -> refs/west/readline_4_3-import-branch
+2026-08-30T05:37:36.8370256Z  * [new branch]          readline_5_1-import-branch  -> refs/west/readline_5_1-import-branch
+2026-08-30T05:37:36.8383755Z  * [new branch]          reverse-20080717-branch     -> refs/west/reverse-20080717-branch
+2026-08-30T05:37:36.8385495Z  * [new branch]          reverse-20080930-branch     -> refs/west/reverse-20080930-branch
+2026-08-30T05:37:36.8399514Z  * [new branch]          reverse-20081226-branch     -> refs/west/reverse-20081226-branch
+2026-08-30T05:37:36.8401564Z  * [new branch]          revert-zephyr-linker-fix    -> refs/west/revert-zephyr-linker-fix
+2026-08-30T05:37:36.8403166Z  * [new branch]          riscv-zicsr                 -> refs/west/riscv-zicsr
+2026-08-30T05:37:36.8406309Z  * [new branch]          semihost-2.0-all            -> refs/west/semihost-2.0-all
+2026-08-30T05:37:36.8408056Z  * [new branch]          sid-20020905-branch         -> refs/west/sid-20020905-branch
+2026-08-30T05:37:36.8423030Z  * [new branch]          signal-rewrite              -> refs/west/signal-rewrite
+2026-08-30T05:37:36.8424892Z  * [new branch]          sysroot-skip-checks         -> refs/west/sysroot-skip-checks
+2026-08-30T05:37:36.8427804Z  * [new branch]          tcltk840-20020924-branch    -> refs/west/tcltk840-20020924-branch
+2026-08-30T05:37:36.8430151Z  * [new branch]          tls                         -> refs/west/tls
+2026-08-30T05:37:36.8432512Z  * [new branch]          topic-zephyr-3.7            -> refs/west/topic-zephyr-3.7
+2026-08-30T05:37:36.8434682Z  * [new branch]          topic/af_unix               -> refs/west/topic/af_unix
+2026-08-30T05:37:36.8436575Z  * [new branch]          topic/ansification          -> refs/west/topic/ansification
+2026-08-30T05:37:36.8438394Z  * [new branch]          topic/fifo                  -> refs/west/topic/fifo
+2026-08-30T05:37:36.8440432Z  * [new branch]          topic/forkables             -> refs/west/topic/forkables
+2026-08-30T05:37:36.8441954Z  * [new branch]          topic/locales               -> refs/west/topic/locales
+2026-08-30T05:37:36.8444199Z  * [new branch]          topic/posix_acl_funcs       -> refs/west/topic/posix_acl_funcs
+2026-08-30T05:37:36.8445548Z  * [new branch]          topic/ssp                   -> refs/west/topic/ssp
+2026-08-30T05:37:36.8448027Z  * [new branch]          undo-specs-prefix-patch     -> refs/west/undo-specs-prefix-patch
+2026-08-30T05:37:36.8451148Z  * [new branch]          unlabeled-1.1.1.1.2         -> refs/west/unlabeled-1.1.1.1.2
+2026-08-30T05:37:36.8453083Z  * [new branch]          unlabeled-1.100.2           -> refs/west/unlabeled-1.100.2
+2026-08-30T05:37:36.8455191Z  * [new branch]          unlabeled-1.1010.2          -> refs/west/unlabeled-1.1010.2
+2026-08-30T05:37:36.8457975Z  * [new branch]          unlabeled-1.1019.2          -> refs/west/unlabeled-1.1019.2
+2026-08-30T05:37:36.8459604Z  * [new branch]          unlabeled-1.1042.2          -> refs/west/unlabeled-1.1042.2
+2026-08-30T05:37:36.8461573Z  * [new branch]          unlabeled-1.1042.2.1.4      -> refs/west/unlabeled-1.1042.2.1.4
+2026-08-30T05:37:36.8463968Z  * [new branch]          unlabeled-1.1042.2.1.4.2.4  -> refs/west/unlabeled-1.1042.2.1.4.2.4
+2026-08-30T05:37:36.8466237Z  * [new branch]          unlabeled-1.1042.2.1.4.2.4.2.2 -> refs/west/unlabeled-1.1042.2.1.4.2.4.2.2
+2026-08-30T05:37:36.8467930Z  * [new branch]          unlabeled-1.105.2           -> refs/west/unlabeled-1.105.2
+2026-08-30T05:37:36.8470606Z  * [new branch]          unlabeled-1.106.2           -> refs/west/unlabeled-1.106.2
+2026-08-30T05:37:36.8472555Z  * [new branch]          unlabeled-1.106.8           -> refs/west/unlabeled-1.106.8
+2026-08-30T05:37:36.8475041Z  * [new branch]          unlabeled-1.107.12          -> refs/west/unlabeled-1.107.12
+2026-08-30T05:37:36.8477465Z  * [new branch]          unlabeled-1.11.2            -> refs/west/unlabeled-1.11.2
+2026-08-30T05:37:36.8479439Z  * [new branch]          unlabeled-1.112.4           -> refs/west/unlabeled-1.112.4
+2026-08-30T05:37:36.8481624Z  * [new branch]          unlabeled-1.116.4           -> refs/west/unlabeled-1.116.4
+2026-08-30T05:37:36.8483682Z  * [new branch]          unlabeled-1.12.20           -> refs/west/unlabeled-1.12.20
+2026-08-30T05:37:36.8485918Z  * [new branch]          unlabeled-1.12.30           -> refs/west/unlabeled-1.12.30
+2026-08-30T05:37:36.8489083Z  * [new branch]          unlabeled-1.12.4            -> refs/west/unlabeled-1.12.4
+2026-08-30T05:37:36.8490503Z  * [new branch]          unlabeled-1.120.2           -> refs/west/unlabeled-1.120.2
+2026-08-30T05:37:36.8493224Z  * [new branch]          unlabeled-1.125.2           -> refs/west/unlabeled-1.125.2
+2026-08-30T05:37:36.8494991Z  * [new branch]          unlabeled-1.13.10           -> refs/west/unlabeled-1.13.10
+2026-08-30T05:37:36.8497408Z  * [new branch]          unlabeled-1.13.2            -> refs/west/unlabeled-1.13.2
+2026-08-30T05:37:36.8500285Z  * [new branch]          unlabeled-1.13.30           -> refs/west/unlabeled-1.13.30
+2026-08-30T05:37:36.8502413Z  * [new branch]          unlabeled-1.13.4            -> refs/west/unlabeled-1.13.4
+2026-08-30T05:37:36.8504292Z  * [new branch]          unlabeled-1.133.2           -> refs/west/unlabeled-1.133.2
+2026-08-30T05:37:36.8506797Z  * [new branch]          unlabeled-1.134.4           -> refs/west/unlabeled-1.134.4
+2026-08-30T05:37:36.8508942Z  * [new branch]          unlabeled-1.135.4           -> refs/west/unlabeled-1.135.4
+2026-08-30T05:37:36.8511673Z  * [new branch]          unlabeled-1.1370.2          -> refs/west/unlabeled-1.1370.2
+2026-08-30T05:37:36.8513385Z  * [new branch]          unlabeled-1.142.2           -> refs/west/unlabeled-1.142.2
+2026-08-30T05:37:36.8515649Z  * [new branch]          unlabeled-1.143.4           -> refs/west/unlabeled-1.143.4
+2026-08-30T05:37:36.8518146Z  * [new branch]          unlabeled-1.144.2           -> refs/west/unlabeled-1.144.2
+2026-08-30T05:37:36.8520178Z  * [new branch]          unlabeled-1.15.10           -> refs/west/unlabeled-1.15.10
+2026-08-30T05:37:36.8523423Z  * [new branch]          unlabeled-1.15.2            -> refs/west/unlabeled-1.15.2
+2026-08-30T05:37:36.8524493Z  * [new branch]          unlabeled-1.1527.4          -> refs/west/unlabeled-1.1527.4
+2026-08-30T05:37:36.8526939Z  * [new branch]          unlabeled-1.153.2           -> refs/west/unlabeled-1.153.2
+2026-08-30T05:37:36.8529344Z  * [new branch]          unlabeled-1.1563.2          -> refs/west/unlabeled-1.1563.2
+2026-08-30T05:37:36.8531163Z  * [new branch]          unlabeled-1.1656.2          -> refs/west/unlabeled-1.1656.2
+2026-08-30T05:37:36.8533542Z  * [new branch]          unlabeled-1.167.4           -> refs/west/unlabeled-1.167.4
+2026-08-30T05:37:36.8535405Z  * [new branch]          unlabeled-1.17.2            -> refs/west/unlabeled-1.17.2
+2026-08-30T05:37:36.8537727Z  * [new branch]          unlabeled-1.17.4            -> refs/west/unlabeled-1.17.4
+2026-08-30T05:37:36.8539678Z  * [new branch]          unlabeled-1.1710.2          -> refs/west/unlabeled-1.1710.2
+2026-08-30T05:37:36.8541687Z  * [new branch]          unlabeled-1.172.4           -> refs/west/unlabeled-1.172.4
+2026-08-30T05:37:36.8543540Z  * [new branch]          unlabeled-1.18.10           -> refs/west/unlabeled-1.18.10
+2026-08-30T05:37:36.8545613Z  * [new branch]          unlabeled-1.18.2            -> refs/west/unlabeled-1.18.2
+2026-08-30T05:37:36.8547637Z  * [new branch]          unlabeled-1.1806.2          -> refs/west/unlabeled-1.1806.2
+2026-08-30T05:37:36.8549805Z  * [new branch]          unlabeled-1.1856.2          -> refs/west/unlabeled-1.1856.2
+2026-08-30T05:37:36.8551679Z  * [new branch]          unlabeled-1.188.2           -> refs/west/unlabeled-1.188.2
+2026-08-30T05:37:36.8553899Z  * [new branch]          unlabeled-1.188.2.1.8       -> refs/west/unlabeled-1.188.2.1.8
+2026-08-30T05:37:36.8556089Z  * [new branch]          unlabeled-1.188.2.1.8.2.2   -> refs/west/unlabeled-1.188.2.1.8.2.2
+2026-08-30T05:37:36.8557773Z  * [new branch]          unlabeled-1.19.12           -> refs/west/unlabeled-1.19.12
+2026-08-30T05:37:36.8561038Z  * [new branch]          unlabeled-1.2.2             -> refs/west/unlabeled-1.2.2
+2026-08-30T05:37:36.8562844Z  * [new branch]          unlabeled-1.20.4            -> refs/west/unlabeled-1.20.4
+2026-08-30T05:37:36.8565052Z  * [new branch]          unlabeled-1.21.2            -> refs/west/unlabeled-1.21.2
+2026-08-30T05:37:36.8567077Z  * [new branch]          unlabeled-1.21.4            -> refs/west/unlabeled-1.21.4
+2026-08-30T05:37:36.8569157Z  * [new branch]          unlabeled-1.22.2            -> refs/west/unlabeled-1.22.2
+2026-08-30T05:37:36.8571948Z  * [new branch]          unlabeled-1.22.4            -> refs/west/unlabeled-1.22.4
+2026-08-30T05:37:36.8574101Z  * [new branch]          unlabeled-1.226.2           -> refs/west/unlabeled-1.226.2
+2026-08-30T05:37:36.8575934Z  * [new branch]          unlabeled-1.23.16           -> refs/west/unlabeled-1.23.16
+2026-08-30T05:37:36.8578364Z  * [new branch]          unlabeled-1.23.2            -> refs/west/unlabeled-1.23.2
+2026-08-30T05:37:36.8580372Z  * [new branch]          unlabeled-1.23.4            -> refs/west/unlabeled-1.23.4
+2026-08-30T05:37:36.8582657Z  * [new branch]          unlabeled-1.231.4           -> refs/west/unlabeled-1.231.4
+2026-08-30T05:37:36.8584591Z  * [new branch]          unlabeled-1.234.16          -> refs/west/unlabeled-1.234.16
+2026-08-30T05:37:36.8586597Z  * [new branch]          unlabeled-1.235.2           -> refs/west/unlabeled-1.235.2
+2026-08-30T05:37:36.8589094Z  * [new branch]          unlabeled-1.238.4           -> refs/west/unlabeled-1.238.4
+2026-08-30T05:37:36.8590828Z  * [new branch]          unlabeled-1.24.16           -> refs/west/unlabeled-1.24.16
+2026-08-30T05:37:36.8592921Z  * [new branch]          unlabeled-1.24.2            -> refs/west/unlabeled-1.24.2
+2026-08-30T05:37:36.8594868Z  * [new branch]          unlabeled-1.24.4            -> refs/west/unlabeled-1.24.4
+2026-08-30T05:37:36.8597061Z  * [new branch]          unlabeled-1.248.2           -> refs/west/unlabeled-1.248.2
+2026-08-30T05:37:36.8599173Z  * [new branch]          unlabeled-1.253.2           -> refs/west/unlabeled-1.253.2
+2026-08-30T05:37:36.8601560Z  * [new branch]          unlabeled-1.27.12           -> refs/west/unlabeled-1.27.12
+2026-08-30T05:37:36.8604444Z  * [new branch]          unlabeled-1.27.8            -> refs/west/unlabeled-1.27.8
+2026-08-30T05:37:36.8606264Z  * [new branch]          unlabeled-1.30.4            -> refs/west/unlabeled-1.30.4
+2026-08-30T05:37:36.8608037Z  * [new branch]          unlabeled-1.31.4            -> refs/west/unlabeled-1.31.4
+2026-08-30T05:37:36.8610244Z  * [new branch]          unlabeled-1.32.16           -> refs/west/unlabeled-1.32.16
+2026-08-30T05:37:36.8612167Z  * [new branch]          unlabeled-1.32.2            -> refs/west/unlabeled-1.32.2
+2026-08-30T05:37:36.8613780Z  * [new branch]          unlabeled-1.35.12           -> refs/west/unlabeled-1.35.12
+2026-08-30T05:37:36.8615586Z  * [new branch]          unlabeled-1.38.4            -> refs/west/unlabeled-1.38.4
+2026-08-30T05:37:36.8617541Z  * [new branch]          unlabeled-1.39.2            -> refs/west/unlabeled-1.39.2
+2026-08-30T05:37:36.8619600Z  * [new branch]          unlabeled-1.44.2            -> refs/west/unlabeled-1.44.2
+2026-08-30T05:37:36.8621586Z  * [new branch]          unlabeled-1.44.4            -> refs/west/unlabeled-1.44.4
+2026-08-30T05:37:36.8623710Z  * [new branch]          unlabeled-1.45.2            -> refs/west/unlabeled-1.45.2
+2026-08-30T05:37:36.8625342Z  * [new branch]          unlabeled-1.45.8            -> refs/west/unlabeled-1.45.8
+2026-08-30T05:37:36.8627835Z  * [new branch]          unlabeled-1.46.4            -> refs/west/unlabeled-1.46.4
+2026-08-30T05:37:36.8630406Z  * [new branch]          unlabeled-1.48.16           -> refs/west/unlabeled-1.48.16
+2026-08-30T05:37:36.8632182Z  * [new branch]          unlabeled-1.5.16            -> refs/west/unlabeled-1.5.16
+2026-08-30T05:37:36.8634152Z  * [new branch]          unlabeled-1.5.2             -> refs/west/unlabeled-1.5.2
+2026-08-30T05:37:36.8636092Z  * [new branch]          unlabeled-1.50.2            -> refs/west/unlabeled-1.50.2
+2026-08-30T05:37:36.8638038Z  * [new branch]          unlabeled-1.50.6            -> refs/west/unlabeled-1.50.6
+2026-08-30T05:37:36.8648543Z  * [new branch]          unlabeled-1.52.2            -> refs/west/unlabeled-1.52.2
+2026-08-30T05:37:36.8649452Z  * [new branch]          unlabeled-1.53.6            -> refs/west/unlabeled-1.53.6
+2026-08-30T05:37:36.8650307Z  * [new branch]          unlabeled-1.54.4            -> refs/west/unlabeled-1.54.4
+2026-08-30T05:37:36.8651158Z  * [new branch]          unlabeled-1.64.2            -> refs/west/unlabeled-1.64.2
+2026-08-30T05:37:36.8652086Z  * [new branch]          unlabeled-1.65.12           -> refs/west/unlabeled-1.65.12
+2026-08-30T05:37:36.8654514Z  * [new branch]          unlabeled-1.65.4            -> refs/west/unlabeled-1.65.4
+2026-08-30T05:37:36.8655752Z  * [new branch]          unlabeled-1.66.2            -> refs/west/unlabeled-1.66.2
+2026-08-30T05:37:36.8656631Z  * [new branch]          unlabeled-1.69.4            -> refs/west/unlabeled-1.69.4
+2026-08-30T05:37:36.8657929Z  * [new branch]          unlabeled-1.74.4            -> refs/west/unlabeled-1.74.4
+2026-08-30T05:37:36.8663080Z  * [new branch]          unlabeled-1.75.4            -> refs/west/unlabeled-1.75.4
+2026-08-30T05:37:36.8663905Z  * [new branch]          unlabeled-1.8.2             -> refs/west/unlabeled-1.8.2
+2026-08-30T05:37:36.8665017Z  * [new branch]          unlabeled-1.81.2            -> refs/west/unlabeled-1.81.2
+2026-08-30T05:37:36.8666255Z  * [new branch]          unlabeled-1.83.4            -> refs/west/unlabeled-1.83.4
+2026-08-30T05:37:36.8667699Z  * [new branch]          unlabeled-1.86.2            -> refs/west/unlabeled-1.86.2
+2026-08-30T05:37:36.8669756Z  * [new branch]          unlabeled-1.88.2            -> refs/west/unlabeled-1.88.2
+2026-08-30T05:37:36.8671692Z  * [new branch]          unlabeled-1.90.2            -> refs/west/unlabeled-1.90.2
+2026-08-30T05:37:36.8673654Z  * [new branch]          unlabeled-1.90.2.1.4        -> refs/west/unlabeled-1.90.2.1.4
+2026-08-30T05:37:36.8675654Z  * [new branch]          unlabeled-1.93.2            -> refs/west/unlabeled-1.93.2
+2026-08-30T05:37:36.8678229Z  * [new branch]          vendor                      -> refs/west/vendor
+2026-08-30T05:37:36.8680656Z  * [new branch]          x86-more-32                 -> refs/west/x86-more-32
+2026-08-30T05:37:36.8682174Z  * [new branch]          zephyr-1.8.10               -> refs/west/zephyr-1.8.10
+2026-08-30T05:37:36.8684819Z  * [new branch]          zephyr-4.2                  -> refs/west/zephyr-4.2
+2026-08-30T05:37:36.8686882Z  * [new branch]          zephyr-add-library          -> refs/west/zephyr-add-library
+2026-08-30T05:37:36.8688473Z  * [new branch]          zephyr-deprecated           -> refs/west/zephyr-deprecated
+2026-08-30T05:37:36.8690349Z  * [new branch]          zephyr-hacks                -> refs/west/zephyr-hacks
+2026-08-30T05:37:36.8692321Z  * [new branch]          zephyr-no-lto               -> refs/west/zephyr-no-lto
+2026-08-30T05:37:36.8695211Z  * [new branch]          zephyr-no-posix-define      -> refs/west/zephyr-no-posix-define
+2026-08-30T05:37:36.8696539Z  * [new branch]          zephyr-posix                -> refs/west/zephyr-posix
+2026-08-30T05:37:36.8698965Z  * [new branch]          zephyr-sdk-0.17             -> refs/west/zephyr-sdk-0.17
+2026-08-30T05:37:36.8700451Z  * [new branch]          zephyr-sdk-v0.17-branch     -> refs/west/zephyr-sdk-v0.17-branch
+2026-08-30T05:37:36.8702504Z  * [new branch]          zephyr-source               -> refs/west/zephyr-source
+2026-08-30T05:37:37.0198044Z  * [new tag]             1.0                         -> 1.0
+2026-08-30T05:37:37.0198999Z  * [new tag]             1.0-1                       -> 1.0-1
+2026-08-30T05:37:37.0200169Z  * [new tag]             1.1                         -> 1.1
+2026-08-30T05:37:37.0200790Z  * [new tag]             1.1-1                       -> 1.1-1
+2026-08-30T05:37:37.0202460Z  * [new tag]             1.1-2                       -> 1.1-2
+2026-08-30T05:37:37.0203656Z  * [new tag]             1.1.1                       -> 1.1.1
+2026-08-30T05:37:37.0204734Z  * [new tag]             1.1.1-1                     -> 1.1.1-1
+2026-08-30T05:37:37.0205805Z  * [new tag]             1.2                         -> 1.2
+2026-08-30T05:37:37.0208021Z  * [new tag]             1.2-1                       -> 1.2-1
+2026-08-30T05:37:37.0209109Z  * [new tag]             1.2.1                       -> 1.2.1
+2026-08-30T05:37:37.0209714Z  * [new tag]             1.2.1-1                     -> 1.2.1-1
+2026-08-30T05:37:37.0211111Z  * [new tag]             1.3                         -> 1.3
+2026-08-30T05:37:37.0212281Z  * [new tag]             1.3-1                       -> 1.3-1
+2026-08-30T05:37:37.0214636Z  * [new tag]             1.4                         -> 1.4
+2026-08-30T05:37:37.0215309Z  * [new tag]             1.4-1                       -> 1.4-1
+2026-08-30T05:37:37.0216548Z  * [new tag]             1.4.1                       -> 1.4.1
+2026-08-30T05:37:37.0217708Z  * [new tag]             1.4.1-1                     -> 1.4.1-1
+2026-08-30T05:37:37.0219370Z  * [new tag]             1.4.1-2                     -> 1.4.1-2
+2026-08-30T05:37:37.0221390Z  * [new tag]             1.4.2                       -> 1.4.2
+2026-08-30T05:37:37.0222706Z  * [new tag]             1.4.2-1                     -> 1.4.2-1
+2026-08-30T05:37:37.0224354Z  * [new tag]             1.4.2-2                     -> 1.4.2-2
+2026-08-30T05:37:37.0225938Z  * [new tag]             1.4.2-3                     -> 1.4.2-3
+2026-08-30T05:37:37.0227606Z  * [new tag]             1.4.3                       -> 1.4.3
+2026-08-30T05:37:37.0228949Z  * [new tag]             1.4.3-1                     -> 1.4.3-1
+2026-08-30T05:37:37.0230494Z  * [new tag]             1.4.4                       -> 1.4.4
+2026-08-30T05:37:37.0231759Z  * [new tag]             1.4.4-1                     -> 1.4.4-1
+2026-08-30T05:37:37.0233548Z  * [new tag]             1.4.5                       -> 1.4.5
+2026-08-30T05:37:37.0234838Z  * [new tag]             1.4.5-1                     -> 1.4.5-1
+2026-08-30T05:37:37.0236633Z  * [new tag]             1.4.6                       -> 1.4.6
+2026-08-30T05:37:37.0237863Z  * [new tag]             1.4.6-1                     -> 1.4.6-1
+2026-08-30T05:37:37.0239305Z  * [new tag]             1.4.7                       -> 1.4.7
+2026-08-30T05:37:37.0241056Z  * [new tag]             1.4.7-1                     -> 1.4.7-1
+2026-08-30T05:37:37.0242312Z  * [new tag]             1.4.7-2                     -> 1.4.7-2
+2026-08-30T05:37:37.0244097Z  * [new tag]             1.5                         -> 1.5
+2026-08-30T05:37:37.0246388Z  * [new tag]             1.5-1                       -> 1.5-1
+2026-08-30T05:37:37.0247726Z  * [new tag]             1.5.1                       -> 1.5.1
+2026-08-30T05:37:37.0249483Z  * [new tag]             1.5.1-1                     -> 1.5.1-1
+2026-08-30T05:37:37.0251269Z  * [new tag]             1.5.1-2                     -> 1.5.1-2
+2026-08-30T05:37:37.0252448Z  * [new tag]             1.6                         -> 1.6
+2026-08-30T05:37:37.0253986Z  * [new tag]             1.6-1                       -> 1.6-1
+2026-08-30T05:37:37.0255484Z  * [new tag]             1.6.1                       -> 1.6.1
+2026-08-30T05:37:37.0256829Z  * [new tag]             1.6.1-1                     -> 1.6.1-1
+2026-08-30T05:37:37.0258784Z  * [new tag]             1.6.2                       -> 1.6.2
+2026-08-30T05:37:37.0260224Z  * [new tag]             1.6.2-1                     -> 1.6.2-1
+2026-08-30T05:37:37.0261814Z  * [new tag]             1.7                         -> 1.7
+2026-08-30T05:37:37.0263861Z  * [new tag]             1.7-1                       -> 1.7-1
+2026-08-30T05:37:37.0264784Z  * [new tag]             1.7.1                       -> 1.7.1
+2026-08-30T05:37:37.0266131Z  * [new tag]             1.7.1-1                     -> 1.7.1-1
+2026-08-30T05:37:37.0268149Z  * [new tag]             1.7.2                       -> 1.7.2
+2026-08-30T05:37:37.0269911Z  * [new tag]             1.7.2-1                     -> 1.7.2-1
+2026-08-30T05:37:37.0271123Z  * [new tag]             1.7.2-2                     -> 1.7.2-2
+2026-08-30T05:37:37.0272917Z  * [new tag]             1.7.3                       -> 1.7.3
+2026-08-30T05:37:37.0274108Z  * [new tag]             1.7.3-1                     -> 1.7.3-1
+2026-08-30T05:37:37.0275646Z  * [new tag]             1.7.3-2                     -> 1.7.3-2
+2026-08-30T05:37:37.0276912Z  * [new tag]             1.7.4                       -> 1.7.4
+2026-08-30T05:37:37.0278649Z  * [new tag]             1.7.4-1                     -> 1.7.4-1
+2026-08-30T05:37:37.0280493Z  * [new tag]             1.7.5                       -> 1.7.5
+2026-08-30T05:37:37.0281800Z  * [new tag]             1.7.5-1                     -> 1.7.5-1
+2026-08-30T05:37:37.0283143Z  * [new tag]             1.7.6                       -> 1.7.6
+2026-08-30T05:37:37.0284624Z  * [new tag]             1.7.6-1                     -> 1.7.6-1
+2026-08-30T05:37:37.0285757Z  * [new tag]             1.7.8                       -> 1.7.8
+2026-08-30T05:37:37.0287700Z  * [new tag]             1.7.9                       -> 1.7.9
+2026-08-30T05:37:37.0288972Z  * [new tag]             1.8.1                       -> 1.8.1
+2026-08-30T05:37:37.0290418Z  * [new tag]             1.8.12                      -> 1.8.12
+2026-08-30T05:37:37.0292726Z  * [new tag]             1.8.2                       -> 1.8.2
+2026-08-30T05:37:37.0293694Z  * [new tag]             1.8.2-1                     -> 1.8.2-1
+2026-08-30T05:37:37.0294569Z  * [new tag]             1.8.4                       -> 1.8.4
+2026-08-30T05:37:37.0296403Z  * [new tag]             1.8.6                       -> 1.8.6
+2026-08-30T05:37:37.0297886Z  * [new tag]             1.8.7                       -> 1.8.7
+2026-08-30T05:37:37.0299647Z  * [new tag]             1.8.8                       -> 1.8.8
+2026-08-30T05:37:37.0371996Z  * [new tag]             1.8.9                       -> 1.8.9
+2026-08-30T05:37:37.0374335Z  * [new tag]             3.1.0.2019.08.08            -> 3.1.0.2019.08.08
+2026-08-30T05:37:37.0374984Z  * [new tag]             3.1.0.2019.08.08-1          -> 3.1.0.2019.08.08-1
+2026-08-30T05:37:37.0376147Z  * [new tag]             3.1.0.2019.08.14            -> 3.1.0.2019.08.14
+2026-08-30T05:37:37.0377365Z  * [new tag]             3.1.0.2019.08.14-1          -> 3.1.0.2019.08.14-1
+2026-08-30T05:37:37.0378581Z  * [new tag]             EOL_registry_mounts         -> EOL_registry_mounts
+2026-08-30T05:37:37.0379732Z  * [new tag]             Z-cygwin_daemon_merge-new_HEAD -> Z-cygwin_daemon_merge-new_HEAD
+2026-08-30T05:37:37.0380653Z  * [new tag]             Z-cygwin_daemon_merge_HEAD  -> Z-cygwin_daemon_merge_HEAD
+2026-08-30T05:37:37.0381652Z  * [new tag]             after-mmap-privanon-noreserve -> after-mmap-privanon-noreserve
+2026-08-30T05:37:37.0382684Z  * [new tag]             after-mmap-revamp           -> after-mmap-revamp
+2026-08-30T05:37:37.0383511Z  * [new tag]             arc-20081103-branchpoint    -> arc-20081103-branchpoint
+2026-08-30T05:37:37.0384354Z  * [new tag]             arc-insight_6_8-branchpoint -> arc-insight_6_8-branchpoint
+2026-08-30T05:37:37.0385170Z  * [new tag]             arc-sim-20090309            -> arc-sim-20090309
+2026-08-30T05:37:37.0386360Z  * [new tag]             before-mmap-revamp          -> before-mmap-revamp
+2026-08-30T05:37:37.0387469Z  * [new tag]             binu_ss_19990502            -> binu_ss_19990502
+2026-08-30T05:37:37.0388410Z  * [new tag]             binu_ss_19990602            -> binu_ss_19990602
+2026-08-30T05:37:37.0389107Z  * [new tag]             binu_ss_19990721            -> binu_ss_19990721
+2026-08-30T05:37:37.0390052Z  * [new tag]             binutils-2_10               -> binutils-2_10
+2026-08-30T05:37:37.0391022Z  * [new tag]             binutils-2_10-branchpoint   -> binutils-2_10-branchpoint
+2026-08-30T05:37:37.0391804Z  * [new tag]             binutils-2_10_1             -> binutils-2_10_1
+2026-08-30T05:37:37.0392517Z  * [new tag]             binutils-2_11               -> binutils-2_11
+2026-08-30T05:37:37.0393191Z  * [new tag]             binutils-2_11_1             -> binutils-2_11_1
+2026-08-30T05:37:37.0393763Z  * [new tag]             binutils-2_11_2             -> binutils-2_11_2
+2026-08-30T05:37:37.0394343Z  * [new tag]             binutils-2_12               -> binutils-2_12
+2026-08-30T05:37:37.0395076Z  * [new tag]             binutils-2_12-branchpoint   -> binutils-2_12-branchpoint
+2026-08-30T05:37:37.0395809Z  * [new tag]             binutils-2_12_1             -> binutils-2_12_1
+2026-08-30T05:37:37.0396504Z  * [new tag]             binutils-2_13               -> binutils-2_13
+2026-08-30T05:37:37.0397449Z  * [new tag]             binutils-2_13-branchpoint   -> binutils-2_13-branchpoint
+2026-08-30T05:37:37.0398261Z  * [new tag]             binutils-2_13_1             -> binutils-2_13_1
+2026-08-30T05:37:37.0398932Z  * [new tag]             binutils-2_13_2             -> binutils-2_13_2
+2026-08-30T05:37:37.0399589Z  * [new tag]             binutils-2_13_2_1           -> binutils-2_13_2_1
+2026-08-30T05:37:37.0400305Z  * [new tag]             binutils-2_14               -> binutils-2_14
+2026-08-30T05:37:37.0401035Z  * [new tag]             binutils-2_14-branchpoint   -> binutils-2_14-branchpoint
+2026-08-30T05:37:37.0402139Z  * [new tag]             binutils-2_15               -> binutils-2_15
+2026-08-30T05:37:37.0402912Z  * [new tag]             binutils-2_15-branchpoint   -> binutils-2_15-branchpoint
+2026-08-30T05:37:37.0403513Z  * [new tag]             binutils-2_16               -> binutils-2_16
+2026-08-30T05:37:37.0404245Z  * [new tag]             binutils-2_16-branchpoint   -> binutils-2_16-branchpoint
+2026-08-30T05:37:37.0404985Z  * [new tag]             binutils-2_16_1             -> binutils-2_16_1
+2026-08-30T05:37:37.0405676Z  * [new tag]             binutils-2_17               -> binutils-2_17
+2026-08-30T05:37:37.0406402Z  * [new tag]             binutils-2_17-branchpoint   -> binutils-2_17-branchpoint
+2026-08-30T05:37:37.0407678Z  * [new tag]             binutils-2_18               -> binutils-2_18
+2026-08-30T05:37:37.0408448Z  * [new tag]             binutils-2_18-branchpoint   -> binutils-2_18-branchpoint
+2026-08-30T05:37:37.0409196Z  * [new tag]             binutils-2_19               -> binutils-2_19
+2026-08-30T05:37:37.0409968Z  * [new tag]             binutils-2_19-branchpoint   -> binutils-2_19-branchpoint
+2026-08-30T05:37:37.0410705Z  * [new tag]             binutils-2_19_1             -> binutils-2_19_1
+2026-08-30T05:37:37.0411415Z  * [new tag]             binutils-2_20               -> binutils-2_20
+2026-08-30T05:37:37.0412097Z  * [new tag]             binutils-2_20-branchpoint   -> binutils-2_20-branchpoint
+2026-08-30T05:37:37.0412797Z  * [new tag]             binutils-2_20_1             -> binutils-2_20_1
+2026-08-30T05:37:37.0413508Z  * [new tag]             binutils-2_21               -> binutils-2_21
+2026-08-30T05:37:37.0414145Z  * [new tag]             binutils-2_21-branchpoint   -> binutils-2_21-branchpoint
+2026-08-30T05:37:37.0414941Z  * [new tag]             binutils-2_21_1             -> binutils-2_21_1
+2026-08-30T05:37:37.0415516Z  * [new tag]             binutils-2_22               -> binutils-2_22
+2026-08-30T05:37:37.0416117Z  * [new tag]             binutils-2_22-branchpoint   -> binutils-2_22-branchpoint
+2026-08-30T05:37:37.0416885Z  * [new tag]             binutils-2_23               -> binutils-2_23
+2026-08-30T05:37:37.0417819Z  * [new tag]             binutils-2_23-branchpoint   -> binutils-2_23-branchpoint
+2026-08-30T05:37:37.0418632Z  * [new tag]             binutils-2_23_1             -> binutils-2_23_1
+2026-08-30T05:37:37.0419324Z  * [new tag]             binutils-2_23_2             -> binutils-2_23_2
+2026-08-30T05:37:37.0419956Z  * [new tag]             binutils-2_24-branchpoint   -> binutils-2_24-branchpoint
+2026-08-30T05:37:37.0420929Z  * [new tag]             binutils-arc-20080908-branchpoint -> binutils-arc-20080908-branchpoint
+2026-08-30T05:37:37.0422088Z  * [new tag]             binutils-arc-20081103-branchpoint -> binutils-arc-20081103-branchpoint
+2026-08-30T05:37:37.0422894Z  * [new tag]             binutils-csl-2_17-branchpoint -> binutils-csl-2_17-branchpoint
+2026-08-30T05:37:37.0424049Z  * [new tag]             binutils-csl-arm-2005q1-branchpoint -> binutils-csl-arm-2005q1-branchpoint
+2026-08-30T05:37:37.0425051Z  * [new tag]             binutils-csl-arm-2005q1a    -> binutils-csl-arm-2005q1a
+2026-08-30T05:37:37.0425898Z  * [new tag]             binutils-csl-arm-2005q1b    -> binutils-csl-arm-2005q1b
+2026-08-30T05:37:37.0426489Z  * [new tag]             binutils-csl-arm-2006q1-6   -> binutils-csl-arm-2006q1-6
+2026-08-30T05:37:37.0427636Z  * [new tag]             binutils-csl-arm-2006q3-19  -> binutils-csl-arm-2006q3-19
+2026-08-30T05:37:37.0428509Z  * [new tag]             binutils-csl-arm-2006q3-21  -> binutils-csl-arm-2006q3-21
+2026-08-30T05:37:37.0429400Z  * [new tag]             binutils-csl-arm-2006q3-26  -> binutils-csl-arm-2006q3-26
+2026-08-30T05:37:37.0430062Z  * [new tag]             binutils-csl-arm-2006q3-27  -> binutils-csl-arm-2006q3-27
+2026-08-30T05:37:37.0430981Z  * [new tag]             binutils-csl-coldfire-4_1-10 -> binutils-csl-coldfire-4_1-10
+2026-08-30T05:37:37.0431649Z  * [new tag]             binutils-csl-coldfire-4_1-11 -> binutils-csl-coldfire-4_1-11
+2026-08-30T05:37:37.0432788Z  * [new tag]             binutils-csl-coldfire-4_1-28 -> binutils-csl-coldfire-4_1-28
+2026-08-30T05:37:37.0433616Z  * [new tag]             binutils-csl-coldfire-4_1-30 -> binutils-csl-coldfire-4_1-30
+2026-08-30T05:37:37.0434576Z  * [new tag]             binutils-csl-coldfire-4_1-32 -> binutils-csl-coldfire-4_1-32
+2026-08-30T05:37:37.0435608Z  * [new tag]             binutils-csl-gxxpro-3_4-branchpoint -> binutils-csl-gxxpro-3_4-branchpoint
+2026-08-30T05:37:37.0436802Z  * [new tag]             binutils-csl-innovasic-fido-3_4_4-33 -> binutils-csl-innovasic-fido-3_4_4-33
+2026-08-30T05:37:37.0439045Z  * [new tag]             binutils-csl-morpho-4_1-4   -> binutils-csl-morpho-4_1-4
+2026-08-30T05:37:37.0440589Z  * [new tag]             binutils-csl-palmsource-arm-prelinker-1_0-1 -> binutils-csl-palmsource-arm-prelinker-1_0-1
+2026-08-30T05:37:37.0441887Z  * [new tag]             binutils-csl-renesas-4_1-6  -> binutils-csl-renesas-4_1-6
+2026-08-30T05:37:37.0442694Z  * [new tag]             binutils-csl-renesas-4_1-7  -> binutils-csl-renesas-4_1-7
+2026-08-30T05:37:37.0443614Z  * [new tag]             binutils-csl-renesas-4_1-8  -> binutils-csl-renesas-4_1-8
+2026-08-30T05:37:37.0444574Z  * [new tag]             binutils-csl-renesas-4_1-9  -> binutils-csl-renesas-4_1-9
+2026-08-30T05:37:37.0445576Z  * [new tag]             binutils-csl-sourcerygxx-3_4_4-17 -> binutils-csl-sourcerygxx-3_4_4-17
+2026-08-30T05:37:37.0446211Z  * [new tag]             binutils-csl-sourcerygxx-3_4_4-19 -> binutils-csl-sourcerygxx-3_4_4-19
+2026-08-30T05:37:37.0447153Z  * [new tag]             binutils-csl-sourcerygxx-3_4_4-21 -> binutils-csl-sourcerygxx-3_4_4-21
+2026-08-30T05:37:37.0448365Z  * [new tag]             binutils-csl-sourcerygxx-3_4_4-25 -> binutils-csl-sourcerygxx-3_4_4-25
+2026-08-30T05:37:37.0449346Z  * [new tag]             binutils-csl-sourcerygxx-3_4_4-32 -> binutils-csl-sourcerygxx-3_4_4-32
+2026-08-30T05:37:37.0450417Z  * [new tag]             binutils-csl-sourcerygxx-4_1-12 -> binutils-csl-sourcerygxx-4_1-12
+2026-08-30T05:37:37.0451487Z  * [new tag]             binutils-csl-sourcerygxx-4_1-13 -> binutils-csl-sourcerygxx-4_1-13
+2026-08-30T05:37:37.0452547Z  * [new tag]             binutils-csl-sourcerygxx-4_1-14 -> binutils-csl-sourcerygxx-4_1-14
+2026-08-30T05:37:37.0453659Z  * [new tag]             binutils-csl-sourcerygxx-4_1-15 -> binutils-csl-sourcerygxx-4_1-15
+2026-08-30T05:37:37.0454743Z  * [new tag]             binutils-csl-sourcerygxx-4_1-17 -> binutils-csl-sourcerygxx-4_1-17
+2026-08-30T05:37:37.0455784Z  * [new tag]             binutils-csl-sourcerygxx-4_1-18 -> binutils-csl-sourcerygxx-4_1-18
+2026-08-30T05:37:37.0456870Z  * [new tag]             binutils-csl-sourcerygxx-4_1-19 -> binutils-csl-sourcerygxx-4_1-19
+2026-08-30T05:37:37.0457992Z  * [new tag]             binutils-csl-sourcerygxx-4_1-20 -> binutils-csl-sourcerygxx-4_1-20
+2026-08-30T05:37:37.0459066Z  * [new tag]             binutils-csl-sourcerygxx-4_1-21 -> binutils-csl-sourcerygxx-4_1-21
+2026-08-30T05:37:37.0460182Z  * [new tag]             binutils-csl-sourcerygxx-4_1-22 -> binutils-csl-sourcerygxx-4_1-22
+2026-08-30T05:37:37.0462119Z  * [new tag]             binutils-csl-sourcerygxx-4_1-23 -> binutils-csl-sourcerygxx-4_1-23
+2026-08-30T05:37:37.0463218Z  * [new tag]             binutils-csl-sourcerygxx-4_1-24 -> binutils-csl-sourcerygxx-4_1-24
+2026-08-30T05:37:37.0464854Z  * [new tag]             binutils-csl-sourcerygxx-4_1-25 -> binutils-csl-sourcerygxx-4_1-25
+2026-08-30T05:37:37.0466120Z  * [new tag]             binutils-csl-sourcerygxx-4_1-26 -> binutils-csl-sourcerygxx-4_1-26
+2026-08-30T05:37:37.0467874Z  * [new tag]             binutils-csl-sourcerygxx-4_1-27 -> binutils-csl-sourcerygxx-4_1-27
+2026-08-30T05:37:37.0469762Z  * [new tag]             binutils-csl-sourcerygxx-4_1-28 -> binutils-csl-sourcerygxx-4_1-28
+2026-08-30T05:37:37.0471501Z  * [new tag]             binutils-csl-sourcerygxx-4_1-29 -> binutils-csl-sourcerygxx-4_1-29
+2026-08-30T05:37:37.0472668Z  * [new tag]             binutils-csl-sourcerygxx-4_1-30 -> binutils-csl-sourcerygxx-4_1-30
+2026-08-30T05:37:37.0474402Z  * [new tag]             binutils-csl-sourcerygxx-4_1-32 -> binutils-csl-sourcerygxx-4_1-32
+2026-08-30T05:37:37.0476176Z  * [new tag]             binutils-csl-sourcerygxx-4_1-4 -> binutils-csl-sourcerygxx-4_1-4
+2026-08-30T05:37:37.0477942Z  * [new tag]             binutils-csl-sourcerygxx-4_1-5 -> binutils-csl-sourcerygxx-4_1-5
+2026-08-30T05:37:37.0479510Z  * [new tag]             binutils-csl-sourcerygxx-4_1-6 -> binutils-csl-sourcerygxx-4_1-6
+2026-08-30T05:37:37.0481220Z  * [new tag]             binutils-csl-sourcerygxx-4_1-7 -> binutils-csl-sourcerygxx-4_1-7
+2026-08-30T05:37:37.0483314Z  * [new tag]             binutils-csl-sourcerygxx-4_1-8 -> binutils-csl-sourcerygxx-4_1-8
+2026-08-30T05:37:37.0484788Z  * [new tag]             binutils-csl-sourcerygxx-4_1-9 -> binutils-csl-sourcerygxx-4_1-9
+2026-08-30T05:37:37.0486176Z  * [new tag]             binutils-csl-wrs-linux-3_4_4-20 -> binutils-csl-wrs-linux-3_4_4-20
+2026-08-30T05:37:37.0487732Z  * [new tag]             binutils-csl-wrs-linux-3_4_4-21 -> binutils-csl-wrs-linux-3_4_4-21
+2026-08-30T05:37:37.0489372Z  * [new tag]             binutils-csl-wrs-linux-3_4_4-22 -> binutils-csl-wrs-linux-3_4_4-22
+2026-08-30T05:37:37.0490658Z  * [new tag]             binutils-csl-wrs-linux-3_4_4-23 -> binutils-csl-wrs-linux-3_4_4-23
+2026-08-30T05:37:37.0492467Z  * [new tag]             binutils-csl-wrs-linux-3_4_4-24 -> binutils-csl-wrs-linux-3_4_4-24
+2026-08-30T05:37:37.0494174Z  * [new tag]             binutils_latest_snapshot    -> binutils_latest_snapshot
+2026-08-30T05:37:37.0495706Z  * [new tag]             cagney-unwind-20030108-branchpoint -> cagney-unwind-20030108-branchpoint
+2026-08-30T05:37:37.0497614Z  * [new tag]             cagney_bfdfile-20040213-branchpoint -> cagney_bfdfile-20040213-branchpoint
+2026-08-30T05:37:37.0499365Z  * [new tag]             cagney_bigcore-20040122-branchpoint -> cagney_bigcore-20040122-branchpoint
+2026-08-30T05:37:37.0500928Z  * [new tag]             cagney_convert-20030606-branchpoint -> cagney_convert-20030606-branchpoint
+2026-08-30T05:37:37.0502379Z  * [new tag]             cagney_fileio-20030521-branchpoint -> cagney_fileio-20030521-branchpoint
+2026-08-30T05:37:37.0503797Z  * [new tag]             cagney_frameaddr-20030403-branchpoint -> cagney_frameaddr-20030403-branchpoint
+2026-08-30T05:37:37.0505627Z  * [new tag]             cagney_frameaddr-20030409-mergepoint -> cagney_frameaddr-20030409-mergepoint
+2026-08-30T05:37:37.0507546Z  * [new tag]             cagney_framebase-20030326-branchpoint -> cagney_framebase-20030326-branchpoint
+2026-08-30T05:37:37.0509217Z  * [new tag]             cagney_framebase-20030330-mergepoint -> cagney_framebase-20030330-mergepoint
+2026-08-30T05:37:37.0510756Z  * [new tag]             cagney_lazyid-20030317-branchpoint -> cagney_lazyid-20030317-branchpoint
+2026-08-30T05:37:37.0512188Z  * [new tag]             cagney_offbyone-20030303-branchpoint -> cagney_offbyone-20030303-branchpoint
+2026-08-30T05:37:37.0513676Z  * [new tag]             cagney_regbuf-20020515-branchpoint -> cagney_regbuf-20020515-branchpoint
+2026-08-30T05:37:37.0515204Z  * [new tag]             cagney_sysregs-20020825-branchpoint -> cagney_sysregs-20020825-branchpoint
+2026-08-30T05:37:37.0517051Z  * [new tag]             cagney_tramp-20040309-branchpoint -> cagney_tramp-20040309-branchpoint
+2026-08-30T05:37:37.0518798Z  * [new tag]             cagney_tramp-20040321-mergepoint -> cagney_tramp-20040321-mergepoint
+2026-08-30T05:37:37.0520292Z  * [new tag]             cagney_writestrings-20030508-branchpoint -> cagney_writestrings-20030508-branchpoint
+2026-08-30T05:37:37.0522005Z  * [new tag]             cagney_x86i386-20030821-branchpoint -> cagney_x86i386-20030821-branchpoint
+2026-08-30T05:37:37.0523645Z  * [new tag]             carlton-dictionary-20031111-merge -> carlton-dictionary-20031111-merge
+2026-08-30T05:37:37.0525330Z  * [new tag]             carlton_dictionary-20020920-branchpoint -> carlton_dictionary-20020920-branchpoint
+2026-08-30T05:37:37.0526720Z  * [new tag]             carlton_dictionary-20020927-merge -> carlton_dictionary-20020927-merge
+2026-08-30T05:37:37.0528285Z  * [new tag]             carlton_dictionary-20021011-merge -> carlton_dictionary-20021011-merge
+2026-08-30T05:37:37.0530561Z  * [new tag]             carlton_dictionary-20021025-merge -> carlton_dictionary-20021025-merge
+2026-08-30T05:37:37.0532102Z  * [new tag]             carlton_dictionary-20021115-merge -> carlton_dictionary-20021115-merge
+2026-08-30T05:37:37.0533963Z  * [new tag]             carlton_dictionary-20021223-merge -> carlton_dictionary-20021223-merge
+2026-08-30T05:37:37.0535758Z  * [new tag]             carlton_dictionary-20030207-merge -> carlton_dictionary-20030207-merge
+2026-08-30T05:37:37.0537090Z  * [new tag]             carlton_dictionary-20030305-merge -> carlton_dictionary-20030305-merge
+2026-08-30T05:37:37.0539284Z  * [new tag]             carlton_dictionary-20030416-merge -> carlton_dictionary-20030416-merge
+2026-08-30T05:37:37.0541175Z  * [new tag]             carlton_dictionary-20030430-merge -> carlton_dictionary-20030430-merge
+2026-08-30T05:37:37.0542478Z  * [new tag]             carlton_dictionary-20030523-merge -> carlton_dictionary-20030523-merge
+2026-08-30T05:37:37.0543912Z  * [new tag]             carlton_dictionary-20030627-merge -> carlton_dictionary-20030627-merge
+2026-08-30T05:37:37.0545634Z  * [new tag]             carlton_dictionary-20030805-merge -> carlton_dictionary-20030805-merge
+2026-08-30T05:37:37.0547954Z  * [new tag]             carlton_dictionary-20030917-merge -> carlton_dictionary-20030917-merge
+2026-08-30T05:37:37.0549290Z  * [new tag]             carlton_dictionary-20031215-merge -> carlton_dictionary-20031215-merge
+2026-08-30T05:37:37.0551968Z  * [new tag]             carlton_dictionary-20040126-merge -> carlton_dictionary-20040126-merge
+2026-08-30T05:37:37.0553372Z  * [new tag]             cgen-1_1-branchpoint        -> cgen-1_1-branchpoint
+2026-08-30T05:37:37.0554701Z  * [new tag]             cgen-snapshot-20071001      -> cgen-snapshot-20071001
+2026-08-30T05:37:37.0555971Z  * [new tag]             cgen-snapshot-20071101      -> cgen-snapshot-20071101
+2026-08-30T05:37:37.0557913Z  * [new tag]             cgen-snapshot-20071201      -> cgen-snapshot-20071201
+2026-08-30T05:37:37.0559677Z  * [new tag]             cgen-snapshot-20080101      -> cgen-snapshot-20080101
+2026-08-30T05:37:37.0561025Z  * [new tag]             cgen-snapshot-20080201      -> cgen-snapshot-20080201
+2026-08-30T05:37:37.0562993Z  * [new tag]             cgen-snapshot-20080301      -> cgen-snapshot-20080301
+2026-08-30T05:37:37.0565102Z  * [new tag]             cgen-snapshot-20080401      -> cgen-snapshot-20080401
+2026-08-30T05:37:37.0566477Z  * [new tag]             cgen-snapshot-20080501      -> cgen-snapshot-20080501
+2026-08-30T05:37:37.0567750Z  * [new tag]             cgen-snapshot-20080601      -> cgen-snapshot-20080601
+2026-08-30T05:37:37.0569658Z  * [new tag]             cgen-snapshot-20080701      -> cgen-snapshot-20080701
+2026-08-30T05:37:37.0571462Z  * [new tag]             cgen-snapshot-20080801      -> cgen-snapshot-20080801
+2026-08-30T05:37:37.0573122Z  * [new tag]             cgen-snapshot-20080901      -> cgen-snapshot-20080901
+2026-08-30T05:37:37.0574358Z  * [new tag]             cgen-snapshot-20081001      -> cgen-snapshot-20081001
+2026-08-30T05:37:37.0576004Z  * [new tag]             cgen-snapshot-20081101      -> cgen-snapshot-20081101
+2026-08-30T05:37:37.0577869Z  * [new tag]             cgen-snapshot-20081201      -> cgen-snapshot-20081201
+2026-08-30T05:37:37.0579779Z  * [new tag]             cgen-snapshot-20090101      -> cgen-snapshot-20090101
+2026-08-30T05:37:37.0581350Z  * [new tag]             cgen-snapshot-20090201      -> cgen-snapshot-20090201
+2026-08-30T05:37:37.0582941Z  * [new tag]             cgen-snapshot-20090301      -> cgen-snapshot-20090301
+2026-08-30T05:37:37.0584571Z  * [new tag]             cgen-snapshot-20090401      -> cgen-snapshot-20090401
+2026-08-30T05:37:37.0586428Z  * [new tag]             cgen-snapshot-20090501      -> cgen-snapshot-20090501
+2026-08-30T05:37:37.0587957Z  * [new tag]             cgen-snapshot-20090601      -> cgen-snapshot-20090601
+2026-08-30T05:37:37.0589920Z  * [new tag]             cgen-snapshot-20090701      -> cgen-snapshot-20090701
+2026-08-30T05:37:37.0591359Z  * [new tag]             cgen-snapshot-20090801      -> cgen-snapshot-20090801
+2026-08-30T05:37:37.0593064Z  * [new tag]             cgen-snapshot-20090901      -> cgen-snapshot-20090901
+2026-08-30T05:37:37.0594722Z  * [new tag]             cgen-snapshot-20091001      -> cgen-snapshot-20091001
+2026-08-30T05:37:37.0596225Z  * [new tag]             cgen-snapshot-20091101      -> cgen-snapshot-20091101
+2026-08-30T05:37:37.0597933Z  * [new tag]             cgen-snapshot-20091201      -> cgen-snapshot-20091201
+2026-08-30T05:37:37.0600064Z  * [new tag]             cgen-snapshot-20100101      -> cgen-snapshot-20100101
+2026-08-30T05:37:37.0601386Z  * [new tag]             cgen-snapshot-20100201      -> cgen-snapshot-20100201
+2026-08-30T05:37:37.0603129Z  * [new tag]             cgen-snapshot-20100301      -> cgen-snapshot-20100301
+2026-08-30T05:37:37.0604852Z  * [new tag]             cgen-snapshot-20100401      -> cgen-snapshot-20100401
+2026-08-30T05:37:37.0606951Z  * [new tag]             cgen-snapshot-20100501      -> cgen-snapshot-20100501
+2026-08-30T05:37:37.0608278Z  * [new tag]             cgen-snapshot-20100601      -> cgen-snapshot-20100601
+2026-08-30T05:37:37.0610327Z  * [new tag]             cgen-snapshot-20100701      -> cgen-snapshot-20100701
+2026-08-30T05:37:37.0611685Z  * [new tag]             cgen-snapshot-20100801      -> cgen-snapshot-20100801
+2026-08-30T05:37:37.0613487Z  * [new tag]             cgen-snapshot-20100901      -> cgen-snapshot-20100901
+2026-08-30T05:37:37.0615273Z  * [new tag]             cgen-snapshot-20101001      -> cgen-snapshot-20101001
+2026-08-30T05:37:37.0617570Z  * [new tag]             cgen-snapshot-20101101      -> cgen-snapshot-20101101
+2026-08-30T05:37:37.0618637Z  * [new tag]             cgen-snapshot-20101201      -> cgen-snapshot-20101201
+2026-08-30T05:37:37.0620944Z  * [new tag]             cgen-snapshot-20110101      -> cgen-snapshot-20110101
+2026-08-30T05:37:37.0622947Z  * [new tag]             cgen-snapshot-20110201      -> cgen-snapshot-20110201
+2026-08-30T05:37:37.0624847Z  * [new tag]             cgen-snapshot-20110301      -> cgen-snapshot-20110301
+2026-08-30T05:37:37.0626269Z  * [new tag]             cgen-snapshot-20110401      -> cgen-snapshot-20110401
+2026-08-30T05:37:37.0628025Z  * [new tag]             cgen-snapshot-20110501      -> cgen-snapshot-20110501
+2026-08-30T05:37:37.0629547Z  * [new tag]             cgen-snapshot-20110601      -> cgen-snapshot-20110601
+2026-08-30T05:37:37.0631780Z  * [new tag]             cgen-snapshot-20110701      -> cgen-snapshot-20110701
+2026-08-30T05:37:37.0633314Z  * [new tag]             cgen-snapshot-20110801      -> cgen-snapshot-20110801
+2026-08-30T05:37:37.0634943Z  * [new tag]             cgen-snapshot-20110901      -> cgen-snapshot-20110901
+2026-08-30T05:37:37.0636277Z  * [new tag]             cgen-snapshot-20111001      -> cgen-snapshot-20111001
+2026-08-30T05:37:37.0638073Z  * [new tag]             cgen-snapshot-20111101      -> cgen-snapshot-20111101
+2026-08-30T05:37:37.0639866Z  * [new tag]             cgen-snapshot-20111201      -> cgen-snapshot-20111201
+2026-08-30T05:37:37.0641357Z  * [new tag]             cgen-snapshot-20120101      -> cgen-snapshot-20120101
+2026-08-30T05:37:37.0642776Z  * [new tag]             cgen-snapshot-20120201      -> cgen-snapshot-20120201
+2026-08-30T05:37:37.0644165Z  * [new tag]             cgen-snapshot-20120301      -> cgen-snapshot-20120301
+2026-08-30T05:37:37.0645765Z  * [new tag]             cgen-snapshot-20120401      -> cgen-snapshot-20120401
+2026-08-30T05:37:37.0647154Z  * [new tag]             cgen-snapshot-20120501      -> cgen-snapshot-20120501
+2026-08-30T05:37:37.0648973Z  * [new tag]             cgen-snapshot-20120601      -> cgen-snapshot-20120601
+2026-08-30T05:37:37.0650388Z  * [new tag]             cgen-snapshot-20120701      -> cgen-snapshot-20120701
+2026-08-30T05:37:37.0652090Z  * [new tag]             cgen-snapshot-20120801      -> cgen-snapshot-20120801
+2026-08-30T05:37:37.0653567Z  * [new tag]             cgen-snapshot-20120901      -> cgen-snapshot-20120901
+2026-08-30T05:37:37.0655061Z  * [new tag]             cgen-snapshot-20121001      -> cgen-snapshot-20121001
+2026-08-30T05:37:37.0656371Z  * [new tag]             cgen-snapshot-20121101      -> cgen-snapshot-20121101
+2026-08-30T05:37:37.0658145Z  * [new tag]             cgen-snapshot-20121201      -> cgen-snapshot-20121201
+2026-08-30T05:37:37.0659539Z  * [new tag]             cgen-snapshot-20130101      -> cgen-snapshot-20130101
+2026-08-30T05:37:37.0661646Z  * [new tag]             cgen-snapshot-20130201      -> cgen-snapshot-20130201
+2026-08-30T05:37:37.0662908Z  * [new tag]             cgen-snapshot-20130301      -> cgen-snapshot-20130301
+2026-08-30T05:37:37.0664428Z  * [new tag]             cgen-snapshot-20130401      -> cgen-snapshot-20130401
+2026-08-30T05:37:37.0665823Z  * [new tag]             cgen-snapshot-20130501      -> cgen-snapshot-20130501
+2026-08-30T05:37:37.0667479Z  * [new tag]             cgen-snapshot-20130601      -> cgen-snapshot-20130601
+2026-08-30T05:37:37.0669261Z  * [new tag]             cgen-snapshot-20130701      -> cgen-snapshot-20130701
+2026-08-30T05:37:37.0670792Z  * [new tag]             cgen-snapshot-20130801      -> cgen-snapshot-20130801
+2026-08-30T05:37:37.0672450Z  * [new tag]             cgen-snapshot-20130901      -> cgen-snapshot-20130901
+2026-08-30T05:37:37.0673965Z  * [new tag]             cgen-snapshot-20131001      -> cgen-snapshot-20131001
+2026-08-30T05:37:37.0675491Z  * [new tag]             cgen-snapshot-20131101      -> cgen-snapshot-20131101
+2026-08-30T05:37:37.0677055Z  * [new tag]             cgen-snapshot-20131201      -> cgen-snapshot-20131201
+2026-08-30T05:37:37.0678621Z  * [new tag]             cgen-snapshot-20140101      -> cgen-snapshot-20140101
+2026-08-30T05:37:37.0680048Z  * [new tag]             cgen-snapshot-20140201      -> cgen-snapshot-20140201
+2026-08-30T05:37:37.0681722Z  * [new tag]             cgen-snapshot-20140301      -> cgen-snapshot-20140301
+2026-08-30T05:37:37.0683539Z  * [new tag]             cgen-snapshot-20140401      -> cgen-snapshot-20140401
+2026-08-30T05:37:37.0684595Z  * [new tag]             cgen-snapshot-20140501      -> cgen-snapshot-20140501
+2026-08-30T05:37:37.0686313Z  * [new tag]             cgen-snapshot-20140601      -> cgen-snapshot-20140601
+2026-08-30T05:37:37.0687758Z  * [new tag]             cgen-snapshot-20140701      -> cgen-snapshot-20140701
+2026-08-30T05:37:37.0689408Z  * [new tag]             cgen-snapshot-20140801      -> cgen-snapshot-20140801
+2026-08-30T05:37:37.0691058Z  * [new tag]             cgen-snapshot-20140901      -> cgen-snapshot-20140901
+2026-08-30T05:37:37.0692682Z  * [new tag]             cgen-snapshot-20141001      -> cgen-snapshot-20141001
+2026-08-30T05:37:37.0693835Z  * [new tag]             cgen-snapshot-20141101      -> cgen-snapshot-20141101
+2026-08-30T05:37:37.0695686Z  * [new tag]             cgen-snapshot-20141201      -> cgen-snapshot-20141201
+2026-08-30T05:37:37.0697445Z  * [new tag]             cgen-snapshot-20150101      -> cgen-snapshot-20150101
+2026-08-30T05:37:37.0699147Z  * [new tag]             cgen-snapshot-20150201      -> cgen-snapshot-20150201
+2026-08-30T05:37:37.0700602Z  * [new tag]             cgen-snapshot-20150301      -> cgen-snapshot-20150301
+2026-08-30T05:37:37.0701791Z  * [new tag]             cgf-more-exit-sync          -> cgf-more-exit-sync
+2026-08-30T05:37:37.0703772Z  * [new tag]             corinna-01                  -> corinna-01
+2026-08-30T05:37:37.0704691Z  * [new tag]             cr-0x99                     -> cr-0x99
+2026-08-30T05:37:37.0706588Z  * [new tag]             csl-arm-2003-q4             -> csl-arm-2003-q4
+2026-08-30T05:37:37.0707804Z  * [new tag]             csl-arm-2004-q1             -> csl-arm-2004-q1
+2026-08-30T05:37:37.0709897Z  * [new tag]             csl-arm-2004-q1a            -> csl-arm-2004-q1a
+2026-08-30T05:37:37.0711494Z  * [new tag]             csl-arm-2004-q3             -> csl-arm-2004-q3
+2026-08-30T05:37:37.0712941Z  * [new tag]             csl-arm-2004-q3d            -> csl-arm-2004-q3d
+2026-08-30T05:37:37.0714638Z  * [new tag]             csl-arm-20050325-branchpoint -> csl-arm-20050325-branchpoint
+2026-08-30T05:37:37.0716020Z  * [new tag]             cygnus_cvs_20020108_pre     -> cygnus_cvs_20020108_pre
+2026-08-30T05:37:37.0717722Z  * [new tag]             cygwin-1-1-5                -> cygwin-1-1-5
+2026-08-30T05:37:37.0719814Z  * [new tag]             cygwin-1-1-6                -> cygwin-1-1-6
+2026-08-30T05:37:37.0720971Z  * [new tag]             cygwin-1-1-7                -> cygwin-1-1-7
+2026-08-30T05:37:37.0722195Z  * [new tag]             cygwin-1-1-8                -> cygwin-1-1-8
+2026-08-30T05:37:37.0724049Z  * [new tag]             cygwin-1-3-19-1-branchpoint -> cygwin-1-3-19-1-branchpoint
+2026-08-30T05:37:37.0725848Z  * [new tag]             cygwin-1_1_1                -> cygwin-1_1_1
+2026-08-30T05:37:37.0727809Z  * [new tag]             cygwin-1_7_1-release        -> cygwin-1_7_1-release
+2026-08-30T05:37:37.0728813Z  * [new tag]             cygwin-1_7_10-release       -> cygwin-1_7_10-release
+2026-08-30T05:37:37.0730787Z  * [new tag]             cygwin-1_7_11-release       -> cygwin-1_7_11-release
+2026-08-30T05:37:37.0732165Z  * [new tag]             cygwin-1_7_12-release       -> cygwin-1_7_12-release
+2026-08-30T05:37:37.0733702Z  * [new tag]             cygwin-1_7_14-release       -> cygwin-1_7_14-release
+2026-08-30T05:37:37.0735203Z  * [new tag]             cygwin-1_7_14_2-release     -> cygwin-1_7_14_2-release
+2026-08-30T05:37:37.0736848Z  * [new tag]             cygwin-1_7_15-release       -> cygwin-1_7_15-release
+2026-08-30T05:37:37.0738113Z  * [new tag]             cygwin-1_7_16-release       -> cygwin-1_7_16-release
+2026-08-30T05:37:37.0740448Z  * [new tag]             cygwin-1_7_17-release       -> cygwin-1_7_17-release
+2026-08-30T05:37:37.0741935Z  * [new tag]             cygwin-1_7_18-release       -> cygwin-1_7_18-release
+2026-08-30T05:37:37.0743260Z  * [new tag]             cygwin-1_7_19-release       -> cygwin-1_7_19-release
+2026-08-30T05:37:37.0745155Z  * [new tag]             cygwin-1_7_2-release        -> cygwin-1_7_2-release
+2026-08-30T05:37:37.0746630Z  * [new tag]             cygwin-1_7_20-release       -> cygwin-1_7_20-release
+2026-08-30T05:37:37.0748408Z  * [new tag]             cygwin-1_7_21-release       -> cygwin-1_7_21-release
+2026-08-30T05:37:37.0749942Z  * [new tag]             cygwin-1_7_22-release       -> cygwin-1_7_22-release
+2026-08-30T05:37:37.0751643Z  * [new tag]             cygwin-1_7_23-release       -> cygwin-1_7_23-release
+2026-08-30T05:37:37.0753159Z  * [new tag]             cygwin-1_7_24-release       -> cygwin-1_7_24-release
+2026-08-30T05:37:37.0754805Z  * [new tag]             cygwin-1_7_25-release       -> cygwin-1_7_25-release
+2026-08-30T05:37:37.0756101Z  * [new tag]             cygwin-1_7_26-release       -> cygwin-1_7_26-release
+2026-08-30T05:37:37.0757740Z  * [new tag]             cygwin-1_7_27-release       -> cygwin-1_7_27-release
+2026-08-30T05:37:37.0759674Z  * [new tag]             cygwin-1_7_28-release       -> cygwin-1_7_28-release
+2026-08-30T05:37:37.0761369Z  * [new tag]             cygwin-1_7_29-release       -> cygwin-1_7_29-release
+2026-08-30T05:37:37.0762922Z  * [new tag]             cygwin-1_7_3-release        -> cygwin-1_7_3-release
+2026-08-30T05:37:37.0764087Z  * [new tag]             cygwin-1_7_30-release       -> cygwin-1_7_30-release
+2026-08-30T05:37:37.0765957Z  * [new tag]             cygwin-1_7_31-release       -> cygwin-1_7_31-release
+2026-08-30T05:37:37.0767671Z  * [new tag]             cygwin-1_7_32-release       -> cygwin-1_7_32-release
+2026-08-30T05:37:37.0769281Z  * [new tag]             cygwin-1_7_33-release       -> cygwin-1_7_33-release
+2026-08-30T05:37:37.0770885Z  * [new tag]             cygwin-1_7_34-release       -> cygwin-1_7_34-release
+2026-08-30T05:37:37.0772703Z  * [new tag]             cygwin-1_7_35-release       -> cygwin-1_7_35-release
+2026-08-30T05:37:37.0774372Z  * [new tag]             cygwin-1_7_4-release        -> cygwin-1_7_4-release
+2026-08-30T05:37:37.0775834Z  * [new tag]             cygwin-1_7_5-release        -> cygwin-1_7_5-release
+2026-08-30T05:37:37.0777631Z  * [new tag]             cygwin-1_7_7-release        -> cygwin-1_7_7-release
+2026-08-30T05:37:37.0779232Z  * [new tag]             cygwin-1_7_8-release        -> cygwin-1_7_8-release
+2026-08-30T05:37:37.0780771Z  * [new tag]             cygwin-1_7_9-release        -> cygwin-1_7_9-release
+2026-08-30T05:37:37.0782084Z  * [new tag]             cygwin-2_0_0-release        -> cygwin-2_0_0-release
+2026-08-30T05:37:37.0783928Z  * [new tag]             cygwin-2_0_1-release        -> cygwin-2_0_1-release
+2026-08-30T05:37:37.0785317Z  * [new tag]             cygwin-2_0_2-release        -> cygwin-2_0_2-release
+2026-08-30T05:37:37.0787032Z  * [new tag]             cygwin-2_0_3-release        -> cygwin-2_0_3-release
+2026-08-30T05:37:37.0788964Z  * [new tag]             cygwin-2_0_4-release        -> cygwin-2_0_4-release
+2026-08-30T05:37:37.0790600Z  * [new tag]             cygwin-2_10_0-release       -> cygwin-2_10_0-release
+2026-08-30T05:37:37.0791808Z  * [new tag]             cygwin-2_11_0-release       -> cygwin-2_11_0-release
+2026-08-30T05:37:37.0793967Z  * [new tag]             cygwin-2_11_1-release       -> cygwin-2_11_1-release
+2026-08-30T05:37:37.0794853Z  * [new tag]             cygwin-2_11_2-release       -> cygwin-2_11_2-release
+2026-08-30T05:37:37.0796816Z  * [new tag]             cygwin-2_1_0-release        -> cygwin-2_1_0-release
+2026-08-30T05:37:37.0798795Z  * [new tag]             cygwin-2_2_0-release        -> cygwin-2_2_0-release
+2026-08-30T05:37:37.0800077Z  * [new tag]             cygwin-2_2_1-release        -> cygwin-2_2_1-release
+2026-08-30T05:37:37.0801667Z  * [new tag]             cygwin-2_3_0-release        -> cygwin-2_3_0-release
+2026-08-30T05:37:37.0803520Z  * [new tag]             cygwin-2_3_1-relase         -> cygwin-2_3_1-relase
+2026-08-30T05:37:37.0804915Z  * [new tag]             cygwin-2_3_1-release        -> cygwin-2_3_1-release
+2026-08-30T05:37:37.0806652Z  * [new tag]             cygwin-2_4_0-release        -> cygwin-2_4_0-release
+2026-08-30T05:37:37.0808411Z  * [new tag]             cygwin-2_4_1-release        -> cygwin-2_4_1-release
+2026-08-30T05:37:37.0810044Z  * [new tag]             cygwin-2_5_0-release        -> cygwin-2_5_0-release
+2026-08-30T05:37:37.0811394Z  * [new tag]             cygwin-2_5_1-release        -> cygwin-2_5_1-release
+2026-08-30T05:37:37.0813295Z  * [new tag]             cygwin-2_5_2-release        -> cygwin-2_5_2-release
+2026-08-30T05:37:37.0814739Z  * [new tag]             cygwin-2_6_0-release        -> cygwin-2_6_0-release
+2026-08-30T05:37:37.0816296Z  * [new tag]             cygwin-2_6_1-release        -> cygwin-2_6_1-release
+2026-08-30T05:37:37.0818270Z  * [new tag]             cygwin-2_7_0-release        -> cygwin-2_7_0-release
+2026-08-30T05:37:37.0820217Z  * [new tag]             cygwin-2_8_0-release        -> cygwin-2_8_0-release
+2026-08-30T05:37:37.0821699Z  * [new tag]             cygwin-2_8_1-release        -> cygwin-2_8_1-release
+2026-08-30T05:37:37.0823437Z  * [new tag]             cygwin-2_8_2-release        -> cygwin-2_8_2-release
+2026-08-30T05:37:37.0824910Z  * [new tag]             cygwin-2_9_0-release        -> cygwin-2_9_0-release
+2026-08-30T05:37:37.0826515Z  * [new tag]             cygwin-3_0_0-release        -> cygwin-3_0_0-release
+2026-08-30T05:37:37.0827892Z  * [new tag]             cygwin-3_0_1-release        -> cygwin-3_0_1-release
+2026-08-30T05:37:37.0829825Z  * [new tag]             cygwin-3_0_2-release        -> cygwin-3_0_2-release
+2026-08-30T05:37:37.0831328Z  * [new tag]             cygwin-3_0_3-release        -> cygwin-3_0_3-release
+2026-08-30T05:37:37.0832929Z  * [new tag]             cygwin-3_0_4-release        -> cygwin-3_0_4-release
+2026-08-30T05:37:37.0834548Z  * [new tag]             cygwin-3_0_5-release        -> cygwin-3_0_5-release
+2026-08-30T05:37:37.0836448Z  * [new tag]             cygwin-3_0_6-release        -> cygwin-3_0_6-release
+2026-08-30T05:37:37.0838081Z  * [new tag]             cygwin-3_0_7-release        -> cygwin-3_0_7-release
+2026-08-30T05:37:37.0839903Z  * [new tag]             cygwin-3_1_0-release        -> cygwin-3_1_0-release
+2026-08-30T05:37:37.0841488Z  * [new tag]             cygwin-3_1_1-release        -> cygwin-3_1_1-release
+2026-08-30T05:37:37.0842762Z  * [new tag]             cygwin-3_1_2-release        -> cygwin-3_1_2-release
+2026-08-30T05:37:37.0844398Z  * [new tag]             cygwin-3_1_3-release        -> cygwin-3_1_3-release
+2026-08-30T05:37:37.0845949Z  * [new tag]             cygwin-3_1_4-release        -> cygwin-3_1_4-release
+2026-08-30T05:37:37.0847870Z  * [new tag]             cygwin-64bit-postmerge      -> cygwin-64bit-postmerge
+2026-08-30T05:37:37.0849636Z  * [new tag]             cygwin-64bit-premerge       -> cygwin-64bit-premerge
+2026-08-30T05:37:37.0851094Z  * [new tag]             cygwin-pre-user-db          -> cygwin-pre-user-db
+2026-08-30T05:37:37.0852477Z  * [new tag]             cygwin_daemon_merge_HEAD    -> cygwin_daemon_merge_HEAD
+2026-08-30T05:37:37.0854031Z  * [new tag]             debian-2.10.0-1             -> debian-2.10.0-1
+2026-08-30T05:37:37.0856305Z  * [new tag]             dje-cgen-play1-branchpoint  -> dje-cgen-play1-branchpoint
+2026-08-30T05:37:37.0857730Z  * [new tag]             drop_9x_support_start       -> drop_9x_support_start
+2026-08-30T05:37:37.0859391Z  * [new tag]             drow-cplus-branchpoint      -> drow-cplus-branchpoint
+2026-08-30T05:37:37.0860851Z  * [new tag]             drow-cplus-merge-20021020   -> drow-cplus-merge-20021020
+2026-08-30T05:37:37.0862885Z  * [new tag]             drow-cplus-merge-20021025   -> drow-cplus-merge-20021025
+2026-08-30T05:37:37.0864839Z  * [new tag]             drow-cplus-merge-20031214   -> drow-cplus-merge-20031214
+2026-08-30T05:37:37.0868125Z  * [new tag]             drow-cplus-merge-20031220   -> drow-cplus-merge-20031220
+2026-08-30T05:37:37.0869032Z  * [new tag]             drow-cplus-merge-20031224   -> drow-cplus-merge-20031224
+2026-08-30T05:37:37.0875769Z  * [new tag]             drow-cplus-merge-20040113   -> drow-cplus-merge-20040113
+2026-08-30T05:37:37.0877099Z  * [new tag]             drow-cplus-merge-20040208   -> drow-cplus-merge-20040208
+2026-08-30T05:37:37.0878760Z  * [new tag]             drow-reverse-20070409-branchpoint -> drow-reverse-20070409-branchpoint
+2026-08-30T05:37:37.0890907Z  * [new tag]             drow_intercu-20040221-branchpoint -> drow_intercu-20040221-branchpoint
+2026-08-30T05:37:37.0891897Z  * [new tag]             drow_intercu-merge-20040327 -> drow_intercu-merge-20040327
+2026-08-30T05:37:37.0892685Z  * [new tag]             drow_intercu-merge-20040402 -> drow_intercu-merge-20040402
+2026-08-30T05:37:37.0893493Z  * [new tag]             drow_intercu-merge-20040915 -> drow_intercu-merge-20040915
+2026-08-30T05:37:37.0894301Z  * [new tag]             drow_intercu-merge-20040921 -> drow_intercu-merge-20040921
+2026-08-30T05:37:37.0895094Z  * [new tag]             egcs_20000222               -> egcs_20000222
+2026-08-30T05:37:37.0895905Z  * [new tag]             ezannoni_pie-20030916-branchpoint -> ezannoni_pie-20030916-branchpoint
+2026-08-30T05:37:37.0896832Z  * [new tag]             ezannoni_pie-20040323-branchpoint -> ezannoni_pie-20040323-branchpoint
+2026-08-30T05:37:37.0898161Z  * [new tag]             gdb-csl-20060226-branch-local-2 -> gdb-csl-20060226-branch-local-2
+2026-08-30T05:37:37.0899333Z  * [new tag]             gdb-csl-20060226-branch-merge-to-csl-local-1 -> gdb-csl-20060226-branch-merge-to-csl-local-1
+2026-08-30T05:37:37.0900824Z  * [new tag]             gdb-csl-20060226-branch-merge-to-csl-symbian-1 -> gdb-csl-20060226-branch-merge-to-csl-symbian-1
+2026-08-30T05:37:37.0901966Z  * [new tag]             gdb-csl-20060226-branchpoint -> gdb-csl-20060226-branchpoint
+2026-08-30T05:37:37.0902853Z  * [new tag]             gdb-csl-arm-20050325-2005-q1a -> gdb-csl-arm-20050325-2005-q1a
+2026-08-30T05:37:37.0903791Z  * [new tag]             gdb-csl-arm-20050325-2005-q1b -> gdb-csl-arm-20050325-2005-q1b
+2026-08-30T05:37:37.0905020Z  * [new tag]             gdb-csl-arm-20051020-branchpoint -> gdb-csl-arm-20051020-branchpoint
+2026-08-30T05:37:37.0905847Z  * [new tag]             gdb-csl-arm-2006q1-6        -> gdb-csl-arm-2006q1-6
+2026-08-30T05:37:37.0906785Z  * [new tag]             gdb-csl-available-20060303-branchpoint -> gdb-csl-available-20060303-branchpoint
+2026-08-30T05:37:37.0907975Z  * [new tag]             gdb-csl-coldfire-4_1-10     -> gdb-csl-coldfire-4_1-10
+2026-08-30T05:37:37.0908721Z  * [new tag]             gdb-csl-coldfire-4_1-11     -> gdb-csl-coldfire-4_1-11
+2026-08-30T05:37:37.0909861Z  * [new tag]             gdb-csl-gxxpro-6_3-branchpoint -> gdb-csl-gxxpro-6_3-branchpoint
+2026-08-30T05:37:37.0910943Z  * [new tag]             gdb-csl-morpho-4_1-4        -> gdb-csl-morpho-4_1-4
+2026-08-30T05:37:37.0914999Z  * [new tag]             gdb-csl-sourcerygxx-3_4_4-17 -> gdb-csl-sourcerygxx-3_4_4-17
+2026-08-30T05:37:37.0918871Z  * [new tag]             gdb-csl-sourcerygxx-3_4_4-19 -> gdb-csl-sourcerygxx-3_4_4-19
+2026-08-30T05:37:37.0920787Z  * [new tag]             gdb-csl-sourcerygxx-3_4_4-21 -> gdb-csl-sourcerygxx-3_4_4-21
+2026-08-30T05:37:37.0922006Z  * [new tag]             gdb-csl-sourcerygxx-3_4_4-25 -> gdb-csl-sourcerygxx-3_4_4-25
+2026-08-30T05:37:37.0923114Z  * [new tag]             gdb-csl-sourcerygxx-4_1-12  -> gdb-csl-sourcerygxx-4_1-12
+2026-08-30T05:37:37.0924212Z  * [new tag]             gdb-csl-sourcerygxx-4_1-13  -> gdb-csl-sourcerygxx-4_1-13
+2026-08-30T05:37:37.0925264Z  * [new tag]             gdb-csl-sourcerygxx-4_1-14  -> gdb-csl-sourcerygxx-4_1-14
+2026-08-30T05:37:37.0926398Z  * [new tag]             gdb-csl-sourcerygxx-4_1-17  -> gdb-csl-sourcerygxx-4_1-17
+2026-08-30T05:37:37.0927810Z  * [new tag]             gdb-csl-sourcerygxx-4_1-4   -> gdb-csl-sourcerygxx-4_1-4
+2026-08-30T05:37:37.0928788Z  * [new tag]             gdb-csl-sourcerygxx-4_1-5   -> gdb-csl-sourcerygxx-4_1-5
+2026-08-30T05:37:37.0930013Z  * [new tag]             gdb-csl-sourcerygxx-4_1-6   -> gdb-csl-sourcerygxx-4_1-6
+2026-08-30T05:37:37.0932136Z  * [new tag]             gdb-csl-sourcerygxx-4_1-7   -> gdb-csl-sourcerygxx-4_1-7
+2026-08-30T05:37:37.0933124Z  * [new tag]             gdb-csl-sourcerygxx-4_1-8   -> gdb-csl-sourcerygxx-4_1-8
+2026-08-30T05:37:37.0934261Z  * [new tag]             gdb-csl-sourcerygxx-4_1-9   -> gdb-csl-sourcerygxx-4_1-9
+2026-08-30T05:37:37.0937190Z  * [new tag]             gdb-csl-symbian-20060226-branchpoint -> gdb-csl-symbian-20060226-branchpoint
+2026-08-30T05:37:37.0939899Z  * [new tag]             gdb-csl-symbian-6_4_50_20060226-10 -> gdb-csl-symbian-6_4_50_20060226-10
+2026-08-30T05:37:37.0940655Z  * [new tag]             gdb-csl-symbian-6_4_50_20060226-11 -> gdb-csl-symbian-6_4_50_20060226-11
+2026-08-30T05:37:37.0942884Z  * [new tag]             gdb-csl-symbian-6_4_50_20060226-12 -> gdb-csl-symbian-6_4_50_20060226-12
+2026-08-30T05:37:37.0945353Z  * [new tag]             gdb-csl-symbian-6_4_50_20060226-8 -> gdb-csl-symbian-6_4_50_20060226-8
+2026-08-30T05:37:37.0946413Z  * [new tag]             gdb-csl-symbian-6_4_50_20060226-9 -> gdb-csl-symbian-6_4_50_20060226-9
+2026-08-30T05:37:37.0948416Z  * [new tag]             gdb-premipsmulti-2000-06-06-branchpoint -> gdb-premipsmulti-2000-06-06-branchpoint
+2026-08-30T05:37:37.0949822Z  * [new tag]             gdb_4_18_2-2000-05-18-release -> gdb_4_18_2-2000-05-18-release
+2026-08-30T05:37:37.0950834Z  * [new tag]             gdb_4_95_0-2000-04-27-snapshot -> gdb_4_95_0-2000-04-27-snapshot
+2026-08-30T05:37:37.0951772Z  * [new tag]             gdb_4_95_1-2000-05-11-snapshot -> gdb_4_95_1-2000-05-11-snapshot
+2026-08-30T05:37:37.0953651Z  * [new tag]             gdb_5_0-2000-04-10-branchpoint -> gdb_5_0-2000-04-10-branchpoint
+2026-08-30T05:37:37.0955901Z  * [new tag]             gdb_5_0-2000-05-19-release  -> gdb_5_0-2000-05-19-release
+2026-08-30T05:37:37.0957572Z  * [new tag]             gdb_5_1-2001-07-29-branchpoint -> gdb_5_1-2001-07-29-branchpoint
+2026-08-30T05:37:37.0958566Z  * [new tag]             gdb_5_1-2001-11-21-release  -> gdb_5_1-2001-11-21-release
+2026-08-30T05:37:37.0960933Z  * [new tag]             gdb_5_1_0_1-2002-01-03-branchpoint -> gdb_5_1_0_1-2002-01-03-branchpoint
+2026-08-30T05:37:37.0963456Z  * [new tag]             gdb_5_1_0_1-2002-01-03-release -> gdb_5_1_0_1-2002-01-03-release
+2026-08-30T05:37:37.0964706Z  * [new tag]             gdb_5_1_1-2002-01-24-release -> gdb_5_1_1-2002-01-24-release
+2026-08-30T05:37:37.0965971Z  * [new tag]             gdb_5_2-2002-03-03-branchpoint -> gdb_5_2-2002-03-03-branchpoint
+2026-08-30T05:37:37.0967743Z  * [new tag]             gdb_5_2-2002-04-29-release  -> gdb_5_2-2002-04-29-release
+2026-08-30T05:37:37.0970197Z  * [new tag]             gdb_5_2_1-2002-07-23-release -> gdb_5_2_1-2002-07-23-release
+2026-08-30T05:37:37.0971727Z  * [new tag]             gdb_5_3-2002-09-04-branchpoint -> gdb_5_3-2002-09-04-branchpoint
+2026-08-30T05:37:37.0973383Z  * [new tag]             gdb_5_3-2002-12-12-release  -> gdb_5_3-2002-12-12-release
+2026-08-30T05:37:37.0975255Z  * [new tag]             gdb_6_0-2003-06-23-branchpoint -> gdb_6_0-2003-06-23-branchpoint
+2026-08-30T05:37:37.0976649Z  * [new tag]             gdb_6_0-2003-10-04-release  -> gdb_6_0-2003-10-04-release
+2026-08-30T05:37:37.0979280Z  * [new tag]             gdb_6_1-2004-03-01-gmt-branchpoint -> gdb_6_1-2004-03-01-gmt-branchpoint
+2026-08-30T05:37:37.0980502Z  * [new tag]             gdb_6_1-2004-04-05-release  -> gdb_6_1-2004-04-05-release
+2026-08-30T05:37:37.0983610Z  * [new tag]             gdb_6_1_1-20040616-release  -> gdb_6_1_1-20040616-release
+2026-08-30T05:37:37.0985192Z  * [new tag]             gdb_6_2-2004-07-10-gmt-branchpoint -> gdb_6_2-2004-07-10-gmt-branchpoint
+2026-08-30T05:37:37.0986806Z  * [new tag]             gdb_6_2-20040730-release    -> gdb_6_2-20040730-release
+2026-08-30T05:37:37.0988029Z  * [new tag]             gdb_6_3-20041019-branchpoint -> gdb_6_3-20041019-branchpoint
+2026-08-30T05:37:37.0990090Z  * [new tag]             gdb_6_3-20041109-release    -> gdb_6_3-20041109-release
+2026-08-30T05:37:37.0993188Z  * [new tag]             gdb_6_4-2005-11-01-branchpoint -> gdb_6_4-2005-11-01-branchpoint
+2026-08-30T05:37:37.0993793Z  * [new tag]             gdb_6_4-20051202-release    -> gdb_6_4-20051202-release
+2026-08-30T05:37:37.0994863Z  * [new tag]             gdb_6_5-2006-05-14-branchpoint -> gdb_6_5-2006-05-14-branchpoint
+2026-08-30T05:37:37.0996610Z  * [new tag]             gdb_6_5-20060621-release    -> gdb_6_5-20060621-release
+2026-08-30T05:37:37.0998914Z  * [new tag]             gdb_6_6-2006-11-15-branchpoint -> gdb_6_6-2006-11-15-branchpoint
+2026-08-30T05:37:37.1000191Z  * [new tag]             gdb_6_6-2006-12-18-release  -> gdb_6_6-2006-12-18-release
+2026-08-30T05:37:37.1002520Z  * [new tag]             gdb_6_7-2007-09-07-branchpoint -> gdb_6_7-2007-09-07-branchpoint
+2026-08-30T05:37:37.1004676Z  * [new tag]             gdb_6_7-2007-10-10-release  -> gdb_6_7-2007-10-10-release
+2026-08-30T05:37:37.1007075Z  * [new tag]             gdb_6_7_1-2007-10-29-release -> gdb_6_7_1-2007-10-29-release
+2026-08-30T05:37:37.1008817Z  * [new tag]             gdb_6_8-2008-02-26-branchpoint -> gdb_6_8-2008-02-26-branchpoint
+2026-08-30T05:37:37.1010579Z  * [new tag]             gdb_6_8-2008-03-27-release  -> gdb_6_8-2008-03-27-release
+2026-08-30T05:37:37.1011824Z  * [new tag]             gdb_7_0-2009-09-16-branchpoint -> gdb_7_0-2009-09-16-branchpoint
+2026-08-30T05:37:37.1013054Z  * [new tag]             gdb_7_0-2009-10-06-release  -> gdb_7_0-2009-10-06-release
+2026-08-30T05:37:37.1014572Z  * [new tag]             gdb_7_0_1-2009-12-22-release -> gdb_7_0_1-2009-12-22-release
+2026-08-30T05:37:37.1016384Z  * [new tag]             gdb_7_1-2010-02-18-branchpoint -> gdb_7_1-2010-02-18-branchpoint
+2026-08-30T05:37:37.1017849Z  * [new tag]             gdb_7_1-2010-03-18-release  -> gdb_7_1-2010-03-18-release
+2026-08-30T05:37:37.1020684Z  * [new tag]             gdb_7_2-2010-07-07-branchpoint -> gdb_7_2-2010-07-07-branchpoint
+2026-08-30T05:37:37.1022094Z  * [new tag]             gdb_7_2-2010-09-02-release  -> gdb_7_2-2010-09-02-release
+2026-08-30T05:37:37.1023776Z  * [new tag]             gdb_7_3-2011-04-01-branchpoint -> gdb_7_3-2011-04-01-branchpoint
+2026-08-30T05:37:37.1026760Z  * [new tag]             gdb_7_3-2011-07-26-release  -> gdb_7_3-2011-07-26-release
+2026-08-30T05:37:37.1027992Z  * [new tag]             gdb_7_3_1-2011-09-04-release -> gdb_7_3_1-2011-09-04-release
+2026-08-30T05:37:37.1030383Z  * [new tag]             gdb_7_4-2011-12-13-branchpoint -> gdb_7_4-2011-12-13-branchpoint
+2026-08-30T05:37:37.1031537Z  * [new tag]             gdb_7_4-2012-01-24-release  -> gdb_7_4-2012-01-24-release
+2026-08-30T05:37:37.1033056Z  * [new tag]             gdb_7_4_1-2012-04-26-release -> gdb_7_4_1-2012-04-26-release
+2026-08-30T05:37:37.1035517Z  * [new tag]             gdb_7_5-2012-07-18-branchpoint -> gdb_7_5-2012-07-18-branchpoint
+2026-08-30T05:37:37.1036715Z  * [new tag]             gdb_7_5-2012-08-17-release  -> gdb_7_5-2012-08-17-release
+2026-08-30T05:37:37.1039852Z  * [new tag]             gdb_7_5_1-2012-11-29-release -> gdb_7_5_1-2012-11-29-release
+2026-08-30T05:37:37.1041248Z  * [new tag]             gdb_7_6-2013-03-12-branchpoint -> gdb_7_6-2013-03-12-branchpoint
+2026-08-30T05:37:37.1043411Z  * [new tag]             gdb_7_6-2013-04-26-release  -> gdb_7_6-2013-04-26-release
+2026-08-30T05:37:37.1046006Z  * [new tag]             gdb_7_6_1-2013-08-30-release -> gdb_7_6_1-2013-08-30-release
+2026-08-30T05:37:37.1047097Z  * [new tag]             gdb_s390-2001-09-26-branchpoint -> gdb_s390-2001-09-26-branchpoint
+2026-08-30T05:37:37.1048844Z  * [new tag]             hmm                         -> hmm
+2026-08-30T05:37:37.1051112Z  * [new tag]             insight-precleanup-2001-01-01 -> insight-precleanup-2001-01-01
+2026-08-30T05:37:37.1054228Z  * [new tag]             insight_6_5-20061003-release -> insight_6_5-20061003-release
+2026-08-30T05:37:37.1057736Z  * [new tag]             insight_6_6-20070208-release -> insight_6_6-20070208-release
+2026-08-30T05:37:37.1059209Z  * [new tag]             insight_6_8-branchpoint     -> insight_6_8-branchpoint
+2026-08-30T05:37:37.1060804Z  * [new tag]             interps-20030202-branchpoint -> interps-20030202-branchpoint
+2026-08-30T05:37:37.1062438Z  * [new tag]             jimb-gdb_6_2-e500-branchpoint -> jimb-gdb_6_2-e500-branchpoint
+2026-08-30T05:37:37.1065747Z  * [new tag]             jimb-macro-020506-branchpoint -> jimb-macro-020506-branchpoint
+2026-08-30T05:37:37.1066940Z  * [new tag]             jimb-ppc64-linux-20030509-branchpoint -> jimb-ppc64-linux-20030509-branchpoint
+2026-08-30T05:37:37.1069905Z  * [new tag]             jimb-ppc64-linux-20030528-branchpoint -> jimb-ppc64-linux-20030528-branchpoint
+2026-08-30T05:37:37.1073413Z  * [new tag]             jimb-ppc64-linux-20030613-branchpoint -> jimb-ppc64-linux-20030613-branchpoint
+2026-08-30T05:37:37.1076833Z  * [new tag]             jimb-rda-nptl-branchpoint   -> jimb-rda-nptl-branchpoint
+2026-08-30T05:37:37.1080533Z  * [new tag]             kettenis-i386newframe-20030308-branchpoint -> kettenis-i386newframe-20030308-branchpoint
+2026-08-30T05:37:37.1083326Z  * [new tag]             kettenis-i386newframe-20030316-mergepoint -> kettenis-i386newframe-20030316-mergepoint
+2026-08-30T05:37:37.1084670Z  * [new tag]             kettenis_i386newframe-20030406-branchpoint -> kettenis_i386newframe-20030406-branchpoint
+2026-08-30T05:37:37.1085980Z  * [new tag]             kettenis_i386newframe-20030419-branchpoint -> kettenis_i386newframe-20030419-branchpoint
+2026-08-30T05:37:37.1087838Z  * [new tag]             kettenis_i386newframe-20030504-mergepoint -> kettenis_i386newframe-20030504-mergepoint
+2026-08-30T05:37:37.1089988Z  * [new tag]             kettenis_i386newframe-20030517-mergepoint -> kettenis_i386newframe-20030517-mergepoint
+2026-08-30T05:37:37.1095174Z  * [new tag]             kettenis_sparc-20030918-branchpoint -> kettenis_sparc-20030918-branchpoint
+2026-08-30T05:37:37.1097708Z  * [new tag]             kseitz_interps-20020528-branchpoint -> kseitz_interps-20020528-branchpoint
+2026-08-30T05:37:37.1100748Z  * [new tag]             kseitz_interps-20020829-merge -> kseitz_interps-20020829-merge
+2026-08-30T05:37:37.1104591Z  * [new tag]             kseitz_interps-20020930-merge -> kseitz_interps-20020930-merge
+2026-08-30T05:37:37.1106450Z  * [new tag]             kseitz_interps-20021103-merge -> kseitz_interps-20021103-merge
+2026-08-30T05:37:37.1107595Z  * [new tag]             kseitz_interps-20021105-merge -> kseitz_interps-20021105-merge
+2026-08-30T05:37:37.1108430Z  * [new tag]             mingw-runtime-2_0           -> mingw-runtime-2_0
+2026-08-30T05:37:37.1109167Z  * [new tag]             mingw-runtime-2_4           -> mingw-runtime-2_4
+2026-08-30T05:37:37.1110146Z  * [new tag]             msnyder-checkpoint-072509-branchpoint -> msnyder-checkpoint-072509-branchpoint
+2026-08-30T05:37:37.1111396Z  * [new tag]             msnyder-fork-checkpoint-branchpoint -> msnyder-fork-checkpoint-branchpoint
+2026-08-30T05:37:37.1112842Z  * [new tag]             msnyder-reverse-20060331-branchpoint -> msnyder-reverse-20060331-branchpoint
+2026-08-30T05:37:37.1114012Z  * [new tag]             msnyder-reverse-20060502-branchpoint -> msnyder-reverse-20060502-branchpoint
+2026-08-30T05:37:37.1115184Z  * [new tag]             msnyder-reverse-20080609-branchpoint -> msnyder-reverse-20080609-branchpoint
+2026-08-30T05:37:37.1116483Z  * [new tag]             msnyder-tracepoint-checkpoint-branchpoint -> msnyder-tracepoint-checkpoint-branchpoint
+2026-08-30T05:37:37.1119221Z  * [new tag]             multiprocess-20081120-branchpoint -> multiprocess-20081120-branchpoint
+2026-08-30T05:37:37.1120152Z  * [new tag]             newlib-1_10_0               -> newlib-1_10_0
+2026-08-30T05:37:37.1120857Z  * [new tag]             newlib-1_11_0               -> newlib-1_11_0
+2026-08-30T05:37:37.1121499Z  * [new tag]             newlib-1_12_0               -> newlib-1_12_0
+2026-08-30T05:37:37.1122198Z  * [new tag]             newlib-1_13_0               -> newlib-1_13_0
+2026-08-30T05:37:37.1122907Z  * [new tag]             newlib-1_14_0               -> newlib-1_14_0
+2026-08-30T05:37:37.1123939Z  * [new tag]             newlib-1_15_0               -> newlib-1_15_0
+2026-08-30T05:37:37.1124655Z  * [new tag]             newlib-1_16_0               -> newlib-1_16_0
+2026-08-30T05:37:37.1139996Z  * [new tag]             newlib-1_17_0               -> newlib-1_17_0
+2026-08-30T05:37:37.1140758Z  * [new tag]             newlib-1_18_0               -> newlib-1_18_0
+2026-08-30T05:37:37.1141398Z  * [new tag]             newlib-1_19_0               -> newlib-1_19_0
+2026-08-30T05:37:37.1142343Z  * [new tag]             newlib-1_20_0               -> newlib-1_20_0
+2026-08-30T05:37:37.1142942Z  * [new tag]             newlib-1_9_0                -> newlib-1_9_0
+2026-08-30T05:37:37.1143633Z  * [new tag]             newlib-2000-02-17           -> newlib-2000-02-17
+2026-08-30T05:37:37.1144071Z  * [new tag]             newlib-2_0_0                -> newlib-2_0_0
+2026-08-30T05:37:37.1144657Z  * [new tag]             newlib-2_1_0                -> newlib-2_1_0
+2026-08-30T05:37:37.1145201Z  * [new tag]             newlib-2_2_0                -> newlib-2_2_0
+2026-08-30T05:37:37.1145760Z  * [new tag]             newlib-2_3_0                -> newlib-2_3_0
+2026-08-30T05:37:37.1146345Z  * [new tag]             newlib-2_4_0                -> newlib-2_4_0
+2026-08-30T05:37:37.1146864Z  * [new tag]             newlib-2_5_0                -> newlib-2_5_0
+2026-08-30T05:37:37.1147643Z  * [new tag]             newlib-3.0.0                -> newlib-3.0.0
+2026-08-30T05:37:37.1148244Z  * [new tag]             newlib-3.1.0                -> newlib-3.1.0
+2026-08-30T05:37:37.1148731Z  * [new tag]             newlib-3.2.0                -> newlib-3.2.0
+2026-08-30T05:37:37.1149266Z  * [new tag]             newlib-3.3.0                -> newlib-3.3.0
+2026-08-30T05:37:37.1149956Z  * [new tag]             newlib-csl-20060320-branchpoint -> newlib-csl-20060320-branchpoint
+2026-08-30T05:37:37.1150605Z  * [new tag]             newlib-csl-arm-2005-q1a     -> newlib-csl-arm-2005-q1a
+2026-08-30T05:37:37.1151468Z  * [new tag]             newlib-csl-arm-2005-q1b     -> newlib-csl-arm-2005-q1b
+2026-08-30T05:37:37.1152692Z  * [new tag]             newlib-csl-arm-2006q1-6     -> newlib-csl-arm-2006q1-6
+2026-08-30T05:37:37.1153484Z  * [new tag]             newlib-csl-arm-2006q3-19    -> newlib-csl-arm-2006q3-19
+2026-08-30T05:37:37.1154058Z  * [new tag]             newlib-csl-arm-2006q3-21    -> newlib-csl-arm-2006q3-21
+2026-08-30T05:37:37.1154811Z  * [new tag]             newlib-csl-arm-2006q3-26    -> newlib-csl-arm-2006q3-26
+2026-08-30T05:37:37.1155385Z  * [new tag]             newlib-csl-arm-2006q3-27    -> newlib-csl-arm-2006q3-27
+2026-08-30T05:37:37.1155930Z  * [new tag]             newlib-csl-coldfire-4_1-28  -> newlib-csl-coldfire-4_1-28
+2026-08-30T05:37:37.1156770Z  * [new tag]             newlib-csl-coldfire-4_1-30  -> newlib-csl-coldfire-4_1-30
+2026-08-30T05:37:37.1157999Z  * [new tag]             newlib-csl-coldfire-4_1-32  -> newlib-csl-coldfire-4_1-32
+2026-08-30T05:37:37.1159629Z  * [new tag]             newlib-csl-innovasic-fido-3_4_4-33 -> newlib-csl-innovasic-fido-3_4_4-33
+2026-08-30T05:37:37.1162758Z  * [new tag]             newlib-csl-sourcerygxx-3_4_4-25 -> newlib-csl-sourcerygxx-3_4_4-25
+2026-08-30T05:37:37.1165064Z  * [new tag]             newlib-csl-sourcerygxx-4_1-12 -> newlib-csl-sourcerygxx-4_1-12
+2026-08-30T05:37:37.1165835Z  * [new tag]             newlib-csl-sourcerygxx-4_1-13 -> newlib-csl-sourcerygxx-4_1-13
+2026-08-30T05:37:37.1166782Z  * [new tag]             newlib-csl-sourcerygxx-4_1-14 -> newlib-csl-sourcerygxx-4_1-14
+2026-08-30T05:37:37.1168486Z  * [new tag]             newlib-csl-sourcerygxx-4_1-17 -> newlib-csl-sourcerygxx-4_1-17
+2026-08-30T05:37:37.1170225Z  * [new tag]             newlib-csl-sourcerygxx-4_1-18 -> newlib-csl-sourcerygxx-4_1-18
+2026-08-30T05:37:37.1172329Z  * [new tag]             newlib-csl-sourcerygxx-4_1-19 -> newlib-csl-sourcerygxx-4_1-19
+2026-08-30T05:37:37.1175440Z  * [new tag]             newlib-csl-sourcerygxx-4_1-21 -> newlib-csl-sourcerygxx-4_1-21
+2026-08-30T05:37:37.1178491Z  * [new tag]             newlib-csl-sourcerygxx-4_1-23 -> newlib-csl-sourcerygxx-4_1-23
+2026-08-30T05:37:37.1180629Z  * [new tag]             newlib-csl-sourcerygxx-4_1-24 -> newlib-csl-sourcerygxx-4_1-24
+2026-08-30T05:37:37.1183620Z  * [new tag]             newlib-csl-sourcerygxx-4_1-26 -> newlib-csl-sourcerygxx-4_1-26
+2026-08-30T05:37:37.1186128Z  * [new tag]             newlib-csl-sourcerygxx-4_1-27 -> newlib-csl-sourcerygxx-4_1-27
+2026-08-30T05:37:37.1189124Z  * [new tag]             newlib-csl-sourcerygxx-4_1-28 -> newlib-csl-sourcerygxx-4_1-28
+2026-08-30T05:37:37.1191224Z  * [new tag]             newlib-csl-sourcerygxx-4_1-30 -> newlib-csl-sourcerygxx-4_1-30
+2026-08-30T05:37:37.1193335Z  * [new tag]             newlib-csl-sourcerygxx-4_1-32 -> newlib-csl-sourcerygxx-4_1-32
+2026-08-30T05:37:37.1194393Z  * [new tag]             newlib-csl-sourcerygxx-4_1-4 -> newlib-csl-sourcerygxx-4_1-4
+2026-08-30T05:37:37.1195315Z  * [new tag]             newlib-csl-sourcerygxx-4_1-5 -> newlib-csl-sourcerygxx-4_1-5
+2026-08-30T05:37:37.1196224Z  * [new tag]             newlib-csl-sourcerygxx-4_1-6 -> newlib-csl-sourcerygxx-4_1-6
+2026-08-30T05:37:37.1197137Z  * [new tag]             newlib-csl-sourcerygxx-4_1-7 -> newlib-csl-sourcerygxx-4_1-7
+2026-08-30T05:37:37.1199680Z  * [new tag]             newlib-csl-sourcerygxx-4_1-8 -> newlib-csl-sourcerygxx-4_1-8
+2026-08-30T05:37:37.1201401Z  * [new tag]             newlib-csl-sourcerygxx-4_1-9 -> newlib-csl-sourcerygxx-4_1-9
+2026-08-30T05:37:37.1203241Z  * [new tag]             newlib-snapshot-20150323    -> newlib-snapshot-20150323
+2026-08-30T05:37:37.1205964Z  * [new tag]             newlib-snapshot-20150423    -> newlib-snapshot-20150423
+2026-08-30T05:37:37.1207944Z  * [new tag]             newlib-snapshot-20150526    -> newlib-snapshot-20150526
+2026-08-30T05:37:37.1209731Z  * [new tag]             newlib-snapshot-20150623    -> newlib-snapshot-20150623
+2026-08-30T05:37:37.1211592Z  * [new tag]             newlib-snapshot-20150723    -> newlib-snapshot-20150723
+2026-08-30T05:37:37.1213319Z  * [new tag]             newlib-snapshot-20150824    -> newlib-snapshot-20150824
+2026-08-30T05:37:37.1216391Z  * [new tag]             newlib-snapshot-20150924    -> newlib-snapshot-20150924
+2026-08-30T05:37:37.1218522Z  * [new tag]             newlib-snapshot-20151023    -> newlib-snapshot-20151023
+2026-08-30T05:37:37.1220266Z  * [new tag]             newlib-snapshot-20160104    -> newlib-snapshot-20160104
+2026-08-30T05:37:37.1222166Z  * [new tag]             newlib-snapshot-20160226    -> newlib-snapshot-20160226
+2026-08-30T05:37:37.1223922Z  * [new tag]             newlib-snapshot-20160527    -> newlib-snapshot-20160527
+2026-08-30T05:37:37.1226241Z  * [new tag]             newlib-snapshot-20160923    -> newlib-snapshot-20160923
+2026-08-30T05:37:37.1228154Z  * [new tag]             newlib-snapshot-20170228    -> newlib-snapshot-20170228
+2026-08-30T05:37:37.1230925Z  * [new tag]             newlib-snapshot-20170323    -> newlib-snapshot-20170323
+2026-08-30T05:37:37.1232826Z  * [new tag]             newlib-snapshot-20170421    -> newlib-snapshot-20170421
+2026-08-30T05:37:37.1234569Z  * [new tag]             newlib-snapshot-20170519    -> newlib-snapshot-20170519
+2026-08-30T05:37:37.1236415Z  * [new tag]             newlib-snapshot-20170623    -> newlib-snapshot-20170623
+2026-08-30T05:37:37.1238289Z  * [new tag]             newlib-snapshot-20170720    -> newlib-snapshot-20170720
+2026-08-30T05:37:37.1240375Z  * [new tag]             newlib-snapshot-20170818    -> newlib-snapshot-20170818
+2026-08-30T05:37:37.1242071Z  * [new tag]             newlib-snapshot-20170922    -> newlib-snapshot-20170922
+2026-08-30T05:37:37.1243862Z  * [new tag]             newlib-snapshot-20171222    -> newlib-snapshot-20171222
+2026-08-30T05:37:37.1245601Z  * [new tag]             newlib-snapshot-20180118    -> newlib-snapshot-20180118
+2026-08-30T05:37:37.1247740Z  * [new tag]             newlib-snapshot-20180226    -> newlib-snapshot-20180226
+2026-08-30T05:37:37.1250485Z  * [new tag]             newlib-snapshot-20180720    -> newlib-snapshot-20180720
+2026-08-30T05:37:37.1251687Z  * [new tag]             newlib-snapshot-20180802    -> newlib-snapshot-20180802
+2026-08-30T05:37:37.1252716Z  * [new tag]             newlib-snapshot-20180831    -> newlib-snapshot-20180831
+2026-08-30T05:37:37.1254183Z  * [new tag]             newlib-snapshot-20181231    -> newlib-snapshot-20181231
+2026-08-30T05:37:37.1255021Z  * [new tag]             newlib-snapshot-20200102    -> newlib-snapshot-20200102
+2026-08-30T05:37:37.1255981Z  * [new tag]             nickrob-async-20060513-branchpoint -> nickrob-async-20060513-branchpoint
+2026-08-30T05:37:37.1257077Z  * [new tag]             nickrob-async-20060828-mergepoint -> nickrob-async-20060828-mergepoint
+2026-08-30T05:37:37.1258323Z  * [new tag]             offbyone-20030313-branchpoint -> offbyone-20030313-branchpoint
+2026-08-30T05:37:37.1259222Z  * [new tag]             post-ptmalloc3              -> post-ptmalloc3
+2026-08-30T05:37:37.1259941Z  * [new tag]             post_wait_sig_exit          -> post_wait_sig_exit
+2026-08-30T05:37:37.1261949Z  * [new tag]             pre-cgf-merge               -> pre-cgf-merge
+2026-08-30T05:37:37.1263437Z  * [new tag]             pre-cygwin-heap             -> pre-cygwin-heap
+2026-08-30T05:37:37.1265356Z  * [new tag]             pre-no-this                 -> pre-no-this
+2026-08-30T05:37:37.1267575Z  * [new tag]             pre-notty                   -> pre-notty
+2026-08-30T05:37:37.1268287Z  * [new tag]             pre-posix-scan              -> pre-posix-scan
+2026-08-30T05:37:37.1268985Z  * [new tag]             pre-ptmalloc3               -> pre-ptmalloc3
+2026-08-30T05:37:37.1269744Z  * [new tag]             pre-ptymaster-archetype     -> pre-ptymaster-archetype
+2026-08-30T05:37:37.1270748Z  * [new tag]             pre-ripout-set_console_state_for_spawn -> pre-ripout-set_console_state_for_spawn
+2026-08-30T05:37:37.1273523Z  * [new tag]             pre-sigrewrite              -> pre-sigrewrite
+2026-08-30T05:37:37.1274261Z  * [new tag]             pre_wait_sig_exit           -> pre_wait_sig_exit
+2026-08-30T05:37:37.1275221Z  * [new tag]             predaemon                   -> predaemon
+2026-08-30T05:37:37.1275848Z  * [new tag]             prefifo                     -> prefifo
+2026-08-30T05:37:37.1278255Z  * [new tag]             preoverlapped               -> preoverlapped
+2026-08-30T05:37:37.1279437Z  * [new tag]             readline_4_3-import-branchpoint -> readline_4_3-import-branchpoint
+2026-08-30T05:37:37.1280935Z  * [new tag]             readline_5_1-import-branchpoint -> readline_5_1-import-branchpoint
+2026-08-30T05:37:37.1282193Z  * [new tag]             reparent-point              -> reparent-point
+2026-08-30T05:37:37.1283219Z  * [new tag]             repo-unification-2000-02-06 -> repo-unification-2000-02-06
+2026-08-30T05:37:37.1284812Z  * [new tag]             reverse-20080717-branchpoint -> reverse-20080717-branchpoint
+2026-08-30T05:37:37.1286094Z  * [new tag]             reverse-20080930-branchpoint -> reverse-20080930-branchpoint
+2026-08-30T05:37:37.1287939Z  * [new tag]             reverse-20081226-branchpoint -> reverse-20081226-branchpoint
+2026-08-30T05:37:37.1289802Z  * [new tag]             sid-20020905-branchpoint    -> sid-20020905-branchpoint
+2026-08-30T05:37:37.1291550Z  * [new tag]             sid-snapshot-20071001       -> sid-snapshot-20071001
+2026-08-30T05:37:37.1293062Z  * [new tag]             sid-snapshot-20071101       -> sid-snapshot-20071101
+2026-08-30T05:37:37.1294868Z  * [new tag]             sid-snapshot-20071201       -> sid-snapshot-20071201
+2026-08-30T05:37:37.1296944Z  * [new tag]             sid-snapshot-20080101       -> sid-snapshot-20080101
+2026-08-30T05:37:37.1298577Z  * [new tag]             sid-snapshot-20080201       -> sid-snapshot-20080201
+2026-08-30T05:37:37.1300632Z  * [new tag]             sid-snapshot-20080301       -> sid-snapshot-20080301
+2026-08-30T05:37:37.1302620Z  * [new tag]             sid-snapshot-20080401       -> sid-snapshot-20080401
+2026-08-30T05:37:37.1304185Z  * [new tag]             sid-snapshot-20080403       -> sid-snapshot-20080403
+2026-08-30T05:37:37.1307653Z  * [new tag]             sid-snapshot-20080501       -> sid-snapshot-20080501
+2026-08-30T05:37:37.1308149Z  * [new tag]             sid-snapshot-20080601       -> sid-snapshot-20080601
+2026-08-30T05:37:37.1309283Z  * [new tag]             sid-snapshot-20080701       -> sid-snapshot-20080701
+2026-08-30T05:37:37.1310804Z  * [new tag]             sid-snapshot-20080801       -> sid-snapshot-20080801
+2026-08-30T05:37:37.1312943Z  * [new tag]             sid-snapshot-20080901       -> sid-snapshot-20080901
+2026-08-30T05:37:37.1314785Z  * [new tag]             sid-snapshot-20081001       -> sid-snapshot-20081001
+2026-08-30T05:37:37.1316326Z  * [new tag]             sid-snapshot-20081101       -> sid-snapshot-20081101
+2026-08-30T05:37:37.1318168Z  * [new tag]             sid-snapshot-20081201       -> sid-snapshot-20081201
+2026-08-30T05:37:37.1320269Z  * [new tag]             sid-snapshot-20090101       -> sid-snapshot-20090101
+2026-08-30T05:37:37.1322032Z  * [new tag]             sid-snapshot-20090201       -> sid-snapshot-20090201
+2026-08-30T05:37:37.1323749Z  * [new tag]             sid-snapshot-20090301       -> sid-snapshot-20090301
+2026-08-30T05:37:37.1325365Z  * [new tag]             sid-snapshot-20090401       -> sid-snapshot-20090401
+2026-08-30T05:37:37.1327390Z  * [new tag]             sid-snapshot-20090501       -> sid-snapshot-20090501
+2026-08-30T05:37:37.1328792Z  * [new tag]             sid-snapshot-20090601       -> sid-snapshot-20090601
+2026-08-30T05:37:37.1330884Z  * [new tag]             sid-snapshot-20090701       -> sid-snapshot-20090701
+2026-08-30T05:37:37.1333006Z  * [new tag]             sid-snapshot-20090801       -> sid-snapshot-20090801
+2026-08-30T05:37:37.1334319Z  * [new tag]             sid-snapshot-20090901       -> sid-snapshot-20090901
+2026-08-30T05:37:37.1336219Z  * [new tag]             sid-snapshot-20091001       -> sid-snapshot-20091001
+2026-08-30T05:37:37.1337971Z  * [new tag]             sid-snapshot-20091101       -> sid-snapshot-20091101
+2026-08-30T05:37:37.1340084Z  * [new tag]             sid-snapshot-20091201       -> sid-snapshot-20091201
+2026-08-30T05:37:37.1341663Z  * [new tag]             sid-snapshot-20100101       -> sid-snapshot-20100101
+2026-08-30T05:37:37.1343391Z  * [new tag]             sid-snapshot-20100201       -> sid-snapshot-20100201
+2026-08-30T05:37:37.1345327Z  * [new tag]             sid-snapshot-20100301       -> sid-snapshot-20100301
+2026-08-30T05:37:37.1347030Z  * [new tag]             sid-snapshot-20100401       -> sid-snapshot-20100401
+2026-08-30T05:37:37.1348938Z  * [new tag]             sid-snapshot-20100501       -> sid-snapshot-20100501
+2026-08-30T05:37:37.1350984Z  * [new tag]             sid-snapshot-20100601       -> sid-snapshot-20100601
+2026-08-30T05:37:37.1352349Z  * [new tag]             sid-snapshot-20100701       -> sid-snapshot-20100701
+2026-08-30T05:37:37.1354378Z  * [new tag]             sid-snapshot-20100801       -> sid-snapshot-20100801
+2026-08-30T05:37:37.1355917Z  * [new tag]             sid-snapshot-20100901       -> sid-snapshot-20100901
+2026-08-30T05:37:37.1357692Z  * [new tag]             sid-snapshot-20101001       -> sid-snapshot-20101001
+2026-08-30T05:37:37.1359645Z  * [new tag]             sid-snapshot-20101101       -> sid-snapshot-20101101
+2026-08-30T05:37:37.1361512Z  * [new tag]             sid-snapshot-20101201       -> sid-snapshot-20101201
+2026-08-30T05:37:37.1363242Z  * [new tag]             sid-snapshot-20110101       -> sid-snapshot-20110101
+2026-08-30T05:37:37.1365248Z  * [new tag]             sid-snapshot-20110201       -> sid-snapshot-20110201
+2026-08-30T05:37:37.1366888Z  * [new tag]             sid-snapshot-20110301       -> sid-snapshot-20110301
+2026-08-30T05:37:37.1368764Z  * [new tag]             sid-snapshot-20110401       -> sid-snapshot-20110401
+2026-08-30T05:37:37.1370591Z  * [new tag]             sid-snapshot-20110501       -> sid-snapshot-20110501
+2026-08-30T05:37:37.1372013Z  * [new tag]             sid-snapshot-20110601       -> sid-snapshot-20110601
+2026-08-30T05:37:37.1373770Z  * [new tag]             sid-snapshot-20110701       -> sid-snapshot-20110701
+2026-08-30T05:37:37.1375584Z  * [new tag]             sid-snapshot-20110801       -> sid-snapshot-20110801
+2026-08-30T05:37:37.1377812Z  * [new tag]             sid-snapshot-20110901       -> sid-snapshot-20110901
+2026-08-30T05:37:37.1379210Z  * [new tag]             sid-snapshot-20111001       -> sid-snapshot-20111001
+2026-08-30T05:37:37.1380909Z  * [new tag]             sid-snapshot-20111101       -> sid-snapshot-20111101
+2026-08-30T05:37:37.1382831Z  * [new tag]             sid-snapshot-20111201       -> sid-snapshot-20111201
+2026-08-30T05:37:37.1384431Z  * [new tag]             sid-snapshot-20120101       -> sid-snapshot-20120101
+2026-08-30T05:37:37.1386430Z  * [new tag]             sid-snapshot-20120201       -> sid-snapshot-20120201
+2026-08-30T05:37:37.1388371Z  * [new tag]             sid-snapshot-20120301       -> sid-snapshot-20120301
+2026-08-30T05:37:37.1390283Z  * [new tag]             sid-snapshot-20120401       -> sid-snapshot-20120401
+2026-08-30T05:37:37.1392076Z  * [new tag]             sid-snapshot-20120501       -> sid-snapshot-20120501
+2026-08-30T05:37:37.1393726Z  * [new tag]             sid-snapshot-20120601       -> sid-snapshot-20120601
+2026-08-30T05:37:37.1395902Z  * [new tag]             sid-snapshot-20120701       -> sid-snapshot-20120701
+2026-08-30T05:37:37.1397952Z  * [new tag]             sid-snapshot-20120801       -> sid-snapshot-20120801
+2026-08-30T05:37:37.1399103Z  * [new tag]             sid-snapshot-20120901       -> sid-snapshot-20120901
+2026-08-30T05:37:37.1401250Z  * [new tag]             sid-snapshot-20121001       -> sid-snapshot-20121001
+2026-08-30T05:37:37.1417957Z  * [new tag]             sid-snapshot-20121101       -> sid-snapshot-20121101
+2026-08-30T05:37:37.1418665Z  * [new tag]             sid-snapshot-20121201       -> sid-snapshot-20121201
+2026-08-30T05:37:37.1419960Z  * [new tag]             sid-snapshot-20130101       -> sid-snapshot-20130101
+2026-08-30T05:37:37.1420287Z  * [new tag]             sid-snapshot-20130201       -> sid-snapshot-20130201
+2026-08-30T05:37:37.1421014Z  * [new tag]             sid-snapshot-20130301       -> sid-snapshot-20130301
+2026-08-30T05:37:37.1421313Z  * [new tag]             sid-snapshot-20130401       -> sid-snapshot-20130401
+2026-08-30T05:37:37.1421609Z  * [new tag]             sid-snapshot-20130501       -> sid-snapshot-20130501
+2026-08-30T05:37:37.1421909Z  * [new tag]             sid-snapshot-20130601       -> sid-snapshot-20130601
+2026-08-30T05:37:37.1422190Z  * [new tag]             sid-snapshot-20130701       -> sid-snapshot-20130701
+2026-08-30T05:37:37.1422485Z  * [new tag]             sid-snapshot-20130801       -> sid-snapshot-20130801
+2026-08-30T05:37:37.1424775Z  * [new tag]             sid-snapshot-20130901       -> sid-snapshot-20130901
+2026-08-30T05:37:37.1425477Z  * [new tag]             sid-snapshot-20131001       -> sid-snapshot-20131001
+2026-08-30T05:37:37.1426447Z  * [new tag]             sid-snapshot-20131101       -> sid-snapshot-20131101
+2026-08-30T05:37:37.1426919Z  * [new tag]             sid-snapshot-20131201       -> sid-snapshot-20131201
+2026-08-30T05:37:37.1427927Z  * [new tag]             sid-snapshot-20140101       -> sid-snapshot-20140101
+2026-08-30T05:37:37.1429708Z  * [new tag]             sid-snapshot-20140201       -> sid-snapshot-20140201
+2026-08-30T05:37:37.1430733Z  * [new tag]             sid-snapshot-20140301       -> sid-snapshot-20140301
+2026-08-30T05:37:37.1432072Z  * [new tag]             sid-snapshot-20140401       -> sid-snapshot-20140401
+2026-08-30T05:37:37.1434118Z  * [new tag]             sid-snapshot-20140501       -> sid-snapshot-20140501
+2026-08-30T05:37:37.1435569Z  * [new tag]             sid-snapshot-20140601       -> sid-snapshot-20140601
+2026-08-30T05:37:37.1437645Z  * [new tag]             sid-snapshot-20140701       -> sid-snapshot-20140701
+2026-08-30T05:37:37.1439264Z  * [new tag]             sid-snapshot-20140801       -> sid-snapshot-20140801
+2026-08-30T05:37:37.1441225Z  * [new tag]             sid-snapshot-20140901       -> sid-snapshot-20140901
+2026-08-30T05:37:37.1442623Z  * [new tag]             sid-snapshot-20141001       -> sid-snapshot-20141001
+2026-08-30T05:37:37.1444337Z  * [new tag]             sid-snapshot-20141101       -> sid-snapshot-20141101
+2026-08-30T05:37:37.1446061Z  * [new tag]             sid-snapshot-20141201       -> sid-snapshot-20141201
+2026-08-30T05:37:37.1447659Z  * [new tag]             sid-snapshot-20150101       -> sid-snapshot-20150101
+2026-08-30T05:37:37.1449549Z  * [new tag]             sid-snapshot-20150201       -> sid-snapshot-20150201
+2026-08-30T05:37:37.1450941Z  * [new tag]             sid-snapshot-20150301       -> sid-snapshot-20150301
+2026-08-30T05:37:37.1453016Z  * [new tag]             tcltk840-20020924-branchpoint -> tcltk840-20020924-branchpoint
+2026-08-30T05:37:37.1454463Z  * [new tag]             w32api-1_5                  -> w32api-1_5
+2026-08-30T05:37:37.1455901Z  * [new tag]             w32api-2_2                  -> w32api-2_2
+2026-08-30T05:37:37.1457616Z  * [new tag]             winsup-2000-02-17           -> winsup-2000-02-17
+2026-08-30T05:37:37.1459549Z  * [new tag]             x86_64versiong3             -> x86_64versiong3
+2026-08-30T05:37:37.1461134Z  * [new tag]             zephyr-sdk-0.17.4           -> zephyr-sdk-0.17.4
+2026-08-30T05:37:37.9036308Z HEAD is now at d07c38ff0 Version 1.8.2
+2026-08-30T05:37:38.0335333Z HEAD is now at d07c38ff0 Version 1.8.2
+2026-08-30T05:37:38.0341728Z === updating segger (modules/debug/segger):
+2026-08-30T05:37:38.0342392Z --- segger: initializing
+2026-08-30T05:37:38.0376164Z Initialized empty Git repository in /__w/zmk-config/zmk-config/modules/debug/segger/.git/
+2026-08-30T05:37:38.0413318Z --- segger: fetching, need revision 9d0191285956cef43daf411edc2f1a7788346def
+2026-08-30T05:37:38.4648937Z From https://github.com/zephyrproject-rtos/segger
+2026-08-30T05:37:38.4649815Z  * [new branch]      master       -> refs/west/master
+2026-08-30T05:37:38.4650330Z  * [new branch]      v1.14-branch -> refs/west/v1.14-branch
+2026-08-30T05:37:38.4878994Z HEAD is now at 9d01912 segger: config: RTT spinlock implementation
+2026-08-30T05:37:38.4950017Z HEAD is now at 9d01912 segger: config: RTT spinlock implementation
+2026-08-30T05:37:38.4954663Z === updating tinycrypt (modules/crypto/tinycrypt):
+2026-08-30T05:37:38.4955780Z --- tinycrypt: initializing
+2026-08-30T05:37:38.4989199Z Initialized empty Git repository in /__w/zmk-config/zmk-config/modules/crypto/tinycrypt/.git/
+2026-08-30T05:37:38.5028453Z --- tinycrypt: fetching, need revision 3e9a49d2672ec01435ffbf0d788db6d95ef28de0
+2026-08-30T05:37:38.8409538Z From https://github.com/zephyrproject-rtos/tinycrypt
+2026-08-30T05:37:38.8410075Z  * [new branch]      master     -> refs/west/master
+2026-08-30T05:37:38.8574012Z HEAD is now at 3e9a49d cmake: Fix conditional in root CMakeLists.txt
+2026-08-30T05:37:38.8641503Z HEAD is now at 3e9a49d cmake: Fix conditional in root CMakeLists.txt
+2026-08-30T05:37:38.8646273Z === updating trusted-firmware-a (modules/tee/tf-a/trusted-firmware-a):
+2026-08-30T05:37:38.8647060Z --- trusted-firmware-a: initializing
+2026-08-30T05:37:38.8679379Z Initialized empty Git repository in /__w/zmk-config/zmk-config/modules/tee/tf-a/trusted-firmware-a/.git/
+2026-08-30T05:37:38.8717886Z --- trusted-firmware-a: fetching, need revision 421dc050278287839f5c70019bd6aec617f2bbdb
+2026-08-30T05:37:42.3283339Z From https://github.com/zephyrproject-rtos/trusted-firmware-a
+2026-08-30T05:37:42.3285423Z  * [new branch]          master                -> refs/west/master
+2026-08-30T05:37:42.3286281Z  * [new branch]          zephyr-tfa-v2.10.4    -> refs/west/zephyr-tfa-v2.10.4
+2026-08-30T05:37:42.3286808Z  * [new branch]          zephyr_tf-a_lts-v2.14 -> refs/west/zephyr_tf-a_lts-v2.14
+2026-08-30T05:37:42.3300088Z  * [new tag]             arm_cca_v0.1          -> arm_cca_v0.1
+2026-08-30T05:37:42.3301625Z  * [new tag]             arm_cca_v0.2          -> arm_cca_v0.2
+2026-08-30T05:37:42.3302277Z  * [new tag]             arm_cca_v0.3          -> arm_cca_v0.3
+2026-08-30T05:37:42.3303464Z  * [new tag]             for-v0.4-rc0          -> for-v0.4-rc0
+2026-08-30T05:37:42.3305088Z  * [new tag]             for-v0.4/05.20        -> for-v0.4/05.20
+2026-08-30T05:37:42.3307876Z  * [new tag]             for-v0.4/05.21        -> for-v0.4/05.21
+2026-08-30T05:37:42.3308850Z  * [new tag]             for-v0.4/05.22        -> for-v0.4/05.22
+2026-08-30T05:37:42.3310674Z  * [new tag]             v0.2                  -> v0.2
+2026-08-30T05:37:42.3311272Z  * [new tag]             v0.3                  -> v0.3
+2026-08-30T05:37:42.3312446Z  * [new tag]             v0.3-Juno             -> v0.3-Juno
+2026-08-30T05:37:42.3313439Z  * [new tag]             v0.3-Juno-0.2         -> v0.3-Juno-0.2
+2026-08-30T05:37:42.3315004Z  * [new tag]             v0.3-Juno-0.3         -> v0.3-Juno-0.3
+2026-08-30T05:37:42.3316215Z  * [new tag]             v0.4                  -> v0.4
+2026-08-30T05:37:42.3317217Z  * [new tag]             v0.4-Juno-0.4         -> v0.4-Juno-0.4
+2026-08-30T05:37:42.3319252Z  * [new tag]             v0.4-Juno-0.4-rc0     -> v0.4-Juno-0.4-rc0
+2026-08-30T05:37:42.3320748Z  * [new tag]             v0.4-Juno-0.5         -> v0.4-Juno-0.5
+2026-08-30T05:37:42.3322030Z  * [new tag]             v0.4-Juno-0.5-rc0     -> v0.4-Juno-0.5-rc0
+2026-08-30T05:37:42.3323366Z  * [new tag]             v0.4-Juno-0.5-rc1     -> v0.4-Juno-0.5-rc1
+2026-08-30T05:37:42.3325745Z  * [new tag]             v0.4-Juno-0.6-rc0     -> v0.4-Juno-0.6-rc0
+2026-08-30T05:37:42.3327412Z  * [new tag]             v0.4-Juno-0.6-rc1     -> v0.4-Juno-0.6-rc1
+2026-08-30T05:37:42.3328707Z  * [new tag]             v0.4-rc1              -> v0.4-rc1
+2026-08-30T05:37:42.3330196Z  * [new tag]             v0.4-rc2              -> v0.4-rc2
+2026-08-30T05:37:42.3330976Z  * [new tag]             v1.0                  -> v1.0
+2026-08-30T05:37:42.3332905Z  * [new tag]             v1.0-rc0              -> v1.0-rc0
+2026-08-30T05:37:42.3334883Z  * [new tag]             v1.1                  -> v1.1
+2026-08-30T05:37:42.3335380Z  * [new tag]             v1.1-Juno-0.1         -> v1.1-Juno-0.1
+2026-08-30T05:37:42.3337102Z  * [new tag]             v1.1-rc0              -> v1.1-rc0
+2026-08-30T05:37:42.3338871Z  * [new tag]             v1.1-rc1              -> v1.1-rc1
+2026-08-30T05:37:42.3341196Z  * [new tag]             v1.1-rc2              -> v1.1-rc2
+2026-08-30T05:37:42.3342087Z  * [new tag]             v1.1-rc3              -> v1.1-rc3
+2026-08-30T05:37:42.3343834Z  * [new tag]             v1.2                  -> v1.2
+2026-08-30T05:37:42.3345432Z  * [new tag]             v1.2-rc0              -> v1.2-rc0
+2026-08-30T05:37:42.3347420Z  * [new tag]             v1.3                  -> v1.3
+2026-08-30T05:37:42.3349043Z  * [new tag]             v1.3-rc0              -> v1.3-rc0
+2026-08-30T05:37:42.3350389Z  * [new tag]             v1.3_rc1              -> v1.3_rc1
+2026-08-30T05:37:42.3352073Z  * [new tag]             v1.3_rc2              -> v1.3_rc2
+2026-08-30T05:37:42.3353671Z  * [new tag]             v1.4                  -> v1.4
+2026-08-30T05:37:42.3355378Z  * [new tag]             v1.4-rc0              -> v1.4-rc0
+2026-08-30T05:37:42.3356912Z  * [new tag]             v1.5                  -> v1.5
+2026-08-30T05:37:42.3358488Z  * [new tag]             v1.5-rc0              -> v1.5-rc0
+2026-08-30T05:37:42.3360305Z  * [new tag]             v1.5-rc1              -> v1.5-rc1
+2026-08-30T05:37:42.3362143Z  * [new tag]             v1.5-rc2              -> v1.5-rc2
+2026-08-30T05:37:42.3363271Z  * [new tag]             v1.5-rc3              -> v1.5-rc3
+2026-08-30T05:37:42.3365175Z  * [new tag]             v1.6                  -> v1.6
+2026-08-30T05:37:42.3366970Z  * [new tag]             v1.6-rc0              -> v1.6-rc0
+2026-08-30T05:37:42.3368280Z  * [new tag]             v1.6-rc1              -> v1.6-rc1
+2026-08-30T05:37:42.3370073Z  * [new tag]             v2.0                  -> v2.0
+2026-08-30T05:37:42.3372342Z  * [new tag]             v2.0-rc0              -> v2.0-rc0
+2026-08-30T05:37:42.3374000Z  * [new tag]             v2.1                  -> v2.1
+2026-08-30T05:37:42.3375906Z  * [new tag]             v2.1-rc0              -> v2.1-rc0
+2026-08-30T05:37:42.3376954Z  * [new tag]             v2.1-rc1              -> v2.1-rc1
+2026-08-30T05:37:42.3380408Z  * [new tag]             v2.2                  -> v2.2
+2026-08-30T05:37:42.3381049Z  * [new tag]             v2.2-rc0              -> v2.2-rc0
+2026-08-30T05:37:42.3382211Z  * [new tag]             v2.2-rc1              -> v2.2-rc1
+2026-08-30T05:37:42.3384123Z  * [new tag]             v2.2-rc2              -> v2.2-rc2
+2026-08-30T05:37:42.3385756Z  * [new tag]             v2.3                  -> v2.3
+2026-08-30T05:37:42.3387568Z  * [new tag]             v2.3-rc0              -> v2.3-rc0
+2026-08-30T05:37:42.3389097Z  * [new tag]             v2.3-rc1              -> v2.3-rc1
+2026-08-30T05:37:42.3390722Z  * [new tag]             v2.3-rc2              -> v2.3-rc2
+2026-08-30T05:37:42.3392392Z  * [new tag]             v2.4                  -> v2.4
+2026-08-30T05:37:42.3393852Z  * [new tag]             v2.4-rc0              -> v2.4-rc0
+2026-08-30T05:37:42.3396143Z  * [new tag]             v2.4-rc1              -> v2.4-rc1
+2026-08-30T05:37:42.3397788Z  * [new tag]             v2.4-rc2              -> v2.4-rc2
+2026-08-30T05:37:42.3399042Z  * [new tag]             v2.5                  -> v2.5
+2026-08-30T05:37:42.3401054Z  * [new tag]             v2.5-rc0              -> v2.5-rc0
+2026-08-30T05:37:42.3403024Z  * [new tag]             v2.5-rc1              -> v2.5-rc1
+2026-08-30T05:37:42.3403888Z  * [new tag]             v2.6                  -> v2.6
+2026-08-30T05:37:42.3406172Z  * [new tag]             v2.6-rc0              -> v2.6-rc0
+2026-08-30T05:37:42.3407658Z  * [new tag]             v2.6-rc1              -> v2.6-rc1
+2026-08-30T05:37:42.3409638Z  * [new tag]             v2.7                  -> v2.7
+2026-08-30T05:37:42.3410784Z  * [new tag]             v2.7-rc0              -> v2.7-rc0
+2026-08-30T05:37:42.3412683Z  * [new tag]             v2.7-rc1              -> v2.7-rc1
+2026-08-30T05:37:42.3413983Z  * [new tag]             v2.7.0                -> v2.7.0
+2026-08-30T05:37:42.3416097Z  * [new tag]             zephyr-lts-v2.10.4    -> zephyr-lts-v2.10.4
+2026-08-30T05:37:42.6759284Z HEAD is now at 421dc0502 Merge pull request #3 from SgrrZhf/topics/huizha01/2.9.0-updates
+2026-08-30T05:37:42.8435289Z HEAD is now at 421dc0502 Merge pull request #3 from SgrrZhf/topics/huizha01/2.9.0-updates
+2026-08-30T05:37:42.8440873Z === updating uoscore-uedhoc (modules/lib/uoscore-uedhoc):
+2026-08-30T05:37:42.8441444Z --- uoscore-uedhoc: initializing
+2026-08-30T05:37:42.8490756Z Initialized empty Git repository in /__w/zmk-config/zmk-config/modules/lib/uoscore-uedhoc/.git/
+2026-08-30T05:37:42.8533837Z --- uoscore-uedhoc: fetching, need revision 5fe2cb613bd7e4590bd1b00c2adf181ac0229379
+2026-08-30T05:37:43.5464505Z From https://github.com/zephyrproject-rtos/uoscore-uedhoc
+2026-08-30T05:37:43.5465923Z  * [new branch]      zephyr     -> refs/west/zephyr
+2026-08-30T05:37:43.5819761Z HEAD is now at 5fe2cb6 2.2.1
+2026-08-30T05:37:43.5983836Z HEAD is now at 5fe2cb6 2.2.1
+2026-08-30T05:37:43.5991537Z === updating zcbor (modules/lib/zcbor):
+2026-08-30T05:37:43.5992114Z --- zcbor: initializing
+2026-08-30T05:37:43.6026948Z Initialized empty Git repository in /__w/zmk-config/zmk-config/modules/lib/zcbor/.git/
+2026-08-30T05:37:43.6075042Z --- zcbor: fetching, need revision 67fd8bb88d3136738661fa8bb5f9989103f4599e
+2026-08-30T05:37:44.0502378Z From https://github.com/zephyrproject-rtos/zcbor
+2026-08-30T05:37:44.0503428Z  * [new branch]      main              -> refs/west/main
+2026-08-30T05:37:44.0504722Z  * [new branch]      release/0.6.1     -> refs/west/release/0.6.1
+2026-08-30T05:37:44.0505589Z  * [new branch]      release/0.8.2     -> refs/west/release/0.8.2
+2026-08-30T05:37:44.0507849Z  * [new tag]         0.1.0             -> 0.1.0
+2026-08-30T05:37:44.0509562Z  * [new tag]         0.2.0             -> 0.2.0
+2026-08-30T05:37:44.0510871Z  * [new tag]         0.3.0             -> 0.3.0
+2026-08-30T05:37:44.0512829Z  * [new tag]         0.3.1             -> 0.3.1
+2026-08-30T05:37:44.0514215Z  * [new tag]         0.4.0             -> 0.4.0
+2026-08-30T05:37:44.0515667Z  * [new tag]         0.5.0             -> 0.5.0
+2026-08-30T05:37:44.0517027Z  * [new tag]         0.5.1             -> 0.5.1
+2026-08-30T05:37:44.0519098Z  * [new tag]         0.6.0             -> 0.6.0
+2026-08-30T05:37:44.0520071Z  * [new tag]         0.8.0             -> 0.8.0
+2026-08-30T05:37:44.0521684Z  * [new tag]         0.8.1             -> 0.8.1
+2026-08-30T05:37:44.0522962Z  * [new tag]         0.9.0             -> 0.9.0
+2026-08-30T05:37:44.0524501Z  * [new tag]         0.9.1             -> 0.9.1
+2026-08-30T05:37:44.0526480Z  * [new tag]         deprecated-master -> deprecated-master
+2026-08-30T05:37:44.0527683Z  * [new tag]         inital-pr         -> inital-pr
+2026-08-30T05:37:44.0529408Z  * [new tag]         old-structure     -> old-structure
+2026-08-30T05:37:44.0818709Z HEAD is now at 67fd8bb Update version from 0.6.99 to 0.7.0
+2026-08-30T05:37:44.0925953Z HEAD is now at 67fd8bb Update version from 0.6.99 to 0.7.0

@@ -1,0 +1,12 @@
+﻿2026-08-30T05:37:44.1285891Z ##[group]Run west zephyr-export
+2026-08-30T05:37:44.1286216Z [36;1mwest zephyr-export[0m
+2026-08-30T05:37:44.1286581Z shell: sh -e {0}
+2026-08-30T05:37:44.1286784Z ##[endgroup]
+2026-08-30T05:37:44.7108192Z Zephyr (/__w/zmk-config/zmk-config/zephyr/share/zephyr-package/cmake)
+2026-08-30T05:37:44.7109048Z has been added to the user package registry in:
+2026-08-30T05:37:44.7109613Z ~/.cmake/packages/Zephyr
+2026-08-30T05:37:44.7109875Z 
+2026-08-30T05:37:45.0061312Z ZephyrUnittest (/__w/zmk-config/zmk-config/zephyr/share/zephyrunittest-package/cmake)
+2026-08-30T05:37:45.0062212Z has been added to the user package registry in:
+2026-08-30T05:37:45.0062702Z ~/.cmake/packages/ZephyrUnittest
+2026-08-30T05:37:45.0062971Z 

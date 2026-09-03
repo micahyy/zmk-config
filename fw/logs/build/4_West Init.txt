@@ -1,0 +1,7 @@
+﻿2026-08-30T05:35:21.6642054Z ##[group]Run west init -l config
+2026-08-30T05:35:21.6642508Z [36;1mwest init -l config[0m
+2026-08-30T05:35:21.6645958Z shell: sh -e {0}
+2026-08-30T05:35:21.6646212Z ##[endgroup]
+2026-08-30T05:35:21.8480945Z === Initializing from existing manifest repository config
+2026-08-30T05:35:21.8481963Z --- Creating /__w/zmk-config/zmk-config/.west and local configuration file
+2026-08-30T05:35:21.8491409Z === Initialized. Now run "west update" inside /__w/zmk-config/zmk-config.

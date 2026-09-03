@@ -86,6 +86,12 @@ static int64_t confirm_deadline = 0;
 static int cue_led = -1;
 static int64_t cue_deadline = 0;
 
+/* Index carried by the last profile-changed event. ZMK raises that event
+ * not only on a real key-driven profile switch but also on BLE connect,
+ * disconnect and pairing completion (all with the SAME active index); a
+ * real switch is the only case where the index actually changes. */
+static int last_evt_profile = -1;
+
 static void led_set(int idx, bool on) {
     if (on) {
         led_on(led_dev, idx);
@@ -209,29 +215,42 @@ static int ble_profile_listener(const zmk_event_t *eh) {
         return 0;
     }
 
+    /* ZMK raises this event on connect/disconnect/pairing too, always with
+     * the SAME index; only a real key-driven switch changes the index.
+     * The first event after boot (index sync, e.g. a host reconnecting)
+     * is treated as a state sync, never as a switch. */
+    bool real_switch = (last_evt_profile >= 0) && (last_evt_profile != ev->index);
+    last_evt_profile = ev->index;
+
     /* Rename the advertiser so hosts show czm_ble_1/2/3 per channel. */
     static char name[16];
     snprintf(name, sizeof(name), "czm_ble_%d", ev->index + 1);
     zmk_ble_set_device_name(name);
 
 #if defined(CONFIG_SETTINGS)
-    /* Persist the active profile immediately: ZMK's own save is debounced
-     * ~60s (CONFIG_ZMK_SETTINGS_SAVE_DEBOUNCE), so switching channels and
-     * powering off within a minute would otherwise revert to the old
-     * channel at next boot. Key/length must match ZMK ble.c (uint8). */
-    uint8_t prof_idx = (uint8_t)ev->index;
-    settings_save_one("ble/active_profile", &prof_idx, sizeof(prof_idx));
+    /* Persist the active profile immediately on a real switch: ZMK's own
+     * save is debounced ~60s (CONFIG_ZMK_SETTINGS_SAVE_DEBOUNCE), so
+     * switching channels and powering off within a minute would otherwise
+     * revert to the old channel at next boot. Key/length must match ZMK
+     * ble.c (uint8). */
+    if (real_switch) {
+        uint8_t prof_idx = (uint8_t)ev->index;
+        settings_save_one("ble/active_profile", &prof_idx, sizeof(prof_idx));
+    }
 #endif
 
-    /* USB cue: a profile switch while plugged in (real key press only;
-     * zmk_ble_prof_select bails out when the profile is unchanged, and
-     * power-on state sync never raises this event) blinks the target blue
-     * LED for 2s. In BLE the blink/solid logic in refresh_all already
-     * covers it, so cue is USB-only. */
-    struct zmk_endpoint_instance ep = zmk_endpoints_selected();
-    if (ep.transport == ZMK_TRANSPORT_USB) {
-        cue_led = LED_BLE0 + ev->index;
-        cue_deadline = k_uptime_get() + CONFIRM_MS;
+    /* USB cue: a real profile switch while plugged in blinks the target
+     * blue LED for 2s (FN+1/2/3 feedback). Connect/disconnect events must
+     * NOT fire it - e.g. plugging USB in while a BLE host is still
+     * connected raises a profile-changed event with the same index, which
+     * previously flashed BLE1 at USB insert. In BLE mode the blink/solid
+     * logic in refresh_all already covers switches, so cue is USB-only. */
+    if (real_switch) {
+        struct zmk_endpoint_instance ep = zmk_endpoints_selected();
+        if (ep.transport == ZMK_TRANSPORT_USB) {
+            cue_led = LED_BLE0 + ev->index;
+            cue_deadline = k_uptime_get() + CONFIRM_MS;
+        }
     }
 
     LOG_INF("BLE profile %d (connected=%d)", ev->index,
@@ -282,6 +301,12 @@ static int dz17_led_init(void) {
 
     /* First tick runs immediately and arms the correct window/edges. */
     refresh_all();
+
+    /* Baseline for real-switch detection in the profile listener: whatever
+     * profile is active at boot (restored from settings) is "state sync",
+     * so the first genuine key press to a different channel still cues. */
+    last_evt_profile = zmk_ble_active_profile_index();
+
     k_work_schedule(&tick_work, K_MSEC(TICK_MS));
 
     LOG_INF("DZ17 mono LEDs ready: Num=P0.22 BLE1=P0.12 BLE2=P0.04 BLE3=P0.26 USB=P0.08");

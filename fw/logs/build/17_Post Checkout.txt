@@ -1,0 +1,16 @@
+﻿2026-08-30T05:37:54.0120246Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-08-30T05:37:54.0122479Z Post job cleanup.
+2026-08-30T05:37:54.0140691Z ##[command]/usr/bin/docker exec  52841959353d432eae1a394107b0dc03c8387ef2e3f5ef3f170e75927d60b79d sh -c "cat /etc/*release | grep ^ID"
+2026-08-30T05:37:54.2297946Z [command]/usr/bin/git version
+2026-08-30T05:37:54.2352367Z git version 2.43.0
+2026-08-30T05:37:54.2450646Z Temporarily overriding HOME='/__w/_temp/becab638-ad7d-4cbd-87b2-2ddebd492d7a' before making global git config changes
+2026-08-30T05:37:54.2453627Z Adding repository directory to the temporary git global config as a safe directory
+2026-08-30T05:37:54.2456132Z [command]/usr/bin/git config --global --add safe.directory /__w/zmk-config/zmk-config
+2026-08-30T05:37:54.2522186Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-08-30T05:37:54.2603872Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-08-30T05:37:54.2954052Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-08-30T05:37:54.2992869Z http.https://github.com/.extraheader
+2026-08-30T05:37:54.3000503Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-08-30T05:37:54.3047836Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-08-30T05:37:54.3423714Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-08-30T05:37:54.3496935Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url

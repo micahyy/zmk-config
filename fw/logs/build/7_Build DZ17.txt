@@ -1,0 +1,145 @@
+﻿2026-08-30T05:37:45.0392653Z ##[group]Run west build -s zmk/app -b nice_nano_v2 -- -DSHIELD=dz17 -DZMK_CONFIG="${GITHUB_WORKSPACE}/config" -DSNIPPET="studio-rpc-usb-uart" -DCONFIG_ZMK_STUDIO=y
+2026-08-30T05:37:45.0393839Z [36;1mwest build -s zmk/app -b nice_nano_v2 -- -DSHIELD=dz17 -DZMK_CONFIG="${GITHUB_WORKSPACE}/config" -DSNIPPET="studio-rpc-usb-uart" -DCONFIG_ZMK_STUDIO=y[0m
+2026-08-30T05:37:45.0394809Z shell: sh -e {0}
+2026-08-30T05:37:45.0395012Z ##[endgroup]
+2026-08-30T05:37:45.3173540Z -- west build: generating a build system
+2026-08-30T05:37:45.6118258Z Loading Zephyr default modules (Zephyr base).
+2026-08-30T05:37:45.6119957Z -- Application: /__w/zmk-config/zmk-config/zmk/app
+2026-08-30T05:37:45.6120566Z -- CMake version: 3.31.6
+2026-08-30T05:37:45.7343978Z -- Found Python3: /usr/bin/python3 (found suitable version "3.12.3", minimum required is "3.8") found components: Interpreter
+2026-08-30T05:37:45.7476912Z -- Cache files will be written to: /__w/zmk-config/zmk-config/zephyr/.cache
+2026-08-30T05:37:45.7539742Z -- Zephyr version: 3.5.0 (/__w/zmk-config/zmk-config/zephyr)
+2026-08-30T05:37:45.8279105Z -- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+2026-08-30T05:37:46.3591420Z CMake Deprecation Warning at keymap-module/modules/modules.cmake:53 (message):
+2026-08-30T05:37:46.3592387Z   The `config/boards` folder is deprecated.  Please use a module instead.
+2026-08-30T05:37:46.3593027Z   See https://zmk.dev/docs/development/hardware-integration/new-shield and
+2026-08-30T05:37:46.3593671Z -- Adding ZMK config directory as board root: /__w/zmk-config/zmk-config/config
+2026-08-30T05:37:46.3594304Z -- Adding ZMK config directory as DTS root: /__w/zmk-config/zmk-config/config
+2026-08-30T05:37:46.3594955Z   https://zmk.dev/docs/development/module-creation for more information.
+2026-08-30T05:37:46.3595440Z Call Stack (most recent call first):
+2026-08-30T05:37:46.3595934Z   /__w/zmk-config/zmk-config/zephyr/cmake/modules/zephyr_module.cmake:130 (include)
+2026-08-30T05:37:46.3596611Z   /__w/zmk-config/zmk-config/zephyr/cmake/modules/zephyr_default.cmake:129 (include)
+2026-08-30T05:37:46.3597610Z   /__w/zmk-config/zmk-config/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:66 (include)
+2026-08-30T05:37:46.3598476Z   /__w/zmk-config/zmk-config/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:92 (include_boilerplate)
+2026-08-30T05:37:46.3599115Z   CMakeLists.txt:9 (find_package)
+2026-08-30T05:37:46.3599326Z 
+2026-08-30T05:37:46.3599334Z 
+2026-08-30T05:37:46.3599604Z CMake Deprecation Warning at keymap-module/modules/modules.cmake:58 (message):
+2026-08-30T05:37:46.3600222Z   The `config/dts` folder is deprecated.  Please use a module instead.  See
+2026-08-30T05:37:46.3600804Z   https://zmk.dev/docs/development/hardware-integration/new-shield and
+2026-08-30T05:37:46.3601387Z   https://zmk.dev/docs/development/module-creation for more information.
+2026-08-30T05:37:46.3601854Z Call Stack (most recent call first):
+2026-08-30T05:37:46.3602332Z   /__w/zmk-config/zmk-config/zephyr/cmake/modules/zephyr_module.cmake:130 (include)
+2026-08-30T05:37:46.3603001Z   /__w/zmk-config/zmk-config/zephyr/cmake/modules/zephyr_default.cmake:129 (include)
+2026-08-30T05:37:46.3603716Z   /__w/zmk-config/zmk-config/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:66 (include)
+2026-08-30T05:37:46.3604560Z   /__w/zmk-config/zmk-config/zephyr/share/zephyr-package/cmake/ZephyrConfig.cmake:92 (include_boilerplate)
+2026-08-30T05:37:46.3605184Z   CMakeLists.txt:9 (find_package)
+2026-08-30T05:37:46.3605382Z 
+2026-08-30T05:37:46.3605386Z 
+2026-08-30T05:37:46.3718432Z -- Adding /__w/zmk-config/zmk-config/config/boards/shields/dz17
+2026-08-30T05:37:46.3719082Z -- ZMK Config directory: /__w/zmk-config/zmk-config/config
+2026-08-30T05:37:46.3721425Z -- Using keymap file: /__w/zmk-config/zmk-config/config/boards/shields/dz17/dz17.keymap
+2026-08-30T05:37:46.3790217Z -- Board: nice_nano_v2
+2026-08-30T05:37:46.3826670Z -- Shield(s): dz17
+2026-08-30T05:37:46.5201601Z -- Snippet(s): studio-rpc-usb-uart
+2026-08-30T05:37:46.5379745Z -- ZEPHYR_TOOLCHAIN_VARIANT not set, trying to locate Zephyr SDK
+2026-08-30T05:37:46.5404301Z -- Found host-tools: zephyr 0.16.9 (/opt/zephyr-sdk-0.16.9)
+2026-08-30T05:37:46.5412803Z -- Found toolchain: zephyr 0.16.9 (/opt/zephyr-sdk-0.16.9)
+2026-08-30T05:37:46.5453399Z -- Found Dtc: /opt/zephyr-sdk-0.16.9/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.6.0", minimum required is "1.4.6")
+2026-08-30T05:37:46.5459121Z -- Found BOARD.dts: /__w/zmk-config/zmk-config/zmk/app/boards/arm/nice_nano/nice_nano_v2.dts
+2026-08-30T05:37:46.5460294Z -- Found devicetree overlay: /__w/zmk-config/zmk-config/config/boards/shields/dz17/dz17.overlay
+2026-08-30T05:37:46.5461542Z -- Found devicetree overlay: /__w/zmk-config/zmk-config/config/boards/shields/dz17/boards/nice_nano_v2.overlay
+2026-08-30T05:37:46.5462808Z -- Found devicetree overlay: /__w/zmk-config/zmk-config/config/boards/shields/dz17/dz17.keymap
+2026-08-30T05:37:46.5464121Z -- Found devicetree overlay: /__w/zmk-config/zmk-config/zmk/app/snippets/studio-rpc-usb-uart/studio-rpc-usb-uart.overlay
+2026-08-30T05:37:46.8803783Z 'label' is marked as deprecated in 'properties:' in /__w/zmk-config/zmk-config/config/dts/bindings/behaviors/czmao,behavior-led-toggle.yaml for node /behaviors/czm_ledtog.
+2026-08-30T05:37:46.8823991Z node '/behaviors/czm_ledtog' compatible 'czmao,behavior-led-toggle' has unknown vendor prefix 'czmao'
+2026-08-30T05:37:46.9470445Z -- Generated zephyr.dts: /__w/zmk-config/zmk-config/build/zephyr/zephyr.dts
+2026-08-30T05:37:46.9471729Z -- Generated devicetree_generated.h: /__w/zmk-config/zmk-config/build/zephyr/include/generated/devicetree_generated.h
+2026-08-30T05:37:47.3290512Z -- Including generated dts.cmake file: /__w/zmk-config/zmk-config/build/zephyr/dts.cmake
+2026-08-30T05:37:48.1865079Z 
+2026-08-30T05:37:48.1865785Z warning: The choice symbol ZMK_LOG_LEVEL_INF (defined at
+2026-08-30T05:37:48.1866556Z subsys/logging/Kconfig.template.log_config:17) was selected (set =y), but no symbol ended up as the
+2026-08-30T05:37:48.1867998Z choice selection. See http://docs.zephyrproject.org/latest/kconfig.html#CONFIG_ZMK_LOG_LEVEL_INF
+2026-08-30T05:37:48.1869452Z and/or look up ZMK_LOG_LEVEL_INF in the menuconfig/guiconfig interface. The Application Development
+2026-08-30T05:37:48.1870745Z Primer, Setting Configuration Values, and Kconfig - Tips and Best Practices sections of the manual
+2026-08-30T05:37:48.1871413Z might be helpful too.
+2026-08-30T05:37:48.1871687Z 
+2026-08-30T05:37:48.1871710Z 
+2026-08-30T05:37:48.1872028Z warning: Deprecated symbol NRF_STORE_REBOOT_TYPE_GPREGRET is enabled.
+2026-08-30T05:37:48.1872406Z 
+2026-08-30T05:37:48.3524151Z Parsing /__w/zmk-config/zmk-config/zmk/app/Kconfig
+2026-08-30T05:37:48.3525032Z Loaded configuration '/__w/zmk-config/zmk-config/zmk/app/boards/arm/nice_nano/nice_nano_v2_defconfig'
+2026-08-30T05:37:48.3525758Z Merged configuration '/__w/zmk-config/zmk-config/zmk/app/prj.conf'
+2026-08-30T05:37:48.3526391Z Merged configuration '/__w/zmk-config/zmk-config/config/boards/shields/dz17/dz17.conf'
+2026-08-30T05:37:48.3527519Z Merged configuration '/__w/zmk-config/zmk-config/zmk/app/snippets/studio-rpc-usb-uart/studio-rpc-usb-uart.conf'
+2026-08-30T05:37:48.3528603Z Merged configuration '/__w/zmk-config/zmk-config/build/zephyr/misc/generated/extra_kconfig_options.conf'
+2026-08-30T05:37:48.3529356Z Configuration saved to '/__w/zmk-config/zmk-config/build/zephyr/.config'
+2026-08-30T05:37:48.3530018Z Kconfig header saved to '/__w/zmk-config/zmk-config/build/zephyr/include/generated/autoconf.h'
+2026-08-30T05:37:48.6433020Z -- Found GnuLd: /opt/zephyr-sdk-0.16.9/arm-zephyr-eabi/bin/../lib/gcc/arm-zephyr-eabi/12.2.0/../../../../arm-zephyr-eabi/bin/ld.bfd (found version "2.38")
+2026-08-30T05:37:48.7068223Z -- The C compiler identification is GNU 12.2.0
+2026-08-30T05:37:48.7645219Z -- The CXX compiler identification is GNU 12.2.0
+2026-08-30T05:37:48.7818873Z -- The ASM compiler identification is GNU
+2026-08-30T05:37:48.7834743Z -- Found assembler: /opt/zephyr-sdk-0.16.9/arm-zephyr-eabi/bin/arm-zephyr-eabi-gcc
+2026-08-30T05:37:50.6569267Z -- Found Nanopb: /__w/zmk-config/zmk-config/modules/lib/nanopb
+2026-08-30T05:37:50.6570810Z -- Found protoc: /__w/zmk-config/zmk-config/modules/lib/nanopb/generator/protoc
+2026-08-30T05:37:50.7753378Z -- Found Nanopb: /__w/zmk-config/zmk-config/modules/lib/nanopb
+2026-08-30T05:37:50.8289943Z -- Configuring done (5.2s)
+2026-08-30T05:37:51.0159891Z -- Generating done (0.2s)
+2026-08-30T05:37:51.0166423Z -- Build files have been written to: /__w/zmk-config/zmk-config/build
+2026-08-30T05:37:51.0610906Z -- west build: building application
+2026-08-30T05:37:51.3837059Z [1/343] Preparing syscall dependency handling
+2026-08-30T05:37:51.3838196Z 
+2026-08-30T05:37:51.3954731Z [2/343] Generating include/generated/version.h
+2026-08-30T05:37:51.3955730Z -- Zephyr version: 3.5.0 (/__w/zmk-config/zmk-config/zephyr), build: dacab4875df7
+2026-08-30T05:37:51.4068380Z [3/343] Generating include/generated/app_version.h
+2026-08-30T05:37:51.4242336Z [4/343] Generating misc/generated/syscalls_subdirs.trigger
+2026-08-30T05:37:51.6914091Z [5/343] Generating misc/generated/syscalls.json, misc/generated/struct_tags.json
+2026-08-30T05:37:51.7685919Z [6/343] Generating include/generated/syscall_dispatch.c, include/generated/syscall_list.h
+2026-08-30T05:37:51.7901030Z [7/343] Generating include/generated/kobj-types-enum.h, include/generated/otype-to-str.h, include/generated/otype-to-size.h
+2026-08-30T05:37:51.8061746Z [8/343] Generating include/generated/driver-validation.h
+2026-08-30T05:37:51.9084658Z [9/343] Building C object zephyr/CMakeFiles/offsets.dir/arch/arm/core/offsets/offsets.c.obj
+2026-08-30T05:37:51.9908820Z [10/343] Generating include/generated/offsets.h
+2026-08-30T05:37:52.0008886Z [11/343] Generating nanopb/generator/nanopb_generator.py, nanopb/generator/proto/nanopb.proto
+2026-08-30T05:37:52.0315512Z [12/343] Building C object zephyr/CMakeFiles/zephyr.dir/lib/crc/crc32_sw.c.obj
+2026-08-30T05:37:52.0471151Z [13/343] Building C object zephyr/CMakeFiles/zephyr.dir/lib/crc/crc8_sw.c.obj
+2026-08-30T05:37:52.0613103Z [14/343] Building C object zephyr/CMakeFiles/zephyr.dir/lib/crc/crc7_sw.c.obj
+2026-08-30T05:37:52.0626855Z [15/343] Building C object zephyr/CMakeFiles/zephyr.dir/lib/crc/crc32c_sw.c.obj
+2026-08-30T05:37:52.0907765Z [16/343] Building C object zephyr/CMakeFiles/zephyr.dir/lib/crc/crc16_sw.c.obj
+2026-08-30T05:37:52.1085238Z [17/343] Building C object zephyr/CMakeFiles/zephyr.dir/lib/crc/crc4_sw.c.obj
+2026-08-30T05:37:52.1933256Z [18/343] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/dec.c.obj
+2026-08-30T05:37:52.2358913Z [19/343] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/hex.c.obj
+2026-08-30T05:37:52.2554113Z [20/343] Generating nanopb/generator/proto/nanopb_pb2.py
+2026-08-30T05:37:52.3499462Z [21/343] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/printk.c.obj
+2026-08-30T05:37:52.4094413Z [22/343] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/thread_entry.c.obj
+2026-08-30T05:37:52.5546429Z [23/343] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/sem.c.obj
+2026-08-30T05:37:52.6582698Z [24/343] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_packaged.c.obj
+2026-08-30T05:37:52.7177051Z [25/343] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/rb.c.obj
+2026-08-30T05:37:52.7729908Z [26/343] Running C++ protocol buffer compiler using nanopb plugin on /__w/zmk-config/zmk-config/modules/msgs/zmk-studio-messages/proto/zmk/meta.proto
+2026-08-30T05:37:52.9263437Z [27/343] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/timeutil.c.obj
+2026-08-30T05:37:52.9913511Z [28/343] Running C++ protocol buffer compiler using nanopb plugin on /__w/zmk-config/zmk-config/modules/msgs/zmk-studio-messages/proto/zmk/studio.proto
+2026-08-30T05:37:53.0435132Z [29/343] Running C++ protocol buffer compiler using nanopb plugin on /__w/zmk-config/zmk-config/modules/msgs/zmk-studio-messages/proto/zmk/core.proto
+2026-08-30T05:37:53.2157955Z [30/343] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/heap.c.obj
+2026-08-30T05:37:53.2250686Z [31/343] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/multi_heap.c.obj
+2026-08-30T05:37:53.2460176Z [32/343] Running C++ protocol buffer compiler using nanopb plugin on /__w/zmk-config/zmk-config/modules/msgs/zmk-studio-messages/proto/zmk/behaviors.proto
+2026-08-30T05:37:53.3330455Z [33/343] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/bitarray.c.obj
+2026-08-30T05:37:53.3383801Z [34/343] Running C++ protocol buffer compiler using nanopb plugin on /__w/zmk-config/zmk-config/modules/msgs/zmk-studio-messages/proto/zmk/keymap.proto
+2026-08-30T05:37:53.3996287Z [35/343] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/heap-validate.c.obj
+2026-08-30T05:37:53.4828863Z [36/343] Building C object CMakeFiles/app.dir/src/stdlib.c.obj
+2026-08-30T05:37:53.4910510Z [37/343] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/notify.c.obj
+2026-08-30T05:37:53.5206921Z [38/343] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/cbprintf_nano.c.obj
+2026-08-30T05:37:53.6914232Z [39/343] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/ring_buffer.c.obj
+2026-08-30T05:37:53.7168405Z [40/343] Building C object CMakeFiles/app.dir/__w/zmk-config/zmk-config/config/src/dz17_indicator.c.obj
+2026-08-30T05:37:53.7170797Z FAILED: CMakeFiles/app.dir/__w/zmk-config/zmk-config/config/src/dz17_indicator.c.obj 
+2026-08-30T05:37:53.7190555Z ccache /opt/zephyr-sdk-0.16.9/arm-zephyr-eabi/bin/arm-zephyr-eabi-gcc -DKERNEL -DNRF52840_XXAA -DPB_MAX_REQUIRED_FIELDS=64 -DPB_NO_ENCODE_SIZE_CHECK -DPB_NO_ERRMSG -DPB_WITHOUT_64BIT -DPICOLIBC_INTEGER_PRINTF_SCANF -D_FORTIFY_SOURCE=1 -D_POSIX_C_SOURCE=200809 -D__LINUX_ERRNO_EXTENSIONS__ -D__PROGRAM_START -D__ZEPHYR__=1 -I/__w/zmk-config/zmk-config/zmk/app/include -I/__w/zmk-config/zmk-config/build -I/__w/zmk-config/zmk-config/zephyr/include -I/__w/zmk-config/zmk-config/build/zephyr/include/generated -I/__w/zmk-config/zmk-config/zephyr/soc/arm/nordic_nrf/nrf52 -I/__w/zmk-config/zmk-config/zephyr/soc/arm/nordic_nrf/common/. -I/__w/zmk-config/zmk-config/zephyr/subsys/usb/device -I/__w/zmk-config/zmk-config/zephyr/subsys/bluetooth/controller/ll_sw/nordic/hal/nrf5/nrfx_glue -I/__w/zmk-config/zmk-config/zephyr/subsys/bluetooth -I/__w/zmk-config/zmk-config/zephyr/subsys/settings/include -I/__w/zmk-config/zmk-config/modules/lib/nanopb -I/__w/zmk-config/zmk-config/modules/hal/cmsis/CMSIS/Core/Include -I/__w/zmk-config/zmk-config/zephyr/modules/cmsis/. -I/__w/zmk-config/zmk-config/modules/hal/nordic/nrfx -I/__w/zmk-config/zmk-config/modules/hal/nordic/nrfx/drivers/include -I/__w/zmk-config/zmk-config/modules/hal/nordic/nrfx/mdk -I/__w/zmk-config/zmk-config/zephyr/modules/hal_nordic/nrfx/. -I/__w/zmk-config/zmk-config/modules/crypto/tinycrypt/lib/include -I/__w/zmk-config/zmk-config/zmk/app/module/include -I/__w/zmk-config/zmk-config/zmk/app/module/drivers/sensor/battery/. -fno-strict-aliasing -Os -imacros /__w/zmk-config/zmk-config/build/zephyr/include/generated/autoconf.h -fno-printf-return-value -fno-common -g -gdwarf-4 -fdiagnostics-color=always -mcpu=cortex-m4 -mthumb -mabi=aapcs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mfp16-format=ieee --sysroot=/opt/zephyr-sdk-0.16.9/arm-zephyr-eabi/arm-zephyr-eabi -imacros /__w/zmk-config/zmk-config/zephyr/include/zephyr/toolchain/zephyr_stdint.h -Wall -Wformat -Wformat-security -Wno-format-zero-length -Wno-pointer-sign -Wpointer-arith -Wexpansion-to-defined -Wno-unused-but-set-variable -Werror=implicit-int -fno-pic -fno-pie -fno-asynchronous-unwind-tables -ftls-model=local-exec -fno-reorder-functions --param=min-pagesize=0 -fno-defer-pop -fmacro-prefix-map=/__w/zmk-config/zmk-config/zmk/app=CMAKE_SOURCE_DIR -fmacro-prefix-map=/__w/zmk-config/zmk-config/zephyr=ZEPHYR_BASE -fmacro-prefix-map=/__w/zmk-config/zmk-config=WEST_TOPDIR -ffunction-sections -fdata-sections --specs=picolibc.specs -std=c99 -Wfatal-errors -MD -MT CMakeFiles/app.dir/__w/zmk-config/zmk-config/config/src/dz17_indicator.c.obj -MF CMakeFiles/app.dir/__w/zmk-config/zmk-config/config/src/dz17_indicator.c.obj.d -o CMakeFiles/app.dir/__w/zmk-config/zmk-config/config/src/dz17_indicator.c.obj -c /__w/zmk-config/zmk-config/config/src/dz17_indicator.c
+2026-08-30T05:37:53.7211006Z /__w/zmk-config/zmk-config/config/src/dz17_indicator.c:228:21: error: variable 'czm_ledtog_api' has initializer but incomplete type
+2026-08-30T05:37:53.7212742Z   228 | static const struct zmk_behavior_driver_api czm_ledtog_api = {
+2026-08-30T05:37:53.7214211Z       |                     ^~~~~~~~~~~~~~~~~~~~~~~
+2026-08-30T05:37:53.7215140Z compilation terminated due to -Wfatal-errors.
+2026-08-30T05:37:53.7323829Z [41/343] Building C object zephyr/CMakeFiles/zephyr.dir/lib/os/onoff.c.obj
+2026-08-30T05:37:53.7485764Z [42/343] Building C object CMakeFiles/app.dir/src/activity.c.obj
+2026-08-30T05:37:53.7581350Z [43/343] Building C object CMakeFiles/app.dir/src/matrix_transform.c.obj
+2026-08-30T05:37:53.9316589Z [44/343] Building C object CMakeFiles/app.dir/src/behavior.c.obj
+2026-08-30T05:37:53.9619314Z [45/343] Building C object CMakeFiles/app.dir/src/physical_layouts.c.obj
+2026-08-30T05:37:53.9620257Z ninja: build stopped: subcommand failed.
+2026-08-30T05:37:53.9636007Z FATAL ERROR: command exited with status 1: /usr/local/bin/cmake --build /__w/zmk-config/zmk-config/build
+2026-08-30T05:37:53.9961562Z ##[error]Process completed with exit code 1.
