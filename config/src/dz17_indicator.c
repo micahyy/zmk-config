@@ -104,8 +104,12 @@ static int confirm_led = -1;
 static int64_t confirm_deadline = 0;
 
 /* Profile-switch cue: fast-blink the target blue LED for CUE_MS regardless
- * of transport, so the BLE1/2/3 keys always give visible feedback. */
+ * of transport, so the BLE1/2/3 keys always give visible feedback. If the
+ * green USB confirmation is showing when the cue is armed, the cue is
+ * QUEUED to start when the green window ends (cue_start) instead of
+ * overlapping it - the <=2s queue delay is imperceptible in use. */
 static int cue_led = -1;
+static int64_t cue_start = 0;
 static int64_t cue_deadline = 0;
 
 /* End of the boot grace window (set in init). */
@@ -128,6 +132,32 @@ static void led_set(int idx, bool on) {
     } else {
         led_off(led_dev, idx);
     }
+}
+
+/* Arm the green USB confirmation (2s). Any in-flight/queued blue cue is
+ * pushed to start after the green window so the two LEDs can never light
+ * at the same time. */
+static void arm_usb_confirm(void) {
+    int64_t now = k_uptime_get();
+    confirm_led = LED_USB;
+    confirm_deadline = now + CONFIRM_MS;
+    if (cue_led >= 0) {
+        cue_start = confirm_deadline;
+        cue_deadline = cue_start + CONFIRM_MS;
+    }
+}
+
+/* Arm a blue profile-switch cue (2s fast blink). If the green USB
+ * confirmation is still showing, queue the cue to begin when it ends
+ * rather than overlapping it; the feedback is never dropped. */
+static void arm_blue_cue(int led) {
+    int64_t now = k_uptime_get();
+    cue_led = led;
+    cue_start = now;
+    if (confirm_led == LED_USB && now < confirm_deadline) {
+        cue_start = confirm_deadline;
+    }
+    cue_deadline = cue_start + CONFIRM_MS;
 }
 
 /* Full recompute + force-write of every LED. Safe to call from any context. */
@@ -178,6 +208,10 @@ static void refresh_all(void) {
         if (usb) {
             confirm_led = LED_USB;
             confirm_deadline = now + CONFIRM_MS;
+            /* Green and the blue profile cue are mutually exclusive:
+             * arriving in USB kills any in-flight blue cue so the two
+             * can never light at the same time. */
+            cue_led = -1;
         } else {
             /* Just entered BLE: force profile/connected edges below to
              * re-arm the confirmation for the active BLE profile. */
@@ -242,8 +276,11 @@ static void refresh_all(void) {
     }
 
     /* Profile-switch cue: fast-blink overrides the steady off state
-     * (applies in USB too; in BLE it's harmless while already blinking). */
-    if (cue_led >= LED_BLE0 && cue_led <= LED_BLE2 && now < cue_deadline) {
+     * (applies in USB too; in BLE it's harmless while already blinking).
+     * A cue armed while the green confirmation is showing stays queued
+     * (now < cue_start) and never overlaps it. */
+    if (cue_led >= LED_BLE0 && cue_led <= LED_BLE2 &&
+        now >= cue_start && now < cue_deadline) {
         on[cue_led] = ((now / CUE_HALF_MS) % 2) == 0;
     }
 
@@ -309,8 +346,7 @@ static int ble_profile_listener(const zmk_event_t *eh) {
         /* Cue in USB mode only (real USB transport with VBUS present;
          * endpoint==USB without VBUS only happens during enumeration). */
         if (cur_ep.transport == ZMK_TRANSPORT_USB && zmk_usb_is_powered()) {
-            cue_led = LED_BLE0 + ev->index;
-            cue_deadline = k_uptime_get() + CONFIRM_MS;
+            arm_blue_cue(LED_BLE0 + ev->index);
         }
     }
 
@@ -337,8 +373,7 @@ static int endpoint_listener(const zmk_event_t *eh) {
      * events before the window ends. */
     if (k_uptime_get() >= boot_grace_end &&
         ev->endpoint.transport == ZMK_TRANSPORT_USB && zmk_usb_is_powered()) {
-        confirm_led = LED_USB;
-        confirm_deadline = k_uptime_get() + CONFIRM_MS;
+        arm_usb_confirm();
     }
 
     refresh_all();
@@ -367,8 +402,7 @@ static void out_tog_handler(struct k_work *w) {
     ARG_UNUSED(w);
     if (zmk_endpoints_selected().transport == ZMK_TRANSPORT_USB &&
         zmk_usb_is_powered()) {
-        confirm_led = LED_USB;
-        confirm_deadline = k_uptime_get() + CONFIRM_MS;
+        arm_usb_confirm();
     }
     /* BLE side: reset edge trackers so refresh_all re-arms the blue
      * blink/solid confirmation for the active profile. */
@@ -396,16 +430,13 @@ static int position_listener(const zmk_event_t *eh) {
 
     switch (ev->position) {
     case POS_BT_SEL0:
-        cue_led = LED_BLE0;
-        cue_deadline = k_uptime_get() + CONFIRM_MS;
+        arm_blue_cue(LED_BLE0);
         break;
     case POS_BT_SEL1:
-        cue_led = LED_BLE1;
-        cue_deadline = k_uptime_get() + CONFIRM_MS;
+        arm_blue_cue(LED_BLE1);
         break;
     case POS_BT_SEL2:
-        cue_led = LED_BLE2;
-        cue_deadline = k_uptime_get() + CONFIRM_MS;
+        arm_blue_cue(LED_BLE2);
         break;
     case POS_OUT_TOG:
         /* Event fires before the output behavior runs; check after it. */
