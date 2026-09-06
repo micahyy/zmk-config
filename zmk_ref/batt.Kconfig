@@ -1,0 +1,40 @@
+# Copyright (c) 2020-2021 The ZMK Contributors
+# SPDX-License-Identifier: MIT
+
+DT_COMPAT_ZMK_BATTERY_NRF_VDDH := zmk,battery-nrf-vddh
+DT_COMPAT_ZMK_BATTERY_VOLTAGE_DIVIDER := zmk,battery-voltage-divider
+
+config ZMK_BATTERY
+    bool "ZMK battery monitoring"
+    help
+        Enable battery monitoring
+
+config ZMK_BATTERY_NRF_VDDH
+    bool
+    default $(dt_compat_enabled,$(DT_COMPAT_ZMK_BATTERY_NRF_VDDH))
+    select ADC
+    select ZMK_BATTERY
+    depends on SENSOR
+    help
+        Enable ZMK nRF VDDH voltage driver for battery monitoring.
+
+config ZMK_BATTERY_VOLTAGE_DIVIDER
+    bool
+    default $(dt_compat_enabled,$(DT_COMPAT_ZMK_BATTERY_VOLTAGE_DIVIDER))
+    select ADC
+    select ZMK_BATTERY
+    depends on SENSOR
+    help
+        Enable ZMK battery voltage divider driver for battery monitoring.
+
+config ZMK_BATTERY_NRF_VDDH_DIODE_DROP_MV
+    int "Diode forward-drop compensation added to measured VDDH (mV)"
+    depends on ZMK_BATTERY_NRF_VDDH
+    default 0
+    help
+        When the battery feeds VDDH through a diode (e.g. SS14 Schottky),
+        the VDDH ADC reads lower than the real battery voltage by the
+        diode forward drop. This value is added to the measured voltage
+        before the lithium state-of-charge conversion. Typical SS14 drop
+        at keyboard idle/typing current is ~200 mV. Set 0 for a direct
+        battery connection.
