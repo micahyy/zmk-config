@@ -6,6 +6,7 @@
  */
 
 #include <zephyr/kernel.h>
+#include <zephyr/init.h>
 #include <zephyr/sys/poweroff.h>
 #include <zephyr/logging/log.h>
 
