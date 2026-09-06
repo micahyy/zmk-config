@@ -11,7 +11,7 @@
     // 17 keys direct GPIO
     kscan0: kscan {
         compatible = "zmk,kscan-gpio-direct";
-        wakeup-source;
+        /* DIAG: wakeup-source removed to test ghost-wake theory */
         debounce-press-ms = <10>;
         debounce-release-ms = <10>;
         input-gpios
