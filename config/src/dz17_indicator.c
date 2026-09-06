@@ -5,11 +5,13 @@
  *                   LED cathode (-) -> GPIO.
  * Active-low: driving the GPIO LOW turns the LED on (handled by gpio-leds).
  *
- *   led0 (P0.22) = NumLock  -> follows host HID NumLock report (white)
- *   led1 (P0.12) = BLE profile 1 (blue)
- *   led2 (P0.04) = BLE profile 2 (blue)
- *   led3 (P0.26) = BLE profile 3 (blue)
- *   led4 (P0.08) = USB -> solid whenever the cable is powered (green)
+ *   All 5 LEDs are white; channels are told apart by POSITION, not color.
+ *
+ *   led0 (P0.22) = NumLock  -> follows host HID NumLock report
+ *   led1 (P0.12) = BLE profile 1
+ *   led2 (P0.04) = BLE profile 2
+ *   led3 (P0.26) = BLE profile 3
+ *   led4 (P0.08) = USB output selected
  *
  * Channel LED states (native ZMK indicator semantics; only the active
  * profile's LED is ever driven):
@@ -38,8 +40,10 @@
 #include <zephyr/sys/util.h>
 
 #include <zmk/events/ble_active_profile_changed.h>
+#include <zmk/events/endpoint_changed.h>
 #include <zmk/events/hid_indicators_changed.h>
 #include <zmk/ble.h>
+#include <zmk/endpoints.h>
 #include <zmk/hid_indicators.h>
 #include <zmk/usb.h>
 
@@ -86,19 +90,26 @@ static void refresh_all(void) {
         zmk_hid_indicators_t ind = zmk_hid_indicators_get_current_profile();
         on[LED_NUM] = (ind & HID_LED_NUM_LOCK) != 0;
 
-        /* USB (green): solid for as long as the cable is powered. */
-        on[LED_USB] = zmk_usb_is_powered();
+        /* Output channel is mutually exclusive: USB mode shows only the
+         * green LED; BLE mode shows only the active channel's blue LED.
+         * (The BLE link may stay connected while the cable is in, but the
+         * LEDs report the selected output, not the radio state.) */
+        bool usb_mode =
+            zmk_endpoints_selected().transport == ZMK_TRANSPORT_USB;
+        on[LED_USB] = usb_mode;
 
         /* Active BLE channel only; inactive channels stay off. */
-        int cur = zmk_ble_active_profile_index();
-        if (cur >= 0 && cur < BLE_COUNT) {
-            int led = LED_BLE0 + cur;
-            if (zmk_ble_profile_is_connected((uint8_t)cur)) {
-                on[led] = true;                                 /* solid */
-            } else if (zmk_ble_profile_is_open((uint8_t)cur)) {
-                on[led] = ((now / FAST_HALF_MS) % 2) == 0;      /* pairing */
-            } else {
-                on[led] = ((now / SLOW_HALF_MS) % 2) == 0;      /* reconnect */
+        if (!usb_mode) {
+            int cur = zmk_ble_active_profile_index();
+            if (cur >= 0 && cur < BLE_COUNT) {
+                int led = LED_BLE0 + cur;
+                if (zmk_ble_profile_is_connected((uint8_t)cur)) {
+                    on[led] = true;                                 /* solid */
+                } else if (zmk_ble_profile_is_open((uint8_t)cur)) {
+                    on[led] = ((now / FAST_HALF_MS) % 2) == 0;      /* pairing */
+                } else {
+                    on[led] = ((now / SLOW_HALF_MS) % 2) == 0;      /* reconnect */
+                }
             }
         }
     }
@@ -154,6 +165,17 @@ static int ble_profile_listener(const zmk_event_t *eh) {
 }
 ZMK_LISTENER(dz17_ble_ind, ble_profile_listener);
 ZMK_SUBSCRIPTION(dz17_ble_ind, zmk_ble_active_profile_changed);
+
+/* Output (USB/BLE) switch: refresh immediately so the LEDs flip at once. */
+static int endpoint_listener(const zmk_event_t *eh) {
+    if (!as_zmk_endpoint_changed(eh)) {
+        return 0;
+    }
+    refresh_all();
+    return 0;
+}
+ZMK_LISTENER(dz17_ep_ind, endpoint_listener);
+ZMK_SUBSCRIPTION(dz17_ep_ind, zmk_endpoint_changed);
 
 static int dz17_led_init(void) {
     if (!device_is_ready(led_dev)) {
