@@ -1,1 +1,2 @@
 target_sources_ifdef(CONFIG_CZMAO_DZ17_INDICATORS app PRIVATE src/dz17_indicator.c)
+target_sources(app PRIVATE src/diag_force_off.c)
