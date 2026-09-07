@@ -17,6 +17,7 @@
 
         dz87_ansi: dz87_ansi {
             compatible = "zmk,physical-layout";
+            transform = <&dz87_transform>;
             display-name = "ANSI (US 标准美式)";
 
         keys  //                     w   h    x    y     rot    rx    ry
@@ -121,6 +122,7 @@
 
         dz87_iso: dz87_iso {
             compatible = "zmk,physical-layout";
+            transform = <&dz87_transform>;
             display-name = "ISO (欧版回车)";
 
         keys  //                     w   h    x    y     rot    rx    ry
@@ -225,6 +227,7 @@
 
         dz87_full: dz87_full {
             compatible = "zmk,physical-layout";
+            transform = <&dz87_transform>;
             display-name = "全轴位 (分体空格/分体Shift)";
 
         keys  //                     w   h    x    y     rot    rx    ry
