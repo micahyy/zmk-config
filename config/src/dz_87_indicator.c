@@ -90,25 +90,23 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
  * Active-low: led_off() drives the pin HIGH; reconfiguring it as a
  * pulled-up input then holds the OFF state in SYSTEM OFF. */
 struct led_pin {
-    const struct device *(*get_port)(void);
+    uint8_t port;   /* 0 = gpio0, 1 = gpio1 */
     uint8_t pin;
 };
 
-static const struct device *port_gpio0(void) {
-    return DEVICE_DT_GET(DT_NODELABEL(gpio0));
-}
-static const struct device *port_gpio1(void) {
-    return DEVICE_DT_GET(DT_NODELABEL(gpio1));
-}
-
 static const struct led_pin led_pins[LED_COUNT] = {
-    { .get_port = port_gpio0, .pin = 20 },  /* CAPS P0.20 */
-    { .get_port = port_gpio0, .pin = 22 },  /* SL   P0.22 */
-    { .get_port = port_gpio1, .pin =  0 },  /* BLE1 P1.00 */
-    { .get_port = port_gpio1, .pin =  2 },  /* BLE2 P1.02 */
-    { .get_port = port_gpio1, .pin =  4 },  /* BLE3 P1.04 */
-    { .get_port = port_gpio1, .pin =  6 },  /* USB  P1.06 */
+    { .port = 0, .pin = 20 },  /* CAPS P0.20 (gpio0) */
+    { .port = 0, .pin = 22 },  /* SL   P0.22 (gpio0) */
+    { .port = 1, .pin =  0 },  /* BLE1 P1.00 (gpio1) */
+    { .port = 1, .pin =  2 },  /* BLE2 P1.02 (gpio1) */
+    { .port = 1, .pin =  4 },  /* BLE3 P1.04 (gpio1) */
+    { .port = 1, .pin =  6 },  /* USB  P1.06 (gpio1) */
 };
+
+static const struct device *led_pin_port(uint8_t port) {
+    return port == 0 ? DEVICE_DT_GET(DT_NODELABEL(gpio0))
+                     : DEVICE_DT_GET(DT_NODELABEL(gpio1));
+}
 
 /* FN layer + physical key positions of the BLE profile / output keys.
  * Position = row * 16 + col.
@@ -459,7 +457,7 @@ static int activity_state_listener(const zmk_event_t *eh) {
 
     for (int i = 0; i < LED_COUNT; i++) {
         led_off(led_dev, i);
-        const struct device *gpio = led_pins[i].get_port();
+        const struct device *gpio = led_pin_port(led_pins[i].port);
         if (device_is_ready(gpio)) {
             gpio_pin_configure(gpio, led_pins[i].pin,
                                GPIO_INPUT | GPIO_PULL_UP);
@@ -493,4 +491,7 @@ static int dz87_led_init(void) {
     k_work_schedule(&tick_work, K_MSEC(TICK_MS));
 
     LOG_INF("DZ87 LEDs ready: CAPS=P0.20 SL=P0.22 "
-            "BLE1=P1.00 BLE2=P1.02 BLE3=P1.04 USB
+            "BLE1=P1.00 BLE2=P1.02 BLE3=P1.04 USB=P1.06");
+    return 0;
+}
+SYS_INIT(dz87_led_init, APPLICATION, CONFIG_APPLICATION_INIT_PRIORITY);
