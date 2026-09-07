@@ -1,5 +1,5 @@
 /*
- * CZM ZMK87 monochrome GPIO LED indicators.
+ * DZ87 monochrome GPIO LED indicators.
  *
  * Wiring (per LED): 3.3V rail -> resistor -> LED anode (+),
  *                   LED cathode (-) -> GPIO.
@@ -25,8 +25,8 @@
  *   - CapsLock / ScrollLock (white) independent: solid while the host
  *     reports the respective lock state.
  *
- * All three BLE channels advertise under the SAME name "czm_zmk87";
- * switching channels does NOT rename the advertiser.
+ * The advertiser is renamed czm_dz_87_ble_1/2/3 per active channel (hosts
+ * see a distinct name per BLE profile, same scheme as DZ17).
  *
  * Implementation: a single 250ms tick RECOMPUTES the desired on/off state
  * of all 6 LEDs from the current transport/profile/connection/HID-lock
@@ -326,9 +326,13 @@ static int ble_profile_listener(const zmk_event_t *eh) {
     bool real_switch = (last_evt_profile >= 0) && (last_evt_profile != ev->index);
     last_evt_profile = ev->index;
 
-    /* All three channels share the SAME advertised name "czm_zmk87";
-     * channel switching intentionally does NOT rename the advertiser.
-     * Persist the active profile immediately on a real switch so a quick
+    /* Rename the advertiser so hosts show czm_dz_87_ble_1/2/3 per channel
+     * (same scheme as DZ17). */
+    static char name[20];
+    snprintf(name, sizeof(name), "czm_dz_87_ble_%d", ev->index + 1);
+    zmk_ble_set_device_name(name);
+
+    /* Persist the active profile immediately on a real switch so a quick
      * power-off does not revert to the old channel at next boot. */
 #if defined(CONFIG_SETTINGS)
     if (real_switch) {
@@ -342,8 +346,8 @@ static int ble_profile_listener(const zmk_event_t *eh) {
     refresh_all();
     return 0;
 }
-ZMK_LISTENER(zmk87_ble_ind, ble_profile_listener);
-ZMK_SUBSCRIPTION(zmk87_ble_ind, zmk_ble_active_profile_changed);
+ZMK_LISTENER(dz87_ble_ind, ble_profile_listener);
+ZMK_SUBSCRIPTION(dz87_ble_ind, zmk_ble_active_profile_changed);
 
 static int endpoint_listener(const zmk_event_t *eh) {
     const struct zmk_endpoint_changed *ev = as_zmk_endpoint_changed(eh);
@@ -361,8 +365,8 @@ static int endpoint_listener(const zmk_event_t *eh) {
     refresh_all();
     return 0;
 }
-ZMK_LISTENER(zmk87_ep_ind, endpoint_listener);
-ZMK_SUBSCRIPTION(zmk87_ep_ind, zmk_endpoint_changed);
+ZMK_LISTENER(dz87_ep_ind, endpoint_listener);
+ZMK_SUBSCRIPTION(dz87_ep_ind, zmk_endpoint_changed);
 
 static int hid_indicators_listener(const zmk_event_t *eh) {
     const struct zmk_hid_indicators_changed *ev =
@@ -374,8 +378,8 @@ static int hid_indicators_listener(const zmk_event_t *eh) {
     refresh_all();
     return 0;
 }
-ZMK_LISTENER(zmk87_hid_ind, hid_indicators_listener);
-ZMK_SUBSCRIPTION(zmk87_hid_ind, zmk_hid_indicators_changed);
+ZMK_LISTENER(dz87_hid_ind, hid_indicators_listener);
+ZMK_SUBSCRIPTION(dz87_hid_ind, zmk_hid_indicators_changed);
 
 /* Runs 50ms after FN+4 (OUT_USB): read the final transport and arm the
  * matching feedback directly. */
@@ -431,8 +435,8 @@ static int position_listener(const zmk_event_t *eh) {
 
     return 0;
 }
-ZMK_LISTENER(zmk87_pos_ind, position_listener);
-ZMK_SUBSCRIPTION(zmk87_pos_ind, zmk_position_state_changed);
+ZMK_LISTENER(dz87_pos_ind, position_listener);
+ZMK_SUBSCRIPTION(dz87_pos_ind, zmk_position_state_changed);
 
 /* Deep sleep (System OFF) parking.
  *
@@ -462,14 +466,14 @@ static int activity_state_listener(const zmk_event_t *eh) {
         }
     }
 
-    LOG_INF("CZM ZMK87 LEDs parked for System OFF (deep sleep)");
+    LOG_INF("DZ87 LEDs parked for System OFF (deep sleep)");
     return 0;
 }
-ZMK_LISTENER(zmk87_activity_ind, activity_state_listener);
-ZMK_SUBSCRIPTION(zmk87_activity_ind, zmk_activity_state_changed);
+ZMK_LISTENER(dz87_activity_ind, activity_state_listener);
+ZMK_SUBSCRIPTION(dz87_activity_ind, zmk_activity_state_changed);
 
 /* ---- init ---- */
-static int zmk87_led_init(void) {
+static int dz87_led_init(void) {
     if (!device_is_ready(led_dev)) {
         LOG_ERR("gpio-leds device not ready");
         return -ENODEV;
@@ -488,8 +492,5 @@ static int zmk87_led_init(void) {
 
     k_work_schedule(&tick_work, K_MSEC(TICK_MS));
 
-    LOG_INF("CZM ZMK87 LEDs ready: CAPS=P0.20 SL=P0.22 "
-            "BLE1=P1.00 BLE2=P1.02 BLE3=P1.04 USB=P1.06");
-    return 0;
-}
-SYS_INIT(zmk87_led_init, APPLICATION, CONFIG_APPLICATION_INIT_PRIORITY);
+    LOG_INF("DZ87 LEDs ready: CAPS=P0.20 SL=P0.22 "
+            "BLE1=P1.00 BLE2=P1.02 BLE3=P1.04 USB

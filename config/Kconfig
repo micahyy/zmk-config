@@ -2,6 +2,6 @@ config CZMAO_DZ17_INDICATORS
     bool "CZMAO DZ17 BLE/USB LED indicators"
     default y
 
-config CZMAO_CZM_ZMK87_INDICATORS
-    bool "CZMAO CZM ZMK87 BLE/USB + Caps/Scroll LED indicators"
+config CZMAO_DZ_87_INDICATORS
+    bool "CZMAO DZ 87 BLE/USB + Caps/Scroll LED indicators"
     default y

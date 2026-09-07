@@ -1,4 +1,4 @@
-id: czm_zmk87
-name: CZM ZMK87
+id: dz_87
+name: DZ 87
 type: shield
 depends_on: [nice_nano]

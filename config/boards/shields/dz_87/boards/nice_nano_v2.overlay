@@ -1,0 +1,4 @@
+// Board-specific overlay for CZM DZ 87 on nice_nano_v2.
+//
+// All matrix/LED configuration lives in dz_87.overlay; no
+// nice_nano_v2-specific overrides are needed.

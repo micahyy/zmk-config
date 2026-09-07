@@ -1,2 +1,0 @@
-config SHIELD_CZM_ZMK87
-    def_bool $(shields_list_contains,czm_zmk87)

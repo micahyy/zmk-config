@@ -1,2 +1,2 @@
 target_sources_ifdef(CONFIG_CZMAO_DZ17_INDICATORS app PRIVATE src/dz17_indicator.c)
-target_sources_ifdef(CONFIG_CZMAO_CZM_ZMK87_INDICATORS app PRIVATE src/czm_zmk87_indicator.c)
+target_sources_ifdef(CONFIG_CZMAO_DZ_87_INDICATORS app PRIVATE src/dz_87_indicator.c)
