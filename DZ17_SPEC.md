@@ -1,6 +1,6 @@
 # DZ17 nRF52840 ZMK 双模数字小键盘 — 功能规范
 
-> 最新固件：**f70510e**（2026-09-06，CI 通过）
+> 最新固件：**e71e164**（2026-09-07，深睡 LED park 修复，CI 通过）
 > 对应 ZMK fork revision：d02621f8（分支 dz17-batt-comp）
 
 ## 硬件参数
@@ -98,10 +98,12 @@
 |:----:|:----|:----|:----|
 | 工作 | 有按键/活动 | 正常运行 | 按灯效逻辑，平时全灭 |
 | **浅睡眠（idle）** | **无操作 5 分钟**（ZMK_IDLE_TIMEOUT=300000ms） | CPU/外设挂起省电，**蓝牙保持连接**，任意键即时唤醒 | **灯不灭**：GPIO 保持，NumLock 开着则 NumLock 位白灯继续常亮；事件提示灯已在 3 秒窗口结束后熄灭 |
-| **深度睡眠（sleep）** | **无操作 15 分钟**（ZMK_IDLE_SLEEP_TIMEOUT=900000ms，从最后一次按键算起） | 系统 poweroff、**断开蓝牙**，任意键 GPIO 唤醒后重启回连 | **全灭**：poweroff 后 GPIO 回到高阻，灯无电流通路，无需软件干预 |
+| **深度睡眠（sleep）** | **无操作 15 分钟**（ZMK_IDLE_SLEEP_TIMEOUT=900000ms，从最后一次按键算起） | 系统 poweroff、**断开蓝牙**，任意键 GPIO 唤醒后重启回连 | **全灭**：进 OFF 前固件主动把 5 个灯脚灭灯并 park 为上拉输入（见下注意事项） |
 | 插着 USB | — | **不会进入深度睡眠**（USB 供电保持） | 同 USB 模式 |
 
 > 唤醒后：蓝牙自动重连，宿主重新下发 NumLock 状态，指示灯按当前状态恢复。
+
+> ⚠️ **深睡灯必须软件 park（2026-09-07 e71e164 修复）**：nRF52 进 System OFF 后 GPIO **保持睡前的引脚配置与输出电平**（并非回到高阻）。active-low 灯若睡前保持低电平输出，OFF 后整宿常亮（XIAO nRF52840 社区已知同类问题）。dz17_indicator.c 订阅 `activity_state_changed`，收到 SLEEP 时：停 tick → 5 灯 `led_off()`（拉高灭灯）→ 引脚重配为 `GPIO_INPUT | GPIO_PULL_UP`（无 SENSE，灯脚不做唤醒源），灯彻底无电流通路。唤醒为整板重启，SYS_INIT 自动恢复输出。
 
 ## 电池电量
 
@@ -163,7 +165,7 @@
 | ZMK fork | micahyy/zmk，revision d02621f8（含 vddh 二极管压降补偿驱动） |
 | 目标板 | nice_nano_v2（nRF52840） |
 | 编译方式 | GitHub Actions |
-| 最新固件 | dz17_nice_nano_v2_f70510e.uf2（418304 字节，md5 d470b1987a12420f1cf0f4ae5f09347a） |
+| 最新固件 | dz17_nice_nano_v2_e71e164_sleepfix.uf2（418304 字节，md5 229e13d978b108c19d51ad7cf1e00cd4） |
 
 ---
 
