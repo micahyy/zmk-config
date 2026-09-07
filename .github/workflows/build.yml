@@ -28,17 +28,34 @@ jobs:
 
       - name: Build DZ17
         run: >
-          west build -s zmk/app -b nice_nano_v2
+          west build -s zmk/app -b nice_nano_v2 -d build_dz17
           -- -DSHIELD=dz17
           -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
           -DSNIPPET="studio-rpc-usb-uart"
           -DCONFIG_ZMK_STUDIO=y
 
-      - name: Rename firmware
-        run: cp build/zephyr/zmk.uf2 dz17_nice_nano_v2.uf2
+      - name: Rename DZ17 firmware
+        run: cp build_dz17/zephyr/zmk.uf2 dz17_nice_nano_v2.uf2
 
-      - name: Upload firmware
+      - name: Build CZM ZMK87
+        run: >
+          west build -s zmk/app -b nice_nano_v2 -d build_zmk87
+          -- -DSHIELD=czm_zmk87
+          -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
+          -DSNIPPET="studio-rpc-usb-uart"
+          -DCONFIG_ZMK_STUDIO=y
+
+      - name: Rename CZM ZMK87 firmware
+        run: cp build_zmk87/zephyr/zmk.uf2 czm_zmk87_nice_nano_v2.uf2
+
+      - name: Upload DZ17 firmware
         uses: actions/upload-artifact@v4
         with:
           name: dz17_firmware
           path: dz17_nice_nano_v2.uf2
+
+      - name: Upload CZM ZMK87 firmware
+        uses: actions/upload-artifact@v4
+        with:
+          name: czm_zmk87_firmware
+          path: czm_zmk87_nice_nano_v2.uf2

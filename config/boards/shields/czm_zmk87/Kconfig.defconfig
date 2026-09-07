@@ -1,0 +1,10 @@
+if SHIELD_CZM_ZMK87
+
+config ZMK_KEYBOARD_NAME
+    default "czm_zmk87"
+
+# Kconfig defaults only for items that must be guaranteed at Kconfig layer.
+# Runtime feature flags (monochrome LEDs / HID indicators / sleep) live in
+# czm_zmk87.conf, matching the convention used by in-tree ZMK shields.
+
+endif

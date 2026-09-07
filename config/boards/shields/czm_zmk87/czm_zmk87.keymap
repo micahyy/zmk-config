@@ -1,0 +1,144 @@
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/reset.h>
+#include <dt-bindings/zmk/outputs.h>
+
+/ {
+    // Logitech-style channel keys (same scheme as DZ17):
+    //   TAP  FN+1/2/3  = switch channel (pairing kept, reconnect attempts)
+    //   HOLD FN+1/2/3 (1s) = pairing mode: selects that channel and clears
+    //                       its bond, so it fast-blinks and accepts a new
+    //                       host. &pair_X = BT_SEL X then BT_CLR;
+    //                       &sel_X  = BT_SEL X only (bond kept for reconnect).
+    // Position = row * 16 + col for the 6x16 matrix (no matrix transform).
+    behaviors {
+        pair1: pair_profile1 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            tap-ms = <50>;
+            bindings = <&bt BT_SEL 0 &bt BT_CLR>;
+        };
+        pair2: pair_profile2 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            tap-ms = <50>;
+            bindings = <&bt BT_SEL 1 &bt BT_CLR>;
+        };
+        pair3: pair_profile3 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            tap-ms = <50>;
+            bindings = <&bt BT_SEL 2 &bt BT_CLR>;
+        };
+        sel1: select_profile1 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&bt BT_SEL 0>;
+        };
+        sel2: select_profile2 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&bt BT_SEL 1>;
+        };
+        sel3: select_profile3 {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&bt BT_SEL 2>;
+        };
+        ch1: ch_key1 {
+            compatible = "zmk,behavior-hold-tap";
+            label = "CH1 (tap select / hold pair)";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <1000>;
+            bindings = <&pair1 &sel1>;
+        };
+        ch2: ch_key2 {
+            compatible = "zmk,behavior-hold-tap";
+            label = "CH2 (tap select / hold pair)";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <1000>;
+            bindings = <&pair2 &sel2>;
+        };
+        ch3: ch_key3 {
+            compatible = "zmk,behavior-hold-tap";
+            label = "CH3 (tap select / hold pair)";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <1000>;
+            bindings = <&pair3 &sel3>;
+        };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        // ---- Layer 0: base TKL layout (16 bindings/row, 6 rows = 96) ----
+        default_layer {
+            bindings = <
+&kp ESC       &kp F1        &kp F2    &kp F3    &kp F4    &kp F5    &kp F6    &kp F7
+&kp F8        &kp F9        &kp F10   &kp F11   &kp F12   &kp PRINTSCREEN &kp SCROLLLOCK &kp PAUSE_BREAK
+&kp GRAVE     &kp N1        &kp N2    &kp N3    &kp N4    &kp N5    &kp N6    &kp N7
+&kp N8        &kp N9        &kp N0    &kp MINUS &kp EQUAL &kp BACKSPACE &kp INSERT &kp HOME
+&kp TAB       &kp Q         &kp W     &kp E     &kp R     &kp T     &kp Y     &kp U
+&kp I         &kp O         &kp P     &kp LBKT  &kp RBKT  &kp BACKSLASH &kp DELETE &kp END
+&kp CAPSLOCK  &kp A         &kp S     &kp D     &kp F     &kp G     &kp H     &kp J
+&kp K         &kp L         &kp SEMICOLON &kp SINGLE_QUOTE &kp ENTER &kp ENTER &none &none
+&kp LSHIFT    &kp NON_US_BACKSLASH &kp Z &kp X &kp C &kp V &kp B &kp N
+&kp M         &kp COMMA     &kp PERIOD &kp SLASH &kp RSHIFT &mo 2 &kp UP &kp LEFT
+&kp LCTRL     &kp LGUI      &kp LALT  &none
+&kp SPACE     &kp SPACE     &kp SPACE &none
+&kp SPACE     &kp BACKSPACE &kp RALT  &kp RGUI
+&mo 1         &kp RCTRL     &kp DOWN  &kp RIGHT
+            >;
+        };
+
+        // ---- Layer 1: FN (hold FN key at (5,12)) ----
+        //   FN+1/2/3 = BT channels (tap select / hold pair),
+        //   FN+4     = USB wired output (OUT_USB),
+        //   FN+C     = Calculator, FN+P = media player (AL Consumer Control Config),
+        //   FN+SPC   = play/pause, arrow cluster = media keys,
+        //   FN+RALT  = momentary layer 2.
+        fn_layer {
+            bindings = <
+&trans &trans &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans &trans &trans
+&trans &ch1 0 0 &ch2 0 0 &ch3 0 0 &out OUT_USB &trans &trans &trans
+&trans &trans &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans &trans &trans
+&trans &trans &kp C_AL_CCC &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &trans &trans &trans &trans
+&trans &trans &trans &trans &kp C_AL_CALC &trans &trans &trans
+&trans &trans &trans &trans &trans &trans &kp C_VOL_UP &kp C_PREV
+&trans &trans &trans &trans
+&kp C_PLAY_PAUSE &kp C_PLAY_PAUSE &kp C_PLAY_PAUSE &trans
+&kp C_PLAY_PAUSE &trans &mo 2 &trans
+&trans &trans &kp C_VOL_DN &kp C_NEXT
+            >;
+        };
+
+        // ---- Layer 2: config/reset (FN2 key (4,13) directly, or FN+RALT) ----
+        //   ESC position   = clear all BLE pairings (factory reset of bonds),
+        //   GRAVE position = ZMK Studio unlock,
+        //   LCTRL position = bootloader (UF2/DFU).
+        layer2 {
+            bindings = <
+// row0: ESC = clear all BLE pairings
+&bt BT_CLR_ALL &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
+// row1: GRAVE = ZMK Studio unlock
+&studio_unlock &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
+// row2
+&trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
+// row3
+&trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
+// row4
+&trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
+// row5: LCTRL = bootloader (UF2/DFU)
+&bootloader &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans &trans
+            >;
+        };
+    };
+};

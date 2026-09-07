@@ -1,0 +1,8 @@
+file_format: "1"
+id: czm_zmk87
+name: CZM ZMK87
+type: shield
+url: https://github.com/micahyy/zmk-config
+requires: [pro_micro]
+features:
+  - keys
