@@ -34,11 +34,13 @@
  */
 
 #include <zephyr/device.h>
+#include <zephyr/drivers/gpio.h>
 #include <zephyr/drivers/led.h>
 #include <zephyr/kernel.h>
 #include <zephyr/logging/log.h>
 #include <zephyr/sys/util.h>
 
+#include <zmk/events/activity_state_changed.h>
 #include <zmk/events/ble_active_profile_changed.h>
 #include <zmk/events/endpoint_changed.h>
 #include <zmk/events/hid_indicators_changed.h>
@@ -76,6 +78,11 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #define LED_USB   4   /* P0.08 */
 #define LED_COUNT 5
 #define BLE_COUNT 3
+
+/* Physical GPIO pins of the 5 LEDs (all on gpio0, active-low). Needed when
+ * parking them before deep sleep - the led_off() call drives them HIGH, and
+ * the reconfiguration to pulled-up input holds the OFF state in SYSTEM OFF. */
+static const uint8_t led_pins[LED_COUNT] = {22, 12, 4, 26, 8};
 
 /* FN layer + physical key positions of the BLE profile / output keys.
  * FN+N1/N2/N3 = BT_SEL 0/1/2 -> positions 12/13/14; FN+N4 = OUT_TOG -> 8. */
@@ -496,6 +503,43 @@ static int position_listener(const zmk_event_t *eh) {
 }
 ZMK_LISTENER(dz17_pos_ind, position_listener);
 ZMK_SUBSCRIPTION(dz17_pos_ind, zmk_position_state_changed);
+
+/* Deep sleep (System OFF) parking.
+ *
+ * The nRF52 GPIO block keeps its pin configuration and output value in
+ * SYSTEM OFF. An active-low LED left driven LOW therefore stays ON through
+ * the whole sleep (RAM is gone, so nothing turns it off) - this is the
+ * known XIAO nRF52840 issue and exactly the "sleeps fine but LED never
+ * turns off" behaviour seen on DZ17.
+ *
+ * On entering ZMK_ACTIVITY_SLEEP: stop the periodic work, drive every LED
+ * HIGH (off) via the led driver, then reconfigure the pins as pulled-up
+ * inputs so the pin cannot sink LED current while the system is off (no
+ * SENSE, as LED pins must not be wake sources). Wake-up from System OFF is
+ * a full reset, so dz17_led_init() restores the outputs on next boot. */
+static int activity_state_listener(const zmk_event_t *eh) {
+    const struct zmk_activity_state_changed *ev =
+        as_zmk_activity_state_changed(eh);
+    if (!ev || ev->state != ZMK_ACTIVITY_SLEEP) {
+        return 0;
+    }
+
+    k_work_cancel_delayable(&tick_work);
+    k_work_cancel_delayable(&out_tog_work);
+
+    const struct device *gpio = DEVICE_DT_GET(DT_NODELABEL(gpio0));
+    for (int i = 0; i < LED_COUNT; i++) {
+        led_off(led_dev, i);
+        if (device_is_ready(gpio)) {
+            gpio_pin_configure(gpio, led_pins[i], GPIO_INPUT | GPIO_PULL_UP);
+        }
+    }
+
+    LOG_INF("DZ17 LEDs parked for System OFF (deep sleep)");
+    return 0;
+}
+ZMK_LISTENER(dz17_activity_ind, activity_state_listener);
+ZMK_SUBSCRIPTION(dz17_activity_ind, zmk_activity_state_changed);
 
 /* ---- init ---- */
 static int dz17_led_init(void) {
