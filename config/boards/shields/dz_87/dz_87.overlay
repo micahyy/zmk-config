@@ -9,18 +9,14 @@
 
     // CZM DZ 87 wireless TKL: 6 x 16 key matrix (96 positions).
     //
-    // Hardware diode wiring (confirmed against schematic): diodes point from
-    // ROW to COL (anode on the row line, cathode on the column line), i.e.
-    // QMK's COL2ROW matrix: COL pins are the strobes (outputs, driven LOW one
-    // at a time to select the column), ROW pins are the sense lines (inputs
-    // with internal pull-up; a pressed key pulls the row low through the
-    // diode, read active-low). ZMK names this by signal/current flow, so the
-    // matching enum is "col2row" (col drives -> row senses; verified against
-    // app/drivers/kscan/kscan_gpio_matrix.c: for col2row outputs=cols,
-    // inputs=rows, and state index = input_idx * cols + output_idx). The
-    // matrix position index is still row * columns + col, i.e. position
-    // (r,c) = r*16 + c, so no matrix transform is needed and keymap bindings
-    // map 1:1 to (row,col).
+    // Hardware diode wiring (confirmed by hardware designer): diodes point
+    // from COL to ROW (anode on the column line, cathode on the row line),
+    // i.e. ZMK "col2row". ZMK's kscan-gpio-matrix scans ACTIVE-HIGH: columns
+    // are strobed HIGH one at a time (GPIO_ACTIVE_HIGH outputs), rows are
+    // inputs with internal pull-down; a pressed key pulls the row HIGH through
+    // the diode. This matches the official ZMK col2row wiring (corne, contra,
+    // eek shields): col-gpios = GPIO_ACTIVE_HIGH,
+    // row-gpios = GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN.
     kscan0: kscan {
         compatible = "zmk,kscan-gpio-matrix";
         wakeup-source;
@@ -29,34 +25,34 @@
 
         diode-direction = "col2row";
 
-        // Rows = sense inputs (internal pull-up; pressed -> pulled low -> active-low)
+        // Rows = sense inputs (internal pull-down; pressed -> pulled high -> active-high)
         row-gpios
-            = <&gpio0 10 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   // R0
-            , <&gpio0 13 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   // R1
-            , <&gpio0 24 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   // R2
-            , <&gpio0  9 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   // R3
-            , <&gpio0 28 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   // R4
-            , <&gpio1 10 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>   // R5
+            = <&gpio0 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>   // R0
+            , <&gpio0 13 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>   // R1
+            , <&gpio0 24 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>   // R2
+            , <&gpio0  9 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>   // R3
+            , <&gpio0 28 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>   // R4
+            , <&gpio1 10 (GPIO_ACTIVE_HIGH | GPIO_PULL_DOWN)>   // R5
             ;
 
-        // Cols = strobe outputs (idle high; driven low one at a time to scan)
+        // Cols = strobe outputs (idle low; driven HIGH one at a time to scan)
         col-gpios
-            = <&gpio0 17 GPIO_ACTIVE_LOW>   // C0
-            , <&gpio0 15 GPIO_ACTIVE_LOW>   // C1
-            , <&gpio0  7 GPIO_ACTIVE_LOW>   // C2
-            , <&gpio1  9 GPIO_ACTIVE_LOW>   // C3
-            , <&gpio0  5 GPIO_ACTIVE_LOW>   // C4
-            , <&gpio0 12 GPIO_ACTIVE_LOW>   // C5
-            , <&gpio0  4 GPIO_ACTIVE_LOW>   // C6
-            , <&gpio0  8 GPIO_ACTIVE_LOW>   // C7
-            , <&gpio0  6 GPIO_ACTIVE_LOW>   // C8
-            , <&gpio0 26 GPIO_ACTIVE_LOW>   // C9
-            , <&gpio0 30 GPIO_ACTIVE_LOW>   // C10
-            , <&gpio0 29 GPIO_ACTIVE_LOW>   // C11
-            , <&gpio0  2 GPIO_ACTIVE_LOW>   // C12
-            , <&gpio1 13 GPIO_ACTIVE_LOW>   // C13
-            , <&gpio0  3 GPIO_ACTIVE_LOW>   // C14
-            , <&gpio1 11 GPIO_ACTIVE_LOW>   // C15
+            = <&gpio0 17 GPIO_ACTIVE_HIGH>   // C0
+            , <&gpio0 15 GPIO_ACTIVE_HIGH>   // C1
+            , <&gpio0  7 GPIO_ACTIVE_HIGH>   // C2
+            , <&gpio1  9 GPIO_ACTIVE_HIGH>   // C3
+            , <&gpio0  5 GPIO_ACTIVE_HIGH>   // C4
+            , <&gpio0 12 GPIO_ACTIVE_HIGH>   // C5
+            , <&gpio0  4 GPIO_ACTIVE_HIGH>   // C6
+            , <&gpio0  8 GPIO_ACTIVE_HIGH>   // C7
+            , <&gpio0  6 GPIO_ACTIVE_HIGH>   // C8
+            , <&gpio0 26 GPIO_ACTIVE_HIGH>   // C9
+            , <&gpio0 30 GPIO_ACTIVE_HIGH>   // C10
+            , <&gpio0 29 GPIO_ACTIVE_HIGH>   // C11
+            , <&gpio0  2 GPIO_ACTIVE_HIGH>   // C12
+            , <&gpio1 13 GPIO_ACTIVE_HIGH>   // C13
+            , <&gpio0  3 GPIO_ACTIVE_HIGH>   // C14
+            , <&gpio1 11 GPIO_ACTIVE_HIGH>   // C15
             ;
     };
 
