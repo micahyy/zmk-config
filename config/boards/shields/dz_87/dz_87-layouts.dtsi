@@ -20,7 +20,7 @@
         display-name = "ANSI（US 标准美式）";
         transform = <&dz87_t_ansi>;
 
-        keys  //                  w   h     x    y    rot rx ry
+        keys = //                w   h     x    y    rot rx ry
             <&key_physical_attrs 100 100   200    0   0 0 0>  // m0  ESC
             , <&key_physical_attrs 100 100   400    0   0 0 0>  // m1  F1
             , <&key_physical_attrs 100 100   500    0   0 0 0>  // m2  F2
@@ -130,7 +130,7 @@
         display-name = "ANSI + 分裂退格";
         transform = <&dz87_t_ansi_split_bs>;
 
-        keys  //                  w   h     x    y    rot rx ry
+        keys = //                w   h     x    y    rot rx ry
             <&key_physical_attrs 100 100   200    0   0 0 0>  // m0  ESC
             , <&key_physical_attrs 100 100   400    0   0 0 0>  // m1  F1
             , <&key_physical_attrs 100 100   500    0   0 0 0>  // m2  F2
@@ -241,7 +241,7 @@
         display-name = "ANSI + 7u 空格";
         transform = <&dz87_t_ansi_7u>;
 
-        keys  //                  w   h     x    y    rot rx ry
+        keys = //                w   h     x    y    rot rx ry
             <&key_physical_attrs 100 100   200    0   0 0 0>  // m0  ESC
             , <&key_physical_attrs 100 100   400    0   0 0 0>  // m1  F1
             , <&key_physical_attrs 100 100   500    0   0 0 0>  // m2  F2
@@ -350,7 +350,7 @@
         display-name = "ANSI + 分裂空格";
         transform = <&dz87_t_ansi_split_sp>;
 
-        keys  //                  w   h     x    y    rot rx ry
+        keys = //                w   h     x    y    rot rx ry
             <&key_physical_attrs 100 100   200    0   0 0 0>  // m0  ESC
             , <&key_physical_attrs 100 100   400    0   0 0 0>  // m1  F1
             , <&key_physical_attrs 100 100   500    0   0 0 0>  // m2  F2
@@ -462,7 +462,7 @@
         display-name = "ISO（欧版回车）";
         transform = <&dz87_t_iso>;
 
-        keys  //                  w   h     x    y    rot rx ry
+        keys = //                w   h     x    y    rot rx ry
             <&key_physical_attrs 100 100   200    0   0 0 0>  // m0  ESC
             , <&key_physical_attrs 100 100   400    0   0 0 0>  // m1  F1
             , <&key_physical_attrs 100 100   500    0   0 0 0>  // m2  F2
@@ -573,7 +573,7 @@
         display-name = "ALL（全轴工程视图，焊了副轴时选这个）";
         transform = <&dz87_t_all>;
 
-        keys  //                  w   h     x    y    rot rx ry
+        keys = //                w   h     x    y    rot rx ry
             <&key_physical_attrs 100 100   200    0   0 0 0>  // m0  ESC
             , <&key_physical_attrs 100 100   400    0   0 0 0>  // m1  F1
             , <&key_physical_attrs 100 100   500    0   0 0 0>  // m2  F2
