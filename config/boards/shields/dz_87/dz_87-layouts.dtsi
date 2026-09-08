@@ -22,7 +22,7 @@
 
         keys = //                w   h     x    y    rot rx ry
             <&key_physical_attrs 100 100   200    100   0 0 0>  // m0  ESC
-            , <&key_physical_attrs 100 100   400    100   0 0 0>  // m1  F1
+            , <&key_physical_attrs 100 100   400   100   0 0 0>  // m1  F1
             , <&key_physical_attrs 100 100   500    100   0 0 0>  // m2  F2
             , <&key_physical_attrs 100 100   600    100   0 0 0>  // m3  F3
             , <&key_physical_attrs 100 100   700    100   0 0 0>  // m4  F4
