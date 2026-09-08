@@ -34,9 +34,9 @@
             , <&key_physical_attrs 100 100  1400    0   0 0 0>  // m10 F10
             , <&key_physical_attrs 100 100  1500    0   0 0 0>  // m11 F11
             , <&key_physical_attrs 100 100  1600    0   0 0 0>  // m12 F12
-            , <&key_physical_attrs 100 100  2025    0   0 0 0>  // m13 PRINTSCREEN
-            , <&key_physical_attrs 100 100  2125    0   0 0 0>  // m14 SCROLLLOCK
-            , <&key_physical_attrs 100 100  2225    0   0 0 0>  // m15 PAUSE_BREAK
+            , <&key_physical_attrs 100 100  1725    0   0 0 0>  // m13 PRINTSCREEN
+            , <&key_physical_attrs 100 100  1825    0   0 0 0>  // m14 SCROLLLOCK
+            , <&key_physical_attrs 100 100  1925    0   0 0 0>  // m15 PAUSE_BREAK
             , <&key_physical_attrs 100 100   200  225   0 0 0>  // m16 GRAVE
             , <&key_physical_attrs 100 100   300  225   0 0 0>  // m17 N1
             , <&key_physical_attrs 100 100   400  225   0 0 0>  // m18 N2
@@ -51,9 +51,9 @@
             , <&key_physical_attrs 100 100  1300  225   0 0 0>  // m27 MINUS
             , <&key_physical_attrs 100 100  1400  225   0 0 0>  // m28 EQUAL
             , <&key_physical_attrs 200 100  1500  225   0 0 0>  // m29 BACKSPACE
-            , <&key_physical_attrs 100 100  2025  225   0 0 0>  // m30 INSERT
-            , <&key_physical_attrs 100 100  2125  225   0 0 0>  // m31 HOME
-            , <&key_physical_attrs 100 100  2225  225   0 0 0>  // m62 PG_UP
+            , <&key_physical_attrs 100 100  1725  225   0 0 0>  // m30 INSERT
+            , <&key_physical_attrs 100 100  1825  225   0 0 0>  // m31 HOME
+            , <&key_physical_attrs 100 100  1925  225   0 0 0>  // m62 PG_UP
             , <&key_physical_attrs 150 100   200  325   0 0 0>  // m32 TAB
             , <&key_physical_attrs 100 100   350  325   0 0 0>  // m33 Q
             , <&key_physical_attrs 100 100   450  325   0 0 0>  // m34 W
@@ -68,9 +68,9 @@
             , <&key_physical_attrs 100 100  1350  325   0 0 0>  // m43 LBKT
             , <&key_physical_attrs 100 100  1450  325   0 0 0>  // m44 RBKT
             , <&key_physical_attrs 150 100  1550  325   0 0 0>  // m45 BACKSLASH
-            , <&key_physical_attrs 100 100  2025  325   0 0 0>  // m46 DELETE
-            , <&key_physical_attrs 100 100  2125  325   0 0 0>  // m47 END
-            , <&key_physical_attrs 100 100  2225  325   0 0 0>  // m63 PG_DN
+            , <&key_physical_attrs 100 100  1725  325   0 0 0>  // m46 DELETE
+            , <&key_physical_attrs 100 100  1825  325   0 0 0>  // m47 END
+            , <&key_physical_attrs 100 100  1925  325   0 0 0>  // m63 PG_DN
             , <&key_physical_attrs 175 100   200  425   0 0 0>  // m48 CAPSLOCK
             , <&key_physical_attrs 100 100   375  425   0 0 0>  // m49 A
             , <&key_physical_attrs 100 100   475  425   0 0 0>  // m50 S
@@ -96,7 +96,7 @@
             , <&key_physical_attrs 100 100  1225  525   0 0 0>  // m74 PERIOD
             , <&key_physical_attrs 100 100  1325  525   0 0 0>  // m75 SLASH
             , <&key_physical_attrs 275 100  1425  525   0 0 0>  // m76 RSHIFT
-            , <&key_physical_attrs 100 100  2125  525   0 0 0>  // m78 UP
+            , <&key_physical_attrs 100 100  1825  525   0 0 0>  // m78 UP
             , <&key_physical_attrs 125 100   200  625   0 0 0>  // m80 LCTRL
             , <&key_physical_attrs 125 100   325  625   0 0 0>  // m81 LGUI
             , <&key_physical_attrs 125 100   450  625   0 0 0>  // m82 LALT
@@ -105,9 +105,9 @@
             , <&key_physical_attrs 125 100  1325  625   0 0 0>  // m91 RGUI
             , <&key_physical_attrs 125 100  1450  625   0 0 0>  // m92 1
             , <&key_physical_attrs 125 100  1575  625   0 0 0>  // m93 RCTRL
-            , <&key_physical_attrs 100 100  2025  625   0 0 0>  // m79 LEFT
-            , <&key_physical_attrs 100 100  2125  625   0 0 0>  // m94 DOWN
-            , <&key_physical_attrs 100 100  2225  625   0 0 0>  // m95 RIGHT
+            , <&key_physical_attrs 100 100  1725  625   0 0 0>  // m79 LEFT
+            , <&key_physical_attrs 100 100  1825  625   0 0 0>  // m94 DOWN
+            , <&key_physical_attrs 100 100  1925  625   0 0 0>  // m95 RIGHT
             ;
     };
 
