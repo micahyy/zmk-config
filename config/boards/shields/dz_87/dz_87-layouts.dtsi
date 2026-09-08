@@ -240,19 +240,19 @@
         transform = <&dz87_t_all>;
 
         keys = //                w   h     x    y    rot rx ry
-            <&key_physical_attrs 100 100   200    0   0 0 0>  // m0  ESC
-            , <&key_physical_attrs 100 100   400    0   0 0 0>  // m1  F1
-            , <&key_physical_attrs 100 100   500    0   0 0 0>  // m2  F2
-            , <&key_physical_attrs 100 100   600    0   0 0 0>  // m3  F3
-            , <&key_physical_attrs 100 100   700    0   0 0 0>  // m4  F4
-            , <&key_physical_attrs 100 100   850    0   0 0 0>  // m5  F5
-            , <&key_physical_attrs 100 100   950    0   0 0 0>  // m6  F6
-            , <&key_physical_attrs 100 100  1050    0   0 0 0>  // m7  F7
-            , <&key_physical_attrs 100 100  1150    0   0 0 0>  // m8  F8
-            , <&key_physical_attrs 100 100  1300    0   0 0 0>  // m9  F9
-            , <&key_physical_attrs 100 100  1400    0   0 0 0>  // m10 F10
-            , <&key_physical_attrs 100 100  1500    0   0 0 0>  // m11 F11
-            , <&key_physical_attrs 100 100  1600    0   0 0 0>  // m12 F12
+            <&key_physical_attrs 100 100   200    100   0 0 0>  // m0  ESC
+            , <&key_physical_attrs 100 100   400    100   0 0 0>  // m1  F1
+            , <&key_physical_attrs 100 100   500    100   0 0 0>  // m2  F2
+            , <&key_physical_attrs 100 100   600    100   0 0 0>  // m3  F3
+            , <&key_physical_attrs 100 100   700    100   0 0 0>  // m4  F4
+            , <&key_physical_attrs 100 100   850    100   0 0 0>  // m5  F5
+            , <&key_physical_attrs 100 100   950    100   0 0 0>  // m6  F6
+            , <&key_physical_attrs 100 100  1050    100   0 0 0>  // m7  F7
+            , <&key_physical_attrs 100 100  1150    100   0 0 0>  // m8  F8
+            , <&key_physical_attrs 100 100  1300    100   0 0 0>  // m9  F9
+            , <&key_physical_attrs 100 100  1400    100   0 0 0>  // m10 F10
+            , <&key_physical_attrs 100 100  1500    100   0 0 0>  // m11 F11
+            , <&key_physical_attrs 100 100  1600    100   0 0 0>  // m12 F12
             , <&key_physical_attrs 100 100  1725    100   0 0 0>  // m13 PRINTSCREEN
             , <&key_physical_attrs 100 100  1825    100   0 0 0>  // m14 SCROLLLOCK
             , <&key_physical_attrs 100 100  1925    100   0 0 0>  // m15 PAUSE_BREAK
