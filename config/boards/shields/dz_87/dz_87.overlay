@@ -4,7 +4,7 @@
 / {
     chosen {
         zmk,kscan = &kscan0;
-        zmk,physical-layout = <&dz87_ansi>;
+        zmk,physical-layout = <&dz87_625>;
     };
 
     // CZM DZ 87 wireless TKL: 6 x 16 key matrix (96 positions).
