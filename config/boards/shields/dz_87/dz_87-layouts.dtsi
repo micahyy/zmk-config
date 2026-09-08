@@ -305,7 +305,7 @@
             , <&key_physical_attrs 100 100  1275  425   0 0 0>  // m58 SEMICOLON
             , <&key_physical_attrs 100 100  1375  425   0 0 0>  // m59 SINGLE_QUOTE
 
-            , <&key_physical_attrs 100 100  1475  425   0 0 0>  // m60 ENTER
+            , <&key_physical_attrs 100 100  1475  425   0 0 0>  // m60
             , <&key_physical_attrs 125 100  1575  425   0 0 0>  // m61 ENTER
             , <&key_physical_attrs 125 100   200  525   0 0 0>  // m64 LSHIFT
             , <&key_physical_attrs 100 100   325  525   0 0 0>  // m65 NON_US_BACKSLASH
@@ -319,8 +319,8 @@
             , <&key_physical_attrs 100 100  1125  525   0 0 0>  // m73 COMMA
             , <&key_physical_attrs 100 100  1225  525   0 0 0>  // m74 PERIOD
             , <&key_physical_attrs 100 100  1325  525   0 0 0>  // m75 SLASH
-            , <&key_physical_attrs 175 100  1675  525   0 0 0>  // m76 RSHIFT
-            , <&key_physical_attrs 100 100  1900  525   0 0 0>  // m77 2
+            , <&key_physical_attrs 175 100  1475  525   0 0 0>  // m76 RSHIFT
+            , <&key_physical_attrs 100 100  1650  525   0 0 0>  // m77 2
             , <&key_physical_attrs 100 100  1825  525   0 0 0>  // m78 UP
             , <&key_physical_attrs 125 100   200  625   0 0 0>  // m80 LCTRL
             , <&key_physical_attrs 125 100   325  625   0 0 0>  // m81 LGUI
