@@ -5,7 +5,7 @@ manifest:
   projects:
     - name: zmk
       remote: micahyy
-      revision: d02621f8df5194cf81e39132bd195e8bf73f32e8
+      revision: 6634e6a344372e2bae0e23609cb79b80ec0f3d23
       import: app/west.yml
   self:
     path: config

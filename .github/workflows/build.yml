@@ -42,6 +42,8 @@ jobs:
           west build -s zmk/app -b nice_nano_v2 -d build_dz87
           -- -DSHIELD=dz_87
           -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
+          -DSNIPPET="studio-rpc-usb-uart"
+          -DCONFIG_ZMK_STUDIO=y
 
       - name: Rename DZ 87 firmware
         run: cp build_dz87/zephyr/zmk.uf2 dz_87_nice_nano_v2.uf2
