@@ -4,7 +4,18 @@
 / {
     chosen {
         zmk,kscan = &kscan0;
+        zmk,battery = <&vbatt>;
         zmk,physical-layout = <&dz87_625>;
+    };
+
+    // Battery voltage monitoring via the nRF VDDH internal ADC (VDDHDIV5 x5).
+    // Declared in the shield (same as DZ17) so the nrf-vddh battery driver is
+    // bound here and its diode-drop compensation
+    // (CONFIG_ZMK_BATTERY_NRF_VDDH_DIODE_DROP_MV) actually takes effect.
+    // P0.31 STBY drives the hardware charge lamp and is not used as a software
+    // charge-status input.
+    vbatt: vbatt {
+        compatible = "zmk,battery-nrf-vddh";
     };
 
     // CZM DZ 87 wireless TKL: 6 x 16 key matrix (96 positions).
