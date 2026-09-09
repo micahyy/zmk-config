@@ -305,9 +305,9 @@
             , <&key_physical_attrs 100 100  1175  425   0 0 0>  // m57 L
             , <&key_physical_attrs 100 100  1275  425   0 0 0>  // m58 SEMICOLON
             , <&key_physical_attrs 100 100  1375  425   0 0 0>  // m59 SINGLE_QUOTE
-            , <&key_physical_attrs 125 100  1675  325   0 0 0>  // m60 ENTER left
-            , <&key_physical_attrs 100 100  1675  425   0 0 0>  // m61 ENTER
-            , <&key_physical_attrs 120 100   200  525   0 0 0>  // m64 LSHIFT
+            , <&key_physical_attrs 100 100  1675  325   0 0 0>  // m60 ENTER left
+            , <&key_physical_attrs 125 200  1675  425   0 0 0>  // m61 ENTER
+            , <&key_physical_attrs 125 100   200  525   0 0 0>  // m64 LSHIFT
             , <&key_physical_attrs 100 100   325  525   0 0 0>  // m65 NON_US_BACKSLASH
             , <&key_physical_attrs 100 100   425  525   0 0 0>  // m66 Z
             , <&key_physical_attrs 100 100   525  525   0 0 0>  // m67 X
