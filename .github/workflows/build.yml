@@ -48,16 +48,6 @@ jobs:
       - name: Rename DZ 87 firmware
         run: cp build_dz87/zephyr/zmk.uf2 dz_87_nice_nano_v2.uf2
 
-      - name: Diagnose battery config
-        if: always()
-        run: |
-          echo "=== DZ87 .config battery symbols ==="
-          grep -iE "DIODE_DROP|BATTERY_NRF_VDDH|ZMK_BATTERY=|BATTERY_REPORTING" build_dz87/zephyr/.config || echo "NONE in DZ87 .config"
-          echo "=== DZ87 merged devicetree battery nodes ==="
-          grep -iE "vbatt|battery-nrf-vddh|battery-voltage-divider|zmk,battery" build_dz87/zephyr/zephyr.dts || echo "no battery node in DZ87 merged dts"
-          echo "=== DZ17 .config battery (reference) ==="
-          grep -iE "DIODE_DROP|BATTERY_NRF_VDDH" build_dz17/zephyr/.config || echo "NONE in DZ17 .config"
-
       - name: Upload DZ17 firmware
         uses: actions/upload-artifact@v4
         with:
