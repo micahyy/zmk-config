@@ -37,6 +37,25 @@ jobs:
       - name: Rename DZ17 firmware
         run: cp build_dz17/zephyr/zmk.uf2 dz17_nice_nano_v2.uf2
 
+      - name: Build DZ17 BLE diagnostic
+        run: >
+          west build -s zmk/app -b nice_nano_v2 -d build_dz17_dbg
+          -- -DSHIELD=dz17
+          -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
+          -DEXTRA_CONF_FILE="${GITHUB_WORKSPACE}/config/boards/shields/dz17/dz17_debug.conf"
+
+      - name: Rename DZ17 diagnostic firmware
+        run: cp build_dz17_dbg/zephyr/zmk.uf2 dz17_debug_nice_nano_v2.uf2
+
+      - name: Build settings reset
+        run: >
+          west build -s zmk/app -b nice_nano_v2 -d build_reset
+          -- -DSHIELD=settings_reset
+          -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
+
+      - name: Rename settings reset firmware
+        run: cp build_reset/zephyr/zmk.uf2 settings_reset_nice_nano_v2.uf2
+
       - name: Build DZ 87
         run: >
           west build -s zmk/app -b nice_nano_v2 -d build_dz87
@@ -53,6 +72,18 @@ jobs:
         with:
           name: dz17_firmware
           path: dz17_nice_nano_v2.uf2
+
+      - name: Upload DZ17 BLE diagnostic
+        uses: actions/upload-artifact@v4
+        with:
+          name: dz17_debug_firmware
+          path: dz17_debug_nice_nano_v2.uf2
+
+      - name: Upload settings reset
+        uses: actions/upload-artifact@v4
+        with:
+          name: settings_reset_firmware
+          path: settings_reset_nice_nano_v2.uf2
 
       - name: Upload DZ 87 firmware
         uses: actions/upload-artifact@v4
