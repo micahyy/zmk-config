@@ -42,6 +42,7 @@ jobs:
           west build -s zmk/app -b nice_nano_v2 -d build_dz17_dbg
           -- -DSHIELD=dz17
           -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
+          -DSNIPPET="zmk-usb-logging"
           -DEXTRA_CONF_FILE="${GITHUB_WORKSPACE}/config/boards/shields/dz17/dz17_debug.conf"
 
       - name: Rename DZ17 diagnostic firmware
