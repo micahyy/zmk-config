@@ -269,7 +269,7 @@
             , <&key_physical_attrs 100 100  1200  225   0 0 0>  // p26 m26 N0
             , <&key_physical_attrs 100 100  1300  225   0 0 0>  // p27 m27 MINUS
             , <&key_physical_attrs 100 100  1400  225   0 0 0>  // p28 m28 EQUAL
-            , <&key_physical_attrs 200 100  1500  225   0 0 0>  // p29 m29 BACKSPACE
+            , <&key_physical_attrs 100 100  1500  225   0 0 0>  // p29 m29 BACKSPACE(分裂退格左半)
             , <&key_physical_attrs 100 100  1600  225   0 0 0>  // p30 m89 BACKSPACE(分裂退格右半)
             , <&key_physical_attrs 100 100  2025  225   0 0 0>  // p31 m30 INSERT
             , <&key_physical_attrs 100 100  2125  225   0 0 0>  // p32 m31 HOME
@@ -303,7 +303,7 @@
             , <&key_physical_attrs 100 100  1175  425   0 0 0>  // p60 m57 L
             , <&key_physical_attrs 100 100  1275  425   0 0 0>  // p61 m58 SEMICOLON
             , <&key_physical_attrs 100 100  1375  425   0 0 0>  // p62 m59 SINGLE_QUOTE
-            , <&key_physical_attrs 125 200  1575  325   0 0 0>  // p63 m60 ENTER(ISO竖回车 1.25x2)
+            , <&key_physical_attrs 125 100  1575  325   0 0 0>  // p63 m60 ENTER(ISO回车 1.25u 单行)
             , <&key_physical_attrs 100 100  1475  425   0 0 0>  // p64 m61 ENTER(ISO横段1u)
             , <&key_physical_attrs 125 100   200  525   0 0 0>  // p65 m64 LSHIFT(ISO 1.25u)
             , <&key_physical_attrs 100 100   325  525   0 0 0>  // p66 m65 NON_US_BACKSLASH(ISO NUBS)
@@ -325,7 +325,7 @@
             , <&key_physical_attrs 125 100   450  625   0 0 0>  // p82 m82 LALT
             , <&key_physical_attrs 225 100   575  625   0 0 0>  // p83 m84 SPACE(分裂空格左2.25u)
             , <&key_physical_attrs 125 100   800  625   0 0 0>  // p84 m85 SPACE(分裂空格中1.25u)
-            , <&key_physical_attrs 625 100   575  625   0 0 0>  // p85 m86 SPACE(6.25u整空格变体)
+            , <&key_physical_attrs 100 100  4000  625   0 0 0>  // p85 m86 SPACE(6.25u整空格变体,不焊接 已移出显示)
             , <&key_physical_attrs 275 100   925  625   0 0 0>  // p86 m88 SPACE(分裂空格右2.75u)
             , <&key_physical_attrs 125 100  1200  625   0 0 0>  // p87 m90 RALT
             , <&key_physical_attrs 125 100  1325  625   0 0 0>  // p88 m91 RGUI
