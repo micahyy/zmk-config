@@ -253,9 +253,9 @@
             , <&key_physical_attrs 100 100  1400  100   0 0 0>  // p10 m10 F10
             , <&key_physical_attrs 100 100  1500  100   0 0 0>  // p11 m11 F11
             , <&key_physical_attrs 100 100  1600  100   0 0 0>  // p12 m12 F12
-            , <&key_physical_attrs 100 100  2025  100   0 0 0>  // p13 m13 PRINTSCREEN
-            , <&key_physical_attrs 100 100  2125  100   0 0 0>  // p14 m14 SCROLLLOCK
-            , <&key_physical_attrs 100 100  2225  100   0 0 0>  // p15 m15 PAUSE_BREAK
+            , <&key_physical_attrs 100 100  1725  100   0 0 0>  // p13 m13 PRINTSCREEN
+            , <&key_physical_attrs 100 100  1825  100   0 0 0>  // p14 m14 SCROLLLOCK
+            , <&key_physical_attrs 100 100  1925  100   0 0 0>  // p15 m15 PAUSE_BREAK
             , <&key_physical_attrs 100 100   200  225   0 0 0>  // p16 m16 GRAVE
             , <&key_physical_attrs 100 100   300  225   0 0 0>  // p17 m17 N1
             , <&key_physical_attrs 100 100   400  225   0 0 0>  // p18 m18 N2
@@ -271,9 +271,9 @@
             , <&key_physical_attrs 100 100  1400  225   0 0 0>  // p28 m28 EQUAL
             , <&key_physical_attrs 100 100  1500  225   0 0 0>  // p29 m29 BACKSPACE(分裂退格左半)
             , <&key_physical_attrs 100 100  1600  225   0 0 0>  // p30 m89 BACKSPACE(分裂退格右半)
-            , <&key_physical_attrs 100 100  2025  225   0 0 0>  // p31 m30 INSERT
-            , <&key_physical_attrs 100 100  2125  225   0 0 0>  // p32 m31 HOME
-            , <&key_physical_attrs 100 100  2225  225   0 0 0>  // p33 m62 PG_UP
+            , <&key_physical_attrs 100 100  1725  225   0 0 0>  // p31 m30 INSERT
+            , <&key_physical_attrs 100 100  1825  225   0 0 0>  // p32 m31 HOME
+            , <&key_physical_attrs 100 100  1925  225   0 0 0>  // p33 m62 PG_UP
             , <&key_physical_attrs 150 100   200  325   0 0 0>  // p34 m32 TAB
             , <&key_physical_attrs 100 100   350  325   0 0 0>  // p35 m33 Q
             , <&key_physical_attrs 100 100   450  325   0 0 0>  // p36 m34 W
@@ -288,9 +288,9 @@
             , <&key_physical_attrs 100 100  1350  325   0 0 0>  // p45 m43 LBKT
             , <&key_physical_attrs 100 100  1450  325   0 0 0>  // p46 m44 RBKT
             , <&key_physical_attrs 150 100  1550  325   0 0 0>  // p47 m45 BACKSLASH(ANSI变体,与ISO竖回车同位)
-            , <&key_physical_attrs 100 100  2025  325   0 0 0>  // p48 m46 DELETE
-            , <&key_physical_attrs 100 100  2125  325   0 0 0>  // p49 m47 END
-            , <&key_physical_attrs 100 100  2225  325   0 0 0>  // p50 m63 PG_DN
+            , <&key_physical_attrs 100 100  1725  325   0 0 0>  // p48 m46 DELETE
+            , <&key_physical_attrs 100 100  1825  325   0 0 0>  // p49 m47 END
+            , <&key_physical_attrs 100 100  1925  325  0 0 0>  // p50 m63 PG_DN
             , <&key_physical_attrs 175 100   200  425   0 0 0>  // p51 m48 CAPSLOCK
             , <&key_physical_attrs 100 100   375  425   0 0 0>  // p52 m49 A
             , <&key_physical_attrs 100 100   475  425   0 0 0>  // p53 m50 S
@@ -303,7 +303,7 @@
             , <&key_physical_attrs 100 100  1175  425   0 0 0>  // p60 m57 L
             , <&key_physical_attrs 100 100  1275  425   0 0 0>  // p61 m58 SEMICOLON
             , <&key_physical_attrs 100 100  1375  425   0 0 0>  // p62 m59 SINGLE_QUOTE
-            , <&key_physical_attrs 125 100  1575  325   0 0 0>  // p63 m60 ENTER(ISO回车 1.25u 单行)
+            , <&key_physical_attrs 125 100  1575  425   0 0 0>  // p63 m60 ENTER(ISO回车 1.25u 下移一行)
             , <&key_physical_attrs 100 100  1475  425   0 0 0>  // p64 m61 ENTER(ISO横段1u)
             , <&key_physical_attrs 125 100   200  525   0 0 0>  // p65 m64 LSHIFT(ISO 1.25u)
             , <&key_physical_attrs 100 100   325  525   0 0 0>  // p66 m65 NON_US_BACKSLASH(ISO NUBS)
@@ -319,7 +319,7 @@
             , <&key_physical_attrs 100 100  1325  525   0 0 0>  // p76 m75 SLASH
             , <&key_physical_attrs 175 100  1425  525   0 0 0>  // p77 m76 RSHIFT(ISO 1.75u)
             , <&key_physical_attrs 100 100  1600  525   0 0 0>  // p78 m77 MO2(右shift旁1u变体键)
-            , <&key_physical_attrs 100 100  2125  525   0 0 0>  // p79 m78 UP
+            , <&key_physical_attrs 100 100  1825  525   0 0 0>  // p79 m78 UP
             , <&key_physical_attrs 125 100   200  625   0 0 0>  // p80 m80 LCTRL
             , <&key_physical_attrs 125 100   325  625   0 0 0>  // p81 m81 LGUI
             , <&key_physical_attrs 125 100   450  625   0 0 0>  // p82 m82 LALT
@@ -331,9 +331,9 @@
             , <&key_physical_attrs 125 100  1325  625   0 0 0>  // p88 m91 RGUI
             , <&key_physical_attrs 125 100  1450  625   0 0 0>  // p89 m92 FN(mo1)
             , <&key_physical_attrs 125 100  1575  625   0 0 0>  // p90 m93 RCTRL
-            , <&key_physical_attrs 100 100  2025  625   0 0 0>  // p91 m79 LEFT
-            , <&key_physical_attrs 100 100  2125  625   0 0 0>  // p92 m94 DOWN
-            , <&key_physical_attrs 100 100  2225  625   0 0 0>  // p93 m95 RIGHT
+            , <&key_physical_attrs 100 100  1725  625   0 0 0>  // p91 m79 LEFT
+            , <&key_physical_attrs 100 100  1825  625   0 0 0>  // p92 m94 DOWN
+            , <&key_physical_attrs 100 100  1925  625   0 0 0>  // p93 m95 RIGHT
          
 
             ;
