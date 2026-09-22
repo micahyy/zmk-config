@@ -1,7 +1,0 @@
-// Build-time extra overlay for ANSI 6.25u (87 keys) ONLY.
-// Passing -DDTC_OVERLAY_FILE drops the auto-added dz_87.keymap, so include it.
-#include "dz_87.keymap"
-
-// This firmware exposes only the 6.25u layout; remove the others from the list.
-&dz87_7u { status = "disabled"; };
-&dz87_all { status = "disabled"; };

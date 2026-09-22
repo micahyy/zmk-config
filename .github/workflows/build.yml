@@ -57,41 +57,16 @@ jobs:
       - name: Rename settings reset firmware
         run: cp build_reset/zephyr/zmk.uf2 settings_reset_nice_nano_v2.uf2
 
-      - name: Build DZ 87 (ANSI 6.25u)
+      - name: Build DZ 87
         run: >
-          west build -s zmk/app -b nice_nano_v2 -d build_dz87_625
+          west build -s zmk/app -b nice_nano_v2 -d build_dz87
           -- -DSHIELD=dz_87
           -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
           -DSNIPPET="studio-rpc-usb-uart"
           -DCONFIG_ZMK_STUDIO=y
-          -DDTC_OVERLAY_FILE="${GITHUB_WORKSPACE}/config/boards/shields/dz_87/dz_87_625.overlay"
 
-      - name: Rename DZ 87 6.25u firmware
-        run: cp build_dz87_625/zephyr/zmk.uf2 dz_87_625_nice_nano_v2.uf2
-
-      - name: Build DZ 87 (ANSI 7u)
-        run: >
-          west build -s zmk/app -b nice_nano_v2 -d build_dz87_7u
-          -- -DSHIELD=dz_87
-          -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
-          -DSNIPPET="studio-rpc-usb-uart"
-          -DCONFIG_ZMK_STUDIO=y
-          -DDTC_OVERLAY_FILE="${GITHUB_WORKSPACE}/config/boards/shields/dz_87/dz_87_7u.overlay"
-
-      - name: Rename DZ 87 7u firmware
-        run: cp build_dz87_7u/zephyr/zmk.uf2 dz_87_7u_nice_nano_v2.uf2
-
-      - name: Build DZ 87 (ALL 94)
-        run: >
-          west build -s zmk/app -b nice_nano_v2 -d build_dz87_all
-          -- -DSHIELD=dz_87
-          -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
-          -DSNIPPET="studio-rpc-usb-uart"
-          -DCONFIG_ZMK_STUDIO=y
-          -DDTC_OVERLAY_FILE="${GITHUB_WORKSPACE}/config/boards/shields/dz_87/dz_87_all.overlay"
-
-      - name: Rename DZ 87 ALL firmware
-        run: cp build_dz87_all/zephyr/zmk.uf2 dz_87_all_nice_nano_v2.uf2
+      - name: Rename DZ 87 firmware
+        run: cp build_dz87/zephyr/zmk.uf2 dz_87_nice_nano_v2.uf2
 
       - name: Upload DZ17 firmware
         uses: actions/upload-artifact@v4
@@ -111,20 +86,8 @@ jobs:
           name: settings_reset_firmware
           path: settings_reset_nice_nano_v2.uf2
 
-      - name: Upload DZ 87 6.25u firmware
+      - name: Upload DZ 87 firmware
         uses: actions/upload-artifact@v4
         with:
-          name: dz_87_625_firmware
-          path: dz_87_625_nice_nano_v2.uf2
-
-      - name: Upload DZ 87 7u firmware
-        uses: actions/upload-artifact@v4
-        with:
-          name: dz_87_7u_firmware
-          path: dz_87_7u_nice_nano_v2.uf2
-
-      - name: Upload DZ 87 ALL firmware
-        uses: actions/upload-artifact@v4
-        with:
-          name: dz_87_all_firmware
-          path: dz_87_all_nice_nano_v2.uf2
+          name: dz_87_firmware
+          path: dz_87_nice_nano_v2.uf2
