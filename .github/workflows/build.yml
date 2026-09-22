@@ -64,6 +64,7 @@ jobs:
           -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
           -DSNIPPET="studio-rpc-usb-uart"
           -DCONFIG_ZMK_STUDIO=y
+          -DDTC_OVERLAY_FILE="${GITHUB_WORKSPACE}/config/boards/shields/dz_87/dz_87_625.overlay"
 
       - name: Rename DZ 87 6.25u firmware
         run: cp build_dz87_625/zephyr/zmk.uf2 dz_87_625_nice_nano_v2.uf2

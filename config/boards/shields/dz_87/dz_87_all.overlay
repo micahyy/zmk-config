@@ -1,10 +1,7 @@
-// Build-time extra overlay for universal ALL (94 keys).
-// Passing -DDTC_OVERLAY_FILE drops the auto-added dz_87.keymap, so include it
-// here explicitly. dz_87.overlay / board overlay / snippet are still auto-added.
+// Build-time extra overlay for universal ALL (94 keys) ONLY.
+// Passing -DDTC_OVERLAY_FILE drops the auto-added dz_87.keymap, so include it.
 #include "dz_87.keymap"
 
-/ {
-    chosen {
-        zmk,physical-layout = <&dz87_all>;
-    };
-};
+// This firmware exposes only the ALL layout; remove the others from the list.
+&dz87_625 { status = "disabled"; };
+&dz87_7u { status = "disabled"; };
