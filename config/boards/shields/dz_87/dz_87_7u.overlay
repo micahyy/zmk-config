@@ -1,0 +1,8 @@
+// Build-time extra overlay: lock physical layout to ANSI 7u space (86 keys).
+// The shield's dz_87.overlay (kscan/battery/LEDs) is applied automatically;
+// this file is appended after it and only overrides the chosen physical layout.
+/ {
+    chosen {
+        zmk,physical-layout = <&dz87_7u>;
+    };
+};

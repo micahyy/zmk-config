@@ -1,0 +1,8 @@
+// Build-time extra overlay: lock physical layout to universal ALL (94 keys).
+// NOTE: -DDTC_OVERLAY_FILE is appended to the shield's auto overlay, so only
+// the changed chosen property is needed here.
+/ {
+    chosen {
+        zmk,physical-layout = <&dz87_all>;
+    };
+};
