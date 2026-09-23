@@ -59,7 +59,7 @@
         fn2_layer { bindings = <
     &factory_reset         &trans                 &trans                 &trans                 &trans                 &trans                 &trans                 &trans                
     &trans                 &trans                 &trans                 &trans                 &trans                 &trans                 &trans                 &trans                
-    &trans                 &trans                 &trans                 &trans                 &trans                 &trans                 &trans                 &trans                
+    &studio_unlock         &trans                 &trans                 &trans                 &trans                 &trans                 &trans                 &trans                
     &trans                 &trans                 &trans                 &trans                 &trans                 &trans                 &trans                 &trans                
     &trans                 &trans                 &trans                 &trans                 &trans                 &trans                 &trans                 &trans                
     &trans                 &trans                 &trans                 &trans                 &trans                 &trans                 &trans                 &trans                
