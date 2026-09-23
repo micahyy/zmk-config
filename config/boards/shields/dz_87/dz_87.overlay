@@ -5,7 +5,7 @@
     chosen {
         zmk,kscan = &kscan0;
         zmk,battery = <&vbatt>;
-        zmk,physical-layout = <&dz87_7u>;
+        zmk,physical-layout = <&dz87_625>;
     };
 
     // Battery voltage monitoring via the nRF VDDH internal ADC (VDDHDIV5 x5).
