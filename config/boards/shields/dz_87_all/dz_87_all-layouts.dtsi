@@ -51,7 +51,7 @@
             , <&key_physical_attrs 100 100  1200  225   0 0 0>  // m26 N0
             , <&key_physical_attrs 100 100  1300  225   0 0 0>  // m27 MINUS
             , <&key_physical_attrs 100 100  1400  225   0 0 0>  // m28 EQUAL
-            , <&key_physical_attrs 200 100  1500  225   0 0 0>  // m29 BACKSPACE
+            , <&key_physical_attrs 100 100  1500  225   0 0 0>  // m29 BACKSPACE（缩减 1U，让出分裂 Backspace 的另一半）
             , <&key_physical_attrs 100 100  1725  225   0 0 0>  // m30 INSERT
             , <&key_physical_attrs 100 100  1825  225   0 0 0>  // m31 HOME
             , <&key_physical_attrs 100 100  1925  225   0 0 0>  // m62 PG_UP
@@ -84,7 +84,7 @@
             , <&key_physical_attrs 100 100  1175  425   0 0 0>  // m57 L
             , <&key_physical_attrs 100 100  1275  425   0 0 0>  // m58 SEMICOLON
             , <&key_physical_attrs 100 100  1375  425   0 0 0>  // m59 SINGLE_QUOTE
-            , <&key_physical_attrs 125 100  1475  425   0 0 0>  // m61 ENTER（缩减 1U，让出 m60 BSLS1 的位置）
+            , <&key_physical_attrs 125 100  1600  425   0 0 0>  // m61 ENTER（ISO：缩到 1.25U 并右移，BSLS1 在其左侧）
             , <&key_physical_attrs 125 100   200  525   0 0 0>  // m64 LSHIFT（缩减 1U，让出 m65 UK 的位置）
             , <&key_physical_attrs 100 100   425  525   0 0 0>  // m66 Z
             , <&key_physical_attrs 100 100   525  525   0 0 0>  // m67 X
@@ -110,13 +110,13 @@
             , <&key_physical_attrs 100 100  1825  625   0 0 0>  // m94 DOWN
             , <&key_physical_attrs 100 100  1925  625   0 0 0>  // m95 RIGHT
             // --- 87-93: 额外轴位（互斥位，与上面的标准键位置重叠属正常）---
-            , <&key_physical_attrs 100 100  1600  425   0 0 0>  // m60 BSLS1 (ISO 额外反斜杠 / NUBS 位，占 ENTER 缩减出的 1U)
+            , <&key_physical_attrs 100 100  1475  425   0 0 0>  // m60 BSLS1 (ISO 额外反斜杠 / NUBS 位，位于 ENTER 左侧)
             , <&key_physical_attrs 100 100   325  525   0 0 0>  // m65 UK    (占 LSHIFT 缩减出的 1U)
             , <&key_physical_attrs 100 100  1600  525   0 0 0>  // m77 FN2   (占 RSHIFT 缩减出的 1U, mo 2)
             , <&key_physical_attrs 225 100   575  625   0 0 0>  // m84 SPACE (split_space 左段 2.25U)
             , <&key_physical_attrs 125 100   800  625   0 0 0>  // m85 SPACE (split_space 中段 1.25U)
             , <&key_physical_attrs 275 100   925  625   0 0 0>  // m88 SPACE (split_space 右段 2.75U)
-            , <&key_physical_attrs 100 100  1200  625   0 0 0>  // m89 BACK  (split_space 右端 1U)
+            , <&key_physical_attrs 100 100  1600  225   0 0 0>  // m89 BACK  (split_backspace 右半 1U，原 2U Backspace 拆成两半)
             ;
     };
 
