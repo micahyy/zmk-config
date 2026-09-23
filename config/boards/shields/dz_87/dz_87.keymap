@@ -39,7 +39,7 @@
         fn_layer { bindings = <
     &trans                 &trans                 &trans                 &trans                 &trans                 &trans                 &trans                 &trans                
     &trans                 &trans                 &trans                 &trans                 &trans                 &trans                 &trans                 &trans                
-    &trans                 &ch1 0 0               &ch2 0 0               &ch3 0 0               &out OUT_USB           &trans                 &trans                 &trans                
+    &clr_all               &ch1 0 0               &ch2 0 0               &ch3 0 0               &out OUT_TOG           &trans                 &trans                 &trans                
     &trans                 &trans                 &trans                 &trans                 &trans                 &trans                 &trans                 &trans                
     &trans                 &trans                 &trans                 &trans                 &trans                 &trans                 &trans                 &trans                
     &trans                 &trans                 &trans                 &kp C_AL_CCC           &trans                 &trans                 &trans                 &trans                
@@ -53,10 +53,10 @@
         fn2_layer { bindings = <
     &factory_reset         &trans                 &trans                 &trans                 &trans                 &trans                 &trans                 &trans                
     &trans                 &trans                 &trans                 &trans                 &trans                 &trans                 &trans                 &trans                
-    &studio_unlock         &trans                 &trans                 &trans                 &trans                 &trans                 &trans                 &trans                
     &trans                 &trans                 &trans                 &trans                 &trans                 &trans                 &trans                 &trans                
     &trans                 &trans                 &trans                 &trans                 &trans                 &trans                 &trans                 &trans                
-    &trans                 &trans                 &trans                 &trans                 &trans                 &trans                 &trans                 &clr_all              
+    &trans                 &trans                 &trans                 &trans                 &trans                 &trans                 &trans                 &trans                
+    &trans                 &trans                 &trans                 &trans                 &trans                 &trans                 &trans                 &trans                
     &trans                 &trans                 &trans                 &trans                 &trans                 &trans                 &trans                 &trans                
     &trans                 &trans                 &trans                 &trans                 &trans                 &trans                 &trans                 &trans                
     &trans                 &trans                 &trans                 &trans                 &trans                 &trans                 &trans                 &trans                
