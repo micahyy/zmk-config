@@ -84,8 +84,8 @@
             , <&key_physical_attrs 100 100  1175  425   0 0 0>  // m57 L
             , <&key_physical_attrs 100 100  1275  425   0 0 0>  // m58 SEMICOLON
             , <&key_physical_attrs 100 100  1375  425   0 0 0>  // m59 SINGLE_QUOTE
-            , <&key_physical_attrs 225 100  1475  425   0 0 0>  // m61 ENTER
-            , <&key_physical_attrs 225 100   200  525   0 0 0>  // m64 LSHIFT
+            , <&key_physical_attrs 125 100  1475  425   0 0 0>  // m61 ENTER（缩减 1U，让出 m60 BSLS1 的位置）
+            , <&key_physical_attrs 125 100   200  525   0 0 0>  // m64 LSHIFT（缩减 1U，让出 m65 UK 的位置）
             , <&key_physical_attrs 100 100   425  525   0 0 0>  // m66 Z
             , <&key_physical_attrs 100 100   525  525   0 0 0>  // m67 X
             , <&key_physical_attrs 100 100   625  525   0 0 0>  // m68 C
@@ -96,12 +96,12 @@
             , <&key_physical_attrs 100 100  1125  525   0 0 0>  // m73 COMMA
             , <&key_physical_attrs 100 100  1225  525   0 0 0>  // m74 PERIOD
             , <&key_physical_attrs 100 100  1325  525   0 0 0>  // m75 SLASH
-            , <&key_physical_attrs 275 100  1425  525   0 0 0>  // m76 RSHIFT
+            , <&key_physical_attrs 175 100  1425  525   0 0 0>  // m76 RSHIFT（缩减 1U，让出 m77 FN2 的位置）
             , <&key_physical_attrs 100 100  1825  525   0 0 0>  // m78 UP
             , <&key_physical_attrs 125 100   200  625   0 0 0>  // m80 LCTRL
             , <&key_physical_attrs 125 100   325  625   0 0 0>  // m81 LGUI
             , <&key_physical_attrs 125 100   450  625   0 0 0>  // m82 LALT
-            , <&key_physical_attrs 625 100   575  625   0 0 0>  // m86 SPACE
+            , <&key_physical_attrs 625 100   575  725   0 0 0>  // m86 SPACE（625/7u 共用，下移一行，不再压住分裂空格）
             , <&key_physical_attrs 125 100  1200  625   0 0 0>  // m90 RALT
             , <&key_physical_attrs 125 100  1325  625   0 0 0>  // m91 RGUI
             , <&key_physical_attrs 125 100  1450  625   0 0 0>  // m92 FN (mo 1)
@@ -110,9 +110,9 @@
             , <&key_physical_attrs 100 100  1825  625   0 0 0>  // m94 DOWN
             , <&key_physical_attrs 100 100  1925  625   0 0 0>  // m95 RIGHT
             // --- 87-93: 额外轴位（互斥位，与上面的标准键位置重叠属正常）---
-            , <&key_physical_attrs 100 100  1475  425   0 0 0>  // m60 BSLS1 (ISO 额外反斜杠 / NUBS 位)
-            , <&key_physical_attrs 100 100   425  525   0 0 0>  // m65 UK    (分裂左 Shift 多出的 1U)
-            , <&key_physical_attrs 100 100  1700  525   0 0 0>  // m77 FN2   (分裂右 Shift 多出的 1U, mo 2)
+            , <&key_physical_attrs 100 100  1600  425   0 0 0>  // m60 BSLS1 (ISO 额外反斜杠 / NUBS 位，占 ENTER 缩减出的 1U)
+            , <&key_physical_attrs 100 100   325  525   0 0 0>  // m65 UK    (占 LSHIFT 缩减出的 1U)
+            , <&key_physical_attrs 100 100  1600  525   0 0 0>  // m77 FN2   (占 RSHIFT 缩减出的 1U, mo 2)
             , <&key_physical_attrs 225 100   575  625   0 0 0>  // m84 SPACE (split_space 左段 2.25U)
             , <&key_physical_attrs 125 100   800  625   0 0 0>  // m85 SPACE (split_space 中段 1.25U)
             , <&key_physical_attrs 275 100   925  625   0 0 0>  // m88 SPACE (split_space 右段 2.75U)
