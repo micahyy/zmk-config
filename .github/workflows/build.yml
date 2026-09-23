@@ -68,6 +68,17 @@ jobs:
       - name: Rename DZ 87 firmware
         run: cp build_dz87/zephyr/zmk.uf2 dz_87_nice_nano_v2.uf2
 
+      - name: Build DZ 87 ALL (94 positions)
+        run: >
+          west build -s zmk/app -b nice_nano_v2 -d build_dz87_all
+          -- -DSHIELD=dz_87_all
+          -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
+          -DSNIPPET="studio-rpc-usb-uart"
+          -DCONFIG_ZMK_STUDIO=y
+
+      - name: Rename DZ 87 ALL firmware
+        run: cp build_dz87_all/zephyr/zmk.uf2 dz_87_all_nice_nano_v2.uf2
+
       - name: Upload DZ17 firmware
         uses: actions/upload-artifact@v4
         with:
@@ -91,3 +102,9 @@ jobs:
         with:
           name: dz_87_firmware
           path: dz_87_nice_nano_v2.uf2
+
+      - name: Upload DZ 87 ALL firmware
+        uses: actions/upload-artifact@v4
+        with:
+          name: dz_87_all_firmware
+          path: dz_87_all_nice_nano_v2.uf2
