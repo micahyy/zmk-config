@@ -84,7 +84,7 @@
             , <&key_physical_attrs 100 100  1175  425   0 0 0>  // m57 L
             , <&key_physical_attrs 100 100  1275  425   0 0 0>  // m58 SEMICOLON
             , <&key_physical_attrs 100 100  1375  425   0 0 0>  // m59 SINGLE_QUOTE
-            , <&key_physical_attrs 125 100  1600  425   0 0 0>  // m61 ENTER（ISO：缩到 1.25U 并右移，BSLS1 在其左侧）
+            , <&key_physical_attrs 125 100  1575  425   0 0 0>  // m61 ENTER（ISO：1.25U，右边界回到 1700 与 ANSI 2.25U 对齐，BSLS1 在其左侧）
             , <&key_physical_attrs 125 100   200  525   0 0 0>  // m64 LSHIFT（缩减 1U，让出 m65 UK 的位置）
             , <&key_physical_attrs 100 100   425  525   0 0 0>  // m66 Z
             , <&key_physical_attrs 100 100   525  525   0 0 0>  // m67 X
