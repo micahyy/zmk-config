@@ -363,6 +363,18 @@ static int endpoint_listener(const zmk_event_t *eh) {
     LOG_INF("Output endpoint: %s",
             ev->endpoint.transport == ZMK_TRANSPORT_USB ? "USB" : "BLE");
 
+    /* Hard rule: while the USB HID endpoint is up (cable plugged and
+     * enumerated) it always wins. Anything that tries to move the output to
+     * BLE -- FN+4 (OUT_TOG) included -- is pulled straight back to USB right
+     * here, so there is exactly one transport while plugged in. Selecting USB
+     * raises this event again with transport == USB, which does not match the
+     * BLE branch, so there is no recursion. */
+    if (ev->endpoint.transport == ZMK_TRANSPORT_BLE && zmk_usb_is_hid_ready()) {
+        LOG_INF("Cable plugged: forcing output back to USB");
+        zmk_endpoints_select_transport(ZMK_TRANSPORT_USB);
+        return 0;
+    }
+
     if (k_uptime_get() >= boot_grace_end &&
         ev->endpoint.transport == ZMK_TRANSPORT_USB && zmk_usb_is_powered()) {
         arm_usb_confirm();
