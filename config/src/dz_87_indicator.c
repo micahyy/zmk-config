@@ -339,13 +339,14 @@ static int ble_profile_listener(const zmk_event_t *eh) {
     }
 #endif
 
-    /* Nothing is attached to the channel we just picked: drop the other
-     * profiles so the host stops showing a stale "connected" state for a
-     * channel that cannot deliver keystrokes. Only done when the new channel
-     * itself has no connection, so hosts bonded on several channels can still
-     * stay attached at the same time. */
-    if (real_switch && !zmk_ble_profile_is_connected(ev->index)) {
-        LOG_INF("BLE profile %d idle: disconnecting other channels", ev->index);
+    /* Only the selected channel may hold a link: drop every other profile.
+     * The GAP device name is global, so leaving BLE1 attached while BLE2 is
+     * selected makes the host relabel that very link as "czm_dz_87_ble_2"
+     * and report it as connected although BLE2 was never paired - the keys
+     * then go to a profile that has no link at all. Disconnecting the rest
+     * keeps "connected" on the host in sync with the real link. */
+    if (real_switch) {
+        LOG_INF("BLE profile %d selected: disconnecting other channels", ev->index);
         for (int i = 0; i < BLE_COUNT; i++) {
             if (i != ev->index) {
                 zmk_ble_prof_disconnect(i);
