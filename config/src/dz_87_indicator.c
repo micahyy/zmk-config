@@ -47,6 +47,10 @@
 #include <zephyr/logging/log.h>
 #include <zephyr/sys/util.h>
 
+#include <zephyr/bluetooth/bluetooth.h>
+#include <zephyr/bluetooth/conn.h>
+#include <zephyr/bluetooth/hci.h>
+
 #include <zmk/events/activity_state_changed.h>
 #include <zmk/events/ble_active_profile_changed.h>
 #include <zmk/events/endpoint_changed.h>
@@ -339,6 +343,18 @@ static int ble_profile_listener(const zmk_event_t *eh) {
     }
 #endif
 
+    /* Only the selected channel keeps a link: drop every other profile right
+     * away so no host can sit there showing "connected" while the keys go to
+     * a different channel. */
+    if (real_switch) {
+        LOG_INF("BLE profile %d selected: disconnecting other channels", ev->index);
+        for (int i = 0; i < BLE_COUNT; i++) {
+            if (i != ev->index) {
+                zmk_ble_prof_disconnect(i);
+            }
+        }
+    }
+
     LOG_INF("BLE profile %d (connected=%d)", ev->index,
             zmk_ble_profile_is_connected(ev->index));
     refresh_all();
@@ -346,6 +362,37 @@ static int ble_profile_listener(const zmk_event_t *eh) {
 }
 ZMK_LISTENER(dz87_ble_ind, ble_profile_listener);
 ZMK_SUBSCRIPTION(dz87_ble_ind, zmk_ble_active_profile_changed);
+
+/* Disconnecting a profile above only tears the link down: the host keeps
+ * seeing the keyboard advertise (every profile shares one Bluetooth
+ * identity) and reconnects on its own, which ends with several hosts showing
+ * "connected" at once again. Refuse those links as they come in - a host
+ * that belongs to a channel which is not the selected one gets dropped.
+ * An unknown host (zmk_ble_profile_index() returns -ENODEV) is a new pairing
+ * attempt and is always let through. */
+static void dz87_single_link_connected(struct bt_conn *conn, uint8_t err) {
+    struct bt_conn_info info;
+
+    if (err || bt_conn_get_info(conn, &info) < 0) {
+        return;
+    }
+    if (info.role != BT_CONN_ROLE_PERIPHERAL) {
+        return;
+    }
+
+    int idx = zmk_ble_profile_index(bt_conn_get_dst(conn));
+    if (idx < 0 || idx == zmk_ble_active_profile_index()) {
+        return;
+    }
+
+    LOG_INF("DZ87: dropping host of profile %d, profile %d is selected", idx,
+            zmk_ble_active_profile_index());
+    bt_conn_disconnect(conn, BT_HCI_ERR_REMOTE_USER_TERM_CONN);
+}
+
+BT_CONN_CB_DEFINE(dz87_single_link_cb) = {
+    .connected = dz87_single_link_connected,
+};
 
 static int endpoint_listener(const zmk_event_t *eh) {
     const struct zmk_endpoint_changed *ev = as_zmk_endpoint_changed(eh);
