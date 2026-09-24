@@ -1,0 +1,4 @@
+id: dz_87_tri
+name: DZ 87 TRI
+type: shield
+depends_on: [nice_nano]

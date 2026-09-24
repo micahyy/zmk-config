@@ -1,0 +1,8 @@
+file_format: "1"
+id: dz_87_tri
+name: DZ 87 TRI
+type: shield
+url: https://github.com/micahyy/zmk-config
+requires: [pro_micro]
+features:
+  - keys

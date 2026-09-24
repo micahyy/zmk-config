@@ -1,0 +1,6 @@
+if SHIELD_DZ_87_TRI
+
+config ZMK_KEYBOARD_NAME
+    default "czm_dz_87"
+
+endif

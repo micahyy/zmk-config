@@ -79,6 +79,17 @@ jobs:
       - name: Rename DZ 87 ALL firmware
         run: cp build_dz87_all/zephyr/zmk.uf2 dz_87_all_nice_nano_v2.uf2
 
+      - name: Build DZ 87 TRI (625 + 7U + ALL in one firmware)
+        run: >
+          west build -s zmk/app -b nice_nano_v2 -d build_dz87_tri
+          -- -DSHIELD=dz_87_tri
+          -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
+          -DSNIPPET="studio-rpc-usb-uart"
+          -DCONFIG_ZMK_STUDIO=y
+
+      - name: Rename DZ 87 TRI firmware
+        run: cp build_dz87_tri/zephyr/zmk.uf2 dz_87_tri_nice_nano_v2.uf2
+
       - name: Upload DZ17 firmware
         uses: actions/upload-artifact@v4
         with:
@@ -108,3 +119,9 @@ jobs:
         with:
           name: dz_87_all_firmware
           path: dz_87_all_nice_nano_v2.uf2
+
+      - name: Upload DZ 87 TRI firmware
+        uses: actions/upload-artifact@v4
+        with:
+          name: dz_87_tri_firmware
+          path: dz_87_tri_nice_nano_v2.uf2
