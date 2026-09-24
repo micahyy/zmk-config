@@ -1,8 +1,0 @@
-file_format: "1"
-id: dz_87_all
-name: DZ 87 ALL
-type: shield
-url: https://github.com/micahyy/zmk-config
-requires: [pro_micro]
-features:
-  - keys

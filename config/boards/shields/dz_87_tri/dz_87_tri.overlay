@@ -1,7 +1,8 @@
 #include <dt-bindings/gpio/gpio.h>
 
-// 625 / 7U 两套配列及其 position map 直接复用 dz_87 的定义，不改动原文件。
-#include "../dz_87/dz_87-layouts.dtsi"
+// 625 / 7U 两套配列及其 position map 原样保留在同目录的 dz_87_tri-layouts.dtsi
+// （原先 include 自 ../dz_87/，该 shield 已删除，内容按原字节搬过来，未做任何改动）。
+#include "dz_87_tri-layouts.dtsi"
 
 // ---------------------------------------------------------------------------
 // 三合一固件：625 + 7U + ALL(94 轴位) 编进同一个 uf2，Studio 里可自由切换。
