@@ -339,6 +339,14 @@ static int ble_profile_listener(const zmk_event_t *eh) {
     }
 #endif
 
+    /* Follow the new channel with the OUTPUT endpoint, but only while on
+     * battery: while the USB HID endpoint is up, FN+1/2/3 must not steal the
+     * output away from the cable (USB always wins when plugged in). This is
+     * the &out OUT_BLE behaviour, gated on the cable being unplugged. */
+    if (real_switch && !zmk_usb_is_hid_ready()) {
+        zmk_endpoints_select_transport(ZMK_TRANSPORT_BLE);
+    }
+
     LOG_INF("BLE profile %d (connected=%d)", ev->index,
             zmk_ble_profile_is_connected(ev->index));
     refresh_all();
