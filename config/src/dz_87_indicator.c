@@ -339,6 +339,20 @@ static int ble_profile_listener(const zmk_event_t *eh) {
     }
 #endif
 
+    /* Nothing is attached to the channel we just picked: drop the other
+     * profiles so the host stops showing a stale "connected" state for a
+     * channel that cannot deliver keystrokes. Only done when the new channel
+     * itself has no connection, so hosts bonded on several channels can still
+     * stay attached at the same time. */
+    if (real_switch && !zmk_ble_profile_is_connected(ev->index)) {
+        LOG_INF("BLE profile %d idle: disconnecting other channels", ev->index);
+        for (int i = 0; i < BLE_COUNT; i++) {
+            if (i != ev->index) {
+                zmk_ble_prof_disconnect(i);
+            }
+        }
+    }
+
     /* Follow the new channel with the OUTPUT endpoint, but only while on
      * battery: while the USB HID endpoint is up, FN+1/2/3 must not steal the
      * output away from the cable (USB always wins when plugged in). This is
