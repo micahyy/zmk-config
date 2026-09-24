@@ -339,29 +339,6 @@ static int ble_profile_listener(const zmk_event_t *eh) {
     }
 #endif
 
-    /* Only the selected channel may hold a link: drop every other profile.
-     * The GAP device name is global, so leaving BLE1 attached while BLE2 is
-     * selected makes the host relabel that very link as "czm_dz_87_ble_2"
-     * and report it as connected although BLE2 was never paired - the keys
-     * then go to a profile that has no link at all. Disconnecting the rest
-     * keeps "connected" on the host in sync with the real link. */
-    if (real_switch) {
-        LOG_INF("BLE profile %d selected: disconnecting other channels", ev->index);
-        for (int i = 0; i < BLE_COUNT; i++) {
-            if (i != ev->index) {
-                zmk_ble_prof_disconnect(i);
-            }
-        }
-    }
-
-    /* Follow the new channel with the OUTPUT endpoint, but only while on
-     * battery: while the USB HID endpoint is up, FN+1/2/3 must not steal the
-     * output away from the cable (USB always wins when plugged in). This is
-     * the &out OUT_BLE behaviour, gated on the cable being unplugged. */
-    if (real_switch && !zmk_usb_is_hid_ready()) {
-        zmk_endpoints_select_transport(ZMK_TRANSPORT_BLE);
-    }
-
     LOG_INF("BLE profile %d (connected=%d)", ev->index,
             zmk_ble_profile_is_connected(ev->index));
     refresh_all();
@@ -377,18 +354,6 @@ static int endpoint_listener(const zmk_event_t *eh) {
     }
     LOG_INF("Output endpoint: %s",
             ev->endpoint.transport == ZMK_TRANSPORT_USB ? "USB" : "BLE");
-
-    /* Hard rule: while the USB HID endpoint is up (cable plugged and
-     * enumerated) it always wins. Anything that tries to move the output to
-     * BLE -- FN+4 (OUT_TOG) included -- is pulled straight back to USB right
-     * here, so there is exactly one transport while plugged in. Selecting USB
-     * raises this event again with transport == USB, which does not match the
-     * BLE branch, so there is no recursion. */
-    if (ev->endpoint.transport == ZMK_TRANSPORT_BLE && zmk_usb_is_hid_ready()) {
-        LOG_INF("Cable plugged: forcing output back to USB");
-        zmk_endpoints_select_transport(ZMK_TRANSPORT_USB);
-        return 0;
-    }
 
     if (k_uptime_get() >= boot_grace_end &&
         ev->endpoint.transport == ZMK_TRANSPORT_USB && zmk_usb_is_powered()) {
