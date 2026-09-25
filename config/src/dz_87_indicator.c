@@ -86,6 +86,14 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #define LED_COUNT  6
 #define BLE_COUNT  3
 
+/* Board revision note: of the four channel/USB LEDs only the first one
+ * (P1.00 = LED_BLE0) is actually wired to the MCU on this PCB; P1.02,
+ * P1.04 and P1.06 carry no LED. Every channel or USB indication is
+ * therefore routed to that single indicator so pairing / connection /
+ * USB feedback is still visible. CapsLock and ScrollLock are unaffected.
+ */
+#define LED_STATUS  LED_BLE0
+
 /* Physical GPIO port/pin of every LED (used only for deep-sleep parking).
  * Active-low: led_off() drives the pin HIGH; reconfiguring it as a
  * pulled-up input then holds the OFF state in SYSTEM OFF. */
@@ -166,6 +174,10 @@ static int vbus_was_powered = 0;
 static int last_evt_profile = -1;
 
 static void led_set(int idx, bool on) {
+    /* Route every channel/USB LED indication to the single wired LED. */
+    if (idx >= LED_BLE0) {
+        idx = LED_STATUS;
+    }
     if (on) {
         led_on(led_dev, idx);
     } else {
